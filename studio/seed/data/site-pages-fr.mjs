@@ -40,11 +40,12 @@ const external = (label, url) => ({
   externalUrl: url
 })
 
-/** Figure du héros d'accueil (même cadrage, deux ratios; sans champ image). */
+/** Figure du héros d'accueil (même cadrage, deux ratios). */
 const heroFigure = (ratio, caption) => ({
   _type: 'figure',
-  alt: 'Technicien de Rempart Extermination en intervention dans une maison de la région de Lévis.',
-  label: 'Intervention à domicile, Rive-Sud de Québec',
+  image: { _imagePath: '/images/hero.jpg' },
+  alt: 'Technicien de Rempart Extermination, planchette à la main, devant le camion de service dans une entrée résidentielle de la Rive-Sud de Québec.',
+  label: 'Notre équipe, sur le terrain',
   caption,
   ratio
 })
@@ -153,9 +154,10 @@ const aboutBlock = (key) => ({
   ],
   photo: {
     _type: 'figure',
+    image: { _imagePath: '/images/hero.jpg' },
     alt: "Mathieu Bouchard, fondateur de Rempart Extermination, devant le camion de service à Lévis.",
     label: 'Mathieu Bouchard, fondateur',
-    caption: 'Portrait équipe, 3:4',
+    caption: 'Portrait, 3:4',
     ratio: '3/4'
   },
   figcaption: 'Mathieu Bouchard, fondateur et technicien certifié. Rempart Extermination, Lévis.',
@@ -478,6 +480,7 @@ export const docs = [
         mediaSide: 'right',
         image: {
           _type: 'figure',
+          image: { _imagePath: '/images/inspection.jpg' },
           alt: "Technicien de Rempart Extermination inspectant le pourtour d'une maison sur la Rive-Sud.",
           label: 'Inspection à domicile',
           caption: 'Sur le terrain, 4:3',
@@ -623,7 +626,8 @@ export const docs = [
       lead: "Rempart Extermination protège les maisons et les commerces de la Rive-Sud depuis 2011. Mathieu Bouchard et son équipe de six techniciens connaissent la région, et restent disponibles bien après le traitement.",
       image: {
         _type: 'figure',
-        alt: "L'équipe de Rempart Extermination devant les camions de service à Lévis.",
+        image: { _imagePath: '/images/equipe.jpg' },
+        alt: "L'équipe de Rempart Extermination devant le camion de service à Lévis.",
         label: 'Équipe Rempart Extermination, Lévis',
         caption: 'Équipe, 2:1',
         ratio: '2/1'

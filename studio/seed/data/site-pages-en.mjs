@@ -40,11 +40,12 @@ const external = (label, url) => ({
   externalUrl: url
 })
 
-/** Home hero figure (same framing, two ratios; no image field). */
+/** Home hero figure (same framing, two ratios). */
 const heroFigure = (ratio, caption) => ({
   _type: 'figure',
-  alt: 'Rempart Extermination technician on a service call inside a home in the Lévis area.',
-  label: 'Residential service call, South Shore of Quebec City',
+  image: { _imagePath: '/images/hero.jpg' },
+  alt: 'Rempart Extermination technician, clipboard in hand, in front of the service van in a residential driveway on the South Shore of Quebec City.',
+  label: 'Our team, on the ground',
   caption,
   ratio
 })
@@ -153,9 +154,10 @@ const aboutBlock = (key) => ({
   ],
   photo: {
     _type: 'figure',
+    image: { _imagePath: '/images/hero.jpg' },
     alt: 'Mathieu Bouchard, founder of Rempart Extermination, in front of the service truck in Lévis.',
     label: 'Mathieu Bouchard, founder',
-    caption: 'Team portrait, 3:4',
+    caption: 'Portrait, 3:4',
     ratio: '3/4'
   },
   figcaption: 'Mathieu Bouchard, founder and certified technician. Rempart Extermination, Lévis.',
@@ -478,6 +480,7 @@ export const docs = [
         mediaSide: 'right',
         image: {
           _type: 'figure',
+          image: { _imagePath: '/images/inspection.jpg' },
           alt: 'Rempart Extermination technician inspecting the perimeter of a home on the South Shore.',
           label: 'Residential inspection',
           caption: 'On site, 4:3',
@@ -623,7 +626,8 @@ export const docs = [
       lead: 'Rempart Extermination has protected homes and businesses on the South Shore since 2011. Mathieu Bouchard and his team of six technicians know the region, and stay available well after the treatment.',
       image: {
         _type: 'figure',
-        alt: 'The Rempart Extermination team in front of the service trucks in Lévis.',
+        image: { _imagePath: '/images/equipe.jpg' },
+        alt: 'The Rempart Extermination team in front of the service van in Lévis.',
         label: 'Rempart Extermination team, Lévis',
         caption: 'Team, 2:1',
         ratio: '2/1'
