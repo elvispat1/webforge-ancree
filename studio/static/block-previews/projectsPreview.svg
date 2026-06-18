@@ -1,0 +1,28 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" fill="#FAFAF7"/>
+  <!-- SectionHead split: eyebrow + h2 a gauche, rule-link CTA accent a droite -->
+  <rect x="24" y="22" width="36" height="5" rx="2" fill="#6B675F"/>
+  <rect x="24" y="34" width="128" height="10" rx="2" fill="#6B675F"/>
+  <rect x="232" y="26" width="64" height="1" fill="#D8D5CE"/>
+  <rect x="232" y="36" width="40" height="5" rx="2" fill="#2D4A3E"/>
+  <path d="M278 35 l4 3.5 l-4 3.5" fill="none" stroke="#2D4A3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 3 cartes projet: cover haute avec tag, titre, extrait -->
+  <rect x="24" y="62" width="82" height="66" rx="2" fill="#D8D5CE"/>
+  <rect x="29" y="67" width="24" height="9" rx="2" fill="#FAFAF7"/>
+  <rect x="34" y="70" width="14" height="3" rx="1.5" fill="#6B675F"/>
+  <rect x="24" y="136" width="60" height="6" rx="2" fill="#6B675F"/>
+  <rect x="24" y="148" width="74" height="4" rx="2" fill="#6B675F"/>
+  <rect x="24" y="156" width="58" height="4" rx="2" fill="#6B675F"/>
+  <rect x="119" y="62" width="82" height="66" rx="2" fill="#D8D5CE"/>
+  <rect x="124" y="67" width="24" height="9" rx="2" fill="#FAFAF7"/>
+  <rect x="129" y="70" width="14" height="3" rx="1.5" fill="#6B675F"/>
+  <rect x="119" y="136" width="56" height="6" rx="2" fill="#6B675F"/>
+  <rect x="119" y="148" width="74" height="4" rx="2" fill="#6B675F"/>
+  <rect x="119" y="156" width="64" height="4" rx="2" fill="#6B675F"/>
+  <rect x="214" y="62" width="82" height="66" rx="2" fill="#D8D5CE"/>
+  <rect x="219" y="67" width="24" height="9" rx="2" fill="#FAFAF7"/>
+  <rect x="224" y="70" width="14" height="3" rx="1.5" fill="#6B675F"/>
+  <rect x="214" y="136" width="62" height="6" rx="2" fill="#6B675F"/>
+  <rect x="214" y="148" width="74" height="4" rx="2" fill="#6B675F"/>
+  <rect x="214" y="156" width="52" height="4" rx="2" fill="#6B675F"/>
+</svg>

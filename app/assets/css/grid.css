@@ -1,0 +1,60 @@
+/* webforge-demo — Système de grille 12 colonnes
+ *
+ * Grille canonique de page (pas de bloc). Bascule entre 4 colonnes (mobile) et
+ * 12 colonnes (desktop) à 1024px par container query `@container site`, le MÊME
+ * mécanisme que les placements de blocs dans global.css. Historiquement c'était
+ * une media query viewport: avec des scrollbars classiques (Windows), la grille
+ * basculait à 12 colonnes (viewport ≥ 1024, scrollbar incluse) pendant que les
+ * placements tablette des blocs restaient actifs (conteneur < 1024, scrollbar
+ * exclue) — fenêtre cassée de ~15-17px. Une seule source de vérité maintenant:
+ * la largeur du conteneur `site`.
+ *
+ * PRÉREQUIS: tout consommateur de .section-grid doit vivre sous un conteneur
+ * nommé `site` (sinon la grille reste en 4 colonnes en permanence). Hôtes
+ * actuels: .wf-site (layouts default/landing/showcase, BlockShowcase, error.vue)
+ * et .wf-dev-grid (overlay DevGrid).
+ *
+ * Usage typique (placement par classe bespoke + grid-column sous
+ * @container site dans global.css — convention dominante, cf. contrat §3):
+ *
+ *   <section class="wf-section">
+ *     <div class="wf-container">
+ *       <div class="section-grid wf-foo-grid">
+ *         <div class="wf-foo-copy">titre, intro…</div>
+ *         <aside class="wf-foo-aside">méta…</aside>
+ *       </div>
+ *     </div>
+ *   </section>
+ *
+ * Les classes `col-span-N` (1→12) et `col-span-full` de Tailwind v4 restent
+ * utilisables pour un span statique. Les variantes viewport `md:` / `lg:` sont
+ * PROSCRITES: elles basculent au viewport et se désynchroniseraient de la
+ * grille (qui bascule au conteneur).
+ *
+ * Le DevGrid (composant) overlay les colonnes à la touche `g` pour valider
+ * le placement.
+ */
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem; /* 16px @1440 */
+}
+@container site (min-width: 1024px) {
+  .section-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 4.8rem; /* 48px @1440, 64px @1920 — gouttière généreuse en desktop */
+  }
+}
+
+/* Subgrid: à poser sur un enfant de .section-grid qui occupe plusieurs colonnes.
+ * Cet enfant réexpose les pistes de colonnes de la page à ses PROPRES enfants,
+ * qui peuvent alors se placer avec `grid-column` sur la vraie grille (12 cols en
+ * desktop, 4 en mobile), gouttières comprises. Permet d'aligner du contenu sur
+ * les colonnes même imbriqué dans un morceau de la grille. Le DevGrid (touche g)
+ * reste un repère valable. Nuance: un enfant n'hérite que des pistes qu'il
+ * occupe (ex: un bloc sur les cols 6-12 expose 7 sous-pistes, pas les 12). */
+.subgrid {
+  display: grid;
+  grid-template-columns: subgrid;
+}

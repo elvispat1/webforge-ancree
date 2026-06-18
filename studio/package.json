@@ -1,0 +1,28 @@
+{
+  "name": "webforge-ancree-studio",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "schema:deploy": "sanity schema deploy"
+  },
+  "dependencies": {
+    "@sanity/document-internationalization": "^6.1.1",
+    "@sanity/icons": "^3.7.0",
+    "@sanity/language-filter": "^5.0.0",
+    "@sanity/locale-fr-fr": "^1.2.32",
+    "@sanity/vision": "^5.23.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-is": "^19.2.5",
+    "sanity": "^5.23.0",
+    "sanity-plugin-internationalized-array": "^5.1.1",
+    "sanity-plugin-media": "^4.2.0",
+    "styled-components": "^6.4.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.5"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "webforge-ancree",
+  "type": "module",
+  "private": true,
+  "packageManager": "yarn@4.13.0",
+  "workspaces": [
+    "studio"
+  ],
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "studio:dev": "yarn workspace webforge-ancree-studio dev",
+    "studio:build": "yarn workspace webforge-ancree-studio build",
+    "studio:deploy": "yarn workspace webforge-ancree-studio deploy"
+  },
+  "dependencies": {
+    "@nuxt/fonts": "^0.14.0",
+    "@nuxt/icon": "^2.2.2",
+    "@nuxt/image": "^2.0.0",
+    "@nuxtjs/i18n": "^10.4.0",
+    "@nuxtjs/sanity": "^2.3.0",
+    "@nuxtjs/seo": "^5.1.3",
+    "@pinia/nuxt": "^0.11.3",
+    "@sanity/client": "^7.22.1",
+    "@sanity/image-url": "^1.1.0",
+    "@tailwindcss/vite": "^4.2.4",
+    "gsap": "^3.15.0",
+    "nuxt": "^4.4.6",
+    "pinia": "^3.0.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "styled-components": "^6.1.0",
+    "tailwindcss": "^4.2.4",
+    "vue": "^3.5.34",
+    "vue-router": "^5.0.7"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.111",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^6.0.3"
+  }
+}

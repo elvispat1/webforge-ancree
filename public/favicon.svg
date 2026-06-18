@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon de marque Atelier Cormier: monogramme « A » centré, identique au
+       mark du header (fond accent-1 #2D4A3E, lettre white #FAFAF7). Les valeurs
+       en dur vivent dans les fichiers d'icônes, pas dans un composant. -->
+  <rect width="64" height="64" rx="6" fill="#2D4A3E"/>
+  <g fill="none" stroke="#FAFAF7" stroke-width="4.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19.25 47 L32 16 L44.75 47"/>
+    <path d="M23.4 37 H40.6"/>
+  </g>
+</svg>

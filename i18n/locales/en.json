@@ -1,0 +1,298 @@
+{
+  "a11y": {
+    "skip_to_content": "Skip to main content",
+    "main_nav": "Main navigation",
+    "toggle_menu_open": "Open menu",
+    "toggle_menu_close": "Close menu",
+    "mobile_menu": "Navigation menu",
+    "footer_nav": "Footer",
+    "number_decrease": "Decrease",
+    "number_increase": "Increase",
+    "file_choose": "Choose a file",
+    "breadcrumb": "Breadcrumb",
+    "pagination": "Article pagination",
+    "previous_page": "Previous page",
+    "next_page": "Next page",
+    "category_filter": "Filter by category",
+    "filter_all": "All",
+    "faq_themes": "FAQ themes",
+    "opens_new_window": "(opens in a new window)",
+    "lang_switcher": "Switch to the French version"
+  },
+  "ui": {
+    "lang": {
+      "target": "FR"
+    },
+    "preview": {
+      "label": "Preview mode",
+      "exit": "Exit preview",
+      "exiting": "Exiting…"
+    },
+    "filter": {
+      "trigger": "Filter",
+      "clear": "Remove filter",
+      "count_articles": "{count} article | {count} articles"
+    },
+    "blog": {
+      "reading_time": "{minutes} min read",
+      "pagination_description": "The {site} blog, page {n}: more posts on wood, techniques and the behind-the-scenes of our projects."
+    },
+    "faq": {
+      "no_theme": "Others"
+    },
+    "video": {
+      "play": "Play video",
+      "iframe_title": "YouTube video"
+    },
+    "legal": {
+      "terms_description": "Terms of use for the {site} website.",
+      "privacy_description": "Privacy policy for the {site} website."
+    },
+    "view_project": "View the project",
+    "learn_more": "Learn more",
+    "error": {
+      "code": "Error {code}",
+      "not_found_title": "Page not found",
+      "not_found_body": "The page you are looking for does not exist or has moved.",
+      "generic_title": "Something went wrong",
+      "generic_body": "Something failed on our end. Head back to the homepage and try again.",
+      "home_link": "Back to the homepage"
+    }
+  },
+  "consent": {
+    "aria_label": "Cookie preferences",
+    "title": "Cookies and privacy",
+    "body": "This site may use analytics cookies to understand its traffic. They only load with your consent.",
+    "policy_prefix": "Details in our",
+    "policy_link": "privacy policy",
+    "accept_all": "Accept all",
+    "necessary_only": "Necessary only",
+    "customize": "Customize",
+    "back": "Back",
+    "save": "Save my choices",
+    "required": "Required",
+    "manage": "Manage cookies",
+    "categories": {
+      "necessary": {
+        "label": "Necessary",
+        "purpose": "Keep the site working: contact form security and remembering your cookie choice. Always on."
+      },
+      "analytics": {
+        "label": "Analytics",
+        "purpose": "Anonymous audience measurement: understand site traffic and improve it. Off until you accept them."
+      }
+    },
+    "policy": {
+      "title": "Cookie categories",
+      "intro": "Here are the cookie categories that may be used on this site and their purpose. Your choice is kept for six months, after which the banner reappears.",
+      "status_required": "Required",
+      "status_optional": "Optional",
+      "change_prefix": "You can review or change your choice at any time:"
+    }
+  },
+  "showcase": {
+    "seo": {
+      "title": "Component guide",
+      "description": "Everything a WebForge multipage site includes: heroes, page blocks, article blocks, form, and visual system. Rendered live from the real content."
+    },
+    "intro": {
+      "eyebrow": "WebForge Multipage",
+      "title": "Component guide",
+      "lead": "Everything a WebForge multipage site includes: heroes, page blocks, article blocks, form, and visual system. Rendered live from the real content."
+    },
+    "nav": {
+      "heros": "Heroes",
+      "reguliers": "Page blocks",
+      "articles": "Article blocks",
+      "formulaire": "Form",
+      "styleguide": "Visual system"
+    },
+    "links": {
+      "multipage": "Multipage",
+      "onepager": "One-pager"
+    },
+    "sections": {
+      "heros": "The opening banner, set by page type.",
+      "reguliers": "The modular blocks of the page builder.",
+      "articles": "The article body blocks.",
+      "formulaire": "Form fields, controls and states.",
+      "styleguide": "Typography, colours, tokens and atoms."
+    },
+    "samples": {
+      "media_text": {
+        "heading": "The wood is chosen before the first line is ever drawn.",
+        "body_1": "Before sketching anything, I go see the material. I pick my boards one by one from two sawmills in the Montérégie, based on the grain, the knots and the natural tone. A dining table isn't designed the same way whether the ash leans toward honey or toward grey.",
+        "body_2": "I then let the wood dry and move in the workshop, sometimes for several months. That patience is why an Atelier Cormier piece won't split three winters later. You leave with a piece of furniture that has already finished settling.",
+        "image_alt": "Stacks of rough ash boards leaning against the workshop's brick wall, marked in chalk.",
+        "image_label": "Ash boards waiting to dry",
+        "image_caption": "Wood store, Chambly workshop, 4:5",
+        "cta_label": "See how I work"
+      },
+      "cta_band": {
+        "title": "A furniture project in mind? Let's talk.",
+        "subtitle": "I take on a few custom pieces each season to stay close to every project. Write to me early, and we'll draw it up together before cutting the first board.",
+        "primary_cta_label": "Start a project",
+        "secondary_cta_label": "See the work"
+      },
+      "iframe": {
+        "title": "Location map of the Chambly workshop",
+        "caption": "Chambly workshop, south shore of Montréal."
+      },
+      "video_youtube": {
+        "poster_alt": "The cabinetmaker's hands carving a piece of walnut with a chisel.",
+        "poster_label": "Workshop, hands at work",
+        "poster_caption": "Custom poster, 16:9",
+        "title": "A visit to the Chambly workshop"
+      }
+    },
+    "styleguide": {
+      "sections": {
+        "typography": "Typography",
+        "tokens": "Tokens",
+        "components": "Components"
+      },
+      "typography": {
+        "group_families": "Font families",
+        "group_weights": "Font weights",
+        "group_headings": "Headings",
+        "group_body": "Body text",
+        "group_captions": "Captions",
+        "group_specials": "Specialized elements",
+        "group_colors": "Colour modifiers",
+        "families_note": "Display and body share Archivo in the Minimaliste family.",
+        "weights_note": "Three systematic weights.",
+        "headings_note": "Fluid sizes (clamp), from mobile to desktop.",
+        "weight_regular": "Regular",
+        "weight_medium": "Medium",
+        "weight_semibold": "Semibold",
+        "family_display": "Display style",
+        "family_body": "Body style",
+        "family_mono": "Mono style",
+        "heading_1": "Heading 1",
+        "heading_2": "Heading 2",
+        "heading_3": "Heading 3",
+        "heading_4": "Heading 4",
+        "heading_5": "Heading 5",
+        "figcap_sample": "Image caption: signed piece, delivered June 2024.",
+        "caption_sample": "Caption or discreet meta information",
+        "sample_sentence": "Cabinetmaking begins with the choice of wood: white oak, black walnut, figured maple."
+      },
+      "tokens": {
+        "group_colors": "Brand colours",
+        "group_geometry": "Geometry",
+        "group_spacing": "Spacing scale",
+        "group_block_rhythm": "Vertical rhythm between blocks",
+        "group_base": "Base",
+        "group_backgrounds": "Backgrounds",
+        "group_text": "Text",
+        "group_accent": "Accent",
+        "colors_note": "Brand colours, by group.",
+        "spacing_note": "Four steps (10, 20, 40, 80 px), fluid.",
+        "block_rhythm_note": "Block-level padding for page-builder blocks.",
+        "use_white": "Brand canonical white",
+        "use_black": "Brand canonical black",
+        "use_bg_base": "Main site background",
+        "use_bg_alt": "Alternate background (cards, light sections)",
+        "use_text_base": "Body text and headings",
+        "use_text_muted": "Secondary text, meta, captions",
+        "use_accent_1": "Single brand colour (primary button, links, accents)",
+        "use_spacing_inline": "Inline gap (icon + label, compact items)",
+        "use_spacing_standard": "Standard gap (form, side-by-side buttons)",
+        "use_spacing_card": "Card or group spacing",
+        "use_spacing_large": "Large spacing (separation between regions)",
+        "use_block_tight": "CTA strip, callout",
+        "use_block_default": "Sections and hero"
+      },
+      "atoms": {
+        "group_button": "Button",
+        "group_link": "Link",
+        "group_icon": "Icon",
+        "usage_primary": "Primary variant, default size.",
+        "usage_sm": "Compact variant for the header and menus.",
+        "usage_ghost": "Outline variant, fills on hover.",
+        "usage_disabled": "Inactive state, interaction blocked.",
+        "usage_icon": "The icon prop accepts any icon name.",
+        "usage_link": "Accent colour by default, animated underline on hover.",
+        "link_sample": "Hover this link",
+        "icon_note": "Lucide icons through the Icon component."
+      },
+      "forms": {
+        "section_champs": "Text fields",
+        "section_selection": "Selection",
+        "section_saisie": "Advanced input",
+        "section_retroaction": "Feedback",
+        "section_exemple": "Full example",
+        "group_input": "Input",
+        "group_checkbox": "Checkbox",
+        "group_checkboxgroup": "CheckboxGroup",
+        "group_radiogroup": "RadioGroup",
+        "group_switch": "Switch",
+        "group_select": "Select",
+        "group_date": "Date field",
+        "group_number": "NumberInput",
+        "group_file": "FileInput",
+        "group_banner": "Error banner",
+        "group_success": "Success screen",
+        "label_name": "Name",
+        "label_email": "Email address",
+        "label_phone": "Phone",
+        "label_project": "Your project",
+        "label_province": "Province",
+        "label_category": "Service category",
+        "label_date": "Preferred date",
+        "label_qty": "Quantity",
+        "label_photo": "Project photo",
+        "label_analytics": "Analytics",
+        "label_necessary": "Necessary",
+        "legend_project": "Project type",
+        "legend_contact": "Preferred contact",
+        "legend_plan": "Package",
+        "legend_services": "Services you're interested in",
+        "placeholder_category": "Choose a category",
+        "button_photo": "Attach a photo",
+        "button_submit": "Send",
+        "focus_tag": "static focus replica",
+        "sample_name": "Jane Smith",
+        "sample_email": "jane.smith{'@'}example.com",
+        "sample_email_partial": "jane.smith{'@'}",
+        "sample_phone": "418 555 0142",
+        "sample_message": "I'd like to redo the signage for my woodworking shop.",
+        "consent_prefix": "I accept the",
+        "consent_link": "privacy policy",
+        "project_cuisine": "Full kitchen",
+        "project_mobilier": "Custom furniture",
+        "project_restauration": "Piece restoration",
+        "contact_courriel": "Email",
+        "contact_telephone": "Phone",
+        "contact_sms": "Text message",
+        "plan_essentiel_label": "Essential",
+        "plan_essentiel_desc": "Single page, delivered in 2 weeks.",
+        "plan_multipage_label": "Multipage",
+        "plan_multipage_desc": "Several pages, blog included.",
+        "plan_builder_label": "Builder",
+        "plan_builder_desc": "CMS, the client edits it themselves.",
+        "service_cuisine": "Kitchen",
+        "service_mobilier": "Custom furniture",
+        "service_restauration": "Restoration",
+        "service_rangement": "Built-in storage",
+        "province_qc": "Quebec",
+        "province_on": "Ontario",
+        "province_nb": "New Brunswick",
+        "category_cuisine": "Kitchen",
+        "category_mobilier": "Furniture",
+        "category_restauration": "Restoration",
+        "desc_analytics": "Anonymous audience measurement.",
+        "desc_necessary": "Required for the site to work.",
+        "error_email": "Invalid email address.",
+        "error_consent": "You must accept to continue.",
+        "error_services": "Choose at least one service.",
+        "error_radio": "Choose an option to continue.",
+        "error_category": "Select a category.",
+        "banner_title": "Sending didn't work",
+        "banner_body": "Try again in a moment, or write to us directly by email.",
+        "success_title": "Message received",
+        "success_body": "Thanks, we'll get back to you within 24 business hours."
+      }
+    }
+  }
+}

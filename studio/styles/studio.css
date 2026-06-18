@@ -1,0 +1,18 @@
+/*
+ * Overrides CSS du Studio Sanity (démo WebForge Ancrée).
+ * Importé depuis sanity.config.ts via `import './styles/studio.css'`.
+ * Vite résout l'import et injecte le CSS globalement.
+ */
+
+/*
+ * Cache l'onglet "All fields" auto-injecté par Sanity dès que des `groups` sont définis.
+ * Plusieurs sélecteurs pour robustesse: le bon testid varie selon la version du Studio.
+ * Si l'onglet persiste, inspecter dans devtools et ajouter le vrai sélecteur.
+ */
+[data-testid="field-group-tab__all-fields"],
+[data-testid="field-group-tab__-all-fields"],
+[data-ui="GroupTab"][data-name="all-fields"],
+button[id*="all-fields"],
+button[aria-controls*="all-fields"] {
+  display: none !important;
+}

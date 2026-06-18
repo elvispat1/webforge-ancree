@@ -1,0 +1,61 @@
+{
+  // Worker « assets-only » du site WebForge Ancrée (Atelier Cormier).
+  //
+  // STATIQUE PUR. Aucun `main`, aucun `binding`: Cloudflare sert directement les
+  // fichiers prérendus par `nuxt generate` (.output/public), zéro worker à
+  // l'exécution. C'est l'équivalent Workers du statique Pages (mêmes coûts: les
+  // requêtes d'assets sont gratuites).
+  //
+  // MODÈLE: repo mono-projet (un repo par famille WebForge), un Worker par
+  // environnement (voir docs/DEPLOY-CLOUDFLARE.md). Ce fichier configure le Worker
+  // de PROD (`webforge-ancree`, branche main, domaine
+  // webforge-ancree.patoinestudio.ca). Le Worker de STAGING réutilise la même
+  // config, build sur la branche `staging`, déployé sous son nom via
+  // `wrangler deploy --config wrangler.jsonc --name webforge-ancree-staging`.
+  // Chaque Worker ne build que sa branche (builds non-prod coupés).
+  //
+  // PREVIEW SSR (édition visuelle Sanity): Worker preview dédié via
+  // wrangler.preview.jsonc, bâti en SSR (preset cloudflare-module), distinct de ce
+  // Worker statique.
+
+  // Nom du Worker de prod. workers.dev est COUPÉ: le site ne sert pas sur
+  // <name>.<sous-domaine>.workers.dev mais sur son domaine custom
+  // webforge-ancree.patoinestudio.ca. Le staging surcharge ce nom via --name.
+  "name": "webforge-ancree",
+
+  // Date de compatibilité du runtime Worker. Sans effet en assets-only (aucun
+  // code ne tourne), mais requise par wrangler. Convention de la doc: date du jour.
+  "compatibility_date": "2026-06-14",
+
+  // Observabilité (Workers Logs): déclarée pour parité avec le Worker preview.
+  // Ce Worker est assets-only (aucun `main`, aucun code à l'exécution): rien à
+  // journaliser ici en pratique, le réglage est inerte mais sans risque (clé
+  // top-level valide, cf. doc Cloudflare).
+  "observability": {
+    "enabled": true
+  },
+
+  "assets": {
+    // Sortie de `nuxt generate` (preset static): HTML prérendu par langue,
+    // variantes /_ipx/, assets. Chemin RELATIF à CE fichier (à la racine du repo),
+    // donc résolu en .output/public quel que soit le cwd du déploiement.
+    "directory": ".output/public",
+
+    // SSG multipage, pas une SPA: chaque route est son propre index.html.
+    // auto-trailing-slash résout « /services/cuisines » vers
+    // « /services/cuisines/index.html » sans redirection. 404-page sert le
+    // 404.html prérendu de Nuxt sur route inconnue (le défaut « none »
+    // renverrait un 404 vide). Valeurs confirmées contre la sortie réelle au
+    // smoke test `yarn generate`.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+
+  // workers.dev ET preview URLs COUPÉS explicitement. Indispensable: sinon chaque
+  // `wrangler deploy` les RALLUME par défaut (ré-exposant le site sur
+  // <name>.<sous-domaine>.workers.dev, vérifié le 15 juin). Le site ne sert QUE
+  // sur son domaine custom patoinestudio.ca; staging est un Worker distinct
+  // (--name), pas une preview de branche.
+  "workers_dev": false,
+  "preview_urls": false
+}

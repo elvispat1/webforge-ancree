@@ -1,0 +1,38 @@
+name: Sync preview from main
+
+# Garde la branche `preview` en miroir exact de `main`.
+#
+# Le Worker Cloudflare `webforge-ancree-preview` build la branche `preview`
+# en SSR (edition visuelle Sanity); prod (`main`) et staging (`staging`) restent
+# statiques. Le SEUL facteur qui distingue le preview, c'est le nom de branche:
+# `WORKERS_CI_BRANCH=preview` active `previewEnabled` (SSR + stega + drafts) dans
+# nuxt.config.ts. Le code est identique partout. Ce workflow garantit donc qu'un
+# push sur `main` rebuild aussi le preview avec le meme code, sans intervention.
+#
+# Mecanique: a chaque push sur `main`, on pousse le commit de `main` sur
+# `preview`. Le push declenche le build du Worker preview (webhook GitHub App de
+# Cloudflare, recu quel que soit l'auteur du push). Pas de recursion: ce workflow
+# ne se declenche que sur `main`, jamais sur `preview`.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-preview
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Miroir de preview sur main
+        run: git push --force origin "${GITHUB_SHA}:refs/heads/preview"

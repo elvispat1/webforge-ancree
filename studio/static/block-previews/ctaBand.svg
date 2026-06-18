@@ -1,0 +1,12 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" fill="#FAFAF7"/>
+  <!-- Bande de conversion pleine largeur, contenu centre cols 3-10 -->
+  <rect x="0" y="36" width="320" height="128" fill="#D8D5CE"/>
+  <rect x="92" y="66" width="136" height="10" rx="2" fill="#6B675F"/>
+  <rect x="110" y="86" width="100" height="4" rx="2" fill="#6B675F"/>
+  <!-- CTA primaire accent + CTA ghost -->
+  <rect x="96" y="108" width="60" height="18" rx="2" fill="#2D4A3E"/>
+  <rect x="112" y="115" width="28" height="4" rx="2" fill="#FAFAF7"/>
+  <rect x="164" y="108" width="60" height="18" rx="2" fill="none" stroke="#6B675F"/>
+  <rect x="180" y="115" width="28" height="4" rx="2" fill="#6B675F"/>
+</svg>

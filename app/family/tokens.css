@@ -1,0 +1,103 @@
+/* Famille Minimaliste — tokens canoniques de la famille.
+ *
+ * Ce fichier contient ce qui est VRAI pour tout site Minimaliste,
+ * peu importe le client: typographies, échelles géométriques, et formules
+ * dérivées. Les couleurs, surfaces et accents vivent dans la couche marque
+ * (`app/brand/tokens.css` dans le démo, `client/tokens.css` chez un vrai client).
+ *
+ * Le jour où la famille Minimaliste est extraite en package partagé
+ * (`packages/webforge-minimaliste/` ou `@patoine-studio/webforge-minimaliste`
+ * via npm), ce fichier part tel quel. Aucun tri à faire.
+ */
+
+:root {
+  /* Typographie */
+  --font-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body:    "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Géométrie — valeurs en rem pour scaler avec html font-size.
+   * À la base canonique 1rem = 10px (1440px viewport):
+   *   --radius = 2px, --spacing-unit = 10px, --header-height = 80px. */
+  --radius: 0.2rem;
+  --header-height: 8rem;
+
+  /* Filet d'accent de l'item actif des rails de navigation verticaux (rail des
+   * thèmes FAQ, panneau de filtre). 2px @1440. */
+  --rail-marker-width: 0.2rem;
+
+  /* Ratio d'affichage des tuiles d'image (cartes de grille). Indépendant du ratio
+   * NATUREL de l'image source: la figure impose ce cadre et l'image le recadre en
+   * object-fit cover. Garantit des tuiles de hauteur égale quel que soit le ratio
+   * du contenu (un cover 16/9 et un 4/3 rendent identiques). */
+  --ratio-tile: 4 / 3;
+
+  /* Ratio des cadres média intégrés (vidéo YouTube, embeds 16:9). Standard des
+   * lecteurs vidéo; le cadre impose ce ratio et l'affiche/iframe le remplit. Le
+   * bloc iframe générique peut surcharger ce cadre par un ratio choisi au Studio. */
+  --ratio-video: 16 / 9;
+
+  /* Hauteur fluide de l'image phare du héros détail (split desktop). L'image
+   * remplit cette bande en object-fit cover; le fil d'Ariane se cale en haut, le
+   * titre en bas. Bande éditoriale, ajustable d'une seule valeur. */
+  --hero-detail-media: clamp(42rem, 58vh, 60rem);
+
+  /* --spacing-unit est l'alias historique de --spacing × 2 (Tailwind est la
+   * source de vérité, --spacing = 0.5rem défini dans le @theme de global.css).
+   * Préférer les utilitaires Tailwind (p-2 = 10px, gap-4 = 20px) dans les
+   * templates. Cette variable reste exposée pour les composants .wf-*
+   * existants qui consomment calc(var(--spacing-unit) * N) en CSS. */
+  --spacing-unit: calc(var(--spacing) * 2);
+
+  /* Rythme vertical entre blocs page-builder.
+   * Deux paliers seulement. Le bloc déclare son padding-block en consommant
+   * un de ces tokens. Comme deux blocs consécutifs additionnent leur
+   * padding-bottom + padding-top, l'écart effectif entre les contenus
+   * vaut le double. À 1440px viewport / 1920px viewport:
+   *   tight   = 40px / 53px   serré → 80px d'écart entre blocs tight
+   *   default = 80px / 107px  standard → 160px d'écart entre sections
+   */
+  --space-block-tight:   4rem;
+  --space-block-default: 8rem;
+
+  /* Espacements typographiques internes aux blocs.
+   * En px fixes, valeur unique mobile et desktop (le mobile sera réévalué
+   * plus tard si besoin). Norme partagée par tous les blocs:
+   *   --space-title-lead   = 20px  entre titre (h1/h2) et description (lead)
+   *   --space-lead-cta     = 40px  entre description et bouton(s) d'action
+   * Utilisés via margin-top sur le sibling cible (cf. .wf-hero-text). */
+  --space-title-lead: 20px;
+  --space-lead-cta:   40px;
+
+  /* Dérivés — formules canoniques de la famille (résolues à l'usage selon les couleurs de marque) */
+  /* Largeur de filet isolée: le collage de bordures (marge négative des grilles à
+   * cadre fermé qui wrappent, ex. logos) doit rester synchronisé avec le trait. */
+  --line-width: 1px;
+  --line-hair: var(--line-width) solid color-mix(in oklch, var(--text-base) 12%, transparent);
+  --line-soft: var(--line-width) solid color-mix(in oklch, var(--text-base) 7%, transparent);
+
+  /* Voile (scrim) derrière un overlay/modal: noir de marque à ~58 % pour
+   * assombrir le fond tout en le laissant deviner. Résolu à l'usage avec les
+   * couleurs de marque, comme --line-*. Migrera vers le package partagé en
+   * même temps que la primitive <Modal>. */
+  --scrim: color-mix(in oklch, var(--text-base) 58%, transparent);
+
+  /* Tailles par défaut du panneau de la primitive <Modal>, surchargeables par
+   * la prop `size` (--wf-modal-size). Migrent avec la primitive vers le package.
+   *   --modal-panel-side   = largeur d'un drawer latéral (right/left)
+   *   --modal-panel-center = largeur max d'un dialogue centré */
+  --modal-panel-side:   42rem;
+  --modal-panel-center: 56rem;
+
+  /* Motion — durées et courbes canoniques de la famille (face CSS).
+   * Pour les effets pilotés en CSS (survols, accordéon). Le miroir JS pour
+   * GSAP (scroll-reveal, parallaxe) vit dans app/family/motion.ts (tokens purs;
+   * la librairie elle-même est chargée par motion-gsap.ts); les deux faces
+   * partagent la même courbe « settle ». */
+  --motion-duration-hover:  150ms; /* rétroaction au survol et au focus (couleur, fond, micro-translations) */
+  --motion-duration-line:   240ms; /* révélation de trait au survol (.wf-link, .wf-rule-link) et rotations courtes (chevron d'accordéon) */
+  --motion-duration-expand: 280ms; /* déploiement de panneau (accordéon) */
+  --motion-duration-spin:   900ms; /* un tour du spinner d'attente (<Button loading>) */
+  --motion-duration-pulse: 2000ms; /* un cycle de respiration de la pastille preview (PreviewBanner) */
+  --motion-ease-settle:     cubic-bezier(0.22, 1, 0.36, 1);
+}

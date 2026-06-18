@@ -1,0 +1,45 @@
+{
+  // Worker preview SSR du site WebForge Ancrée (édition visuelle Sanity).
+  // DISTINCT de wrangler.jsonc (assets-only, prod + staging statiques): ici
+  // `nuxt build` en preset cloudflare-module (previewEnabled au build) produit un
+  // SERVEUR (.output/server) + des assets (.output/public), donc on déclare un
+  // `main` et un binding assets, pas seulement assets.directory.
+  //
+  // Utilisé par le Worker `webforge-ancree-preview` (branche de prod
+  // `preview`), via la commande de déploiement:
+  //   npx wrangler deploy --config wrangler.preview.jsonc
+  // Les chemins sont RELATIFS à CE fichier (à la racine du repo).
+
+  "name": "webforge-ancree-preview",
+
+  // Entrée serveur générée par Nitro (preset cloudflare-module). Chemin confirmé
+  // par un build SSR local: Nitro affiche « deploy using wrangler deploy
+  // .output/server/index.mjs --assets .output/public ».
+  "main": "./.output/server/index.mjs",
+
+  // nodejs_compat: la stack serveur (Nitro + @sanity/client + visual editing) tape
+  // des built-ins Node sur workerd. Requiert une compatibility_date >= 2024-09-23.
+  "compatibility_date": "2026-06-15",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Observabilité (Workers Logs): activée sur CE Worker preview parce qu'il
+  // exécute du code (SSR Nitro). Le Worker prod (wrangler.jsonc) est assets-only
+  // (aucun code à l'exécution), l'observabilité n'y capterait rien. Déclarée dans
+  // la config pour qu'un `wrangler deploy` ne la réinitialise pas (anti-drift).
+  "observability": {
+    "enabled": true
+  },
+
+  "assets": {
+    // Assets statiques (JS client, CSS, favicons, etc.). Servis par le binding
+    // ASSETS; le serveur SSR rend le HTML à la requête (drafts en preview).
+    "directory": "./.output/public",
+    "binding": "ASSETS"
+  },
+
+  // workers.dev ET preview URLs COUPÉS explicitement (sinon chaque `wrangler
+  // deploy` les rallume par défaut). Le Worker preview ne sert que sur son
+  // domaine custom webforge-ancree-preview.patoinestudio.ca.
+  "workers_dev": false,
+  "preview_urls": false
+}

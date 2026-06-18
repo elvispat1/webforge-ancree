@@ -1,0 +1,15 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" fill="#FAFAF7"/>
+  <!-- Bande de chiffres autonome: 4 stats, valeur accent au-dessus du libelle -->
+  <rect x="88" y="72" width="1" height="56" fill="#D8D5CE"/>
+  <rect x="159" y="72" width="1" height="56" fill="#D8D5CE"/>
+  <rect x="230" y="72" width="1" height="56" fill="#D8D5CE"/>
+  <rect x="24" y="82" width="46" height="14" rx="2" fill="#2D4A3E"/>
+  <rect x="24" y="104" width="36" height="4" rx="2" fill="#6B675F"/>
+  <rect x="95" y="82" width="38" height="14" rx="2" fill="#2D4A3E"/>
+  <rect x="95" y="104" width="40" height="4" rx="2" fill="#6B675F"/>
+  <rect x="166" y="82" width="50" height="14" rx="2" fill="#2D4A3E"/>
+  <rect x="166" y="104" width="32" height="4" rx="2" fill="#6B675F"/>
+  <rect x="237" y="82" width="42" height="14" rx="2" fill="#2D4A3E"/>
+  <rect x="237" y="104" width="38" height="4" rx="2" fill="#6B675F"/>
+</svg>

@@ -1,0 +1,39 @@
+/* Marque Atelier Cormier — tokens spécifiques à ce démo.
+ *
+ * Ce fichier contient ce qui est VRAI pour Atelier Cormier seulement:
+ * palette de surfaces, couleurs de texte, accents (vert forêt). Un autre
+ * client Minimaliste aurait son propre fichier avec d'autres valeurs.
+ *
+ * Importé après `family/tokens.css` dans `nuxt.config.ts`
+ * pour que la cascade soit cohérente.
+ */
+
+:root {
+  /* Couleurs de base — swatches canoniques de la marque, à référencer
+   * partout où on veut un blanc ou un noir « pur » (fond de carte sombre,
+   * texte sur fond accent, etc.) plutôt que via leurs alias sémantiques.
+   * --bg-base et --text-base ci-dessous pointent ici par défaut. */
+  --white: #FAFAF7;
+  --black: #1A1A1A;
+
+  /* Surfaces sémantiques */
+  --bg-base: var(--white);
+  --bg-alt:  #F2EFE9;
+
+  /* Texte */
+  --text-base:  var(--black);
+  --text-muted: #6B675F;
+
+  /* Accent — couleur de marque unique (vert forêt). Sert au texte d'emphase,
+   * au bouton primary (fill), aux liens, etc. La famille Minimaliste tient sur
+   * un seul accent: tout ce qui demandait une seconde couleur (hover du bouton,
+   * etc.) passe par --black. */
+  --accent-1: #2D4A3E;
+
+  /* Couleur fonctionnelle d'erreur (rouge doux), distincte des accents de marque.
+   * --error: texte, bordure, icône d'erreur (contraste >= 4.5:1 sur surface claire).
+   * --error-soft: variante claire pour les fonds, lisible avec du texte par-dessus.
+   * Même rouge pour la bannière de soumission et les erreurs de champ. */
+  --error:      #C0453B;
+  --error-soft: color-mix(in oklch, var(--error) 10%, var(--bg-base));
+}

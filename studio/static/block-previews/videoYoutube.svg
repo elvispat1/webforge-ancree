@@ -1,0 +1,10 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" fill="#FAFAF7"/>
+  <!-- Affiche vidéo 16/9 pleine largeur de contenu -->
+  <rect x="24" y="34" width="272" height="118" rx="2" fill="#D8D5CE"/>
+  <!-- Bouton de lecture accent, triangle blanc cassé -->
+  <circle cx="160" cy="93" r="26" fill="#2D4A3E"/>
+  <path d="M152 81 v24 l20 -12 z" fill="#FAFAF7"/>
+  <!-- Légende -->
+  <rect x="24" y="164" width="120" height="4" rx="2" fill="#6B675F"/>
+</svg>

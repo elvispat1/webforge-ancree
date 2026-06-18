@@ -1,0 +1,45 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Nano Banana Pro: images générées temporaires (les retenues sont déplacées vers apps/*/public/images/)
+generated_imgs/
+
+# Archive locale des images remplacées (les originaux restent dans l'historique git)
+.image-backups/
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Docs de travail jetables (prompts d'audit, jamais livrés au client)
+docs/PROMPT-AUDIT-FINAL.md
+
+# Claude Code: config locale et scripts de workflow jetables (launch.json est versionné)
+.claude/settings.local.json
+.claude/wf-*.mjs
+
+# Yarn 4 (Berry) cache et state, on garde seulement les bouts utiles
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

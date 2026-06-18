@@ -1,0 +1,298 @@
+{
+  "a11y": {
+    "skip_to_content": "Aller au contenu principal",
+    "main_nav": "Navigation principale",
+    "toggle_menu_open": "Ouvrir le menu",
+    "toggle_menu_close": "Fermer le menu",
+    "mobile_menu": "Menu de navigation",
+    "footer_nav": "Pied de page",
+    "number_decrease": "Diminuer",
+    "number_increase": "Augmenter",
+    "file_choose": "Choisir un fichier",
+    "breadcrumb": "Fil d'Ariane",
+    "pagination": "Pagination des articles",
+    "previous_page": "Page précédente",
+    "next_page": "Page suivante",
+    "category_filter": "Filtrer par catégorie",
+    "filter_all": "Tous",
+    "faq_themes": "Thèmes de la FAQ",
+    "opens_new_window": "(s'ouvre dans une nouvelle fenêtre)",
+    "lang_switcher": "Passer à la version anglaise"
+  },
+  "ui": {
+    "lang": {
+      "target": "EN"
+    },
+    "preview": {
+      "label": "Mode prévisualisation",
+      "exit": "Quitter la prévisualisation",
+      "exiting": "Sortie en cours…"
+    },
+    "filter": {
+      "trigger": "Filtrer",
+      "clear": "Enlever le filtre",
+      "count_articles": "{count} article | {count} articles"
+    },
+    "blog": {
+      "reading_time": "{minutes} min de lecture",
+      "pagination_description": "Le blogue d'{site}, page {n}: la suite des billets sur le bois, les techniques et les coulisses des projets."
+    },
+    "faq": {
+      "no_theme": "Autres"
+    },
+    "video": {
+      "play": "Lire la vidéo",
+      "iframe_title": "Vidéo YouTube"
+    },
+    "legal": {
+      "terms_description": "Conditions d'utilisation du site {site}.",
+      "privacy_description": "Politique de confidentialité du site {site}."
+    },
+    "view_project": "Voir le projet",
+    "learn_more": "En savoir plus",
+    "error": {
+      "code": "Erreur {code}",
+      "not_found_title": "Page introuvable",
+      "not_found_body": "La page demandée n'existe pas ou a été déplacée.",
+      "generic_title": "Une erreur est survenue",
+      "generic_body": "Quelque chose a mal tourné de notre côté. Revenez à l'accueil et réessayez.",
+      "home_link": "Retour à l'accueil"
+    }
+  },
+  "consent": {
+    "aria_label": "Préférences de témoins",
+    "title": "Témoins et confidentialité",
+    "body": "Ce site peut utiliser des témoins de mesure d'audience pour comprendre sa fréquentation. Ils ne se chargent qu’avec votre accord.",
+    "policy_prefix": "Détails dans notre",
+    "policy_link": "politique de confidentialité",
+    "accept_all": "Tout accepter",
+    "necessary_only": "Nécessaires seulement",
+    "customize": "Personnaliser",
+    "back": "Retour",
+    "save": "Enregistrer mes choix",
+    "required": "Requis",
+    "manage": "Gérer les témoins",
+    "categories": {
+      "necessary": {
+        "label": "Nécessaires",
+        "purpose": "Assurent le fonctionnement du site : sécurité du formulaire de contact et mémorisation de votre choix de témoins. Toujours actifs."
+      },
+      "analytics": {
+        "label": "Analytique",
+        "purpose": "Mesure d’audience anonyme : comprendre la fréquentation du site et l’améliorer. Désactivés tant que vous ne les avez pas acceptés."
+      }
+    },
+    "policy": {
+      "title": "Catégories de témoins",
+      "intro": "Voici les catégories de témoins pouvant être utilisées sur ce site et leur finalité. Votre choix est conservé six mois; passé ce délai, la bannière réapparaît.",
+      "status_required": "Requis",
+      "status_optional": "Optionnel",
+      "change_prefix": "Vous pouvez revoir ou modifier votre choix à tout moment :"
+    }
+  },
+  "showcase": {
+    "seo": {
+      "title": "Guide des composants",
+      "description": "Tout ce qu'un site WebForge multipage comprend : héros, blocs de page, blocs d'article, formulaire et système visuel. Rendu en direct, depuis le contenu réel."
+    },
+    "intro": {
+      "eyebrow": "WebForge Multipage",
+      "title": "Guide des composants",
+      "lead": "Tout ce qu'un site WebForge multipage comprend : héros, blocs de page, blocs d'article, formulaire et système visuel. Rendu en direct, depuis le contenu réel."
+    },
+    "nav": {
+      "heros": "Héros",
+      "reguliers": "Blocs de page",
+      "articles": "Blocs d'article",
+      "formulaire": "Formulaire",
+      "styleguide": "Système visuel"
+    },
+    "links": {
+      "multipage": "Multipage",
+      "onepager": "One-pager"
+    },
+    "sections": {
+      "heros": "Le bandeau d'ouverture, imposé par type de page.",
+      "reguliers": "Les blocs modulaires du constructeur de page.",
+      "articles": "Les blocs de corps d'article.",
+      "formulaire": "Champs, contrôles et états de formulaire.",
+      "styleguide": "Typographie, couleurs, tokens et atomes."
+    },
+    "samples": {
+      "media_text": {
+        "heading": "Le bois choisi avant même le premier trait de crayon.",
+        "body_1": "Avant de dessiner quoi que ce soit, je vais voir la matière. Je sélectionne mes planches une à une chez deux scieurs de la Montérégie, en fonction du fil, des nœuds et de la teinte naturelle. Une table de salle à manger ne se conçoit pas pareil selon que le frêne penche vers le miel ou vers le gris.",
+        "body_2": "Je laisse ensuite le bois sécher et bouger dans l'atelier, parfois plusieurs mois. C'est cette patience qui fait qu'une pièce d'Atelier Cormier ne fend pas trois hivers plus tard. Vous repartez avec un meuble qui a déjà fini de travailler.",
+        "image_alt": "Planches de frêne brut empilées contre le mur de brique de l'atelier, marquées à la craie.",
+        "image_label": "Planches de frêne en attente de séchage",
+        "image_caption": "Réserve de bois, atelier de Chambly, 4:5",
+        "cta_label": "Voir comment je travaille"
+      },
+      "cta_band": {
+        "title": "Un projet de mobilier en tête ? Parlons-en.",
+        "subtitle": "Je prends quelques pièces sur mesure par saison pour rester proche de chaque chantier. Écrivez-moi tôt, on dessine ensemble avant de scier la première planche.",
+        "primary_cta_label": "Démarrer un projet",
+        "secondary_cta_label": "Voir les réalisations"
+      },
+      "iframe": {
+        "title": "Carte de localisation de l'atelier à Chambly",
+        "caption": "Atelier de Chambly, rive sud de Montréal."
+      },
+      "video_youtube": {
+        "poster_alt": "Mains de l'ébéniste sculptant une pièce de noyer au ciseau à bois.",
+        "poster_label": "Atelier, mains au travail",
+        "poster_caption": "Affiche personnalisée, 16:9",
+        "title": "Visite de l'atelier de Chambly"
+      }
+    },
+    "styleguide": {
+      "sections": {
+        "typography": "Typographie",
+        "tokens": "Tokens",
+        "components": "Composants"
+      },
+      "typography": {
+        "group_families": "Familles de police",
+        "group_weights": "Poids de police",
+        "group_headings": "Titres",
+        "group_body": "Corps de texte",
+        "group_captions": "Captions",
+        "group_specials": "Éléments spécialisés",
+        "group_colors": "Modificateurs de couleur",
+        "families_note": "Display et corps partagent Archivo dans la famille Minimaliste.",
+        "weights_note": "Trois poids systématiques.",
+        "headings_note": "Tailles fluides (clamp), du mobile au desktop.",
+        "weight_regular": "Regular",
+        "weight_medium": "Medium",
+        "weight_semibold": "Semibold",
+        "family_display": "Style display",
+        "family_body": "Style courant",
+        "family_mono": "Style mono",
+        "heading_1": "Titre 1",
+        "heading_2": "Titre 2",
+        "heading_3": "Titre 3",
+        "heading_4": "Titre 4",
+        "heading_5": "Titre 5",
+        "figcap_sample": "Légende d'image : pièce signée, livraison juin 2024.",
+        "caption_sample": "Légende ou méta-information discrète",
+        "sample_sentence": "L'ébénisterie commence par le choix du bois, chêne blanc, noyer noir, érable madré."
+      },
+      "tokens": {
+        "group_colors": "Couleurs marque",
+        "group_geometry": "Géométrie",
+        "group_spacing": "Échelle d'espacement",
+        "group_block_rhythm": "Rythme vertical entre blocs",
+        "group_base": "Base",
+        "group_backgrounds": "Backgrounds",
+        "group_text": "Text",
+        "group_accent": "Accent",
+        "colors_note": "Couleurs de marque, par groupe.",
+        "spacing_note": "Quatre paliers (10, 20, 40, 80 px), fluides.",
+        "block_rhythm_note": "Padding-block des blocs page-builder.",
+        "use_white": "Blanc canonique de la marque",
+        "use_black": "Noir canonique de la marque",
+        "use_bg_base": "Fond principal du site",
+        "use_bg_alt": "Fond alternatif (cartes, sections claires)",
+        "use_text_base": "Texte courant et titres",
+        "use_text_muted": "Texte secondaire, meta, captions",
+        "use_accent_1": "Couleur de marque unique (bouton primary, liens, accents)",
+        "use_spacing_inline": "Gap inline (icône + label, items compacts)",
+        "use_spacing_standard": "Gap standard (form, boutons côte à côte)",
+        "use_spacing_card": "Espacement de carte ou de groupe",
+        "use_spacing_large": "Grand espacement (séparation entre régions)",
+        "use_block_tight": "CTA strip, callout",
+        "use_block_default": "Sections et hero"
+      },
+      "atoms": {
+        "group_button": "Button",
+        "group_link": "Link",
+        "group_icon": "Icon",
+        "usage_primary": "Variante primary, taille par défaut.",
+        "usage_sm": "Variante compacte pour le header et les menus.",
+        "usage_ghost": "Variante en contour, pleine au survol.",
+        "usage_disabled": "État inactif, interaction bloquée.",
+        "usage_icon": "Le prop icon accepte n'importe quel nom d'icône.",
+        "usage_link": "Couleur accent par défaut, filet animé au survol.",
+        "link_sample": "Survolez ce lien",
+        "icon_note": "Icônes Lucide via le composant Icon."
+      },
+      "forms": {
+        "section_champs": "Champs texte",
+        "section_selection": "Sélection",
+        "section_saisie": "Saisie avancée",
+        "section_retroaction": "Rétroaction",
+        "section_exemple": "Exemple complet",
+        "group_input": "Input",
+        "group_checkbox": "Checkbox",
+        "group_checkboxgroup": "CheckboxGroup",
+        "group_radiogroup": "RadioGroup",
+        "group_switch": "Switch",
+        "group_select": "Select",
+        "group_date": "Champ date",
+        "group_number": "NumberInput",
+        "group_file": "FileInput",
+        "group_banner": "Bannière d'erreur",
+        "group_success": "Écran de succès",
+        "label_name": "Nom",
+        "label_email": "Adresse courriel",
+        "label_phone": "Téléphone",
+        "label_project": "Votre projet",
+        "label_province": "Province",
+        "label_category": "Catégorie de service",
+        "label_date": "Date souhaitée",
+        "label_qty": "Quantité",
+        "label_photo": "Photo du projet",
+        "label_analytics": "Analytique",
+        "label_necessary": "Nécessaires",
+        "legend_project": "Type de projet",
+        "legend_contact": "Contact préféré",
+        "legend_plan": "Forfait",
+        "legend_services": "Services qui vous intéressent",
+        "placeholder_category": "Choisir une catégorie",
+        "button_photo": "Joindre une photo",
+        "button_submit": "Envoyer",
+        "focus_tag": "réplique statique du focus",
+        "sample_name": "Jean Tremblay",
+        "sample_email": "jean.tremblay{'@'}exemple.com",
+        "sample_email_partial": "jean.tremblay{'@'}",
+        "sample_phone": "418 555 0142",
+        "sample_message": "J'aimerais refaire la signalétique de mon atelier d'ébénisterie.",
+        "consent_prefix": "J'accepte la",
+        "consent_link": "politique de confidentialité",
+        "project_cuisine": "Cuisine complète",
+        "project_mobilier": "Mobilier sur mesure",
+        "project_restauration": "Restauration de pièce",
+        "contact_courriel": "Courriel",
+        "contact_telephone": "Téléphone",
+        "contact_sms": "Texto",
+        "plan_essentiel_label": "Essentiel",
+        "plan_essentiel_desc": "Page unique, livrée en 2 semaines.",
+        "plan_multipage_label": "Multipage",
+        "plan_multipage_desc": "Plusieurs pages, blog inclus.",
+        "plan_builder_label": "Builder",
+        "plan_builder_desc": "CMS, le client édite lui-même.",
+        "service_cuisine": "Cuisine",
+        "service_mobilier": "Mobilier sur mesure",
+        "service_restauration": "Restauration",
+        "service_rangement": "Rangements intégrés",
+        "province_qc": "Québec",
+        "province_on": "Ontario",
+        "province_nb": "Nouveau-Brunswick",
+        "category_cuisine": "Cuisine",
+        "category_mobilier": "Mobilier",
+        "category_restauration": "Restauration",
+        "desc_analytics": "Mesure d'audience anonyme.",
+        "desc_necessary": "Requis au fonctionnement du site.",
+        "error_email": "Adresse courriel invalide.",
+        "error_consent": "Vous devez accepter pour continuer.",
+        "error_services": "Choisissez au moins un service.",
+        "error_radio": "Choisissez une option pour continuer.",
+        "error_category": "Sélectionnez une catégorie.",
+        "banner_title": "L'envoi n'a pas fonctionné",
+        "banner_body": "Réessaie dans un instant, ou écris-nous directement par courriel.",
+        "success_title": "Message reçu",
+        "success_body": "Merci, on te revient en moins de 24 h ouvrables."
+      }
+    }
+  }
+}
