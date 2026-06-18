@@ -20807,9 +20807,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webforge-minimaliste-studio@workspace:studio":
+"webforge-ancree-studio@workspace:studio":
   version: 0.0.0-use.local
-  resolution: "webforge-minimaliste-studio@workspace:studio"
+  resolution: "webforge-ancree-studio@workspace:studio"
   dependencies:
     "@sanity/document-internationalization": "npm:^6.1.1"
     "@sanity/icons": "npm:^3.7.0"
@@ -20827,9 +20827,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"webforge-minimaliste@workspace:.":
+"webforge-ancree@workspace:.":
   version: 0.0.0-use.local
-  resolution: "webforge-minimaliste@workspace:."
+  resolution: "webforge-ancree@workspace:."
   dependencies:
     "@iconify-json/lucide": "npm:^1.2.111"
     "@nuxt/fonts": "npm:^0.14.0"
