@@ -1,22 +1,27 @@
-# Branchement Cloudflare, démo WebForge Minimaliste
+# Branchement Cloudflare, démo WebForge Ancrée
 
-Runbook du déploiement du démo Atelier Cormier sur Cloudflare. **Phase 1 (prod +
-staging, statique) ET Phase 2 (preview SSR, édition visuelle Sanity) sont en ligne**
-depuis le 15 juin 2026. Seul reste optionnel: Cloudflare Access (Zero Trust) sur les
-domaines preview et staging (geste de Charles). Source de vérité à amender au fil de
-l'exécution.
+Runbook du déploiement du démo Rempart Extermination sur Cloudflare. Calqué sur le
+déploiement de la famille Minimaliste (même modèle: un Worker par environnement).
+Le reste du document décrit la cible et les gestes; ci-dessous l'état RÉEL d'Ancrée.
 
-## État actuel: Phase 1 en ligne
+## État actuel (18 juin 2026): config prête, Workers à créer
 
-- **Prod**: Worker `webforge-minimaliste`, branche `main`, domaine custom
-  `webforge-minimaliste.patoinestudio.ca` (répond 200).
-- **Staging**: Worker `webforge-minimaliste-staging`, branche `staging`, domaine
-  custom `webforge-minimaliste-staging.patoinestudio.ca` (répond 200).
-- **workers.dev coupé** sur les deux: ils ne servent que sur leurs domaines
-  `patoinestudio.ca`. Tout reste `noindex` (le démo est un gabarit non indexable,
-  `site.indexable: false`).
-- Le démo roule entièrement sur Sanity (project `fesilwqf`), bilingue fr/en,
-  statique pur. Voir la mémoire `project-sanity-v2-done`.
+- **Config en place et vérifiée**: `wrangler.jsonc` (prod/staging, assets-only,
+  sortie `.output/public`) et `wrangler.preview.jsonc` (preview SSR, `main` +
+  binding ASSETS, `nodejs_compat`) portent les bons noms (`webforge-ancree`,
+  `webforge-ancree-preview`). `yarn generate` est VERT (65 routes bilingues,
+  statique pur), le site se sert proprement en local (`npx serve .output/public`).
+- **Sanity**: project `5if00rwn` (« WebForge - Ancree », org Patoine Studio),
+  dataset `production`, schéma déployé, contenu seedé (fr + en). Les ids sont
+  gravés en constantes de code (zéro variable Sanity requise au build).
+- **Git**: remote `origin` = `github.com/elvispat1/webforge-ancree`. Branches
+  `main`, `staging`, `preview` poussées (preview suit main via
+  `.github/workflows/sync-preview.yml`).
+- **À FAIRE (geste de tableau de bord Cloudflare, le MCP CF est en lecture
+  seule)**: créer les trois Workers (prod/staging/preview) connectés au repo
+  GitHub, poser `NUXT_PUBLIC_SITE_URL` par Worker (+ les 3 variables du preview),
+  brancher les domaines custom `*.patoinestudio.ca`, couper workers.dev. Le détail
+  pas-à-pas suit; tout reste `noindex` (`site.indexable: false`).
 
 ## Modèle retenu: Workers, un Worker par environnement
 
@@ -31,10 +36,10 @@ Le motif est l'**isolation multi-familles**:
   famille ne touche jamais ce Worker; chaque Worker ne construit que sa branche.
 
 Le `wrangler.jsonc` à la racine déclare la topologie du Worker de prod
-(`name: webforge-minimaliste`, assets-only, sortie `.output/public`). Le
+(`name: webforge-ancree`, assets-only, sortie `.output/public`). Le
 Worker de **staging** réutilise la même config, build sur la branche `staging`,
 et se déploie sous son propre nom (`wrangler deploy --config wrangler.jsonc
---name webforge-minimaliste-staging`).
+--name webforge-ancree-staging`).
 
 ### Build (yarn 4)
 
@@ -59,13 +64,13 @@ et se déploie sous son propre nom (`wrangler deploy --config wrangler.jsonc
 
 ## Phase 2: preview SSR (édition visuelle Sanity) — TERMINÉE (15 juin 2026)
 
-**État: EN LIGNE.** Le Worker `webforge-minimaliste-preview` build la branche `preview`
+**État: EN LIGNE.** Le Worker `webforge-ancree-preview` build la branche `preview`
 en SSR (preset `cloudflare-module`, `nodejs_compat`, Startup ~53ms) et sert sur
-`https://webforge-minimaliste-preview.patoinestudio.ca` (200, `x-powered-by: Nuxt`,
+`https://webforge-ancree-preview.patoinestudio.ca` (200, `x-powered-by: Nuxt`,
 noindex). Build `corepack enable && yarn install --immutable && yarn build`, deploy
 `npx wrangler deploy --config wrangler.preview.jsonc`, watch `*`, 3 vars de build posées
 (`SANITY_API_READ_TOKEN`, `NUXT_PUBLIC_STUDIO_URL`, `NUXT_PUBLIC_SITE_URL`). Cycle
-d'édition visuelle VALIDÉ depuis `webforge-minimaliste.sanity.studio` > Presentation
+d'édition visuelle VALIDÉ depuis `webforge-ancree.sanity.studio` > Presentation
 (iframe sur le domaine preview, résolution de document, overlays click-to-edit/stega,
 images CDN Sanity). **Auto-sync**: `.github/workflows/sync-preview.yml` pousse `main` sur
 `preview` à chaque push, donc le preview rebuild avec le même code que prod.
@@ -128,8 +133,8 @@ La spec d'origine ci-dessous est conservée comme dossier de ce qui a été impl
    valider: le fragment `<Image>` passe par l'abstraction provider de @nuxt/image,
    et le provider consomme bien le `src` (URL cdn.sanity.io complète) du contenu.
 
-4. **`studioHost` figé** dans `sanity.cli.ts` (proposé `webforge-minimaliste` ->
-   `webforge-minimaliste.sanity.studio`), pour que `yarn studio:deploy` soit
+4. **`studioHost` figé** dans `sanity.cli.ts` (proposé `webforge-ancree` ->
+   `webforge-ancree.sanity.studio`), pour que `yarn studio:deploy` soit
    reproductible et scriptable. À confirmer par Charles (c'est une URL).
 
 5. **Branche `preview`**: la créer depuis `main` et la pousser (n'existe pas;
@@ -141,26 +146,26 @@ sont posées au build. Token seul, ou mauvaise branche -> build statique.
 
 ### À faire, infra (qui fait quoi)
 
-- **Token Viewer** (Charles): manage.sanity.io > project fesilwqf > API > Tokens,
+- **Token Viewer** (Charles): manage.sanity.io > project 5if00rwn > API > Tokens,
   rôle Viewer. Server-only, jamais commité.
 - **Deploy du Studio** (assistant, scriptable une fois `studioHost` figé):
-  `SANITY_STUDIO_PREVIEW_URL=https://webforge-minimaliste-preview.patoinestudio.ca yarn studio:deploy`.
-  Produit `webforge-minimaliste.sanity.studio`. (Si le CLI local n'est pas
+  `SANITY_STUDIO_PREVIEW_URL=https://webforge-ancree-preview.patoinestudio.ca yarn studio:deploy`.
+  Produit `webforge-ancree.sanity.studio`. (Si le CLI local n'est pas
   authentifié: `sanity login` d'abord, côté Charles.)
 - **Worker preview Cloudflare** (Charles, dashboard; MCP CF en lecture seule):
-  Worker `webforge-minimaliste-preview`, Git sur `patoine-studio/webforge-minimaliste`,
+  Worker `webforge-ancree-preview`, Git sur `patoine-studio/webforge-ancree`,
   branche de prod `preview`, watch path `*` (tout le repo), config
   `wrangler.preview.jsonc` à la racine, build
   `corepack enable && yarn install --immutable && yarn build`,
-  domaine custom `webforge-minimaliste-preview.patoinestudio.ca`, `nodejs_compat`
+  domaine custom `webforge-ancree-preview.patoinestudio.ca`, `nodejs_compat`
   au besoin. Variables (les TROIS, sinon build statique):
   `SANITY_API_READ_TOKEN` (Viewer),
-  `NUXT_PUBLIC_STUDIO_URL=https://webforge-minimaliste.sanity.studio`,
-  `NUXT_PUBLIC_SITE_URL=https://webforge-minimaliste-preview.patoinestudio.ca`.
+  `NUXT_PUBLIC_STUDIO_URL=https://webforge-ancree.sanity.studio`,
+  `NUXT_PUBLIC_SITE_URL=https://webforge-ancree-preview.patoinestudio.ca`.
 - **CORS Sanity** (assistant, via MCP): ajouter l'origine
-  `https://webforge-minimaliste-preview.patoinestudio.ca` aux origines CORS du
+  `https://webforge-ancree-preview.patoinestudio.ca` aux origines CORS du
   project, allowCredentials.
-- **Cloudflare Access** (Charles): sur `webforge-minimaliste-preview.patoinestudio.ca`
+- **Cloudflare Access** (Charles): sur `webforge-ancree-preview.patoinestudio.ca`
   (Zero Trust), comme staging.
 
 ### Ordre d'exécution
@@ -170,7 +175,7 @@ sont posées au build. Token seul, ou mauvaise branche -> build statique.
 2. Pousser la branche `preview`.
 3. Charles: créer le token Viewer.
 4. Assistant: `yarn studio:deploy` (avec `SANITY_STUDIO_PREVIEW_URL`) ->
-   `webforge-minimaliste.sanity.studio`.
+   `webforge-ancree.sanity.studio`.
 5. Assistant: CORS de l'origine preview via MCP.
 6. Charles: créer le Worker preview avec les TROIS variables (donc build SSR).
 7. Charles: Access sur l'URL preview.
@@ -180,7 +185,7 @@ sont posées au build. Token seul, ou mauvaise branche -> build statique.
 
 - Build du Worker preview vert (SSR, `nodejs_compat` OK), et `WORKERS_CI_BRANCH=preview`
   bien posé au build (sinon la sécurité par branche est inerte).
-- Depuis `webforge-minimaliste.sanity.studio`, le Presentation tool charge le
+- Depuis `webforge-ancree.sanity.studio`, le Presentation tool charge le
   Worker preview en iframe; cookie posé via `/preview/enable`.
 - Un draft non publié est visible au reload de l'iframe; overlays click-to-edit
   actifs; bannière de sortie présente.
@@ -200,7 +205,7 @@ sans GitHub Action (le `sync-preview.yml` sert à autre chose: pousser main sur
 preview).
 
 ```
-Sanity (Publish) ──webhook POST──▶ Cloudflare Deploy Hook (branche main) ──▶ build webforge-minimaliste
+Sanity (Publish) ──webhook POST──▶ Cloudflare Deploy Hook (branche main) ──▶ build webforge-ancree
 ```
 
 Les deux pièces sont des gestes de tableau de bord (le MCP Cloudflare et le MCP
@@ -208,7 +213,7 @@ Sanity n'ont pas d'outil pour les créer).
 
 ### 1. Cloudflare Deploy Hook
 
-Worker `webforge-minimaliste` > **Settings** > **Build** > **Deploy Hooks** >
+Worker `webforge-ancree` > **Settings** > **Build** > **Deploy Hooks** >
 **Add deploy hook**: nom `Sanity publish`, branche **main**. Copier l'URL générée
 (`https://api.cloudflare.com/client/v4/workers/builds/deploy_hooks/<UUID>`).
 **Cette URL est un secret** (quiconque l'a peut déclencher un build, risque faible).
@@ -217,7 +222,7 @@ hooks en rafale (plusieurs publications d'un coup = 1 build).
 
 ### 2. Webhook Sanity (GROQ-powered)
 
-manage.sanity.io > project `fesilwqf` > **API** > **Webhooks** > **Create webhook**:
+manage.sanity.io > project `5if00rwn` > **API** > **Webhooks** > **Create webhook**:
 
 | Champ | Valeur |
 |---|---|
@@ -240,7 +245,7 @@ build pas.
 
 ### Vérification
 
-Publier un changement, puis Worker `webforge-minimaliste` > **Builds**: un build
+Publier un changement, puis Worker `webforge-ancree` > **Builds**: un build
 apparaît avec « Sanity publish » comme source, prod à jour ~1-2 min après.
 
 ### Hors scope
