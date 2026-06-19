@@ -43,17 +43,26 @@ const swatches = [
   { token: '--bg-deep', label: 'Bande forte' }
 ]
 const typeScale = ['wf-h1', 'wf-h2', 'wf-h3', 'wf-h4', 'wf-h5', 'wf-body-1', 'wf-body-2', 'wf-body-3', 'wf-caption']
+
+// Sections pour la navigation scroll-spy: le systeme visuel, le heros, puis chaque bloc.
+const sections = [
+  { id: 'sys', label: t('showcase.section_system') },
+  { id: 'hero-home', label: t('showcase.hero') },
+  ...sampleBlocks.map((b) => ({ id: b._type as string, label: b._type as string }))
+]
 </script>
 
 <template>
   <article class="sg">
+    <ShowcaseNav :items="sections" />
+
     <header class="sg-intro wf-container">
       <p class="sg-intro__kicker wf-caption">{{ t('showcase.title') }}</p>
       <h1 class="sg-intro__title wf-h1">{{ t('showcase.subtitle') }}</h1>
       <p class="sg-intro__lead wf-body-1 wf-text-muted">{{ t('showcase.lead') }}</p>
     </header>
 
-    <section class="sg-sys wf-container">
+    <section id="sys" class="sg-sys wf-container">
       <h2 class="sg-sys__title wf-h3">{{ t('showcase.section_system') }}</h2>
 
       <h3 class="sg-sub wf-h5">{{ t('showcase.colors') }}</h3>
@@ -87,11 +96,11 @@ const typeScale = ['wf-h1', 'wf-h2', 'wf-h3', 'wf-h4', 'wf-h5', 'wf-body-1', 'wf
 
     <h2 class="sg-gallery-title wf-container wf-h3">{{ t('showcase.blocks') }}</h2>
 
-    <ShowcaseStage :label="t('showcase.hero')" type="hero-home">
+    <ShowcaseStage id="hero-home" :label="t('showcase.hero')" type="hero-home">
       <Hero :hero="heroSample" />
     </ShowcaseStage>
 
-    <ShowcaseStage v-for="b in sampleBlocks" :key="(b._key as string)" :label="(b._type as string)" :type="(b._type as string)">
+    <ShowcaseStage v-for="b in sampleBlocks" :id="(b._type as string)" :key="(b._key as string)" :label="(b._type as string)" :type="(b._type as string)">
       <component :is="blockComp(b._type as string)" v-bind="b" />
     </ShowcaseStage>
   </article>

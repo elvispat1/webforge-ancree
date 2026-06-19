@@ -3,11 +3,11 @@
  * (nom + type). Le bloc vit dans son propre .wf-site, donc ses requetes
  * @container site se resolvent contre la largeur de la scene, exactement comme en
  * production. La barre, elle, reste dans le contexte site de la page. */
-defineProps<{ label: string; type?: string }>()
+defineProps<{ label: string; type?: string; id?: string }>()
 </script>
 
 <template>
-  <section class="sg-stage">
+  <section :id="id" class="sg-stage">
     <header class="sg-stage__bar">
       <div class="wf-container sg-stage__bar-inner">
         <span class="sg-stage__name">{{ label }}</span>
@@ -26,12 +26,10 @@ defineProps<{ label: string; type?: string }>()
 .sg-stage {
   border-top: var(--line-hair);
 }
+/* Barre d'etiquette statique: la navigation collante de la vitrine (ShowcaseNav)
+ * porte le reperage; ici on nomme simplement la scene. */
 .sg-stage__bar {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: color-mix(in oklch, var(--bg-base) 88%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--bg-base);
   padding-block: 1.4rem;
   border-bottom: var(--line-soft);
 }
