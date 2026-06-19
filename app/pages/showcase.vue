@@ -5,16 +5,30 @@
  * Ancree. Chaque bloc est rendu dans sa propre scene .wf-site (contexte de
  * requete de conteneur), via le meme block-map que la page-builder de prod. */
 import { regularBlockMap } from '~/components/page-builder/block-map'
+import { breadcrumbsFor } from '~/config/route-map'
+import type { HeroPageBlock } from '~/types/blocks'
 
 definePageMeta({ layout: 'showcase' })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 useSeoMeta({
   title: () => `${t('showcase.title')} — ${t('showcase.subtitle')}`,
   robots: 'noindex, nofollow'
 })
 
 const heroSample = useHeroContent()
+
+// Masthead de page, echantillon de catalogue (fil d'Ariane reel, appel tel:
+// non crawle par le link checker).
+const heroPageSample = computed<HeroPageBlock>(() => ({
+  _type: 'hero-page',
+  _key: 'hero-page',
+  crumbs: breadcrumbsFor('services', undefined, locale.value as 'fr' | 'en'),
+  eyebrow: t('hero.kicker'),
+  title: t('pages.services_heading'),
+  lead: t('pages.services_lead'),
+  cta: { label: t('hero.cta_primary'), href: t('contact.phone_href') }
+}))
 
 /* Echantillons = fixtures de la home. On neutralise les liens du bloc services:
  * le fixture pointe vers des slugs de parasites sans page, ce qui casserait le
@@ -47,7 +61,8 @@ const typeScale = ['wf-h1', 'wf-h2', 'wf-h3', 'wf-h4', 'wf-h5', 'wf-body-1', 'wf
 // Sections pour la navigation scroll-spy: le systeme visuel, le heros, puis chaque bloc.
 const sections = [
   { id: 'sys', label: t('showcase.section_system') },
-  { id: 'hero-home', label: t('showcase.hero') },
+  { id: 'hero-home', label: t('showcase.hero_home') },
+  { id: 'hero-page', label: t('showcase.hero_page') },
   ...sampleBlocks.map((b) => ({ id: b._type as string, label: b._type as string }))
 ]
 </script>
@@ -96,8 +111,12 @@ const sections = [
 
     <h2 class="sg-gallery-title wf-container wf-h3">{{ t('showcase.blocks') }}</h2>
 
-    <ShowcaseStage id="hero-home" :label="t('showcase.hero')" type="hero-home">
+    <ShowcaseStage id="hero-home" :label="t('showcase.hero_home')" type="hero-home">
       <Hero :hero="heroSample" />
+    </ShowcaseStage>
+
+    <ShowcaseStage id="hero-page" :label="t('showcase.hero_page')" type="hero-page">
+      <Hero :hero="heroPageSample" />
     </ShowcaseStage>
 
     <ShowcaseStage v-for="b in sampleBlocks" :id="(b._type as string)" :key="(b._key as string)" :label="(b._type as string)" :type="(b._type as string)">

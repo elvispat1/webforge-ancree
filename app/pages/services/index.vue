@@ -1,9 +1,24 @@
 <script setup lang="ts">
 /* Index des services. Liste tous les services depuis Sanity (langue courante),
- * repli sur la fixture si vide. En-tete solide (pas de heros): hauteur reservee. */
+ * repli sur la fixture si vide. Masthead = bloc hero-page (catalogue de heros),
+ * fil d'Ariane localise depuis le route-map. */
 import { SERVICES_INDEX_QUERY } from '~/sanity/content'
+import { breadcrumbsFor } from '~/config/route-map'
+import type { HeroPageBlock } from '~/types/blocks'
 
 const { t, locale } = useI18n()
+
+// Masthead de la page (bloc du catalogue de heros, rendu par <Hero>). L'eyebrow
+// reprend la zone de service (motif local d'Ancree), distinct du fil d'Ariane.
+const heroBlock = computed<HeroPageBlock>(() => ({
+  _type: 'hero-page',
+  _key: 'masthead',
+  crumbs: breadcrumbsFor('services', undefined, locale.value as 'fr' | 'en'),
+  eyebrow: t('hero.kicker'),
+  title: t('pages.services_heading'),
+  lead: t('pages.services_lead'),
+  cta: { label: t('hero.cta_primary'), href: t('contact.phone_href') }
+}))
 
 const { data: raw } = await useSanityQuery<{ services?: Array<{ _id: string; icon?: string; title: string; body?: string; featured?: boolean }> }>(
   SERVICES_INDEX_QUERY,
@@ -29,21 +44,7 @@ useSeoMeta({
 
 <template>
   <div class="svc">
-    <header class="svc__head">
-      <div class="wf-container">
-        <p class="svc__kicker wf-caption">
-          <span class="svc__tick" aria-hidden="true" />
-          {{ t('nav.services') }}
-        </p>
-        <h1 class="svc__title wf-h1">{{ t('pages.services_heading') }}</h1>
-        <p class="svc__lead wf-body-1">{{ t('pages.services_lead') }}</p>
-        <div class="svc__actions">
-          <Button :href="t('contact.phone_href')" kind="anchor" variant="call" icon="lucide:phone" :pulse="true">
-            {{ t('hero.cta_primary') }}
-          </Button>
-        </div>
-      </div>
-    </header>
+    <Hero :hero="heroBlock" />
 
     <div class="wf-container svc__body">
       <ul class="svc__grid">
@@ -60,38 +61,6 @@ useSeoMeta({
 </template>
 
 <style scoped>
-.svc__head {
-  background: var(--bg-deep);
-  color: var(--text-ondeep);
-  padding-block: calc(var(--header-height) + 5rem) clamp(4rem, 7vh, 6rem);
-}
-.svc__kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.1rem;
-  margin-bottom: 1.6rem;
-  color: color-mix(in oklch, var(--text-ondeep) 72%, transparent);
-}
-.svc__tick {
-  display: inline-block;
-  width: 2.6rem;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--accent-call);
-}
-.svc__title {
-  color: var(--text-ondeep);
-  max-width: 18ch;
-}
-.svc__lead {
-  margin-top: var(--space-title-lead);
-  max-width: 52ch;
-  color: color-mix(in oklch, var(--text-ondeep) 86%, transparent);
-}
-.svc__actions {
-  margin-top: var(--space-lead-cta);
-}
-
 .svc__body {
   padding-block: var(--space-block-default);
 }

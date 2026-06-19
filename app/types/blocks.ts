@@ -1,7 +1,7 @@
 /* Types de blocs. BlockBase porte la discrimination (_type) et la cle (_key) que
  * les mecanismes de dispatch (block-map + <component :is>) utilisent. Les contrats
  * de contenu vivent dans content/. */
-import type { HeroContent } from '~/content/hero'
+import type { HeroContent, HeroPageContent } from '~/content/hero'
 import type { TrustBarContent, ServicesContent, ServiceCitiesContent } from '~/content/blocks'
 import type { AboutContent } from '~/content/about'
 import type { TestimonialsContent } from '~/content/testimonials'
@@ -13,7 +13,8 @@ export type BlockBase<T extends string> = { _type: T; _key: string }
 
 // Heros (catalogue a part, comme dans le systeme).
 export type HeroHomeBlock = BlockBase<'hero-home'> & HeroContent
-export type HeroBlock = HeroHomeBlock
+export type HeroPageBlock = BlockBase<'hero-page'> & HeroPageContent
+export type HeroBlock = HeroHomeBlock | HeroPageBlock
 
 // Blocs de la page-builder.
 export type TrustBarBlock = BlockBase<'trust-bar'> & TrustBarContent

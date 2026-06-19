@@ -8,12 +8,15 @@
     "typography": "Typographie",
     "buttons": "Boutons",
     "hero": "Héros",
+    "hero_home": "Héros d’accueil",
+    "hero_page": "Héros de page",
     "blocks": "Blocs de page",
     "type_sample": "On reprend le contrôle, pour de bon"
   },
   "a11y": {
     "skip_to_content": "Aller au contenu",
     "main_nav": "Navigation principale",
+    "breadcrumb": "Fil d’Ariane",
     "open_menu": "Ouvrir le menu",
     "close_menu": "Fermer le menu"
   },

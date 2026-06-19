@@ -8,12 +8,15 @@
     "typography": "Typography",
     "buttons": "Buttons",
     "hero": "Hero",
+    "hero_home": "Home hero",
+    "hero_page": "Page hero",
     "blocks": "Page blocks",
     "type_sample": "We take back control, for good"
   },
   "a11y": {
     "skip_to_content": "Skip to content",
     "main_nav": "Main navigation",
+    "breadcrumb": "Breadcrumb",
     "open_menu": "Open menu",
     "close_menu": "Close menu"
   },
