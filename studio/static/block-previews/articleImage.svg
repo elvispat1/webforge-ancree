@@ -1,7 +1,0 @@
-<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Figure pleine colonne + figcaption (tiret accent + legende) -->
-  <rect x="60" y="36" width="200" height="104" rx="2" fill="#D8D5CE"/>
-  <rect x="60" y="150" width="10" height="4" rx="2" fill="#2D4A3E"/>
-  <rect x="76" y="150" width="84" height="4" rx="2" fill="#6B675F"/>
-</svg>

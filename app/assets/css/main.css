@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* CSS de base du canvas. Reset minimal + la coquille placeholder. Toutes les
+ * valeurs viennent des tokens (family/ et brand/), aucune en dur ici. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--wf-font-body);
+  color: var(--wf-text);
+  background: var(--wf-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lien d'évitement (a11y): visible au focus clavier seulement. */
+.wf-skip {
+  position: absolute;
+  left: -9999px;
+}
+.wf-skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+}
+
+/* Coquille placeholder (accueil + page d'erreur). */
+.canvas {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+}
+.canvas-kicker {
+  margin: 0;
+  font-family: var(--wf-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wf-accent);
+}
+.canvas-title {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+.canvas-lead {
+  margin: 0;
+  max-width: 38ch;
+  color: var(--wf-text-muted);
+}
+.canvas-link {
+  margin-top: 0.5rem;
+  color: var(--wf-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
