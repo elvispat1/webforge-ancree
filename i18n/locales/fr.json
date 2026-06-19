@@ -1,7 +1,6 @@
 {
   "a11y": {
     "skip_to_content": "Aller au contenu principal",
-    "call_label": "Appeler au {phone}",
     "main_nav": "Navigation principale",
     "toggle_menu_open": "Ouvrir le menu",
     "toggle_menu_close": "Fermer le menu",
@@ -21,9 +20,6 @@
     "lang_switcher": "Passer à la version anglaise"
   },
   "ui": {
-    "call_now": "Appeler maintenant",
-    "before": "Avant",
-    "after": "Après",
     "lang": {
       "target": "EN"
     },
@@ -124,29 +120,29 @@
     },
     "samples": {
       "media_text": {
-        "heading": "On règle le problème, puis on s'assure qu'il ne revienne pas.",
-        "body_1": "La moitié d'une intervention, c'est de comprendre par où le nuisible entre. On inspecte le pourtour, on repère les points d'accès, on identifie la source avant de traiter quoi que ce soit. Vous recevez un diagnostic clair, sans jargon.",
-        "body_2": "Ensuite on traite avec la bonne méthode, on scelle les entrées et on vous donne les bons réflexes. Si le problème revient pendant la période couverte, on revient sans frais. C'est ça, régler la situation pour de bon.",
-        "image_alt": "Technicien de Rempart Extermination inspectant le pourtour d'une maison à la lampe de poche.",
-        "image_label": "Inspection du pourtour, Rive-Sud de Québec",
-        "image_caption": "Sur le terrain, 4:5",
-        "cta_label": "Voir comment on travaille"
+        "heading": "Le bois choisi avant même le premier trait de crayon.",
+        "body_1": "Avant de dessiner quoi que ce soit, je vais voir la matière. Je sélectionne mes planches une à une chez deux scieurs de la Montérégie, en fonction du fil, des nœuds et de la teinte naturelle. Une table de salle à manger ne se conçoit pas pareil selon que le frêne penche vers le miel ou vers le gris.",
+        "body_2": "Je laisse ensuite le bois sécher et bouger dans l'atelier, parfois plusieurs mois. C'est cette patience qui fait qu'une pièce d'Atelier Cormier ne fend pas trois hivers plus tard. Vous repartez avec un meuble qui a déjà fini de travailler.",
+        "image_alt": "Planches de frêne brut empilées contre le mur de brique de l'atelier, marquées à la craie.",
+        "image_label": "Planches de frêne en attente de séchage",
+        "image_caption": "Réserve de bois, atelier de Chambly, 4:5",
+        "cta_label": "Voir comment je travaille"
       },
       "cta_band": {
-        "title": "Un nuisible chez vous ? On s'en occupe.",
-        "subtitle": "L'estimation est gratuite et le prix est ferme à l'avance. Appelez-nous, on vous dit franchement quoi faire, même pour une urgence du soir ou de fin de semaine.",
-        "primary_cta_label": "Appeler 418 555 0147",
-        "secondary_cta_label": "Soumission gratuite"
+        "title": "Un projet de mobilier en tête ? Parlons-en.",
+        "subtitle": "Je prends quelques pièces sur mesure par saison pour rester proche de chaque chantier. Écrivez-moi tôt, on dessine ensemble avant de scier la première planche.",
+        "primary_cta_label": "Démarrer un projet",
+        "secondary_cta_label": "Voir les réalisations"
       },
       "iframe": {
-        "title": "Carte de la zone desservie autour de Lévis",
-        "caption": "Rempart Extermination, Lévis et la Rive-Sud de Québec."
+        "title": "Carte de localisation de l'atelier à Chambly",
+        "caption": "Atelier de Chambly, rive sud de Montréal."
       },
       "video_youtube": {
-        "poster_alt": "Camion de service de Rempart Extermination dans une entrée résidentielle.",
-        "poster_label": "Notre équipe, sur le terrain",
+        "poster_alt": "Mains de l'ébéniste sculptant une pièce de noyer au ciseau à bois.",
+        "poster_label": "Atelier, mains au travail",
         "poster_caption": "Affiche personnalisée, 16:9",
-        "title": "Une intervention de Rempart Extermination, étape par étape"
+        "title": "Visite de l'atelier de Chambly"
       }
     },
     "styleguide": {
@@ -163,7 +159,7 @@
         "group_captions": "Captions",
         "group_specials": "Éléments spécialisés",
         "group_colors": "Modificateurs de couleur",
-        "families_note": "Famille Ancrée : Plus Jakarta Sans en display, Source Sans 3 en corps.",
+        "families_note": "Display et corps partagent Archivo dans la famille Minimaliste.",
         "weights_note": "Trois poids systématiques.",
         "headings_note": "Tailles fluides (clamp), du mobile au desktop.",
         "weight_regular": "Regular",
@@ -177,9 +173,9 @@
         "heading_3": "Titre 3",
         "heading_4": "Titre 4",
         "heading_5": "Titre 5",
-        "figcap_sample": "Légende d'image : intervention réalisée, juin 2024.",
+        "figcap_sample": "Légende d'image : pièce signée, livraison juin 2024.",
         "caption_sample": "Légende ou méta-information discrète",
-        "sample_sentence": "La gestion parasitaire commence par une bonne inspection : fourmis, souris, guêpes, punaises de lit."
+        "sample_sentence": "L'ébénisterie commence par le choix du bois, chêne blanc, noyer noir, érable madré."
       },
       "tokens": {
         "group_colors": "Couleurs marque",
@@ -260,7 +256,7 @@
         "sample_email": "jean.tremblay{'@'}exemple.com",
         "sample_email_partial": "jean.tremblay{'@'}",
         "sample_phone": "418 555 0142",
-        "sample_message": "J'ai des souris dans le grenier, j'aimerais une inspection.",
+        "sample_message": "J'aimerais refaire la signalétique de mon atelier d'ébénisterie.",
         "consent_prefix": "J'accepte la",
         "consent_link": "politique de confidentialité",
         "project_cuisine": "Cuisine complète",

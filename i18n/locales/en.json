@@ -1,7 +1,6 @@
 {
   "a11y": {
     "skip_to_content": "Skip to main content",
-    "call_label": "Call {phone}",
     "main_nav": "Main navigation",
     "toggle_menu_open": "Open menu",
     "toggle_menu_close": "Close menu",
@@ -21,9 +20,6 @@
     "lang_switcher": "Switch to the French version"
   },
   "ui": {
-    "call_now": "Call now",
-    "before": "Before",
-    "after": "After",
     "lang": {
       "target": "FR"
     },
@@ -124,29 +120,29 @@
     },
     "samples": {
       "media_text": {
-        "heading": "We solve the problem, then make sure it doesn't come back.",
-        "body_1": "Half of any job is figuring out how the pest gets in. We inspect the perimeter, find the access points and identify the source before treating anything. You get a clear diagnosis, no jargon.",
-        "body_2": "Then we treat with the right method, seal the entries and give you the right habits. If the problem comes back during the covered period, we come back at no charge. That is what settling the situation for good means.",
-        "image_alt": "Rempart Extermination technician inspecting the perimeter of a home with a flashlight.",
-        "image_label": "Perimeter inspection, South Shore of Quebec City",
-        "image_caption": "On site, 4:5",
-        "cta_label": "See how we work"
+        "heading": "The wood is chosen before the first line is ever drawn.",
+        "body_1": "Before sketching anything, I go see the material. I pick my boards one by one from two sawmills in the Montérégie, based on the grain, the knots and the natural tone. A dining table isn't designed the same way whether the ash leans toward honey or toward grey.",
+        "body_2": "I then let the wood dry and move in the workshop, sometimes for several months. That patience is why an Atelier Cormier piece won't split three winters later. You leave with a piece of furniture that has already finished settling.",
+        "image_alt": "Stacks of rough ash boards leaning against the workshop's brick wall, marked in chalk.",
+        "image_label": "Ash boards waiting to dry",
+        "image_caption": "Wood store, Chambly workshop, 4:5",
+        "cta_label": "See how I work"
       },
       "cta_band": {
-        "title": "A pest at your place? We've got it.",
-        "subtitle": "The estimate is free and the price is firm upfront. Call us and we'll tell you honestly what to do, even for an evening or weekend emergency.",
-        "primary_cta_label": "Call 418 555 0147",
-        "secondary_cta_label": "Free quote"
+        "title": "A furniture project in mind? Let's talk.",
+        "subtitle": "I take on a few custom pieces each season to stay close to every project. Write to me early, and we'll draw it up together before cutting the first board.",
+        "primary_cta_label": "Start a project",
+        "secondary_cta_label": "See the work"
       },
       "iframe": {
-        "title": "Map of the service area around Lévis",
-        "caption": "Rempart Extermination, Lévis and the South Shore of Quebec City."
+        "title": "Location map of the Chambly workshop",
+        "caption": "Chambly workshop, south shore of Montréal."
       },
       "video_youtube": {
-        "poster_alt": "Rempart Extermination service van in a residential driveway.",
-        "poster_label": "Our team, on the ground",
+        "poster_alt": "The cabinetmaker's hands carving a piece of walnut with a chisel.",
+        "poster_label": "Workshop, hands at work",
         "poster_caption": "Custom poster, 16:9",
-        "title": "A Rempart Extermination intervention, step by step"
+        "title": "A visit to the Chambly workshop"
       }
     },
     "styleguide": {
@@ -163,7 +159,7 @@
         "group_captions": "Captions",
         "group_specials": "Specialized elements",
         "group_colors": "Colour modifiers",
-        "families_note": "Ancrée family: Plus Jakarta Sans for display, Source Sans 3 for body.",
+        "families_note": "Display and body share Archivo in the Minimaliste family.",
         "weights_note": "Three systematic weights.",
         "headings_note": "Fluid sizes (clamp), from mobile to desktop.",
         "weight_regular": "Regular",
@@ -177,9 +173,9 @@
         "heading_3": "Heading 3",
         "heading_4": "Heading 4",
         "heading_5": "Heading 5",
-        "figcap_sample": "Image caption: completed intervention, June 2024.",
+        "figcap_sample": "Image caption: signed piece, delivered June 2024.",
         "caption_sample": "Caption or discreet meta information",
-        "sample_sentence": "Pest management starts with a good inspection: ants, mice, wasps, bed bugs."
+        "sample_sentence": "Cabinetmaking begins with the choice of wood: white oak, black walnut, figured maple."
       },
       "tokens": {
         "group_colors": "Brand colours",
@@ -260,7 +256,7 @@
         "sample_email": "jane.smith{'@'}example.com",
         "sample_email_partial": "jane.smith{'@'}",
         "sample_phone": "418 555 0142",
-        "sample_message": "I have mice in the attic, I'd like an inspection.",
+        "sample_message": "I'd like to redo the signage for my woodworking shop.",
         "consent_prefix": "I accept the",
         "consent_link": "privacy policy",
         "project_cuisine": "Full kitchen",

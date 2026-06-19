@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /* Section Formulaire du Style Guide. Spécimens rendus des contrôles de la
- * famille Ancrée (Input, Checkbox, CheckboxGroup, RadioGroup, Switch,
+ * famille Minimaliste (Input, Checkbox, CheckboxGroup, RadioGroup, Switch,
  * Select, date, NumberInput, FileInput) et de la rétroaction de soumission
  * (bannière d'erreur, écran de succès), plus un exemple de formulaire complet.
  * Texte naturel via i18n (showcase.styleguide.forms), valeurs pré-remplies

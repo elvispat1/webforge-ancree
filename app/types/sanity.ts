@@ -82,7 +82,7 @@ export interface SanityHeroHome {
   lead: string
   primaryCta: SanityLink
   secondaryCta: SanityLink
-  meta: Array<{ label: string; value: string; icon?: string }>
+  meta: Array<{ label: string; value: string }>
   visual: SanityFigure
   visualMobile: SanityFigure
 }
@@ -210,43 +210,6 @@ export type SanityHighlightsBlock = SanityBlockBase<'highlights'> & {
   items: Array<{ icon: Maybe<string>; title: string; body: string }>
 }
 
-export type SanityReassuranceBlock = SanityBlockBase<'reassurance'> & {
-  eyebrow: Maybe<string>
-  heading: Maybe<string>
-  lead: Maybe<string>
-  items: Array<{ icon: Maybe<string>; label: string }>
-}
-
-export type SanityServiceAreaBlock = SanityBlockBase<'serviceArea'> & {
-  eyebrow: Maybe<string>
-  heading: string
-  lead: Maybe<string>
-  areas: Array<{ name: string }>
-  note: Maybe<string>
-}
-
-export type SanityBeforeAfterBlock = SanityBlockBase<'beforeAfter'> & {
-  eyebrow: Maybe<string>
-  heading: Maybe<string>
-  lead: Maybe<string>
-  /** Figures projetées via FIGURE_PROJECTION (asset résolu en URL CDN). */
-  items: Array<{ before: SanityFigure; after: SanityFigure; caption: Maybe<string> }>
-}
-
-export type SanityQuoteFormBlock = SanityBlockBase<'quoteForm'> & {
-  eyebrow: Maybe<string>
-  heading: string
-  lead: Maybe<string>
-  nameLabel: string
-  phoneLabel: string
-  serviceLabel: string
-  serviceOptions: Array<{ label: string }>
-  submitLabel: string
-  successTitle: string
-  successBody: string
-  privacyNote: Maybe<string>
-}
-
 export type SanityLogosBlock = SanityBlockBase<'logos'> & {
   eyebrow: Maybe<string>
   heading: Maybe<string>
@@ -301,10 +264,6 @@ export type SanityRawBlock =
   | SanityProcessBlock
   | SanityStatsBlock
   | SanityHighlightsBlock
-  | SanityReassuranceBlock
-  | SanityServiceAreaBlock
-  | SanityBeforeAfterBlock
-  | SanityQuoteFormBlock
   | SanityLogosBlock
   | SanityProjectsPreviewBlock
   | SanityBlogPreviewBlock

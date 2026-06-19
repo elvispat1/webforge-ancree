@@ -5,7 +5,7 @@
 // niveau 2 à l'autre; titre; intro; CTA optionnel) puis image de couverture pleine
 // largeur EN DESSOUS. Silhouette volontairement distincte du héros détail (split
 // texte/image), pour que l'index ne se confonde pas avec la fiche. L'image est
-// OPTIONNELLE: sans elle (faq, contact), la tête seule, Ancrée pur. Entrée au
+// OPTIONNELLE: sans elle (faq, contact), la tête seule, Minimaliste pur. Entrée au
 // chargement.
 import type { Crumb } from '~/config/route-map'
 import type { HeroPageBlock } from '~/types/blocks'

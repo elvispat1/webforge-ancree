@@ -1,13 +1,13 @@
-/* webforge-demo — Système typographique (famille Ancrée)
+/* webforge-demo — Système typographique (famille Minimaliste)
  *
  * Échelle canonique réutilisable par tous les blocs. Toutes les tailles en
  * rem, donc scalent avec html font-size (clamp 8.53px → 13.33px). Référence:
  * 1rem = 10px à 1440px viewport, 1rem = 13.33px à 1920px viewport.
  *
- * Hiérarchie (Ancrée: Plus Jakarta Sans en display, Source Sans 3 en corps):
- *   wf-h1 → wf-h5     Titres (font-display, weight 600-700, tracking doux)
- *   wf-body-1/2/3     Texte courant (font-body, line-height ~1.6, chaleureux)
- *   wf-caption        Label/surtitre uppercase (font-display 700, 1.2rem)
+ * Hiérarchie:
+ *   wf-h1 → wf-h5     Titres (font-display, weight 500-600, négative tracking)
+ *   wf-body-1/2/3     Texte courant (font-body, line-height 1.5)
+ *   wf-caption        Label/légende uppercase (font-display, 1.2rem)
  *   wf-figcap         Légende d'image (font-display, 1.2rem muted, non-uppercase)
  *
  * Pas de wf-h6: la rampe s'arrête à h5. Pas de wf-eyebrow ni wf-kicker:
@@ -19,7 +19,7 @@
  * une classe sémantique séparée pour un cas d'usage trivial à composer.
  *
  * Toutes les classes consomment les tokens de marque/famille pour les couleurs
- * et les fonts. Le jour où la famille Ancrée est extraite en package
+ * et les fonts. Le jour où la famille Minimaliste est extraite en package
  * partagé, ce fichier part tel quel.
  *
  * Les composants Vue référencent ces classes. Une mise à jour de valeur ici
@@ -47,33 +47,33 @@
  * proportionnels à la taille calculée. */
 .wf-h1 {
   font-size: clamp(3.6rem, calc(2.33rem + 3.38vw), 7.2rem);
-  line-height: 1.06;
-  letter-spacing: -0.022em;
-  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 500;
 }
 .wf-h2 {
   font-size: clamp(2.8rem, calc(1.89rem + 2.44vw), 5.4rem);
-  line-height: 1.1;
-  letter-spacing: -0.018em;
-  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  font-weight: 500;
 }
 .wf-h3 {
   font-size: clamp(2.3rem, calc(1.7rem + 1.6vw), 4rem);
-  line-height: 1.16;
-  letter-spacing: -0.013em;
-  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 500;
 }
 .wf-h4 {
   font-size: clamp(2rem, calc(1.65rem + 0.94vw), 3rem);
-  line-height: 1.22;
-  letter-spacing: -0.008em;
-  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 600;
 }
 .wf-h5 {
   font-size: clamp(1.9rem, calc(1.79rem + 0.28vw), 2.2rem);
-  line-height: 1.28;
-  letter-spacing: -0.004em;
-  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
 }
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -89,17 +89,17 @@
 }
 .wf-body-1 {
   font-size: 1.8rem;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-base);
 }
 .wf-body-2 {
   font-size: 1.6rem;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--text-base);
 }
 .wf-body-3 {
   font-size: 1.4rem;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text-muted);
 }
 
@@ -110,9 +110,9 @@
   font-family: var(--font-display);
   font-size: 1.2rem;
   line-height: 1.4;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-muted);
   margin: 0;
 }

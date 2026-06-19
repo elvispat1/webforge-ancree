@@ -1,5 +1,5 @@
 <script setup lang="ts">
-/* SectionHead — en-tête de section réutilisable (famille Ancrée).
+/* SectionHead — en-tête de section réutilisable (famille Minimaliste).
  *
  * Surtitre + titre + description + CTA. La disposition est choisie selon le
  * contenu, pas par une prop:

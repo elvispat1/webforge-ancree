@@ -1,17 +1,19 @@
-// Seed FR: globales (siteSettings) et pages (accueil, services, interventions,
+// Seed FR: globales (siteSettings) et pages (accueil, services, projets,
 // à propos, blogue, FAQ, contact, one-pager).
 //
-// Transcription fidèle de la copie Rempart Extermination (bible de contenu,
-// docs/CONTENU-DEMO-REMPART.md, sections 1 et 5). La composition des pageBuilder
-// reproduit le gabarit de la famille Minimaliste via les modes des blocs
-// intelligents; le bloc faq est en sélection manuelle pure, sans mode ni limit,
-// et la page FAQ se compose en sections par thème dans faqPage.sections. La copie
-// des pages de détail vit sur chaque service et projet (collections), plus dans
-// servicesPage ni projectsPage. Ids déterministes (bible, section 4).
-// Politique d'images (bible, section 3): les figures portent alt, label, caption,
-// ratio mais PAS de champ image; brand.logo est OMIS (repli wordmark texte).
-// Les jetons {year} (copyright) et {email} (bandeau d'échec du formulaire)
-// restent tels quels: remplacés à la résolution.
+// Transcription fidèle de la copie V1 auditée: app/content/site.ts, hero.ts,
+// home.ts, page-heroes.ts, highlights.ts, stats.ts, process.ts, logos.ts,
+// about.ts, services.ts, testimonials.ts, faq.ts, contact.ts, services-page.ts,
+// projects-page.ts, about-page.ts, blog-page.ts. La composition des pageBuilder
+// reproduit usePageBlocks.ts et useOnePagerBlocks.ts via les modes des blocs
+// intelligents (spec, sections 6.2 à 6.9); le bloc faq est en sélection
+// manuelle pure, sans mode ni limit (spec 4.4), et la page FAQ se compose
+// en sections par thème dans faqPage.sections (spec 6.7). La copie des pages
+// de détail vit sur chaque service et projet (collections, spec 6.10 et 6.11),
+// plus dans servicesPage ni projectsPage. Ids déterministes (spec, section 11).
+// Les images sont des marqueurs { _imagePath } remplacés par le runner après
+// upload des assets. Les jetons {year} (copyright) et {email} (bandeau d'échec
+// du formulaire) restent tels quels: remplacés à la résolution.
 
 // ── Fabriques locales (liens et figures récurrents) ──────────────────────────
 
@@ -31,171 +33,162 @@ const anchor = (label, target) => ({
   anchor: target
 })
 
-/** Lien externe (ex: appel téléphonique). Le champ du schéma `link` est
- *  `externalUrl` (validé scheme http/https/mailto/tel), pas `href`. */
-const external = (label, url) => ({
-  _type: 'link',
-  label,
-  type: 'external',
-  externalUrl: url
-})
-
-/** Figure du héros d'accueil (même cadrage, deux ratios). */
+/** Figure du héros d'accueil (art direction: même image, deux ratios). */
 const heroFigure = (ratio, caption) => ({
   _type: 'figure',
   image: { _imagePath: '/images/hero.jpg' },
-  alt: 'Technicien de Rempart Extermination, planchette à la main, devant le camion de service dans une entrée résidentielle de la Rive-Sud de Québec.',
-  label: 'Notre équipe, sur le terrain',
+  alt: "Atelier d'ébénisterie, plan de travail avec planche de frêne, rabots et ciseaux à bois.",
+  label: 'Atelier, plan de travail en frêne',
   caption,
   ratio
 })
 
 // ── Blocs partagés entre pages (copie identique, _key propre à chaque page) ──
 
-/** Bloc highlights (accueil + à propos): quatre engagements concrets. */
+/** Bloc highlights (HIGHLIGHTS_CONTENT, accueil + à propos). */
 const highlightsBlock = (key) => ({
   _type: 'highlights',
   _key: key,
-  heading: 'Ce que vous obtenez en nous appelant.',
-  lead: "Pas de promesse vague. Quatre engagements clairs qu'on tient sur chaque intervention, à la maison comme au commerce.",
+  heading: 'Ce que vous obtenez en travaillant avec moi.',
+  lead: "Pas de promesse de marketing. Quatre engagements concrets que je tiens sur chaque pièce qui sort de l'atelier.",
   items: [
     {
       _type: 'highlightItem',
-      _key: 'item-permis',
-      icon: 'lucide:shield-check',
-      title: 'Licencié et assuré',
-      body: "Certification provinciale en application de pesticides (MELCCFP) et assurance complète. Vous savez exactement qui entre chez vous."
+      _key: 'item-bois',
+      icon: 'lucide:trees',
+      title: "Bois d'ici",
+      body: "Frêne, érable, merisier et noyer noir sourcés à moins de 200 km de Chambly. Je sais d'où vient chaque planche."
+    },
+    {
+      _type: 'highlightItem',
+      _key: 'item-mains',
+      icon: 'lucide:hammer',
+      title: 'Une seule paire de mains',
+      body: 'Du premier croquis à la livraison, c\'est moi qui fais tout. Vous parlez toujours à la personne qui construit.'
+    },
+    {
+      _type: 'highlightItem',
+      _key: 'item-joinage',
+      icon: 'lucide:ruler',
+      title: 'Joinage traditionnel',
+      body: 'Tenons, mortaises et queues d\'aronde taillés à la main. Aucune quincaillerie cachée pour masquer un raccourci.'
     },
     {
       _type: 'highlightItem',
       _key: 'item-garantie',
-      icon: 'lucide:badge-check',
-      title: 'Garantie de résultat',
-      body: "Si le problème revient pendant la période couverte, on revient sans frais. On règle la situation pour de bon, pas juste pour aujourd'hui."
-    },
-    {
-      _type: 'highlightItem',
-      _key: 'item-securite',
-      icon: 'lucide:heart-handshake',
-      title: 'Sûr pour la famille',
-      body: "Produits homologués par Santé Canada, appliqués par des techniciens formés et certifiés. On vous explique quoi faire avant et après chaque traitement."
-    },
-    {
-      _type: 'highlightItem',
-      _key: 'item-urgence',
-      icon: 'lucide:clock',
-      title: "Service d'urgence 24/7",
-      body: 'Un nid de guêpes au-dessus de la porte un dimanche soir? On répond. Les soirs et les fins de semaine, on reste joignables pour les urgences.'
+      icon: 'lucide:shield-check',
+      title: 'Garantie à vie sur la structure',
+      body: 'Si un assemblage lâche, je le reprends sans frais. Une pièce de bois massif se transmet, elle ne se jette pas.'
     }
   ]
 })
 
-/** Bloc stats (accueil + à propos): repères de confiance. */
+/** Bloc stats (STATS_CONTENT, accueil + à propos). */
 const statsBlock = (key) => ({
   _type: 'stats',
   _key: key,
-  heading: 'Quinze ans à protéger la Rive-Sud, en quelques chiffres.',
+  heading: 'Dix ans d’atelier, en quelques chiffres.',
   items: [
-    { _type: 'statItem', _key: 'stat-fonde', value: '2011', label: 'Au service de la région de Québec' },
-    { _type: 'statItem', _key: 'stat-experience', value: '15 ans', label: "D'expérience sur le terrain" },
-    { _type: 'statItem', _key: 'stat-google', value: '4,9', label: 'Note Google sur 312 avis' },
-    { _type: 'statItem', _key: 'stat-urgence', value: '24/7', label: "Service d'urgence, soirs et fins de semaine" }
+    { _type: 'statItem', _key: 'stat-fonde', value: '2014', label: 'Atelier fondé à Chambly' },
+    { _type: 'statItem', _key: 'stat-pieces', value: '140+', label: 'Pièces livrées à la main' },
+    { _type: 'statItem', _key: 'stat-rayon', value: '200 km', label: 'Rayon des bois sourcés' },
+    { _type: 'statItem', _key: 'stat-garantie', value: 'À vie', label: 'Garantie sur la structure' }
   ]
 })
 
-/** Étapes du processus (sans le n: dérivé de la position). */
+/** Étapes du processus (PROCESS_CONTENT, sans le n: dérivé de la position). */
 const processSteps = () => ([
   {
     _type: 'processStep',
     _key: 'step-1',
-    title: "L'inspection",
-    body: "On identifie le nuisible, on trouve par où il entre et on évalue l'ampleur du problème. Vous recevez un diagnostic clair, sans jargon, avant qu'on traite quoi que ce soit."
+    title: 'La rencontre',
+    body: "Une heure ensemble, à l'atelier ou chez vous, pour comprendre votre projet et votre espace. Gratuite et sans engagement."
   },
   {
     _type: 'processStep',
     _key: 'step-2',
-    title: 'Le traitement',
-    body: "On applique la bonne méthode pour votre situation: appâts ciblés, traitement localisé ou traitement thermique. Toujours avec des produits homologués et un plan adapté à votre bâtiment."
+    title: 'Le devis et le dessin',
+    body: 'Un devis écrit et ferme dans la semaine: essences, dimensions, échéancier. On fige le dessin ensemble avant que je scie quoi que ce soit.'
   },
   {
     _type: 'processStep',
     _key: 'step-3',
-    title: 'La prévention',
-    body: "On scelle les points d'entrée et on vous donne les bons réflexes pour que le problème ne revienne pas. La moitié du travail, c'est d'empêcher la prochaine visite."
+    title: 'La fabrication',
+    body: "Je débite, j'assemble et je finis à l'atelier de Chambly. Je vous tiens au courant aux étapes clés, parfois avec une photo."
   },
   {
     _type: 'processStep',
     _key: 'step-4',
-    title: 'La garantie',
-    body: "On fait un suivi et on reste disponibles. Si le nuisible revient pendant la période couverte, on revient sans frais. C'est ça, régler le problème pour de bon."
+    title: 'La livraison et la pose',
+    body: "Je livre et j'installe moi-même. Ajustements et finitions sur place. Le solde n'est dû qu'une fois la pièce en place."
   }
 ])
 
-/** Bloc/objet process complet. _key omis hors pageBuilder. */
+/** Bloc/objet process complet (PROCESS_CONTENT). _key omis hors pageBuilder. */
 const processContent = (key) => ({
   _type: 'process',
   ...(key ? { _key: key } : {}),
   eyebrow: 'Le déroulement',
-  heading: 'Comment se déroule une intervention',
-  lead: "Du premier appel au suivi, une méthode éprouvée et un seul objectif: que le nuisible parte et ne revienne pas.",
-  cta: external('418 555 0147', 'tel:+14185550147'),
+  heading: 'Comment se déroule un mandat',
+  lead: 'Du premier appel à la pose finale, un seul interlocuteur: moi.',
+  cta: internal('Me contacter', 'contactPage-fr'),
   steps: processSteps()
 })
 
-/** Bloc about (à propos + one-pager). */
+/** Bloc about (ABOUT_CONTENT, à propos + one-pager). */
 const aboutBlock = (key) => ({
   _type: 'about',
   _key: key,
   eyebrow: 'À propos',
-  heading: 'Une équipe locale qui répond, et qui revient si besoin.',
+  heading: 'Une seule personne, du dessin à la livraison.',
   body: [
-    "Rempart Extermination, c'est Mathieu Bouchard et son équipe de six techniciens, basés à Lévis depuis 2011. Mathieu a démarré seul, un camion et sa certification en poche. Quinze ans plus tard, on dessert toute la Rive-Sud de Québec et la Chaudière-Appalaches, mais l'approche n'a pas changé: vous parlez à du vrai monde de la région, pas à un centre d'appels.",
-    "Karine, David, Jean-Philippe, Stéphanie et Olivier complètent l'équipe. Tous certifiés, tous formés à expliquer clairement ce qu'ils font et pourquoi. Notre métier, ce n'est pas juste de chasser des insectes: c'est de vous redonner la tranquillité d'esprit chez vous."
+    "J'ai appris le métier dans l'atelier de mon grand-père à Saint-Hyacinthe, puis passé cinq ans chez un maître ébéniste à Lévis. Depuis 2014, je travaille seul à Chambly. C'est moi qui dessine, qui scie, qui assemble, qui livre. Si vous m'appelez, c'est moi qui réponds.",
+    'Mon parti pris est simple : moins de pièces, mieux faites. Si je ne suis pas la bonne personne pour votre projet, je vous le dirai directement.'
   ],
   photo: {
     _type: 'figure',
-    image: { _imagePath: '/images/hero.jpg' },
-    alt: "Mathieu Bouchard, fondateur de Rempart Extermination, devant le camion de service à Lévis.",
-    label: 'Mathieu Bouchard, fondateur',
-    caption: 'Portrait, 3:4',
+    image: { _imagePath: '/images/about.jpg' },
+    alt: "Mains de l'ébéniste sculptant une pièce de noyer au ciseau à bois.",
+    label: 'Atelier, mains au travail',
+    caption: 'Photo atelier, 3:4',
     ratio: '3/4'
   },
-  figcaption: 'Mathieu Bouchard, fondateur et technicien certifié. Rempart Extermination, Lévis.',
+  figcaption: 'Maxime Cormier, fondateur. Atelier Cormier, Chambly.',
   diffs: [
     {
       _type: 'aboutDiff',
-      _key: 'diff-local',
-      title: 'Locaux.',
-      body: "Basés à Lévis, on connaît les bâtiments et les nuisibles de la région. On se déplace vite sur toute la Rive-Sud."
+      _key: 'diff-bois',
+      title: 'Bois locaux.',
+      body: "Frêne, érable, merisier, noyer noir, sourcés à moins de 200 km de l'atelier."
     },
     {
       _type: 'aboutDiff',
-      _key: 'diff-certifie',
-      title: 'Certifiés.',
-      body: "Licenciés MELCCFP et assurés. Chaque technicien est formé à l'application sécuritaire des produits."
+      _key: 'diff-solo',
+      title: 'Atelier solo.',
+      body: "Vous parlez à la personne qui construit votre pièce. Pas d'intermédiaire, pas de sous-traitance."
     },
     {
       _type: 'aboutDiff',
-      _key: 'diff-garantie',
-      title: 'Garantie de résultat.',
-      body: "On ne disparaît pas après le traitement. Si le problème revient pendant la période couverte, on revient sans frais."
+      _key: 'diff-joinage',
+      title: 'Joinage traditionnel.',
+      body: "Tenons, mortaises, queues d'aronde. Aucune quincaillerie cachée pour combler le travail."
     }
   ]
 })
 
-/** Bloc contact complet (page Contact + one-pager). Les valeurs des coordonnées
- *  vivent dans siteSettings (join à la résolution); seuls les libellés et la
- *  copie du formulaire sont stockés ici. */
+/** Bloc contact complet (CONTACT_CONTENT, page Contact + one-pager). Les
+ *  valeurs des coordonnées vivent dans siteSettings (join à la résolution);
+ *  seuls les libellés et la copie du formulaire sont stockés ici. */
 const contactBlock = (key) => ({
   _type: 'contact',
   _key: key,
   eyebrow: 'Contact',
-  heading: 'Parlez-nous de votre problème.',
-  lead: "Décrivez-nous ce que vous voyez ou entendez, et où. On vous revient rapidement avec un plan d'action. Pour une urgence, le téléphone reste le plus rapide.",
+  heading: 'Parlez-moi de votre projet.',
+  lead: "Une rencontre d'une heure, à l'atelier ou chez vous, suffit pour savoir si on est faits pour travailler ensemble. Aucun engagement avant la signature du devis.",
   metaLabels: {
     phone: 'Téléphone',
     email: 'Courriel',
-    address: 'Adresse',
+    address: 'Atelier',
     hours: 'Heures'
   },
   form: {
@@ -213,7 +206,7 @@ const contactBlock = (key) => ({
     submit: { idle: 'Envoyer la demande', loading: 'Envoi en cours...' },
     errorBanner: {
       title: 'Envoi impossible.',
-      body: 'Vérifiez votre connexion et réessayez, ou écrivez-nous directement à {email}.'
+      body: 'Vérifiez votre connexion et réessayez, ou écrivez-moi directement à {email}.'
     },
     privacy: {
       text: "J'accepte que mes informations soient traitées selon la",
@@ -222,100 +215,8 @@ const contactBlock = (key) => ({
   },
   success: {
     title: 'Message reçu.',
-    body: 'Merci. On vous revient dans les plus brefs délais. Pour une urgence, appelez-nous au 418 555 0147.'
+    body: 'Merci beaucoup. On vous répond dans les plus brefs délais.'
   }
-})
-
-// ── Blocs de conversion propres à la famille Ancrée ──────────────────────────
-
-/** Chips de réassurance (même jour, 24/7, estimation gratuite, prix ferme). */
-const reassuranceBlock = (key) => ({
-  _type: 'reassurance',
-  _key: key,
-  items: [
-    { _type: 'reassuranceItem', _key: 'r-jour', icon: 'lucide:calendar-check', label: 'Intervention le jour même' },
-    { _type: 'reassuranceItem', _key: 'r-urgence', icon: 'lucide:clock', label: 'Urgence 24/7' },
-    { _type: 'reassuranceItem', _key: 'r-estimation', icon: 'lucide:badge-check', label: 'Estimation gratuite' },
-    { _type: 'reassuranceItem', _key: 'r-prix', icon: 'lucide:coins', label: "Prix ferme à l'avance" }
-  ]
-})
-
-/** Bloc zone de service (Rive-Sud de Québec). */
-const serviceAreaBlock = (key) => ({
-  _type: 'serviceArea',
-  _key: key,
-  eyebrow: 'Zone desservie',
-  heading: 'On dessert toute la Rive-Sud de Québec',
-  lead: "Basés à Lévis, on se déplace vite. Du même jour au lendemain selon l'urgence et votre secteur.",
-  areas: [
-    { _type: 'serviceAreaItem', _key: 'a-levis', name: 'Lévis' },
-    { _type: 'serviceAreaItem', _key: 'a-quebec', name: 'Québec' },
-    { _type: 'serviceAreaItem', _key: 'a-st-romuald', name: 'Saint-Romuald' },
-    { _type: 'serviceAreaItem', _key: 'a-st-nicolas', name: 'Saint-Nicolas' },
-    { _type: 'serviceAreaItem', _key: 'a-charny', name: 'Charny' },
-    { _type: 'serviceAreaItem', _key: 'a-chaudiere', name: 'Chaudière-Appalaches' },
-    { _type: 'serviceAreaItem', _key: 'a-bellechasse', name: 'Bellechasse' },
-    { _type: 'serviceAreaItem', _key: 'a-lotbiniere', name: 'Lotbinière' },
-    { _type: 'serviceAreaItem', _key: 'a-beauce', name: 'Beauce' },
-    { _type: 'serviceAreaItem', _key: 'a-portneuf', name: 'Portneuf' }
-  ],
-  note: "Vous n'êtes pas certain qu'on couvre votre secteur? Appelez-nous, on vous le dit en deux minutes."
-})
-
-/** Galerie avant/après (figures sans image: placeholders soignés). */
-const beforeAfterBlock = (key) => ({
-  _type: 'beforeAfter',
-  _key: key,
-  eyebrow: 'Avant / après',
-  heading: "Des résultats qu'on montre, pas juste qu'on promet",
-  lead: 'Quelques interventions récentes, du problème réglé à la prévention qui tient.',
-  items: [
-    {
-      _type: 'beforeAfterItem',
-      _key: 'ba-restaurant',
-      before: { _type: 'figure', alt: 'Cuisine de restaurant avant le traitement contre les coquerelles.', label: 'Avant le traitement', caption: 'Restaurant du Vieux-Lévis', ratio: '4/3' },
-      after: { _type: 'figure', alt: 'Même cuisine de restaurant, propre et scellée, après traitement.', label: 'Après le traitement', caption: 'Restaurant du Vieux-Lévis', ratio: '4/3' },
-      caption: 'Restaurant du Vieux-Lévis: coquerelles éradiquées, points d\'entrée scellés, suivi mensuel.'
-    },
-    {
-      _type: 'beforeAfterItem',
-      _key: 'ba-duplex',
-      before: { _type: 'figure', alt: 'Chambre de duplex avant le traitement thermique contre les punaises de lit.', label: 'Avant le traitement', caption: 'Duplex à Charny', ratio: '4/3' },
-      after: { _type: 'figure', alt: 'Même chambre après traitement thermique, prête à réoccuper.', label: 'Après le traitement', caption: 'Duplex à Charny', ratio: '4/3' },
-      caption: 'Duplex à Charny: punaises de lit éliminées en une visite de traitement thermique.'
-    },
-    {
-      _type: 'beforeAfterItem',
-      _key: 'ba-fourmis',
-      before: { _type: 'figure', alt: 'Solive de sous-sol grugée par les fourmis charpentières.', label: 'Avant le traitement', caption: 'Maison à Saint-Nicolas', ratio: '4/3' },
-      after: { _type: 'figure', alt: 'Structure traitée et protégée, fourmis charpentières arrêtées.', label: 'Après le traitement', caption: 'Maison à Saint-Nicolas', ratio: '4/3' },
-      caption: 'Maison à Saint-Nicolas: colonie de fourmis charpentières arrêtée avant les dégâts.'
-    }
-  ]
-})
-
-/** Formulaire de soumission à 3 champs (simulé côté client, comme le contact). */
-const quoteFormBlock = (key) => ({
-  _type: 'quoteForm',
-  _key: key,
-  eyebrow: 'Soumission gratuite',
-  heading: 'Obtenez votre soumission gratuite',
-  lead: "Trois infos, on vous rappelle aujourd'hui même. Pour une urgence, appelez directement.",
-  nameLabel: 'Votre nom',
-  phoneLabel: 'Téléphone',
-  serviceLabel: 'Type de problème',
-  serviceOptions: [
-    { _type: 'quoteServiceOption', _key: 'opt-souris', label: 'Souris ou rats' },
-    { _type: 'quoteServiceOption', _key: 'opt-fourmis', label: 'Fourmis' },
-    { _type: 'quoteServiceOption', _key: 'opt-guepes', label: 'Guêpes ou frelons' },
-    { _type: 'quoteServiceOption', _key: 'opt-punaises', label: 'Punaises de lit' },
-    { _type: 'quoteServiceOption', _key: 'opt-coquerelles', label: 'Coquerelles' },
-    { _type: 'quoteServiceOption', _key: 'opt-autre', label: 'Autre nuisible' }
-  ],
-  submitLabel: 'Demander ma soumission',
-  successTitle: 'Demande reçue.',
-  successBody: "Merci. On vous rappelle aujourd'hui même. Pour une urgence, appelez le 418 555 0147.",
-  privacyNote: "En envoyant, vous acceptez d'être contacté au sujet de votre demande."
 })
 
 // ── Documents ────────────────────────────────────────────────────────────────
@@ -327,38 +228,27 @@ export const docs = [
     _type: 'siteSettings',
     language: 'fr',
     brand: {
-      name: 'Rempart Extermination',
-      homeAriaLabel: "Rempart Extermination, retour à l'accueil",
-      tagline: 'Gestion parasitaire pour la maison et le commerce. On reprend le contrôle, pour de bon.',
-      foundedYear: 2011
+      name: 'Atelier Cormier',
+      logo: { _imagePath: '/seed-assets/logo-atelier-cormier.svg' },
+      homeAriaLabel: "Atelier Cormier, retour à l'accueil",
+      tagline: 'Ébénisterie sur mesure, Chambly QC. Établi en 2014.',
+      foundedYear: 2014
     },
     contact: {
-      phone: '418 555 0147',
-      email: 'bonjour@rempartextermination.ca',
+      phone: '450 555 0188',
+      email: 'bonjour@ateliercormier.ca',
       address: {
-        line1: '2750 avenue des Lilas',
-        cityProv: 'Lévis QC',
-        city: 'Lévis',
+        line1: '14 rue Bourgogne',
+        cityProv: 'Chambly QC',
+        city: 'Chambly',
         region: 'QC',
         country: 'CA',
-        postal: 'G6W 0M5'
+        postal: 'J3L 1A4'
       },
-      areaServed: [
-        'Lévis',
-        'Québec',
-        'Saint-Romuald',
-        'Saint-Nicolas',
-        'Charny',
-        'Chaudière-Appalaches',
-        'Bellechasse',
-        'Lotbinière',
-        'Beauce',
-        'Portneuf',
-        'Rive-Sud de Québec'
-      ],
+      areaServed: ['Chambly', 'Montérégie', 'Rive-Sud de Montréal', 'Montréal', 'Estrie'],
       hours: {
-        weekdays: 'Lun au Ven, 7h à 19h',
-        weekend: 'Sam et Dim, urgences 24/7'
+        weekdays: 'Lun à Ven, 8h à 17h',
+        weekend: 'Sam sur rendez-vous'
       }
     },
     nav: {
@@ -369,23 +259,23 @@ export const docs = [
           { _key: 'nav-testimonials', ...anchor('Témoignages', 'testimonials') },
           { _key: 'nav-faq', ...anchor('FAQ', 'faq') }
         ],
-        cta: anchor('Soumission gratuite', 'contact')
+        cta: anchor('Démarrer un projet', 'contact')
       },
       multipage: {
         primary: [
           { _key: 'nav-services', ...internal('Services', 'servicesPage-fr') },
-          { _key: 'nav-projets', ...internal('Interventions', 'projectsPage-fr') },
+          { _key: 'nav-projets', ...internal('Projets', 'projectsPage-fr') },
           { _key: 'nav-a-propos', ...internal('À propos', 'aboutPage-fr') },
           { _key: 'nav-blogue', ...internal('Blogue', 'blogPage-fr') },
           { _key: 'nav-contact', ...internal('Contact', 'contactPage-fr') }
         ],
-        cta: internal('Soumission gratuite', 'contactPage-fr')
+        cta: internal('Démarrer un projet', 'contactPage-fr')
       }
     },
     footer: {
       primary: [
         { _key: 'footer-services', ...internal('Services', 'servicesPage-fr') },
-        { _key: 'footer-projets', ...internal('Interventions', 'projectsPage-fr') },
+        { _key: 'footer-projets', ...internal('Projets', 'projectsPage-fr') },
         { _key: 'footer-a-propos', ...internal('À propos', 'aboutPage-fr') },
         { _key: 'footer-blogue', ...internal('Blogue', 'blogPage-fr') },
         { _key: 'footer-contact', ...internal('Contact', 'contactPage-fr') }
@@ -413,17 +303,17 @@ export const docs = [
         { _key: 'legal-conditions', ...internal("Conditions d'utilisation", 'legalPage-conditions-fr') },
         { _key: 'legal-confidentialite', ...internal('Politique de confidentialité', 'legalPage-confidentialite-fr') }
       ],
-      copyright: '© {year} Rempart Extermination. Tous droits réservés.',
+      copyright: '© {year} Atelier Cormier. Tous droits réservés.',
       credit: {
         label: 'Création de',
         studio: 'Patoine Studio',
-        product: 'WebForge, famille Ancrée',
+        product: 'WebForge, famille Minimaliste',
         studioUrl: 'https://patoinestudio.ca'
       }
     },
     seo: {
-      titleSuffix: 'Rempart Extermination',
-      defaultDescription: "Gestion parasitaire et extermination à Lévis et dans la région de Québec. Fourmis, souris, guêpes, punaises de lit, coquerelles. Licencié, assuré, garantie de résultat. Service d'urgence 24/7."
+      titleSuffix: 'Atelier Cormier',
+      defaultDescription: 'Ébénisterie sur mesure à Chambly, Québec. Cuisines, mobilier et restauration en bois massif local. Atelier indépendant établi en 2014.'
     }
   },
 
@@ -433,27 +323,26 @@ export const docs = [
     _type: 'homePage',
     language: 'fr',
     hero: [{ _type: 'heroHome', _key: 'hero',
-      title: 'On reprend le contrôle de chez vous. Pour de bon.',
-      lead: 'Fourmis, souris, guêpes, punaises de lit, coquerelles: gestion parasitaire pour la maison et le commerce à Lévis et dans la région de Québec. Urgences 24/7.',
-      primaryCta: external('418 555 0147', 'tel:+14185550147'),
-      secondaryCta: internal('Soumission gratuite', 'contactPage-fr'),
+      title: 'Du bois massif local, façonné à la main, pour durer cent ans.',
+      lead: 'Cuisines, mobilier et restauration, dans un atelier indépendant en Montérégie depuis 2014.',
+      primaryCta: internal('Démarrer un projet', 'contactPage-fr'),
+      secondaryCta: internal('Voir les services', 'servicesPage-fr'),
       meta: [
-        { _type: 'heroMetaItem', _key: 'meta-google', icon: 'lucide:star', label: 'Google', value: '4,9' },
-        { _type: 'heroMetaItem', _key: 'meta-permis', icon: 'lucide:shield-check', label: 'Permis', value: 'Licencié et assuré' },
-        { _type: 'heroMetaItem', _key: 'meta-depuis', icon: 'lucide:award', label: 'Depuis', value: '2011' }
+        { _type: 'heroMetaItem', _key: 'meta-etabli', label: 'Établi', value: '2014' },
+        { _type: 'heroMetaItem', _key: 'meta-projets', label: 'Projets livrés', value: '140+' },
+        { _type: 'heroMetaItem', _key: 'meta-rayon', label: 'Rayon', value: '200 km' }
       ],
-      visual: heroFigure('4/5', 'Intervention, 4:5'),
-      visualMobile: heroFigure('4/3', 'Intervention, 4:3')
+      visual: heroFigure('4/5', 'Photo atelier, 4:5'),
+      visualMobile: heroFigure('4/3', 'Photo atelier, 4:3')
     }],
     pageBuilder: [
-      reassuranceBlock('home-reassurance'),
       highlightsBlock('home-highlights'),
       {
         _type: 'projectsPreview',
         _key: 'home-projects',
-        heading: "Des interventions qui parlent d'elles-mêmes",
-        lead: "Quelques situations qu'on a réglées récemment, de la première visite au résultat final.",
-        cta: internal('Toutes les interventions', 'projectsPage-fr'),
+        heading: "Des projets qui parlent d'eux-mêmes",
+        lead: 'Quelques réalisations récentes, du croquis à la pose.',
+        cta: internal('Tous les projets', 'projectsPage-fr'),
         mode: 'featured',
         limit: 3
       },
@@ -461,61 +350,58 @@ export const docs = [
         _type: 'services',
         _key: 'home-services',
         eyebrow: 'Services',
-        heading: 'Ce qu\'on règle pour vous',
-        lead: 'Cinq nuisibles qu\'on traite tous les jours, à la maison comme au commerce.',
-        cta: internal('Soumission gratuite', 'contactPage-fr'),
+        heading: 'Ce que je fabrique',
+        lead: 'Cinq familles de projets, livrées des dizaines de fois chacune.',
+        cta: internal('Démarrer un projet', 'contactPage-fr'),
         mode: 'auto',
       },
-      beforeAfterBlock('home-before-after'),
       statsBlock('home-stats'),
-      serviceAreaBlock('home-service-area'),
       {
         _type: 'mediaText',
         _key: 'home-story',
-        heading: 'Une équipe locale qui répond, et qui revient si besoin',
+        heading: 'Une seule personne, du dessin à la livraison',
         body: [
-          "On est basés à Lévis depuis 2011. Quand vous appelez, c'est du vrai monde de la région qui répond, pas un centre d'appels. On connaît les bâtiments et les nuisibles d'ici.",
-          "Notre objectif n'est pas juste de traiter une fois: c'est de régler la situation pour de bon. On scelle les points d'entrée, on vous explique quoi surveiller, et on garantit notre travail."
+          "Je travaille seul à Chambly depuis 2014. C'est moi qui dessine, qui scie, qui assemble et qui livre. Si vous m'appelez, c'est moi qui réponds.",
+          'Moins de pièces, mieux faites: si je ne suis pas la bonne personne pour votre projet, je vous le dirai directement.'
         ],
         mediaSide: 'right',
         image: {
           _type: 'figure',
-          image: { _imagePath: '/images/inspection.jpg' },
-          alt: "Technicien de Rempart Extermination inspectant le pourtour d'une maison sur la Rive-Sud.",
-          label: 'Inspection à domicile',
-          caption: 'Sur le terrain, 4:3',
+          image: { _imagePath: '/images/about.jpg' },
+          alt: "Mains de l'ébéniste sculptant une pièce de noyer au ciseau à bois.",
+          label: 'Atelier, mains au travail',
+          caption: 'Photo atelier, 3:4',
           ratio: '4/3'
         },
-        cta: internal("À propos de l'équipe", 'aboutPage-fr')
+        cta: internal("À propos de l'atelier", 'aboutPage-fr')
       },
       {
         _type: 'testimonials',
         _key: 'home-testimonials',
         eyebrow: 'Témoignages',
-        heading: 'Ce que nos clients en disent',
+        heading: 'Ce que mes clients en disent',
         mode: 'featured'
       },
-      quoteFormBlock('home-quote'),
       {
         _type: 'blogPreview',
         _key: 'home-blog',
         heading: 'Le blogue',
-        lead: 'Prévention, identification des nuisibles et conseils pour une maison saine.',
+        lead: 'Le bois, les techniques, les coulisses des projets.',
         cta: internal('Tout le blogue', 'blogPage-fr'),
         limit: 3
       },
       {
         _type: 'ctaBand',
         _key: 'home-cta',
-        title: 'Un nuisible chez vous?',
-        subtitle: "L'estimation est gratuite. Appelez-nous, on vous dit quoi faire.",
-        primaryCta: external('418 555 0147', 'tel:+14185550147')
+        title: 'Un projet en tête?',
+        subtitle: 'La première rencontre est gratuite et sans engagement. Parlons-en.',
+        primaryCta: internal('Démarrer un projet', 'contactPage-fr')
       }
     ],
     seo: {
       _type: 'seo',
-      title: 'Rempart Extermination | Extermination à Lévis et dans la région de Québec',
-      description: "Gestion parasitaire et extermination à Lévis et dans la région de Québec. Fourmis, souris, guêpes, punaises de lit, coquerelles. Licencié, assuré, garantie de résultat. Service d'urgence 24/7."
+      title: 'Atelier Cormier | Ébénisterie sur mesure à Chambly',
+      description: 'Ébénisterie sur mesure à Chambly, Québec. Cuisines, mobilier et restauration en bois massif local. Atelier indépendant établi en 2014.'
     }
   },
 
@@ -525,94 +411,92 @@ export const docs = [
     _type: 'servicesPage',
     language: 'fr',
     hero: [{ _type: 'pageHero', _key: 'hero',
-      title: "Ce qu'on règle, et comment on le règle",
-      lead: "Cinq nuisibles qu'on traite tous les jours sur la Rive-Sud. Si votre situation n'est pas dans la liste, appelez-nous quand même: on vous oriente vers la bonne solution, franchement.",
+      title: 'Ce que je fabrique, et comment',
+      lead: "Cinq familles de projets, livrées des dizaines de fois chacune. Si ce n'est pas dans la liste, c'est probablement que je ne suis pas la bonne personne. Je vous le dirai franchement.",
       image: {
         _type: 'figure',
-        alt: "Technicien appliquant un traitement ciblé le long d'une fondation de maison.",
-        label: 'Rempart Extermination, traitement ciblé',
-        caption: 'Intervention, 2:1',
+        image: { _imagePath: '/images/service-bibliotheques.jpg' },
+        alt: 'Bibliothèque intégrée en merisier couvrant un mur complet de salon.',
+        label: 'Atelier Cormier, réalisation sur mesure',
+        caption: 'Réalisation, 2:1',
         ratio: '2/1'
       }
     }],
     pageBuilder: [
-      reassuranceBlock('services-reassurance'),
       {
         _type: 'services',
         _key: 'services-grid',
         eyebrow: 'Services',
-        heading: 'Cinq nuisibles, une méthode éprouvée',
-        lead: "Chaque carte mène au détail du traitement. Votre situation n'y est pas? Appelez-nous, on a probablement déjà vu votre cas.",
-        cta: internal('Soumission gratuite', 'contactPage-fr'),
+        heading: 'Cinq familles de projets',
+        lead: "Chaque carte mène au détail. Si votre besoin n'y est pas, écrivez-moi quand même: je vous orienterai.",
+        cta: internal('Démarrer un projet', 'contactPage-fr'),
         mode: 'auto',
       },
       processContent('services-process'),
-      serviceAreaBlock('services-area'),
       {
         _type: 'testimonials',
         _key: 'services-testimonials',
         eyebrow: 'Témoignages',
-        heading: 'Des clients tranquilles, intervention après intervention',
+        heading: 'Des clients satisfaits, projet après projet',
         mode: 'featured'
       },
       {
         _type: 'faq',
         _key: 'services-faq',
         eyebrow: 'FAQ',
-        heading: 'Questions fréquentes sur nos services',
+        heading: 'Questions fréquentes sur les services',
         items: [
           { _key: 'faq-delai', _type: 'reference', _ref: 'faqItem-delai-fr' },
-          { _key: 'faq-soumission', _type: 'reference', _ref: 'faqItem-soumission-fr' },
-          { _key: 'faq-produits', _type: 'reference', _ref: 'faqItem-produits-fr' },
+          { _key: 'faq-estimation', _type: 'reference', _ref: 'faqItem-estimation-fr' },
+          { _key: 'faq-essences', _type: 'reference', _ref: 'faqItem-essences-fr' },
           { _key: 'faq-garantie', _type: 'reference', _ref: 'faqItem-garantie-fr' }
         ]
       },
       {
         _type: 'ctaBand',
         _key: 'services-cta',
-        title: 'Prêt à régler la situation?',
-        subtitle: 'Décrivez-nous ce que vous voyez. On vous répond avec un plan clair.',
-        primaryCta: external('418 555 0147', 'tel:+14185550147')
+        title: 'Prêt à lancer votre projet?',
+        subtitle: 'Décrivez-moi ce que vous avez en tête. Je vous réponds en personne.',
+        primaryCta: internal('Démarrer un projet', 'contactPage-fr')
       }
     ],
     seo: {
       _type: 'seo',
       title: 'Services',
-      description: 'Extermination de fourmis, souris et rats, guêpes et frelons, punaises de lit et coquerelles à Lévis et dans la région de Québec. Licencié, assuré, garantie de résultat.'
+      description: 'Cuisines sur mesure, mobilier, bibliothèques intégrées, restauration et agencements de commerce en bois massif local, atelier de Chambly.'
     }
   },
 
-  // ── Page Interventions (projectsPage) ──────────────────────────────────────
+  // ── Page Projets (projectsPage) ────────────────────────────────────────────
   {
     _id: 'projectsPage-fr',
     _type: 'projectsPage',
     language: 'fr',
     hero: [{ _type: 'pageHero', _key: 'hero',
-      title: 'Des vraies situations, réglées pour de bon',
-      lead: "Chaque intervention répond à un problème concret, dans une vraie maison ou un vrai commerce de la région. Voici quelques-unes des plus parlantes.",
+      title: 'Des projets, pas des photos de catalogue',
+      lead: 'Chaque pièce a été dessinée, taillée et posée pour une vraie maison et de vraies personnes. Voici quelques-unes des plus parlantes.',
       image: {
         _type: 'figure',
-        alt: "Cuisine de restaurant assainie après une intervention contre les coquerelles.",
-        label: 'Restaurant du Vieux-Lévis, intervention',
-        caption: 'Intervention, 2:1',
+        image: { _imagePath: '/images/project-cafe-comptoir.jpg' },
+        alt: 'Comptoir de café en bois massif avec tablettes murales assorties.',
+        label: 'Café Le Moulin, Chambly',
+        caption: 'Projet, 2:1',
         ratio: '2/1'
       }
     }],
     pageBuilder: [
-      beforeAfterBlock('projects-before-after'),
-      serviceAreaBlock('projects-area'),
       {
         _type: 'ctaBand',
         _key: 'projects-cta',
-        title: 'Votre situation sera la prochaine réglée',
-        subtitle: "Racontez-nous ce qui se passe chez vous. On vous dit franchement quoi faire.",
-        primaryCta: external('418 555 0147', 'tel:+14185550147')
+        title: 'Votre projet sera le prochain',
+        subtitle: 'Racontez-moi ce que vous imaginez. Je vous dirai franchement ce qui est possible.',
+        primaryCta: internal('Démarrer un projet', 'contactPage-fr')
       }
     ],
     seo: {
       _type: 'seo',
-      title: 'Interventions',
-      description: 'Études de cas en gestion parasitaire: coquerelles, punaises de lit, rongeurs, fourmis charpentières et guêpes, réglées sur la Rive-Sud de Québec.'
+      title: 'Projets',
+      description: 'Réalisations en ébénisterie sur mesure: cuisines, mobilier, bibliothèques et restauration en bois massif local, en Montérégie.'
     }
   },
 
@@ -622,14 +506,14 @@ export const docs = [
     _type: 'aboutPage',
     language: 'fr',
     hero: [{ _type: 'pageHero', _key: 'hero',
-      title: 'Une équipe locale, certifiée, qui répond',
-      lead: "Rempart Extermination protège les maisons et les commerces de la Rive-Sud depuis 2011. Mathieu Bouchard et son équipe de six techniciens connaissent la région, et restent disponibles bien après le traitement.",
+      title: 'Une seule personne, du dessin à la livraison',
+      lead: "Je travaille seul à Chambly depuis 2014. C'est moi qui dessine, qui scie, qui assemble, qui livre. Et c'est moi qui réponds quand vous appelez.",
       image: {
         _type: 'figure',
-        image: { _imagePath: '/images/equipe.jpg' },
-        alt: "L'équipe de Rempart Extermination devant le camion de service à Lévis.",
-        label: 'Équipe Rempart Extermination, Lévis',
-        caption: 'Équipe, 2:1',
+        image: { _imagePath: '/images/hero.jpg' },
+        alt: "Atelier d'ébénisterie, plan de travail avec planche de frêne, rabots et ciseaux à bois.",
+        label: 'Atelier à Chambly',
+        caption: 'Atelier, 2:1',
         ratio: '2/1'
       }
     }],
@@ -641,34 +525,34 @@ export const docs = [
         _type: 'logos',
         _key: 'about-logos',
         eyebrow: 'Reconnaissances',
-        heading: "Des standards qu'on assume, par écrit.",
+        heading: 'Des standards que je signe de mon nom.',
         items: [
-          { _type: 'logoItem', _key: 'logo-acgp', label: 'Membre ACGP' },
-          { _type: 'logoItem', _key: 'logo-melccfp', label: 'Licencié MELCCFP' },
-          { _type: 'logoItem', _key: 'logo-assure', label: 'Assuré' },
-          { _type: 'logoItem', _key: 'logo-garantie', label: 'Garantie de résultat' },
-          { _type: 'logoItem', _key: 'logo-sante-canada', label: 'Produits homologués Santé Canada' }
+          { _type: 'logoItem', _key: 'logo-guilde', label: 'Guilde des artisans ébénistes du Québec' },
+          { _type: 'logoItem', _key: 'logo-fsc', label: 'Bois certifié FSC' },
+          { _type: 'logoItem', _key: 'logo-fournisseurs', label: 'Fournisseurs de la Montérégie' },
+          { _type: 'logoItem', _key: 'logo-finitions', label: 'Finitions à l\'huile sans COV' },
+          { _type: 'logoItem', _key: 'logo-garantie', label: 'Garantie à vie sur la structure' }
         ]
       },
       {
         _type: 'testimonials',
         _key: 'about-testimonials',
         eyebrow: 'Témoignages',
-        heading: 'La confiance de nos clients',
+        heading: 'La confiance de mes clients',
         mode: 'featured'
       },
       {
         _type: 'ctaBand',
         _key: 'about-cta',
-        title: "On s'occupe de votre problème?",
-        subtitle: "L'estimation est gratuite, à la maison comme au commerce.",
-        primaryCta: external('418 555 0147', 'tel:+14185550147')
+        title: 'On se rencontre?',
+        subtitle: "À l'atelier ou chez vous, la première rencontre est gratuite.",
+        primaryCta: internal('Démarrer un projet', 'contactPage-fr')
       }
     ],
     seo: {
       _type: 'seo',
       title: 'À propos',
-      description: "Une équipe d'extermination locale à Lévis depuis 2011. Licenciée MELCCFP, assurée et engagée par une garantie de résultat sur la Rive-Sud de Québec."
+      description: 'Un ébéniste solo à Chambly depuis 2014. Du dessin à la livraison, bois locaux et joinage traditionnel.'
     }
   },
 
@@ -679,32 +563,32 @@ export const docs = [
     language: 'fr',
     hero: [{ _type: 'pageHero', _key: 'hero',
       title: 'Le blogue',
-      lead: "Prévention, identification des nuisibles, maison saine. Les conseils concrets qu'on donne tous les jours à nos clients, avant même qu'un problème s'installe."
+      lead: "Le bois, les techniques, les coulisses des projets. Ce que j'aurais aimé qu'on m'explique avant de commander une pièce sur mesure."
     }],
     listCta: {
       _type: 'ctaBand',
-      title: 'Une situation qui ne peut pas attendre?',
-      subtitle: "Appelez-nous. L'estimation est gratuite et on répond aux urgences 24/7.",
-      primaryCta: external('418 555 0147', 'tel:+14185550147')
+      title: 'Un projet inspiré par ces lectures?',
+      subtitle: 'Parlons-en. La première rencontre est gratuite et sans engagement.',
+      primaryCta: internal('Démarrer un projet', 'contactPage-fr')
     },
     categoryCta: {
       _type: 'ctaBand',
-      title: 'Un nuisible chez vous?',
-      subtitle: "L'estimation est gratuite. Appelez-nous, on vous dit quoi faire.",
-      primaryCta: external('418 555 0147', 'tel:+14185550147')
+      title: 'Un projet en tête?',
+      subtitle: 'La première rencontre est gratuite et sans engagement.',
+      primaryCta: internal('Démarrer un projet', 'contactPage-fr')
     },
     articleCta: {
       _type: 'ctaBand',
-      title: "Besoin d'une intervention?",
-      subtitle: "Décrivez-nous votre situation. L'estimation est gratuite et sans engagement.",
-      primaryCta: internal('Soumission gratuite', 'contactPage-fr')
+      title: "Envie d'une pièce sur mesure?",
+      subtitle: 'Décrivez-moi votre projet. La première rencontre est gratuite et sans engagement.',
+      primaryCta: internal('Démarrer un projet', 'contactPage-fr')
     },
     related: { heading: 'À lire ensuite' },
     pageBuilder: [],
     seo: {
       _type: 'seo',
       title: 'Blogue',
-      description: 'Le blogue de Rempart Extermination: prévention, identification des nuisibles et conseils pour garder une maison saine sur la Rive-Sud de Québec.'
+      description: "Le blogue d'Atelier Cormier: le bois, les techniques et les coulisses des projets de l'atelier."
     }
   },
 
@@ -714,16 +598,17 @@ export const docs = [
     _type: 'faqPage',
     language: 'fr',
     hero: [{ _type: 'pageHero', _key: 'hero',
-      title: "Les questions qu'on nous pose",
-      lead: "Délais, zone, estimation, sécurité, garantie, prix, suivi et déroulement. Les réponses honnêtes, avant même qu'on se parle."
+      title: "Les questions qu'on me pose",
+      lead: 'Délais, prix, matériaux, garantie, entretien. Les réponses honnêtes, avant même qu\'on se parle.'
     }],
-    // 8 sections en mode manuel, une par thème; Prix et paiement porte prix
-    // puis acompte. Reproduit la composition du gabarit à l'identique.
+    // 8 sections en mode manuel, une par thème dans l'ordre de première
+    // apparition V1; Prix et paiement porte prix puis acompte (spec 6.7):
+    // reproduit la page V1 à l'identique.
     sections: [
       {
         _type: 'faqSection',
-        _key: 'section-urgence',
-        theme: { _type: 'reference', _ref: 'faqTheme-urgence-fr' },
+        _key: 'section-delais',
+        theme: { _type: 'reference', _ref: 'faqTheme-delais-fr' },
         mode: 'manual',
         items: [
           { _key: 'q-delai', _type: 'reference', _ref: 'faqItem-delai-fr' }
@@ -731,8 +616,8 @@ export const docs = [
       },
       {
         _type: 'faqSection',
-        _key: 'section-zone',
-        theme: { _type: 'reference', _ref: 'faqTheme-zone-fr' },
+        _key: 'section-zone-desservie',
+        theme: { _type: 'reference', _ref: 'faqTheme-zone-desservie-fr' },
         mode: 'manual',
         items: [
           { _key: 'q-zone', _type: 'reference', _ref: 'faqItem-zone-fr' }
@@ -740,20 +625,20 @@ export const docs = [
       },
       {
         _type: 'faqSection',
-        _key: 'section-soumission',
-        theme: { _type: 'reference', _ref: 'faqTheme-soumission-fr' },
+        _key: 'section-estimation-et-devis',
+        theme: { _type: 'reference', _ref: 'faqTheme-estimation-et-devis-fr' },
         mode: 'manual',
         items: [
-          { _key: 'q-soumission', _type: 'reference', _ref: 'faqItem-soumission-fr' }
+          { _key: 'q-estimation', _type: 'reference', _ref: 'faqItem-estimation-fr' }
         ]
       },
       {
         _type: 'faqSection',
-        _key: 'section-securite',
-        theme: { _type: 'reference', _ref: 'faqTheme-securite-fr' },
+        _key: 'section-materiaux',
+        theme: { _type: 'reference', _ref: 'faqTheme-materiaux-fr' },
         mode: 'manual',
         items: [
-          { _key: 'q-produits', _type: 'reference', _ref: 'faqItem-produits-fr' }
+          { _key: 'q-essences', _type: 'reference', _ref: 'faqItem-essences-fr' }
         ]
       },
       {
@@ -767,8 +652,8 @@ export const docs = [
       },
       {
         _type: 'faqSection',
-        _key: 'section-prix',
-        theme: { _type: 'reference', _ref: 'faqTheme-prix-fr' },
+        _key: 'section-prix-et-paiement',
+        theme: { _type: 'reference', _ref: 'faqTheme-prix-et-paiement-fr' },
         mode: 'manual',
         items: [
           { _key: 'q-prix', _type: 'reference', _ref: 'faqItem-prix-fr' },
@@ -777,11 +662,11 @@ export const docs = [
       },
       {
         _type: 'faqSection',
-        _key: 'section-suivi',
-        theme: { _type: 'reference', _ref: 'faqTheme-suivi-fr' },
+        _key: 'section-entretien',
+        theme: { _type: 'reference', _ref: 'faqTheme-entretien-fr' },
         mode: 'manual',
         items: [
-          { _key: 'q-suivi', _type: 'reference', _ref: 'faqItem-suivi-fr' }
+          { _key: 'q-entretien', _type: 'reference', _ref: 'faqItem-entretien-fr' }
         ]
       },
       {
@@ -790,7 +675,7 @@ export const docs = [
         theme: { _type: 'reference', _ref: 'faqTheme-processus-fr' },
         mode: 'manual',
         items: [
-          { _key: 'q-processus', _type: 'reference', _ref: 'faqItem-processus-fr' }
+          { _key: 'q-modifications', _type: 'reference', _ref: 'faqItem-modifications-fr' }
         ]
       }
     ],
@@ -799,14 +684,14 @@ export const docs = [
         _type: 'ctaBand',
         _key: 'faq-cta',
         title: 'Vous ne trouvez pas votre réponse?',
-        subtitle: "Appelez-nous, on répond en personne. L'estimation est gratuite et sans engagement.",
-        primaryCta: external('418 555 0147', 'tel:+14185550147')
+        subtitle: 'Écrivez-moi, je réponds en personne. La première rencontre est gratuite et sans engagement.',
+        primaryCta: internal('Me contacter', 'contactPage-fr')
       }
     ],
     seo: {
       _type: 'seo',
       title: 'Foire aux questions',
-      description: "Délais, zone desservie, estimation, sécurité des produits, garantie, prix et suivi: les réponses honnêtes aux questions fréquentes, avant même qu'on se parle."
+      description: "Matériaux, délais, prix, entretien, garantie et processus: les réponses honnêtes aux questions fréquentes, avant même qu'on se parle."
     }
   },
 
@@ -816,8 +701,8 @@ export const docs = [
     _type: 'contactPage',
     language: 'fr',
     hero: [{ _type: 'pageHero', _key: 'hero',
-      title: "On s'occupe de votre problème",
-      lead: "Un nid, des traces, des bruits dans les murs ou juste un doute: écrivez-nous ce que vous observez. On vous revient avec un plan clair. Pour une urgence, appelez-nous, c'est plus rapide."
+      title: 'Démarrons votre projet',
+      lead: "Une idée, un croquis sur une serviette de table ou juste une envie: écrivez-moi. La première rencontre est gratuite et sans engagement."
     }],
     pageBuilder: [
       contactBlock('contact-page')
@@ -825,7 +710,7 @@ export const docs = [
     seo: {
       _type: 'seo',
       title: 'Contact',
-      description: "Obtenir une soumission gratuite pour une intervention d'extermination à Lévis et dans la région de Québec. Écrivez-nous ou appelez-nous. Urgences 24/7."
+      description: "Démarrer un projet d'ébénisterie sur mesure à Chambly. Écrivez-moi ou appelez l'atelier. Première rencontre gratuite et sans engagement."
     }
   },
 
@@ -835,28 +720,27 @@ export const docs = [
     _type: 'onePager',
     language: 'fr',
     hero: [{ _type: 'heroHome', _key: 'hero',
-      title: 'On reprend le contrôle de chez vous. Pour de bon.',
-      lead: 'Fourmis, souris, guêpes, punaises de lit, coquerelles: gestion parasitaire pour la maison et le commerce à Lévis et dans la région de Québec. Urgences 24/7.',
-      primaryCta: external('418 555 0147', 'tel:+14185550147'),
-      secondaryCta: anchor('Soumission gratuite', 'contact'),
+      title: 'Du bois massif local, façonné à la main, pour durer cent ans.',
+      lead: 'Cuisines, mobilier et restauration, dans un atelier indépendant en Montérégie depuis 2014.',
+      primaryCta: anchor('Démarrer un projet', 'contact'),
+      secondaryCta: anchor('Voir les services', 'services'),
       meta: [
-        { _type: 'heroMetaItem', _key: 'meta-google', icon: 'lucide:star', label: 'Google', value: '4,9' },
-        { _type: 'heroMetaItem', _key: 'meta-permis', icon: 'lucide:shield-check', label: 'Permis', value: 'Licencié et assuré' },
-        { _type: 'heroMetaItem', _key: 'meta-depuis', icon: 'lucide:award', label: 'Depuis', value: '2011' }
+        { _type: 'heroMetaItem', _key: 'meta-etabli', label: 'Établi', value: '2014' },
+        { _type: 'heroMetaItem', _key: 'meta-projets', label: 'Projets livrés', value: '140+' },
+        { _type: 'heroMetaItem', _key: 'meta-rayon', label: 'Rayon', value: '200 km' }
       ],
-      visual: heroFigure('4/5', 'Intervention, 4:5'),
-      visualMobile: heroFigure('4/3', 'Intervention, 4:3')
+      visual: heroFigure('4/5', 'Photo atelier, 4:5'),
+      visualMobile: heroFigure('4/3', 'Photo atelier, 4:3')
     }],
     pageBuilder: [
-      reassuranceBlock('one-pager-reassurance'),
       aboutBlock('one-pager-about'),
       {
         _type: 'services',
         _key: 'one-pager-services',
         eyebrow: 'Services',
-        heading: "Les nuisibles qu'on règle le plus souvent.",
-        lead: "On ne fait pas semblant de tout faire. Voilà ce qu'on traite tous les jours, à la maison comme au commerce, sur toute la Rive-Sud.",
-        cta: anchor('Soumission gratuite', 'contact'),
+        heading: 'Quatre choses, faites correctement.',
+        lead: "Je ne fais pas tout. Voilà ce que je fais : chaque ligne représente un projet que j'ai livré au moins vingt fois.",
+        cta: anchor('Demander un devis', 'contact'),
         mode: 'auto',
         limit: 4,
       },
@@ -864,29 +748,28 @@ export const docs = [
         _type: 'testimonials',
         _key: 'one-pager-testimonials',
         eyebrow: 'Témoignages',
-        heading: 'Trois clients, trois situations, une même tranquillité retrouvée.',
+        heading: "Trois clients, trois projets, une seule règle : livrer ce qu'on a promis.",
         mode: 'featured'
       },
       {
         _type: 'faq',
         _key: 'one-pager-faq',
         eyebrow: 'FAQ',
-        heading: "Les questions qu'on nous pose le plus souvent.",
+        heading: "Les questions qu'on me pose le plus souvent.",
         items: [
           { _key: 'faq-delai', _type: 'reference', _ref: 'faqItem-delai-fr' },
           { _key: 'faq-zone', _type: 'reference', _ref: 'faqItem-zone-fr' },
-          { _key: 'faq-soumission', _type: 'reference', _ref: 'faqItem-soumission-fr' },
-          { _key: 'faq-produits', _type: 'reference', _ref: 'faqItem-produits-fr' },
+          { _key: 'faq-estimation', _type: 'reference', _ref: 'faqItem-estimation-fr' },
+          { _key: 'faq-essences', _type: 'reference', _ref: 'faqItem-essences-fr' },
           { _key: 'faq-garantie', _type: 'reference', _ref: 'faqItem-garantie-fr' }
         ]
       },
-      quoteFormBlock('one-pager-quote'),
       contactBlock('one-pager-contact')
     ],
     seo: {
       _type: 'seo',
-      title: 'Rempart Extermination | Extermination à Lévis et dans la région de Québec',
-      description: "Gestion parasitaire et extermination à Lévis et dans la région de Québec. Licencié, assuré, garantie de résultat. Service d'urgence 24/7."
+      title: 'Atelier Cormier | Ébénisterie sur mesure à Chambly',
+      description: 'Ébénisterie sur mesure à Chambly, Québec. Établi en 2014.'
     }
   }
 ]

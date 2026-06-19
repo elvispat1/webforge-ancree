@@ -17,10 +17,6 @@ import CtaBand from './block/cta-band.vue'
 import Process from './block/process.vue'
 import Stats from './block/stats.vue'
 import Highlights from './block/highlights.vue'
-import Reassurance from './block/reassurance.vue'
-import ServiceArea from './block/service-area.vue'
-import BeforeAfter from './block/before-after.vue'
-import QuoteForm from './block/quote-form.vue'
 import Logos from './block/logos.vue'
 import ProjectsPreview from './block/projects-preview.vue'
 import BlogPreview from './block/blog-preview.vue'
@@ -38,10 +34,6 @@ export const regularBlockMap = {
   process: Process,
   stats: Stats,
   highlights: Highlights,
-  reassurance: Reassurance,
-  'service-area': ServiceArea,
-  'before-after': BeforeAfter,
-  'quote-form': QuoteForm,
   logos: Logos,
   'projects-preview': ProjectsPreview,
   'blog-preview': BlogPreview,

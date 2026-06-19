@@ -1,48 +1,37 @@
-// Seed Sanity: articles EN, lot 1 de 2 (les 3 premiers du tableau ARTICLES de la
-// bible §4, ordre antichronologique). Documents `article` complets: title, slug,
-// excerpt, cover (figure, ratio explicite), category (référence même langue),
-// date, author, readingTime et body (blocs article). Pas de champ order: le tri
-// se fait par date.
+// Seed Sanity: articles EN, lot 1 de 2. Miroir structurel exact de
+// articles-fr-1.mjs: mêmes documents (_id en -en, clé canonique FR conservée),
+// mêmes _key, mêmes marqueurs { _imagePath }, mêmes dates. Seuls les textes,
+// slugs et labels changent de langue. Les références internes (category, cta)
+// pointent les documents -en. Pas de champ order: le tri se fait par date.
 //
-// Conversion du body vers Sanity:
-// - 'lead'       -> articleLead { text }
-// - 'rich-text'  -> articleRichText { body: Portable Text }; paragraph -> block
-//                   'normal', heading -> block 'h2', list -> un block par item
-//                   (listItem 'bullet', level 1, style 'normal')
-// - 'image'      -> articleImage { image: figure } (placeholders sans src: champ
-//                   image du figure OMIS, alt/label/caption/ratio gardés)
-// - 'quote'      -> articleQuote { quote, attribution }
-// - 'callout'    -> articleCallout { tone, title, text }
-// - 'inline-cta' -> articleInlineCta { text, cta: link } (href -> référence interne)
+// Conversion du body V1 vers Sanity: voir l'en-tête de articles-fr-1.mjs.
 //
-// Politique d'images (bible §3): les figures portent alt/label/caption/ratio mais
-// PAS de champ image (donc aucun marqueur { _imagePath }). Les vraies images
-// seront ajoutées dans une passe ultérieure.
+// Les marqueurs { _imagePath } sont remplacés par le runner après upload des assets.
 
 export const docs = [
   {
-    _id: 'article-souris-automne-en',
+    _id: 'article-prix-du-sur-mesure-en',
     _type: 'article',
     language: 'en',
-    title: 'Keeping mice out this fall',
-    slug: { _type: 'slug', current: 'keep-mice-out-this-fall' },
-    excerpt: 'As soon as the nights turn cool, mice start looking for a roof over their heads. Here is how to shut the door before they settle in.',
+    title: 'What custom work really costs',
+    slug: { _type: 'slug', current: 'what-custom-work-really-costs' },
+    excerpt: 'Talking price should not be taboo. Where the cost of a custom piece comes from, and why I quote firm prices.',
     cover: {
       _type: 'figure',
-      alt: 'Corner of a suburban home foundation in the fall, dead leaves on the ground and the base of the wall where entry points are being inspected.',
-      label: 'Foundation inspection',
-      caption: 'Prevention, 16:9',
+      image: { _imagePath: '/images/blog-prix.jpg' },
+      alt: 'Wood species samples fanned out on a large solid wood planning table, folding rule and open notebook.',
+      label: 'Planning table',
+      caption: 'Consultation, 16:9',
       ratio: '16/9',
     },
-    category: { _type: 'reference', _ref: 'category-prevention-en' },
-    date: '2025-09-22',
-    author: 'Mathieu Bouchard',
-    readingTime: 5,
+    date: '2025-05-26',
+    author: 'Maxime Cormier',
+    readingTime: 6,
     body: [
       {
         _type: 'articleLead',
         _key: 'l1',
-        text: 'Every fall it is the same story around the Quebec City region: the moment the temperature drops, mice set out to find a warm place to spend the winter. The good news is that most entry points can be sealed off in a single morning, and a little prevention saves you a lot of trouble.',
+        text: "It's the question everyone has in mind on the first call, and the one nobody dares ask first. Might as well answer it plainly right here.",
       },
       {
         _type: 'articleRichText',
@@ -54,7 +43,7 @@ export const docs = [
             style: 'normal',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'An adult mouse can slip through an opening the size of a dime. Around a house, those openings are everywhere: around the pipes and wires that run into the basement, the bottom of garage doors, basement windows, poorly fitted dryer vents. You do not have to seal everything at once, but starting with the most obvious ones already makes a real difference.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'The price of a custom piece comes from three things: material, time, installation. Material means the wood, but also its drying, which has to be paid for: kiln-dried ash does not cost what green ash costs. Shop time, for its part, cannot be compressed: a well-made joint takes the time it takes, and that is precisely what you are buying.', marks: [] },
             ],
           },
           {
@@ -63,7 +52,7 @@ export const docs = [
             style: 'normal',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'The right habit is to walk around your foundation at the end of summer, flashlight in hand. You are looking for daylight coming through, cracks, corners where the screen has come loose. Wherever your pinky fits, a mouse fits too.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'That is why two tables of the same size do not carry the same price. The species, the joinery and the finish change everything: a dovetailed walnut top, oiled by hand, and a maple top screwed together then varnished do not live in the same column of numbers.', marks: [] },
             ],
           },
         ],
@@ -71,8 +60,8 @@ export const docs = [
       {
         _type: 'articleQuote',
         _key: 'q1',
-        quote: 'A mouse gets in wherever your pinky gets in. Block the entry before fall, and you solve the problem before it even starts.',
-        attribution: 'Mathieu Bouchard',
+        quote: 'A firm price means I carry the risk, not you.',
+        attribution: 'Maxime Cormier',
       },
       {
         _type: 'articleRichText',
@@ -84,80 +73,52 @@ export const docs = [
             style: 'h2',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'The spots to check first', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'What drives the bill up', marks: [] },
             ],
           },
           {
             _type: 'block',
             _key: 'r2-b2',
             style: 'normal',
-            listItem: 'bullet',
-            level: 1,
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'Around the pipes and wires that pass through the foundation wall: seal them with steel wool and a proper sealant, never with foam alone, which a mouse chews through with ease.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'Rare or imported species, curves (every bent piece needs its own jig), electrical integrations and recessed lighting. Nothing wrong with any of it: you just need to know that this is where the dollars go.', marks: [] },
             ],
           },
           {
             _type: 'block',
             _key: 'r2-b3',
-            style: 'normal',
-            listItem: 'bullet',
-            level: 1,
+            style: 'h2',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'The bottom of garage and service doors: a weatherstrip in good shape closes off a passage mice almost always use.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'What brings it down', marks: [] },
             ],
           },
           {
             _type: 'block',
             _key: 'r2-b4',
             style: 'normal',
-            listItem: 'bullet',
-            level: 1,
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'Dryer and ventilation vents: a fine mesh screen lets the air through but not the rodents.', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r2-b5',
-            style: 'normal',
-            listItem: 'bullet',
-            level: 1,
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'The pantry and the pet food: store seeds and kibble in airtight containers, and you take away the main reason for their visit.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'Dimensions that respect standard board widths, an oiled finish rather than a multi-coat varnish, and flexible timelines that let me slip your project in between two big jobs. If your budget is tight, say so from the start: that is often where we find the room.', marks: [] },
             ],
           },
         ],
       },
       {
-        _type: 'articleImage',
-        _key: 'i1',
-        image: {
-          _type: 'figure',
-          alt: 'Base of a foundation wall where a pipe passage has been sealed with steel wool, ready for the sealant to go on.',
-          label: 'Sealed pipe passage',
-          caption: 'Prevention, 4:3',
-          ratio: '4/3',
-        },
-      },
-      {
         _type: 'articleCallout',
         _key: 'co1',
         tone: 'note',
-        title: 'The signs that never lie',
-        text: 'Small dark droppings along the baseboards, scratching sounds in the walls in the evening, food bags nibbled at the back of the cupboard. If you notice even one of these signs, you already have company. Better to act early: one mouse quickly becomes a family.',
+        title: 'The quote is free, and so is the no',
+        text: 'If the budget and the project do not line up, I tell you in the first conversation, not the last. It costs you nothing to find out, and you leave with a straight answer.',
       },
       {
         _type: 'articleInlineCta',
         _key: 'c1',
-        text: 'Sounds in the walls or droppings in the basement? We will come take a look.',
+        text: 'Want a clear number for your project?',
         cta: {
           _type: 'link',
-          label: 'Call 418 555 0147',
+          label: 'Start a project',
           type: 'internal',
           internalRef: { _type: 'reference', _ref: 'contactPage-en' },
         },
@@ -165,28 +126,29 @@ export const docs = [
     ],
   },
   {
-    _id: 'article-fourmis-charpentieres-en',
+    _id: 'article-reparer-plutot-que-remplacer-en',
     _type: 'article',
     language: 'en',
-    title: 'Preventing carpenter ants around the house',
-    slug: { _type: 'slug', current: 'prevent-carpenter-ants' },
-    excerpt: 'Carpenter ants do not eat wood, but they hollow it out. Here is how to take away any urge they have to move into your walls.',
+    title: "Repair instead of replace: when it's worth it",
+    slug: { _type: 'slug', current: 'repair-instead-of-replace' },
+    excerpt: "A wobbly chair is not a chair that's done for. What can be repaired, what can't, and how I make the call.",
     cover: {
       _type: 'figure',
-      alt: 'Outdoor corner of a wood-sided house where the siding meets the ground, a damp and shaded spot that carpenter ants favour.',
-      label: 'Siding and ground',
-      caption: 'Prevention, 16:9',
+      image: { _imagePath: '/images/blog-reparer.jpg' },
+      alt: 'Antique maple chair turned upside down on the workbench, joints taken apart, clamps and a pot of glue within reach.',
+      label: 'Chair on the workbench',
+      caption: 'Workshop, 16:9',
       ratio: '16/9',
     },
-    category: { _type: 'reference', _ref: 'category-prevention-en' },
-    date: '2025-06-05',
-    author: 'Mathieu Bouchard',
+    category: { _type: 'reference', _ref: 'category-entretien-en' },
+    date: '2025-04-28',
+    author: 'Maxime Cormier',
     readingTime: 5,
     body: [
       {
         _type: 'articleLead',
         _key: 'l1',
-        text: 'Contrary to what people think, carpenter ants do not feed on wood: they hollow it out to house their colony. The result, though, is very real, and it is best to discourage them before they have chosen your home.',
+        text: 'The modern reflex is to throw things out. Yet a solid wood piece can almost always be repaired, and often for less than a replacement of equal quality.',
       },
       {
         _type: 'articleRichText',
@@ -198,7 +160,7 @@ export const docs = [
             style: 'h2',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'What attracts them', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'What repairs well', marks: [] },
             ],
           },
           {
@@ -207,7 +169,7 @@ export const docs = [
             style: 'normal',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'Carpenter ants are after one thing above all: wood softened by moisture. A beam that has taken on water, a window frame exposed to the weather, a stretch of siding in contact with the ground. Sound, dry wood holds no interest for them; it is the moisture that opens the door.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: "Loose joints, first of all: a wobbly chair is glue that has dried out, not a chair that's done for. You take it apart, clean it, reglue it, and the joint is good for decades more. Worn drawer slides get replaced, tired finishes get redone, lifted veneer gets glued back down.", marks: [] },
             ],
           },
           {
@@ -216,51 +178,16 @@ export const docs = [
             style: 'h2',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'The steps that keep them away', marks: [] },
+              { _type: 'span', _key: 'span-1', text: "What can't be saved", marks: [] },
             ],
           },
           {
             _type: 'block',
             _key: 'r1-b4',
             style: 'normal',
-            listItem: 'bullet',
-            level: 1,
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'Keep firewood away from the house and store it up on a rack, never right on the ground against a wall.', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r1-b5',
-            style: 'normal',
-            listItem: 'bullet',
-            level: 1,
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'Trim back branches that touch the roof or the siding: they serve as a bridge for the colonies.', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r1-b6',
-            style: 'normal',
-            listItem: 'bullet',
-            level: 1,
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'Repair overflowing gutters and leaks that soak the structural wood without delay.', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r1-b7',
-            style: 'normal',
-            listItem: 'bullet',
-            level: 1,
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'Keep a gap between the soil, the mulch and the bottom of the siding, so the wood can breathe and stay dry.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'Particleboard swollen with water: once the wood dust has risen, nothing brings it back down. Rotten wood, which has no structure left to offer. And furniture built not to last, where every repair calls for three more.', marks: [] },
             ],
           },
         ],
@@ -268,17 +195,18 @@ export const docs = [
       {
         _type: 'articleQuote',
         _key: 'q1',
-        quote: 'Fix the moisture, and you fix half the carpenter ant problem before it even shows.',
-        attribution: 'Mathieu Bouchard',
+        quote: 'A solid wood piece is never done for as long as the wood is sound.',
+        attribution: 'Maxime Cormier',
       },
       {
+        // Placeholder V1 volontaire (pas de src): champ image omis.
         _type: 'articleImage',
         _key: 'i1',
         image: {
           _type: 'figure',
-          alt: 'A stack of firewood stored on a rack, a good distance from the wall of the house.',
-          label: 'Firewood kept clear',
-          caption: 'Prevention, 4:3',
+          alt: 'Antique chair held in clamps after regluing, glue beading at the joints.',
+          label: 'Regluing under clamps',
+          caption: 'Workshop, 4:3',
           ratio: '4/3',
         },
       },
@@ -286,45 +214,178 @@ export const docs = [
         _type: 'articleCallout',
         _key: 'co1',
         tone: 'note',
-        title: 'How to know if they are already there',
-        text: 'Look for small piles of very fine sawdust, almost like shavings, at the foot of the walls or under the windows: those are the chips the ants push out as they carve their galleries. If you find some, or if you see large black ants moving around in the evening, the colony is probably established and a treatment is in order.',
+        title: 'Before you call me',
+        text: 'Three checks to run at home: is the piece solid wood or panel stock (look under the top, the edge never lies)? Is the wood sound, with no rot or swelling? Are all the parts there? Three yeses, and the repair is almost always worth it.',
       },
       {
         _type: 'articleInlineCta',
         _key: 'c1',
-        text: 'Sawdust at the foot of the walls or large ants in the evening? Give us a shout.',
+        text: 'A family piece to put back into service?',
         cta: {
           _type: 'link',
-          label: 'See the Ant control service',
+          label: 'See the Restoration service',
           type: 'internal',
-          internalRef: { _type: 'reference', _ref: 'service-fourmis-en' },
+          internalRef: { _type: 'reference', _ref: 'service-restauration-en' },
         },
       },
     ],
   },
   {
-    _id: 'article-punaises-reconnaitre-en',
+    _id: 'article-erreurs-de-mesure-en',
     _type: 'article',
     language: 'en',
-    title: 'Spotting bed bugs before it is too late',
-    slug: { _type: 'slug', current: 'spot-bed-bugs-early' },
-    excerpt: 'The sooner you catch them, the simpler the treatment. Here are the first signs to watch for, without panicking.',
+    title: 'Measuring an old house: the traps that cost you',
+    slug: { _type: 'slug', current: 'measuring-an-old-house' },
+    excerpt: 'Nothing is straight in a pre-war house. The measuring mistakes I see most often, and how I avoid them.',
     cover: {
       _type: 'figure',
-      alt: 'Corner of a mattress lifted near the seam, the first place you inspect when looking for bed bugs.',
-      label: 'Mattress inspection',
-      caption: 'Identification, 16:9',
+      image: { _imagePath: '/images/blog-mesure.jpg' },
+      alt: 'Tape measure and laser level on the windowsill of an old house, a thin laser line cast across a plaster wall.',
+      label: 'Window survey',
+      caption: 'Site measure, 16:9',
       ratio: '16/9',
     },
-    category: { _type: 'reference', _ref: 'category-nuisibles-en' },
-    date: '2025-04-14',
-    author: 'Mathieu Bouchard',
-    readingTime: 6,
+    category: { _type: 'reference', _ref: 'category-atelier-en' },
+    date: '2025-03-17',
+    author: 'Maxime Cormier',
+    readingTime: 4,
     body: [
       {
         _type: 'articleLead',
         _key: 'l1',
-        text: 'One thing to keep in mind first: having bed bugs has nothing to do with cleanliness. They travel in luggage, in clothing, in second-hand furniture, and anyone can bring some home. What matters is catching them early, because a small new outbreak is far easier to treat than an infestation that has settled in.',
+        text: 'The worst mistake in custom work does not happen in the shop: it happens during the site measure. A sixteenth of an inch missed in the wrong spot becomes a gaping seam on installation morning.',
+      },
+      {
+        _type: 'articleRichText',
+        _key: 'r1',
+        body: [
+          {
+            _type: 'block',
+            _key: 'r1-b1',
+            style: 'h2',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'The classics', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b2',
+            style: 'normal',
+            listItem: 'bullet',
+            level: 1,
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Measuring a wall in a single spot when it bellies at the centre. In a pre-war house, a wall can vary by half an inch over its length.', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b3',
+            style: 'normal',
+            listItem: 'bullet',
+            level: 1,
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Trusting the original plans. They describe the house as it was drawn, not as it was built, much less as it has moved since.', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b4',
+            style: 'normal',
+            listItem: 'bullet',
+            level: 1,
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Forgetting the thickness of baseboards, mouldings and casings, which eat up space at the foot of the wall.', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b5',
+            style: 'normal',
+            listItem: 'bullet',
+            level: 1,
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Ignoring a floor that is out of level. The cabinet will stand plumb, the floor will not, and the whole gap reads at a glance along the counter line.', marks: [] },
+            ],
+          },
+        ],
+      },
+      {
+        // Placeholder V1 volontaire (pas de src): champ image omis.
+        _type: 'articleImage',
+        _key: 'i1',
+        image: {
+          _type: 'figure',
+          alt: 'Laser level on the floor casting its line across an old plaster wall, the gap between line and wall visible to the eye.',
+          label: 'The line that tells the truth',
+          caption: 'Site measure, 4:3',
+          ratio: '4/3',
+        },
+      },
+      {
+        _type: 'articleRichText',
+        _key: 'r2',
+        body: [
+          {
+            _type: 'block',
+            _key: 'r2-b1',
+            style: 'normal',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'My method is simple and non-negotiable: three measurements per dimension, at the top, the centre and the bottom, and I keep the least forgiving one. A full laser survey of the room, electrical outlets and plumbing included. For impossible corners, a cardboard template cut on site beats any number.', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r2-b2',
+            style: 'normal',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Above all, the room for adjustment is planned at the drawing stage: filler panels, calculated clearances, scribe pieces fitted on site. Nothing is straight in an old house, and the piece has to be designed to absorb that truth, not to deny it.', marks: [] },
+            ],
+          },
+        ],
+      },
+      {
+        _type: 'articleInlineCta',
+        _key: 'c1',
+        text: 'A project in a house that has lived a little?',
+        cta: {
+          _type: 'link',
+          label: "Let's talk",
+          type: 'internal',
+          internalRef: { _type: 'reference', _ref: 'contactPage-en' },
+        },
+      },
+    ],
+  },
+  {
+    _id: 'article-commander-sur-mesure-en',
+    _type: 'article',
+    language: 'en',
+    title: 'What to expect when you order custom',
+    slug: { _type: 'slug', current: 'ordering-custom-furniture' },
+    excerpt: 'Timelines, price, back and forth: the honest course of a project, so nobody gets surprised.',
+    cover: {
+      _type: 'figure',
+      image: { _imagePath: '/images/blog-commander.jpg' },
+      alt: 'Wood species samples and two cups of coffee on a solid wood consultation table.',
+      label: 'Consultation table',
+      caption: 'Consultation, 16:9',
+      ratio: '16/9',
+    },
+    date: '2025-02-10',
+    author: 'Maxime Cormier',
+    readingTime: 5,
+    body: [
+      {
+        _type: 'articleLead',
+        _key: 'l1',
+        text: 'Ordering a custom piece is nothing like buying off the shelf. It takes longer, it is more personal, and the result looks like you. Here is what to expect.',
       },
       {
         _type: 'articleRichText',
@@ -336,80 +397,25 @@ export const docs = [
             style: 'normal',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'An adult bed bug is about the size and colour of an apple seed: reddish brown, flat, oval. It hides during the day and comes out at night. That is why you rarely see one directly; mostly you notice the traces it leaves behind.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'It all starts with a conversation, free, with no obligation. We talk about what you want and about your budget, and I tell you frankly whether I am the right person for the project.', marks: [] },
             ],
           },
           {
             _type: 'block',
             _key: 'r1-b2',
-            style: 'h2',
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'The first signs to watch for', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r1-b3',
             style: 'normal',
-            listItem: 'bullet',
-            level: 1,
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'Small black specks, like pen dots, along the seams of the mattress and the box spring.', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r1-b4',
-            style: 'normal',
-            listItem: 'bullet',
-            level: 1,
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'Small reddish stains on the sheets, especially first thing in the morning.', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r1-b5',
-            style: 'normal',
-            listItem: 'bullet',
-            level: 1,
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'Bites in a line or a cluster on the skin, often on the arms and legs, that appear overnight.', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r1-b6',
-            style: 'normal',
-            listItem: 'bullet',
-            level: 1,
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'Tiny translucent skins left behind in the folds of the mattress, near the headboard.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'Then comes the written quote: species, dimensions, schedule, firm price. No surprise at the end.', marks: [] },
             ],
           },
         ],
       },
       {
-        _type: 'articleImage',
-        _key: 'i1',
-        image: {
-          _type: 'figure',
-          alt: 'A mattress seam examined up close, looking for the telltale small dark specks.',
-          label: 'Mattress seam',
-          caption: 'Identification, 4:3',
-          ratio: '4/3',
-        },
-      },
-      {
         _type: 'articleQuote',
         _key: 'q1',
-        quote: 'Caught early, bed bugs are quick to deal with. It is the waiting that complicates everything, never moving fast.',
-        attribution: 'Mathieu Bouchard',
+        quote: 'I would rather tell you no at the start than disappoint you at the end. If your project is not for me, I will say so.',
+        attribution: 'Maxime Cormier',
       },
       {
         _type: 'articleRichText',
@@ -421,7 +427,7 @@ export const docs = [
             style: 'h2',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'Where to look first', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'The pace', marks: [] },
             ],
           },
           {
@@ -430,36 +436,277 @@ export const docs = [
             style: 'normal',
             markDefs: [],
             children: [
-              { _type: 'span', _key: 'span-1', text: 'Start with the bed, it is their headquarters. Lift the corners of the mattress and inspect the seams, then the box spring and the frame. From there, widen out to the nightstand, the baseboards behind the headboard and the nearest armchair. A flashlight and a bit of patience are enough for a first look.', marks: [] },
-            ],
-          },
-          {
-            _type: 'block',
-            _key: 'r2-b3',
-            style: 'normal',
-            markDefs: [],
-            children: [
-              { _type: 'span', _key: 'span-1', text: 'If you are back from a trip, this is the right time to check your luggage before putting it away. And above all, avoid moving your things from one room to another at the slightest doubt: you risk spreading the problem rather than containing it.', marks: [] },
+              { _type: 'span', _key: 'span-1', text: 'A deposit starts the build. I keep you posted at the key stages, sometimes with a photo from the shop. Then I deliver and install. The balance is only due once the piece is in place and you are happy with it.', marks: [] },
             ],
           },
         ],
       },
       {
-        _type: 'articleCallout',
-        _key: 'co1',
-        tone: 'note',
-        title: 'At the slightest doubt, move nothing',
-        text: 'The natural reflex is to toss the mattress or move everything into another room. That is exactly what helps the bed bugs spread. Keep things where they are, sleep in your bed as usual, and call us: an inspection quickly confirms whether there is anything to deal with and how far it has gone.',
+        _type: 'articleInlineCta',
+        _key: 'c1',
+        text: 'Ready to talk it over, no strings attached?',
+        cta: {
+          _type: 'link',
+          label: 'Start a project',
+          type: 'internal',
+          internalRef: { _type: 'reference', _ref: 'contactPage-en' },
+        },
+      },
+    ],
+  },
+  {
+    _id: 'article-queue-d-aronde-en',
+    _type: 'article',
+    language: 'en',
+    title: "The dovetail, and why I'm stubborn about it",
+    slug: { _type: 'slug', current: 'dovetail-joint' },
+    excerpt: 'A joint that takes longer to cut than driving two screws. Here is what it buys, and why I refuse to give it up.',
+    cover: {
+      _type: 'figure',
+      image: { _imagePath: '/images/blog-dovetail.jpg' },
+      alt: 'Hand sawing a board clamped in a vise, shavings hanging in the workshop air.',
+      label: 'Hand sawing',
+      caption: 'Workshop, 16:9',
+      ratio: '16/9',
+    },
+    category: { _type: 'reference', _ref: 'category-atelier-en' },
+    date: '2025-01-20',
+    author: 'Maxime Cormier',
+    readingTime: 6,
+    body: [
+      {
+        _type: 'articleLead',
+        _key: 'l1',
+        text: 'People sometimes ask why I spend an hour on a joint a metal bracket could handle in two minutes. Short answer: because it holds for a hundred years.',
+      },
+      {
+        _type: 'articleRichText',
+        _key: 'r1',
+        body: [
+          {
+            _type: 'block',
+            _key: 'r1-b1',
+            style: 'normal',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Dovetails are those fanned teeth you see at the corners of old drawers. Their shape makes the joint lock mechanically: the harder you pull, the tighter it grips.', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b2',
+            style: 'h2',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'What it replaces', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b3',
+            style: 'normal',
+            listItem: 'bullet',
+            level: 1,
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'No screws, so nothing to rust or work loose.', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b4',
+            style: 'normal',
+            listItem: 'bullet',
+            level: 1,
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'No structural glue required: the joint holds on its own.', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b5',
+            style: 'normal',
+            listItem: 'bullet',
+            level: 1,
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Full repairability fifty years from now.', marks: [] },
+            ],
+          },
+        ],
+      },
+      {
+        _type: 'articleImage',
+        _key: 'i1',
+        image: {
+          _type: 'figure',
+          image: { _imagePath: '/images/blog-aronde-tiroir.jpg' },
+          alt: 'Dovetailed drawer, seen from the corner.',
+          label: 'Assembled drawer',
+          caption: 'Detail, 4:3',
+          ratio: '4/3',
+        },
+      },
+      {
+        _type: 'articleRichText',
+        _key: 'r2',
+        body: [
+          {
+            _type: 'block',
+            _key: 'r2-b1',
+            style: 'normal',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Does the client see the difference at first glance? Not always. Will they feel it opening the drawer twenty years from now? Every single time.', marks: [] },
+            ],
+          },
+        ],
+      },
+      {
+        _type: 'articleGallery',
+        _key: 'g1',
+        images: [
+          {
+            _type: 'figure',
+            _key: 'tracage',
+            image: { _imagePath: '/images/blog-aronde-tracage.jpg' },
+            alt: 'Marking out the dovetails with a marking gauge.',
+            label: 'Marking out',
+            caption: 'Step 1, 4:5',
+            ratio: '4/5',
+          },
+          {
+            _type: 'figure',
+            _key: 'decoupe',
+            image: { _imagePath: '/images/blog-aronde-decoupe.jpg' },
+            alt: 'Cutting with a backsaw.',
+            label: 'Cutting',
+            caption: 'Step 2, 4:5',
+            ratio: '4/5',
+          },
+          {
+            _type: 'figure',
+            _key: 'ajustement',
+            image: { _imagePath: '/images/blog-aronde-ajustement.jpg' },
+            alt: 'Final fitting with a chisel.',
+            label: 'Fitting',
+            caption: 'Step 3, 4:5',
+            ratio: '4/5',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    _id: 'article-choisir-essence-bois-en',
+    _type: 'article',
+    language: 'en',
+    title: 'Ash, maple or walnut: how I choose the wood',
+    slug: { _type: 'slug', current: 'choosing-the-right-wood' },
+    excerpt: 'Choosing wood is about more than colour. Here is what I look at before milling the first board.',
+    cover: {
+      _type: 'figure',
+      image: { _imagePath: '/images/blog-kitchen-plan.jpg' },
+      alt: 'Hands marking a pencil line on a pale wood board, plane shavings scattered around.',
+      label: 'Pencil marking',
+      caption: 'Workshop, 16:9',
+      ratio: '16/9',
+    },
+    category: { _type: 'reference', _ref: 'category-le-bois-en' },
+    date: '2024-11-12',
+    author: 'Maxime Cormier',
+    readingTime: 5,
+    body: [
+      {
+        _type: 'articleLead',
+        _key: 'l1',
+        text: 'When a client tells me “I want pale wood”, I know we still have work to do. Pale runs from lively ash to milky maple, and those two do not behave the same way.',
+      },
+      {
+        _type: 'articleRichText',
+        _key: 'r1',
+        body: [
+          {
+            _type: 'block',
+            _key: 'r1-b1',
+            style: 'normal',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Before thinking about tone, I look at three things: hardness, stability, and how the species ages. A kitchen table and a bookcase do not call for the same trade-offs.', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b2',
+            style: 'h2',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Hardness, for daily use', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r1-b3',
+            style: 'normal',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Maple and oak take everyday knocks in stride. Walnut, softer, marks more easily, but its patina forgives those marks better than a pale wood does. For a work surface, I steer toward the hard species.', marks: [] },
+            ],
+          },
+        ],
+      },
+      {
+        _type: 'articleImage',
+        _key: 'i1',
+        image: {
+          _type: 'figure',
+          image: { _imagePath: '/images/blog-essence-veinage.jpg' },
+          alt: 'Close-up of the grain on a freshly planed ash board.',
+          label: 'Ash grain',
+          caption: 'Planed ash, 4:3',
+          ratio: '4/3',
+        },
+      },
+      {
+        _type: 'articleQuote',
+        _key: 'q1',
+        quote: 'The best wood for your project is rarely the most expensive. It is the one that will age well under the use you will give it.',
+        attribution: 'Maxime Cormier',
+      },
+      {
+        _type: 'articleRichText',
+        _key: 'r2',
+        body: [
+          {
+            _type: 'block',
+            _key: 'r2-b1',
+            style: 'h2',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'Stability, for the long run', marks: [] },
+            ],
+          },
+          {
+            _type: 'block',
+            _key: 'r2-b2',
+            style: 'normal',
+            markDefs: [],
+            children: [
+              { _type: 'span', _key: 'span-1', text: 'All wood moves with humidity. Yellow birch and walnut move little once properly dried; some cuts of oak move a great deal. I choose the species AND the cut to suit the piece.', marks: [] },
+            ],
+          },
+        ],
       },
       {
         _type: 'articleInlineCta',
         _key: 'c1',
-        text: 'A doubt after a trip or bites in the morning? We confirm it with an inspection.',
+        text: 'A project in mind but not sure about the wood?',
         cta: {
           _type: 'link',
-          label: 'See the Bed bug service',
+          label: "Let's talk",
           type: 'internal',
-          internalRef: { _type: 'reference', _ref: 'service-punaises-en' },
+          internalRef: { _type: 'reference', _ref: 'contactPage-en' },
         },
       },
     ],

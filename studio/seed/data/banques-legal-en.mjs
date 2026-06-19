@@ -1,17 +1,223 @@
-// Seed EN: legal pages (bank) rebranded Rempart Extermination.
+// Seed EN: content banks (testimonials, FAQ themes, FAQ) and legal pages.
 //
 // English mirror of banques-legal-fr.mjs: same documents with -en ids, same
-// _key values, same structure, same order. Takes the generic legal structure
-// from the Minimaliste family (legalPage terms + privacy policy, legalSection /
-// legalParagraph / legalList / legalTodo), replacing the brand with Rempart
-// Extermination, the sector with pest management and extermination services,
-// and the contact details with those of the company sheet (Lévis, QC). The
-// legalTodo entries (placeholders to be validated by the client) and the Law 25
-// posture are kept. No real legal value (template). Legal page dates (effective,
-// updated) are OMITTED: the seed invents no date, the empty field carries the
-// "to be filled in by the client" semantics (spec, section 6.16).
+// _key values, same structure, same order, refs pointing to the -en documents.
+// Deterministic ids per the spec convention (docs/SANITY-SCHEMA-SPEC.md,
+// section 11): the _id keeps the canonical FR-based key (faqTheme ids use the
+// FR slug; the slug field itself is per-language). FAQ themes are faqTheme
+// documents (one per distinct V1 FaqItem.theme value, spec 6.17) referenced by
+// the faqItem documents; the V1 order field is gone (ordering belongs to the
+// consumers, spec 6.15). Legal page dates (effective, updated) are OMITTED:
+// the seed invents no date, the empty field carries the "to be filled in by
+// the client" semantics (spec, section 6.16).
 
 export const docs = [
+  // ── Testimonials (bank, 6 documents) ───────────────────────────────────────
+  {
+    _id: 'testimonial-catherine-dufresne-en',
+    _type: 'testimonial',
+    language: 'en',
+    quote: "Rebuilt our ash kitchen in 2022. Three years later, the doors still haven't moved. The work speaks for itself.",
+    name: 'Catherine Dufresne',
+    context: 'Complete kitchen, Saint-Mathias-sur-Richelieu',
+    service: { _type: 'reference', _ref: 'service-cuisines-en' },
+    project: { _type: 'reference', _ref: 'project-cuisine-frene-saint-mathias-en' },
+    featured: true,
+    order: 1
+  },
+  {
+    _id: 'testimonial-jean-philippe-rousseau-en',
+    _type: 'testimonial',
+    language: 'en',
+    quote: "An eight-seat walnut table for my father's seventieth birthday. Delivered three months after the first sketch, exactly as agreed.",
+    name: 'Jean-Philippe Rousseau',
+    context: 'Dining table, Chambly',
+    service: { _type: 'reference', _ref: 'service-mobilier-en' },
+    project: { _type: 'reference', _ref: 'project-table-noyer-chambly-en' },
+    featured: true,
+    order: 2
+  },
+  {
+    _id: 'testimonial-marie-helene-belanger-en',
+    _type: 'testimonial',
+    language: 'en',
+    quote: "I had inherited a dresser from my grandmother that was falling apart. Maxime brought it back to life without erasing its history.",
+    name: 'Marie-Hélène Bélanger',
+    context: 'Restoration, Carignan',
+    service: { _type: 'reference', _ref: 'service-restauration-en' },
+    project: { _type: 'reference', _ref: 'project-commode-restauration-carignan-en' },
+    featured: true,
+    order: 3
+  },
+  {
+    _id: 'testimonial-sophie-tremblay-en',
+    _type: 'testimonial',
+    language: 'en',
+    quote: "The bookcase follows the crooked wall of our old living room to the millimetre. It looks like it was built with the house in 1910.",
+    name: 'Sophie Tremblay',
+    context: 'Built-in bookcase, Longueuil',
+    service: { _type: 'reference', _ref: 'service-bibliotheques-en' },
+    project: { _type: 'reference', _ref: 'project-bibliotheque-merisier-longueuil-en' },
+    featured: false,
+    order: 4
+  },
+  {
+    _id: 'testimonial-marc-andre-gagnon-en',
+    _type: 'testimonial',
+    language: 'en',
+    quote: "A maple sideboard that just had to be beautiful. Three years of family dinners later, there isn't a mark worth mentioning. Solid.",
+    name: 'Marc-André Gagnon',
+    context: 'Custom sideboard, Saint-Bruno',
+    service: { _type: 'reference', _ref: 'service-mobilier-en' },
+    project: { _type: 'reference', _ref: 'project-buffet-erable-saint-bruno-en' },
+    featured: false,
+    order: 5
+  },
+  {
+    _id: 'testimonial-le-moulin-cafe-en',
+    _type: 'testimonial',
+    language: 'en',
+    quote: "Our counter has taken three hundred coffees a day since opening day. Maxime understood our pace before we did. Solid work, and beautiful too.",
+    name: 'Le Moulin, café',
+    context: 'Commercial millwork, Chambly',
+    service: { _type: 'reference', _ref: 'service-commerces-en' },
+    project: { _type: 'reference', _ref: 'project-cafe-amenagement-chambly-en' },
+    featured: false,
+    order: 6
+  },
+
+  // ── FAQ themes (bank, 8 documents) ─────────────────────────────────────────
+  {
+    _id: 'faqTheme-delais-en',
+    _type: 'faqTheme',
+    language: 'en',
+    title: 'Timelines',
+    slug: { _type: 'slug', current: 'timelines' }
+  },
+  {
+    _id: 'faqTheme-zone-desservie-en',
+    _type: 'faqTheme',
+    language: 'en',
+    title: 'Service area',
+    slug: { _type: 'slug', current: 'service-area' }
+  },
+  {
+    _id: 'faqTheme-estimation-et-devis-en',
+    _type: 'faqTheme',
+    language: 'en',
+    title: 'Estimates and quotes',
+    slug: { _type: 'slug', current: 'estimates-and-quotes' }
+  },
+  {
+    _id: 'faqTheme-materiaux-en',
+    _type: 'faqTheme',
+    language: 'en',
+    title: 'Materials',
+    slug: { _type: 'slug', current: 'materials' }
+  },
+  {
+    _id: 'faqTheme-garantie-en',
+    _type: 'faqTheme',
+    language: 'en',
+    title: 'Warranty',
+    slug: { _type: 'slug', current: 'warranty' }
+  },
+  {
+    _id: 'faqTheme-prix-et-paiement-en',
+    _type: 'faqTheme',
+    language: 'en',
+    title: 'Pricing and payment',
+    slug: { _type: 'slug', current: 'pricing-and-payment' }
+  },
+  {
+    _id: 'faqTheme-entretien-en',
+    _type: 'faqTheme',
+    language: 'en',
+    title: 'Care',
+    slug: { _type: 'slug', current: 'care' }
+  },
+  {
+    _id: 'faqTheme-processus-en',
+    _type: 'faqTheme',
+    language: 'en',
+    title: 'Process',
+    slug: { _type: 'slug', current: 'process' }
+  },
+
+  // ── FAQ (bank, 9 documents, canonical V1 order) ────────────────────────────
+  {
+    _id: 'faqItem-delai-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'What is the typical timeline for a project?',
+    answer: "From six weeks for a simple piece to six months for a complete kitchen. I would rather give you an honest schedule than a quick promise. Your delivery date is set out in writing in the quote.",
+    theme: { _type: 'reference', _ref: 'faqTheme-delais-en' }
+  },
+  {
+    _id: 'faqItem-zone-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'Do you work outside the Montérégie?',
+    answer: "Yes, on the South Shore, in Montreal and as far as the Eastern Townships. Beyond 200 km, transport costs make the project less worthwhile for you, so I will refer you to a fellow cabinetmaker in your area.",
+    theme: { _type: 'reference', _ref: 'faqTheme-zone-desservie-en' }
+  },
+  {
+    _id: 'faqItem-estimation-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'How does the estimate work?',
+    answer: "A one-hour meeting, at the shop or at your place, free, with no obligation. You receive a detailed written quote within the week, with the wood species, the dimensions and a precise schedule.",
+    theme: { _type: 'reference', _ref: 'faqTheme-estimation-et-devis-en' }
+  },
+  {
+    _id: 'faqItem-essences-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'Which wood species do you offer?',
+    answer: "Ash, maple, yellow birch, black walnut and white oak as standard. All sourced in Quebec and kiln-dried. As for exotic or tropical species, I will gladly explain why I prefer not to use them.",
+    theme: { _type: 'reference', _ref: 'faqTheme-materiaux-en' }
+  },
+  {
+    _id: 'faqItem-garantie-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'Do you offer a warranty?',
+    answer: "Lifetime coverage on the structure and the joinery. If a tenon, a mortise or a dovetail fails because of the workmanship, I take the piece back and repair it at no charge, no matter the year. The finish, on the other hand, needs upkeep: I provide a care sheet with every piece.",
+    theme: { _type: 'reference', _ref: 'faqTheme-garantie-en' }
+  },
+  {
+    _id: 'faqItem-prix-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'How much does a custom piece cost?',
+    answer: "Every project is priced case by case, but to give you a rough idea: a dining table starts around $3,500, a complete kitchen around $25,000. The written quote is firm, with no surprises at delivery.",
+    theme: { _type: 'reference', _ref: 'faqTheme-prix-et-paiement-en' }
+  },
+  {
+    _id: 'faqItem-acompte-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'How does payment work?',
+    answer: "A 40% deposit confirms the order and pays for the wood, 30% at the halfway point, and the balance at delivery once you have seen the piece installed. Nothing is owed until you are satisfied with the final result.",
+    theme: { _type: 'reference', _ref: 'faqTheme-prix-et-paiement-en' }
+  },
+  {
+    _id: 'faqItem-entretien-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'How do I care for a solid wood piece?',
+    answer: "A damp cloth for everyday cleaning, and a coat of hardwax oil once or twice a year on the surfaces that see heavy use. That is all. I provide a short care sheet with every piece, along with everything you need for the first year.",
+    theme: { _type: 'reference', _ref: 'faqTheme-entretien-en' }
+  },
+  {
+    _id: 'faqItem-modifications-en',
+    _type: 'faqItem',
+    language: 'en',
+    question: 'Can I change the project along the way?',
+    answer: "Before production starts, as much as you like: that is what the design phase is for. Once the wood is cut, changes get expensive, so we take the time to lock down the drawing together before I saw anything.",
+    theme: { _type: 'reference', _ref: 'faqTheme-processus-en' }
+  },
+
   // ── Legal pages (2 documents) ──────────────────────────────────────────────
   // effective and updated deliberately omitted (spec 6.16: the seed invents
   // no date; the V1 tokens are instructions, not dates).
@@ -29,7 +235,7 @@ export const docs = [
           {
             _type: 'legalParagraph',
             _key: 'p-1',
-            text: "These terms govern the use of the rempartextermination.ca website and any exchange initiated through the contact form. By browsing the site, you accept these terms. The version in force is the one displayed on this page, dated at the top of the document."
+            text: "These terms govern the use of the ateliercormier.ca website and any exchange initiated through the contact form. By browsing the site, you accept these terms. The version in force is the one displayed on this page, dated at the top of the document."
           }
         ]
       },
@@ -41,7 +247,7 @@ export const docs = [
           {
             _type: 'legalParagraph',
             _key: 'p-1',
-            text: "The site is made available to you for information purposes, to present our pest management services and allow an initial point of contact. By using it, you agree to:"
+            text: "The site is made available to you for information purposes, to present our services and allow an initial point of contact. By using it, you agree to:"
           },
           {
             _type: 'legalList',
@@ -63,7 +269,7 @@ export const docs = [
           {
             _type: 'legalParagraph',
             _key: 'p-1',
-            text: "The texts, photographs, designs, trademarks, graphic elements and source code appearing on the site are our property or are used with permission. Any reproduction, distribution or use, in whole or in part, without prior written authorization is prohibited."
+            text: "The texts, photographs, sketches, designs, trademarks, graphic elements and source code appearing on the site are our property or are used with permission. Any reproduction, distribution or use, in whole or in part, without prior written authorization is prohibited."
           }
         ]
       },
@@ -75,7 +281,7 @@ export const docs = [
           {
             _type: 'legalParagraph',
             _key: 'p-1',
-            text: "The contact form lets you send us a request for information or a request for service. Submitting it does not constitute a contract or a confirmation of service. Any agreement relating to a pest management service is the subject of a separate communication between the parties."
+            text: "The contact form allows you to send us a request for information. Submitting it does not constitute a contract or a confirmation of service. Any agreement relating to a service is the subject of a separate communication between the parties."
           }
         ]
       },
@@ -99,7 +305,7 @@ export const docs = [
           {
             _type: 'legalParagraph',
             _key: 'p-1',
-            text: "The site may contain links to third-party sites, such as social media platforms or a review platform, provided for your convenience. These sites are not under our control. We are not responsible for their content, their practices or their privacy policies, and the presence of a link does not constitute an endorsement on our part. We encourage you to review the terms of each site you visit."
+            text: "The site may contain links to third-party sites, such as social media platforms or a booking platform, provided for your convenience. These sites are not under our control. We are not responsible for their content, their practices or their privacy policies, and the presence of a link does not constitute an endorsement on our part. We encourage you to review the terms of each site you visit."
           }
         ]
       },
@@ -204,7 +410,7 @@ export const docs = [
           {
             _type: 'legalParagraph',
             _key: 'p-2',
-            text: "This consent is explicit: you give it by voluntarily providing your information so that we can follow up on your request, whether through the contact form, by phone or by contacting us directly. If we wish to use your information for another purpose, we will ask for your consent, unless the law allows otherwise."
+            text: "This consent is explicit: you give it by voluntarily providing your information so that we can follow up on your request, whether through the contact form or by contacting us directly. If we wish to use your information for another purpose, we will ask for your consent, unless the law allows otherwise."
           }
         ]
       },
@@ -225,7 +431,6 @@ export const docs = [
               'your name;',
               'your email address;',
               'your phone number (optional);',
-              'the address where you would like an intervention (optional);',
               'the content of your message.'
             ]
           },
@@ -244,7 +449,7 @@ export const docs = [
           {
             _type: 'legalTodo',
             _key: 'todo-1',
-            text: "To be completed: describe the purposes for which you use the information received through the form (for example, responding to a request, preparing a quote, scheduling an intervention or following up on a treatment)."
+            text: "To be completed: describe the purposes for which you use the information received through the form (for example, responding to a request, preparing a quote, following up on a project)."
           },
           {
             _type: 'legalParagraph',
@@ -287,7 +492,7 @@ export const docs = [
           {
             _type: 'legalTodo',
             _key: 'todo-1',
-            text: "To be completed if applicable: add any other service you use that handles your clients' information (newsletter, quoting software, appointment booking, technician dispatch software)."
+            text: "To be completed if applicable: add any other service you use that handles your clients' information (newsletter, quoting software, appointment booking)."
           },
           {
             _type: 'legalParagraph',
@@ -304,7 +509,7 @@ export const docs = [
           {
             _type: 'legalTodo',
             _key: 'todo-1',
-            text: "To be completed: specify how long you keep the information (for example, deleting inquiries that go nowhere after twelve months, keeping intervention files for seven years to meet your tax obligations and for warranty follow-up)."
+            text: "To be completed: specify how long you keep the information (for example, deleting inquiries that go nowhere after twelve months, keeping client files for seven years to meet your tax obligations)."
           },
           {
             _type: 'legalParagraph',
@@ -321,7 +526,7 @@ export const docs = [
           {
             _type: 'legalTodo',
             _key: 'todo-1',
-            text: 'To be completed: state who, within your organization, has access to the information collected (for example, "the owner and the technicians assigned to your file").'
+            text: 'To be completed: state who, within your organization, has access to the information collected (for a self-employed person: "I am the only person with access to it").'
           },
           {
             _type: 'legalParagraph',
@@ -361,34 +566,12 @@ export const docs = [
           {
             _type: 'legalTodo',
             _key: 'todo-1',
-            text: "To be completed: the name of the person in charge of the protection of personal information (by default, the business owner). This person handles access requests and complaints, and approved this policy."
+            text: "To be completed: the name of the person in charge of the protection of personal information (by default, you). This person handles access requests and complaints, and approved this policy."
           },
           {
             _type: 'legalParagraph',
             _key: 'p-1',
             text: "The content of this policy has been approved by this person. To exercise your rights or file a complaint, contact them at the contact details provided below. We respond to your request within 30 days."
-          }
-        ]
-      },
-      {
-        _type: 'legalSection',
-        _key: 'sec-coordonnees',
-        title: 'Contact us',
-        body: [
-          {
-            _type: 'legalParagraph',
-            _key: 'p-1',
-            text: "For any question about this policy or your personal information, you can reach us:"
-          },
-          {
-            _type: 'legalList',
-            _key: 'list-1',
-            items: [
-              'Rempart Extermination;',
-              '2750 avenue des Lilas, Lévis QC G6W 0M5;',
-              'Phone: 418 555 0147;',
-              'Email: bonjour@rempartextermination.ca.'
-            ]
           }
         ]
       },

@@ -20,18 +20,9 @@ useEntrance(heroRef)
 
 /* Kind dérivé par CTA: le héros sert le one-pager (CTAs en ancres #contact /
  * #services → <a> natif) ET l'accueil multipage (CTAs en routes /contact /
- * /services → <NuxtLink>, navigation SPA + prefetch, cohérent avec le header).
- * Les liens tel:/mailto: (bouton d'appel d'Ancrée) rendent un <a> natif (kind
- * anchor), jamais un NuxtLink (vue-router les traiterait comme une route). */
+ * /services → <NuxtLink>, navigation SPA + prefetch, cohérent avec le header). */
 const ctaKind = (href: string): 'anchor' | 'internal' =>
-  href.startsWith('#') || href.startsWith('tel:') || href.startsWith('mailto:')
-    ? 'anchor'
-    : 'internal'
-
-/* Le CTA primaire est un APPEL téléphonique (tel:) = le bouton ambre de
- * conversion d'Ancrée (.wf-btn-call), icône téléphone. Sinon (cas générique),
- * bouton primaire bleu standard. Le téléphone est le héros (DESIGN.md). */
-const primaryIsCall = computed(() => hero.primaryCta.href.startsWith('tel:'))
+  href.startsWith('#') ? 'anchor' : 'internal'
 
 /* ── Art direction du visuel (D23, contrat §15.4) ─────────────────────────
  * UNE <picture>: <source media> sert le cadrage MOBILE paysage (visualMobile),
@@ -92,27 +83,19 @@ useParallax(image, frame)
           <h1 class="wf-h1">{{ hero.title }}</h1>
           <p class="wf-body-1 wf-text-muted">{{ hero.lead }}</p>
           <div class="wf-hero-cta">
-            <Button
-              :href="hero.primaryCta.href"
-              :kind="ctaKind(hero.primaryCta.href)"
-              :class="primaryIsCall ? 'wf-btn-call' : ''"
-              :icon="primaryIsCall ? 'lucide:phone' : 'lucide:chevron-right'"
-            >
+            <Button :href="hero.primaryCta.href" :kind="ctaKind(hero.primaryCta.href)" icon="lucide:chevron-right">
               {{ hero.primaryCta.label }}
             </Button>
             <Button :href="hero.secondaryCta.href" :kind="ctaKind(hero.secondaryCta.href)" variant="ghost" :icon="false">
               {{ hero.secondaryCta.label }}
             </Button>
           </div>
-          <!-- Chips de confiance: la preuve est MONTRÉE, pas affirmée (note
-               Google, licence, années). DESIGN.md famille Ancrée. -->
-          <ul class="wf-hero-chips" data-reveal>
-            <li v-for="m in hero.meta" :key="m.label" class="wf-chip">
-              <Icon v-if="m.icon" :name="m.icon" class="wf-chip-icon" aria-hidden="true" />
-              <span class="wf-chip-value">{{ m.value }}</span>
-              <span v-if="m.label" class="wf-chip-label">{{ m.label }}</span>
-            </li>
-          </ul>
+          <dl class="wf-hero-meta">
+            <div v-for="m in hero.meta" :key="m.label">
+              <dt class="wf-caption">{{ m.label }}</dt>
+              <dd class="wf-h4">{{ m.value }}</dd>
+            </div>
+          </dl>
         </div>
 
         <div class="wf-hero-visual" data-reveal>

@@ -1,4 +1,4 @@
-/* Famille Ancrée — valeurs de motion canoniques (face JS).
+/* Famille Minimaliste — valeurs de motion canoniques (face JS).
  *
  * Tokens PURS, sans dépendance GSAP: importable statiquement partout (y compris
  * dans la directive v-reveal, bundlée dans l'entrée via plugins/reveal.ts) sans
@@ -9,19 +9,15 @@
  * deux faces partagent la même courbe « settle » = cubic-bezier(0.22, 1, 0.36, 1),
  * la courbe bespoke déjà dominante du repo.
  *
- * Accordée au feeling Ancrée: apparitions un peu plus amples et plus lentes,
- * cascade plus espacée, parallaxe un brin plus inerte. Chaleur, jamais sec.
- * On accorde, on ne réinvente pas: le polish fin (timing, séquences) viendra
- * dans un deuxième temps avec Charles.
- *
- * La motion est une décision de famille: ce fichier part avec la famille Ancrée
- * le jour de l'extraction vers @patoine-studio/webforge-ancree. Aucune valeur
- * design en dur dans les composants (discipline 1): ils consomment MOTION. */
+ * La motion est une décision de famille: ce fichier part avec la famille
+ * Minimaliste le jour de l'extraction vers packages/webforge-minimaliste/.
+ * Aucune valeur design en dur dans les composants (discipline 1): ils consomment
+ * MOTION, pas des littéraux. */
 
 export const MOTION = {
   /** Durées en secondes (unité GSAP). */
   duration: {
-    reveal: 0.7
+    reveal: 0.6
   },
   /** Eases GSAP (enregistrées par registerGsap ou built-in). */
   ease: {
@@ -30,14 +26,12 @@ export const MOTION = {
   },
   /** Apparition au scroll (directive v-reveal). */
   reveal: {
-    /** Translation verticale d'entrée, en px (base 10px/rem). Ancrée: un peu
-     *  plus ample que Minimaliste (24), le contenu « se pose » de plus loin. */
-    distance: 28,
+    /** Translation verticale d'entrée, en px (base 10px/rem). */
+    distance: 24,
     /** Déclenchement ScrollTrigger: haut de l'élément vs viewport. */
     start: 'top 85%',
-    /** Décalage entre éléments d'une cascade, en secondes. Cascade plus
-     *  espacée (warmer), chaque carte arrive distinctement. */
-    stagger: 0.1
+    /** Décalage entre éléments d'une cascade, en secondes. */
+    stagger: 0.08
   },
   /** Parallaxe verticale (<Image parallax>). */
   parallax: {
@@ -47,7 +41,7 @@ export const MOTION = {
     travel: 1.5,
     /** Lissage du scrub, en secondes de rattrapage. L'image continue un peu
      *  après l'arrêt du scroll (inertie), au lieu d'un suivi sec 1:1. */
-    scrub: 1.4,
+    scrub: 1.2,
     /** Fenêtre ScrollTrigger: la course démarre quand le haut du cadre touche le
      *  bas du viewport (l'image entre à l'écran)... */
     start: 'top bottom',
@@ -58,11 +52,11 @@ export const MOTION = {
   /** Entrée au chargement du héros (useEntrance, above-the-fold). */
   entrance: {
     /** Translation verticale d'entrée, en px (base 10px/rem). */
-    distance: 22,
-    /** Durée par élément, en secondes. Un soupçon plus lente (chaleureux). */
-    duration: 0.8,
-    /** Décalage entre éléments (cascade harmonieuse), en secondes. */
-    stagger: 0.11,
+    distance: 20,
+    /** Durée par élément, en secondes. */
+    duration: 0.7,
+    /** Décalage entre éléments (cascade rapprochée, harmonieuse), en secondes. */
+    stagger: 0.09,
     /** Léger retard après le montage avant de lancer la cascade, en secondes. */
     delay: 0.15
   }

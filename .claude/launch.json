@@ -2,17 +2,11 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "ancree",
+      "name": "minimaliste",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["dev"],
       "port": 3000,
       "autoPort": false
-    },
-    {
-      "name": "ancree-static",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4178", "--directory", ".output/public"],
-      "port": 4178
     }
   ]
 }

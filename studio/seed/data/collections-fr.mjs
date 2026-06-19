@@ -1,18 +1,14 @@
-// Seed FR des collections: catégories (3), thèmes FAQ (8), témoignages (6),
-// FAQ (9), services (5), interventions (5).
+// Seed FR des collections: services (5), projets (6), catégories (3).
 //
-// Transposition fidèle de la structure du seed de la famille Minimaliste
-// (studio/seed/data/collections-fr.mjs et banques-legal-fr.mjs): mêmes _type,
-// mêmes _key, même mécanique de références. Ids déterministes (spec §11):
-// <type>-<cleFR>-fr; les internalRef et _ref pointent vers <base>-fr.
+// Transposition fidèle de app/content/services.ts, projects.ts et categories.ts.
+// Ids déterministes (spec §11): <type>-<cleFR>-fr. Les images sont des marqueurs
+// { _imagePath } remplacés par le runner après upload des assets. Les figures de
+// service reprennent la dérivation serviceImage(): ratio 4/3, alt « <titre>,
+// réalisation d'Atelier Cormier. », label et caption au titre.
 //
-// Politique d'images de la démo Rempart: les figures (_type: 'figure') portent
-// alt, label, caption et ratio mais AUCUN champ image ni marqueur de chemin.
-// Image rend ses placeholders, le build est vert sans aucun fichier. Les alt
-// restent descriptifs et honnêtes.
-//
-// Chaque service et chaque intervention porte son objet detail (la copie de sa
-// page /services/<slug> ou /interventions/<slug>): gabarit V1 identique d'un
+// Chaque service et chaque projet porte son objet detail (la copie de sa page
+// /services/<slug> ou /projets/<slug>, ex-servicesPage.serviceDetail et
+// ex-projectsPage.projectDetail, spec 6.10 et 6.11): gabarit V1 identique d'un
 // document à l'autre, la personnalisation viendra du Studio.
 
 // ── Fabriques locales (gabarits de page de détail partagés) ──────────────────
@@ -29,67 +25,67 @@ const internal = (label, ref) => ({
 const serviceDetail = () => ({
   benefits: {
     heading: 'Ce que vous obtenez',
-    cta: internal('Demander une soumission', 'contactPage-fr')
+    cta: internal('Demander un devis', 'contactPage-fr')
   },
-  included: { heading: 'Inclus dans chaque intervention' },
+  included: { heading: 'Inclus dans chaque mandat' },
   process: {
     _type: 'process',
     eyebrow: 'Le déroulement',
-    heading: 'Comment se déroule une intervention',
-    lead: 'Du premier appel à la garantie, on suit la même méthode éprouvée.',
-    cta: internal('Nous appeler', 'contactPage-fr'),
+    heading: 'Comment se déroule un mandat',
+    lead: 'Du premier appel à la pose finale, un seul interlocuteur: moi.',
+    cta: internal('Me contacter', 'contactPage-fr'),
     steps: [
       {
         _type: 'processStep',
         _key: 'step-1',
-        title: "L'inspection",
-        body: "On vient chez vous, on repère le nuisible, ses points d'entrée et l'ampleur réelle du problème. Vous savez exactement à quoi vous avez affaire avant qu'on intervienne."
+        title: 'La rencontre',
+        body: "Une heure ensemble, à l'atelier ou chez vous, pour comprendre votre projet et votre espace. Gratuite et sans engagement."
       },
       {
         _type: 'processStep',
         _key: 'step-2',
-        title: 'Le traitement',
-        body: 'On applique le traitement adapté au nuisible et à votre milieu, avec des produits homologués et un technicien certifié. Une intervention ciblée, pas un nuage de produit partout.'
+        title: 'Le devis et le dessin',
+        body: 'Un devis écrit et ferme dans la semaine: essences, dimensions, échéancier. On fige le dessin ensemble avant que je scie quoi que ce soit.'
       },
       {
         _type: 'processStep',
         _key: 'step-3',
-        title: 'La prévention',
-        body: "On scelle les entrées, on retire les attraits et on vous laisse des conseils concrets pour que le problème ne revienne pas. La meilleure intervention, c'est celle qu'on n'a pas à refaire."
+        title: 'La fabrication',
+        body: "Je débite, j'assemble et je finis à l'atelier de Chambly. Je vous tiens au courant aux étapes clés, parfois avec une photo."
       },
       {
         _type: 'processStep',
         _key: 'step-4',
-        title: 'La garantie',
-        body: "On revient au besoin pendant la période couverte, sans frais. Si le nuisible revient, on revient. C'est ça, la garantie de résultat."
+        title: 'La livraison et la pose',
+        body: "Je livre et j'installe moi-même. Ajustements et finitions sur place. Le solde n'est dû qu'une fois la pièce en place."
       }
     ]
   },
   projects: {
-    heading: 'Interventions de ce type',
-    lead: 'Des cas réels réglés près de chez vous, avant et après.',
-    cta: internal('Toutes les interventions', 'projectsPage-fr')
+    heading: 'Réalisations dans ce service',
+    lead: 'Des pièces récentes livrées dans ce service, du croquis à la pose.',
+    cta: internal('Tous les projets', 'projectsPage-fr')
   },
   testimonials: {
     eyebrow: 'Témoignages',
-    heading: "Ce qu'en disent nos clients"
+    heading: "Ce qu'en disent mes clients"
   },
   cta: {
     _type: 'ctaBand',
-    title: 'Un problème à régler?',
-    subtitle: "Appelez-nous, on vous donne un coup de main aujourd'hui.",
-    primaryCta: internal('Soumission gratuite', 'contactPage-fr')
+    title: 'Discutons de votre projet',
+    subtitle: 'Un devis détaillé et honnête, sans engagement.',
+    primaryCta: internal('Démarrer un projet', 'contactPage-fr')
   }
 })
 
-/** Page de détail d'une intervention (gabarit V1, ex-projectsPage.projectDetail). */
+/** Page de détail d'un projet (gabarit V1, ex-projectsPage.projectDetail). */
 const projectDetail = () => ({
   gallery: { heading: 'En images' },
   caseStudy: {
     eyebrow: "L'étude de cas",
-    heading: "La situation, l'intervention, le résultat",
-    challengeLabel: 'La situation',
-    solutionLabel: "L'intervention",
+    heading: 'Le défi, la solution, le résultat',
+    challengeLabel: 'Le défi',
+    solutionLabel: 'La solution',
     resultLabel: 'Le résultat'
   },
   testimonial: {
@@ -97,718 +93,561 @@ const projectDetail = () => ({
     heading: 'Le mot du client'
   },
   similar: {
-    heading: 'Interventions similaires',
-    cta: internal('Toutes les interventions', 'projectsPage-fr')
+    heading: 'Projets similaires',
+    cta: internal('Tous les projets', 'projectsPage-fr')
   },
   cta: {
     _type: 'ctaBand',
-    title: 'Le même problème chez vous?',
-    subtitle: "Chaque cas est différent. Parlons du vôtre dès aujourd'hui.",
-    primaryCta: internal('Soumission gratuite', 'contactPage-fr')
+    title: 'Un projet comme celui-ci?',
+    subtitle: 'Chaque pièce est unique. Parlons de la vôtre.',
+    primaryCta: internal('Démarrer un projet', 'contactPage-fr')
   }
 })
 
 export const docs = [
   // ── Catégories de blogue ──────────────────────────────────────────────────
   {
-    _id: 'category-prevention-fr',
+    _id: 'category-le-bois-fr',
     _type: 'category',
     language: 'fr',
-    title: 'Prévention',
-    slug: { _type: 'slug', current: 'prevention' },
-    description: "Garder les nuisibles dehors avant qu'ils entrent. Gestes simples, bons réflexes et petits travaux qui font la différence saison après saison.",
+    title: 'Le bois',
+    slug: { _type: 'slug', current: 'le-bois' },
+    description: 'Essences locales, approvisionnement, séchage et tenue dans le temps. Ce que je choisis, et pourquoi.',
     order: 1
   },
   {
-    _id: 'category-nuisibles-fr',
+    _id: 'category-atelier-fr',
     _type: 'category',
     language: 'fr',
-    title: 'Reconnaître les nuisibles',
-    slug: { _type: 'slug', current: 'reconnaitre-les-nuisibles' },
-    description: "Savoir à quoi vous avez affaire, vite. Indices, traces et signes qui distinguent une souris d'un rat, une guêpe d'une abeille, une punaise d'une simple piqûre.",
+    title: "À l'atelier",
+    slug: { _type: 'slug', current: 'atelier' },
+    description: "Coulisses des projets, techniques de joinage et décisions de fabrication, racontées de l'établi.",
     order: 2
   },
   {
-    _id: 'category-maison-saine-fr',
+    _id: 'category-entretien-fr',
     _type: 'category',
     language: 'fr',
-    title: 'Maison saine',
-    slug: { _type: 'slug', current: 'maison-saine' },
-    description: "Une maison où on respire mieux et où les nuisibles ne trouvent rien à se mettre sous la dent. Cuisine, grenier, sous-sol: ce qui les attire et comment leur couper l'envie.",
+    title: 'Entretien',
+    slug: { _type: 'slug', current: 'entretien' },
+    description: 'Garder une pièce de bois massif belle pendant des décennies: finition, soin courant et petites réparations.',
     order: 3
-  },
-
-  // ── Thèmes FAQ (banque, 8 documents) ───────────────────────────────────────
-  {
-    _id: 'faqTheme-urgence-fr',
-    _type: 'faqTheme',
-    language: 'fr',
-    title: 'Délais et urgence',
-    slug: { _type: 'slug', current: 'delais-et-urgence' }
-  },
-  {
-    _id: 'faqTheme-zone-fr',
-    _type: 'faqTheme',
-    language: 'fr',
-    title: 'Zone desservie',
-    slug: { _type: 'slug', current: 'zone-desservie' }
-  },
-  {
-    _id: 'faqTheme-soumission-fr',
-    _type: 'faqTheme',
-    language: 'fr',
-    title: 'Estimation et soumission',
-    slug: { _type: 'slug', current: 'estimation-et-soumission' }
-  },
-  {
-    _id: 'faqTheme-securite-fr',
-    _type: 'faqTheme',
-    language: 'fr',
-    title: 'Produits, famille et animaux',
-    slug: { _type: 'slug', current: 'produits-famille-et-animaux' }
-  },
-  {
-    _id: 'faqTheme-garantie-fr',
-    _type: 'faqTheme',
-    language: 'fr',
-    title: 'Garantie',
-    slug: { _type: 'slug', current: 'garantie' }
-  },
-  {
-    _id: 'faqTheme-prix-fr',
-    _type: 'faqTheme',
-    language: 'fr',
-    title: 'Prix et paiement',
-    slug: { _type: 'slug', current: 'prix-et-paiement' }
-  },
-  {
-    _id: 'faqTheme-suivi-fr',
-    _type: 'faqTheme',
-    language: 'fr',
-    title: 'Suivi et prévention',
-    slug: { _type: 'slug', current: 'suivi-et-prevention' }
-  },
-  {
-    _id: 'faqTheme-processus-fr',
-    _type: 'faqTheme',
-    language: 'fr',
-    title: "Déroulement d'une intervention",
-    slug: { _type: 'slug', current: 'deroulement-d-une-intervention' }
-  },
-
-  // ── Témoignages (banque, 6 documents) ─────────────────────────────────────
-  {
-    _id: 'testimonial-julie-fr',
-    _type: 'testimonial',
-    language: 'fr',
-    quote: "On entendait des grattements dans les murs depuis des semaines. Rempart est venu le lendemain de mon appel, a trouvé l'entrée et bouché le tout. Plus un bruit depuis.",
-    name: 'Julie L.',
-    context: 'Souris, Saint-Romuald',
-    service: { _type: 'reference', _ref: 'service-rongeurs-fr' },
-    project: { _type: 'reference', _ref: 'project-entrepot-rongeurs-fr' },
-    featured: true,
-    order: 1
-  },
-  {
-    _id: 'testimonial-marc-andre-fr',
-    _type: 'testimonial',
-    language: 'fr',
-    quote: "Dans la restauration, des coquerelles, ça peut tout faire basculer. Ils sont intervenus discrètement, après les heures, et le problème était réglé en deux visites. Service impeccable.",
-    name: 'Marc-André G.',
-    context: 'Restaurant, Lévis',
-    service: { _type: 'reference', _ref: 'service-coquerelles-fr' },
-    project: { _type: 'reference', _ref: 'project-restaurant-coquerelles-fr' },
-    featured: true,
-    order: 2
-  },
-  {
-    _id: 'testimonial-genevieve-fr',
-    _type: 'testimonial',
-    language: 'fr',
-    quote: "J'avais des fourmis charpentières dans une poutre du sous-sol. Le technicien a tout de suite vu l'ampleur et m'a expliqué clairement quoi faire. Réglé, et rassurée.",
-    name: 'Geneviève T.',
-    context: 'Fourmis charpentières, Saint-Nicolas',
-    service: { _type: 'reference', _ref: 'service-fourmis-fr' },
-    project: { _type: 'reference', _ref: 'project-maison-fourmis-fr' },
-    featured: true,
-    order: 3
-  },
-  {
-    _id: 'testimonial-patrick-fr',
-    _type: 'testimonial',
-    language: 'fr',
-    quote: "Des punaises de lit, je pensais qu'on ne s'en sortirait jamais. Le traitement thermique a tout réglé en une journée, sans avoir à jeter nos meubles. Un vrai soulagement.",
-    name: 'Patrick D.',
-    context: 'Punaises de lit, Charny',
-    service: { _type: 'reference', _ref: 'service-punaises-fr' },
-    project: { _type: 'reference', _ref: 'project-duplex-punaises-fr' },
-    featured: false,
-    order: 4
-  },
-  {
-    _id: 'testimonial-sophie-fr',
-    _type: 'testimonial',
-    language: 'fr',
-    quote: "Un gros nid de guêpes juste au-dessus de la porte de la garderie, avec les enfants qui rentraient. Ils sont venus le jour même et l'ont retiré en toute sécurité. Merci mille fois.",
-    name: 'Sophie R.',
-    context: 'Nid de guêpes, garderie, Lévis',
-    service: { _type: 'reference', _ref: 'service-guepes-fr' },
-    project: { _type: 'reference', _ref: 'project-garderie-guepes-fr' },
-    featured: false,
-    order: 5
-  },
-  {
-    _id: 'testimonial-yvon-fr',
-    _type: 'testimonial',
-    language: 'fr',
-    quote: "Des rats avaient élu domicile dans mon garage à la campagne. Le programme de pièges et le suivi en sont venus à bout en quelques semaines. Du monde sérieux et honnête.",
-    name: 'Yvon B.',
-    context: 'Rats, Beauce',
-    service: { _type: 'reference', _ref: 'service-rongeurs-fr' },
-    featured: false,
-    order: 6
-  },
-
-  // ── FAQ (banque, 9 documents) ──────────────────────────────────────────────
-  {
-    _id: 'faqItem-delai-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: 'En combien de temps pouvez-vous intervenir?',
-    answer: "Le plus souvent dans les 24 heures, et le jour même pour une urgence comme un nid de guêpes ou une invasion soudaine. Appelez-nous: on vous donne un créneau précis au téléphone, pas une fourchette vague.",
-    theme: { _type: 'reference', _ref: 'faqTheme-urgence-fr' }
-  },
-  {
-    _id: 'faqItem-zone-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: 'Quel territoire desservez-vous?',
-    answer: "Lévis et toute la Rive-Sud de Québec: Saint-Romuald, Saint-Nicolas, Charny, ainsi que la Chaudière-Appalaches, Bellechasse, Lotbinière, la Beauce et Portneuf. Un doute sur votre secteur? Un appel et on vous le confirme.",
-    theme: { _type: 'reference', _ref: 'faqTheme-zone-fr' }
-  },
-  {
-    _id: 'faqItem-soumission-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: "L'estimation est-elle vraiment gratuite?",
-    answer: "Oui, sans condition. On évalue la situation, on vous explique ce qu'on recommande et on vous donne un prix clair, avant que vous décidiez quoi que ce soit. Vous n'avez rien à payer pour le savoir.",
-    theme: { _type: 'reference', _ref: 'faqTheme-soumission-fr' }
-  },
-  {
-    _id: 'faqItem-produits-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: 'Vos produits sont-ils sûrs pour mes enfants et mes animaux?',
-    answer: "Oui. On utilise des produits homologués par Santé Canada, appliqués par un technicien certifié, aux bons endroits et aux bonnes doses. On vous indique toujours le délai à respecter avant de réintégrer la pièce traitée, s'il y a lieu.",
-    theme: { _type: 'reference', _ref: 'faqTheme-securite-fr' }
-  },
-  {
-    _id: 'faqItem-garantie-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: "Qu'est-ce que la garantie de résultat couvre?",
-    answer: "Si le nuisible traité revient pendant la période couverte, on revient sans frais, aussi souvent qu'il le faut. La période dépend du nuisible et du type d'intervention, et elle est écrite noir sur blanc sur votre soumission.",
-    theme: { _type: 'reference', _ref: 'faqTheme-garantie-fr' }
-  },
-  {
-    _id: 'faqItem-prix-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: 'Combien coûte une intervention?',
-    answer: "Ça dépend du nuisible, de la superficie et de l'ampleur du problème. Une intervention de routine pour des fourmis ne coûte pas la même chose qu'un traitement thermique de punaises de lit. C'est pour ça qu'on donne un prix ferme après l'inspection, avant de commencer.",
-    theme: { _type: 'reference', _ref: 'faqTheme-prix-fr' }
-  },
-  {
-    _id: 'faqItem-acompte-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: "Faut-il payer d'avance?",
-    answer: "Non, pas d'acompte pour une intervention résidentielle courante: vous payez une fois le travail fait, sur place ou par virement. Pour les gros mandats commerciaux ou les programmes de suivi, on convient des modalités à l'avance, et tout est écrit.",
-    theme: { _type: 'reference', _ref: 'faqTheme-prix-fr' }
-  },
-  {
-    _id: 'faqItem-suivi-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: 'Faut-il un suivi après le traitement?',
-    answer: "Parfois oui, parfois non. Certains nuisibles, comme les punaises ou les rongeurs, demandent une visite de contrôle pour confirmer que tout est réglé. On vous le dit dès le départ, et le suivi nécessaire est compris dans le prix convenu.",
-    theme: { _type: 'reference', _ref: 'faqTheme-suivi-fr' }
-  },
-  {
-    _id: 'faqItem-processus-fr',
-    _type: 'faqItem',
-    language: 'fr',
-    question: 'Comment se déroule une visite à la maison?',
-    answer: "Le technicien arrive à l'heure convenue, inspecte les zones touchées, vous explique ce qu'il voit, puis applique le traitement adapté. Il termine par les gestes de prévention et vous laisse des conseils clairs. Une visite courante dure de trente à soixante minutes.",
-    theme: { _type: 'reference', _ref: 'faqTheme-processus-fr' }
   },
 
   // ── Services ──────────────────────────────────────────────────────────────
   {
-    _id: 'service-fourmis-fr',
+    _id: 'service-cuisines-fr',
     _type: 'service',
     language: 'fr',
-    title: 'Fourmis et fourmis charpentières',
-    slug: { _type: 'slug', current: 'extermination-fourmis' },
-    summary: 'Des fourmis dans la cuisine ou des charpentières dans le bois de la maison? On trouve le nid, on coupe la source et on protège la structure.',
-    meta: 'Intervention sous 24 h',
+    title: 'Cuisines complètes',
+    slug: { _type: 'slug', current: 'cuisines' },
+    summary: 'Caissons, façades et plans de travail en bois massif. Du croquis initial à la pose finale, en passant par les électros.',
+    meta: '8 à 12 semaines',
     image: {
       _type: 'figure',
-      alt: "Technicien de Rempart inspectant le pourtour d'une maison pour des fourmis charpentières.",
-      label: 'Fourmis et fourmis charpentières',
-      caption: 'Fourmis et fourmis charpentières',
+      image: { _imagePath: '/images/service-cuisines.jpg' },
+      alt: "Cuisines complètes, réalisation d'Atelier Cormier.",
+      label: 'Cuisines complètes',
+      caption: 'Cuisines complètes',
       ratio: '4/3'
     },
     intro: [
-      "Une traînée de fourmis sur le comptoir, c'est agaçant. Des fourmis charpentières dans une poutre, c'est plus sérieux: elles creusent le bois de la maison. Dans les deux cas, écraser celles qu'on voit ne règle rien, parce que le nid reste caché.",
-      "On remonte la piste jusqu'au nid, on traite à la source et on bloque les entrées. Pour les charpentières, on vérifie l'ampleur des dégâts au bois et on vous dit franchement où vous en êtes."
+      "Une cuisine, c'est la pièce qui travaille le plus fort de la maison. Je la construis pour ça: des caissons en contreplaqué de bouleau, des façades en bois massif, des charnières et coulisses que vous ne remplacerez pas dans dix ans.",
+      "Je prends les mesures moi-même, je dessine en fonction de votre façon de cuisiner, et je pose moi-même à la fin. Vous n'avez qu'un seul interlocuteur, du premier croquis à la dernière poignée."
     ],
     benefits: [
       {
         _key: 'benefit-1',
         _type: 'serviceBenefit',
-        title: 'Le nid, pas juste les fourmis',
-        body: "On élimine la colonie à la source plutôt que de chasser les ouvrières une à une. C'est la seule façon que ça ne revienne pas la semaine suivante."
+        title: 'Bois massif visible',
+        body: 'Façades, tablettes et plans en frêne, érable ou noyer. Pas de placage qui cloque, pas de mélamine qui gonfle.'
       },
       {
         _key: 'benefit-2',
         _type: 'serviceBenefit',
-        title: 'Protection du bois',
-        body: "Pour les charpentières, on évalue l'atteinte à la structure et on traite avant que les dégâts ne s'aggravent. Mieux vaut agir tôt."
+        title: 'Ajusté à votre mur',
+        body: 'Relevé au laser sur place, fabrication au pouce près. Les angles et les murs croches sont mon problème, pas le vôtre.'
       },
       {
         _key: 'benefit-3',
         _type: 'serviceBenefit',
-        title: 'Entrées scellées',
-        body: 'On repère et on bouche les points de passage autour des fondations et des fenêtres pour leur couper le chemin du retour.'
+        title: 'Pose comprise',
+        body: "Je livre et j'installe. Ajustement des portes, calage de niveau, finitions de jonction: tout est fait avant que je reparte."
       }
     ],
     detail: serviceDetail(),
     related: [
-      { _key: 'maison-fourmis-saint-nicolas', _type: 'reference', _ref: 'project-maison-fourmis-fr' }
+      { _key: 'cuisine-frene-saint-mathias', _type: 'reference', _ref: 'project-cuisine-frene-saint-mathias-fr' }
     ],
     order: 1
   },
   {
-    _id: 'service-rongeurs-fr',
+    _id: 'service-mobilier-fr',
     _type: 'service',
     language: 'fr',
-    title: 'Souris et rats',
-    slug: { _type: 'slug', current: 'souris-et-rats' },
-    summary: 'Des grattements dans les murs, des crottes au sous-sol? On localise les entrées, on installe le bon dispositif et on referme la maison pour de bon.',
-    meta: 'Intervention sous 24 h',
+    title: 'Mobilier de salle à manger',
+    slug: { _type: 'slug', current: 'mobilier' },
+    summary: 'Tables, bancs, buffets et chaises. Conçus pour le quotidien, taillés pour passer aux enfants.',
+    meta: '6 à 10 semaines',
     image: {
       _type: 'figure',
-      alt: "Technicien scellant un point d'entrée de souris le long d'une fondation.",
-      label: 'Souris et rats',
-      caption: 'Souris et rats',
+      image: { _imagePath: '/images/service-mobilier.jpg' },
+      alt: "Mobilier de salle à manger, réalisation d'Atelier Cormier.",
+      label: 'Mobilier de salle à manger',
+      caption: 'Mobilier de salle à manger',
       ratio: '4/3'
     },
     intro: [
-      "Une souris se faufile par un trou de la taille d'un dix sous, et une seule en annonce souvent d'autres. Les bruits dans le grenier, les crottes le long des plinthes et les sacs grignotés sont des signaux à ne pas ignorer.",
-      "On inspecte la maison de fond en comble, on installe des dispositifs sûrs aux bons endroits et, surtout, on scelle les entrées. Sans ça, on ne fait que vider une porte tournante."
+      'Une table de salle à manger, ça se mange dessus tous les jours et ça se transmet une fois par génération. Je la construis avec des assemblages traditionnels qui encaissent les deux.',
+      'Tables, bancs, buffets, consoles: je travaille les essences locales en pièces qui vieillissent bien et se réparent au besoin, plutôt que de se jeter.'
     ],
     benefits: [
       {
         _key: 'benefit-1',
         _type: 'serviceBenefit',
-        title: 'Maison refermée',
-        body: "On trouve et on bouche les points d'entrée, des fondations à la toiture. Sans accès, plus de nouveaux visiteurs."
+        title: 'Joinage traditionnel',
+        body: 'Tenons-mortaises chevillés, pas de vis cachées sous un bouchon. La structure tient par le bois, pas par la quincaillerie.'
       },
       {
         _key: 'benefit-2',
         _type: 'serviceBenefit',
-        title: 'Dispositifs sécuritaires',
-        body: 'Pièges et stations placés hors de portée des enfants et des animaux, là où les rongeurs circulent vraiment.'
+        title: 'Plateaux en bois massif',
+        body: "Débités et collés à l'atelier, finis à l'huile-cire pénétrante: une marque s'efface, le plateau se ponce et se refinit."
       },
       {
         _key: 'benefit-3',
         _type: 'serviceBenefit',
-        title: "Suivi jusqu'à zéro",
-        body: 'On revient confirmer que tout est réglé avant de fermer le dossier. Vous savez quand le problème est réellement derrière vous.'
+        title: 'Dimensions sur mesure',
+        body: "Longueur, hauteur et nombre de places ajustés à votre pièce et au monde qui s'assoit autour."
       }
     ],
     detail: serviceDetail(),
     related: [
-      { _key: 'entrepot-rongeurs-saint-romuald', _type: 'reference', _ref: 'project-entrepot-rongeurs-fr' }
+      { _key: 'table-noyer-chambly', _type: 'reference', _ref: 'project-table-noyer-chambly-fr' },
+      { _key: 'buffet-erable-saint-bruno', _type: 'reference', _ref: 'project-buffet-erable-saint-bruno-fr' }
     ],
     order: 2
   },
   {
-    _id: 'service-guepes-fr',
+    _id: 'service-bibliotheques-fr',
     _type: 'service',
     language: 'fr',
-    title: 'Guêpes, frelons et nids',
-    slug: { _type: 'slug', current: 'guepes-et-frelons' },
-    summary: 'Un nid près de la porte, sous la galerie ou dans la toiture? On le retire en sécurité, souvent le jour même, sans risque pour votre monde.',
-    meta: 'Service le jour même',
+    title: 'Bibliothèques intégrées',
+    slug: { _type: 'slug', current: 'bibliotheques' },
+    summary: 'Rangements muraux sur mesure, ajustés au pouce près à votre mur. Plinthes, moulures et angles compris.',
+    meta: '6 à 8 semaines',
     image: {
       _type: 'figure',
-      alt: "Technicien équipé retirant en sécurité un nid de guêpes sous un avant-toit.",
-      label: 'Guêpes, frelons et nids',
-      caption: 'Guêpes, frelons et nids',
+      image: { _imagePath: '/images/service-bibliotheques.jpg' },
+      alt: "Bibliothèques intégrées, réalisation d'Atelier Cormier.",
+      label: 'Bibliothèques intégrées',
+      caption: 'Bibliothèques intégrées',
       ratio: '4/3'
     },
     intro: [
-      "Un nid de guêpes près d'une entrée ou d'une aire de jeu, ça devient vite un problème quand quelqu'un est allergique ou qu'il y a des enfants. Y toucher soi-même est la meilleure façon de se faire piquer.",
-      "On intervient avec l'équipement de protection nécessaire, on retire le nid au complet et on traite le point d'attache pour éviter qu'une nouvelle colonie s'y réinstalle. Souvent réglé le jour même de votre appel."
+      "Une bibliothèque intégrée, bien faite, disparaît dans le mur: les plinthes suivent celles de la pièce, les moulures rejoignent le plafond, rien ne trahit qu'on l'a ajoutée.",
+      "Je conçois le rangement autour de ce que vous y mettez, des livres aux objets en passant par la télé, et je l'ajuste exactement à la géométrie de votre mur."
     ],
     benefits: [
       {
         _key: 'benefit-1',
         _type: 'serviceBenefit',
-        title: 'Le jour même',
-        body: "Un nid actif, c'est une urgence. On se déplace rapidement pour le retirer avant qu'il grossisse ou que quelqu'un se fasse piquer."
+        title: 'Intégration au bâti',
+        body: "Plinthes, cimaises et moulures raccordées à l'existant. La bibliothèque a l'air d'avoir toujours été là."
       },
       {
         _key: 'benefit-2',
         _type: 'serviceBenefit',
-        title: 'Retrait sécuritaire',
-        body: 'Équipement de protection et bonne méthode: on enlève le nid au complet sans mettre votre famille ni vos voisins en danger.'
+        title: 'Tablettes qui ne ploient pas',
+        body: 'Épaisseur et portée calculées selon la charge réelle. Une tablette de livres reste droite, année après année.'
       },
       {
         _key: 'benefit-3',
         _type: 'serviceBenefit',
-        title: 'Pas de retour au même endroit',
-        body: "On traite le point d'attache pour décourager une nouvelle colonie de reconstruire exactement là où vous veniez de régler le problème."
+        title: 'Éclairage prévu',
+        body: 'Passage de fils et intégration de réglettes DEL planifiés au dessin, pas bricolés après coup.'
       }
     ],
     detail: serviceDetail(),
     related: [
-      { _key: 'garderie-guepes-levis', _type: 'reference', _ref: 'project-garderie-guepes-fr' }
+      { _key: 'bibliotheque-merisier-longueuil', _type: 'reference', _ref: 'project-bibliotheque-merisier-longueuil-fr' }
     ],
     order: 3
   },
   {
-    _id: 'service-punaises-fr',
+    _id: 'service-restauration-fr',
     _type: 'service',
     language: 'fr',
-    title: 'Punaises de lit',
-    slug: { _type: 'slug', current: 'punaises-de-lit' },
-    summary: 'Des piqûres au réveil, des petites taches sur le matelas? On confirme, on traite en profondeur, souvent sans avoir à jeter vos meubles.',
-    meta: 'Traitement thermique disponible',
+    title: 'Restauration de pièces anciennes',
+    slug: { _type: 'slug', current: 'restauration' },
+    summary: "Remise en état de meubles hérités, dans le respect de l'original. Devis honnête, parfois je vous dirai de ne rien toucher.",
+    meta: '4 à 8 semaines',
     image: {
       _type: 'figure',
-      alt: "Inspection d'une couture de matelas à la recherche de punaises de lit.",
-      label: 'Punaises de lit',
-      caption: 'Punaises de lit',
+      image: { _imagePath: '/images/service-restauration.jpg' },
+      alt: "Restauration de pièces anciennes, réalisation d'Atelier Cormier.",
+      label: 'Restauration de pièces anciennes',
+      caption: 'Restauration de pièces anciennes',
       ratio: '4/3'
     },
     intro: [
-      "Découvrir des punaises de lit, c'est stressant, et c'est normal. Bonne nouvelle: avec la bonne méthode, on en vient à bout, et le plus souvent sans avoir à jeter votre matelas ni vos meubles.",
-      "On confirme d'abord qu'il s'agit bien de punaises, puis on choisit le traitement adapté, dont le traitement thermique qui élimine les œufs et les adultes en une journée. On vous explique chaque étape, simplement."
+      "Un meuble qui a traversé deux générations mérite mieux qu'un décapage agressif et trois couches de vernis brillant. Je restaure dans le respect de l'âge de la pièce.",
+      "Recollage d'assemblages, remplacement de pièces manquantes en bois d'époque, ravivage de la finition d'origine: je remets en service sans effacer l'histoire."
     ],
     benefits: [
       {
         _key: 'benefit-1',
         _type: 'serviceBenefit',
-        title: 'Confirmation avant tout',
-        body: "On vérifie que ce sont bien des punaises avant d'agir. Pas de traitement coûteux pour rien, pas de fausse alerte."
+        title: 'Diagnostic honnête',
+        body: 'Parfois la bonne réponse est de ne presque rien faire. Je vous le dirai avant de prendre votre argent.'
       },
       {
         _key: 'benefit-2',
         _type: 'serviceBenefit',
-        title: 'Traitement thermique',
-        body: 'La chaleur élimine œufs et adultes jusque dans les recoins, souvent en une seule journée, sans inonder votre chambre de produits.'
+        title: 'Réparations réversibles',
+        body: "Colles et techniques choisies pour qu'une intervention future reste possible, comme le veut la bonne pratique."
       },
       {
         _key: 'benefit-3',
         _type: 'serviceBenefit',
-        title: 'Vos meubles, gardés',
-        body: 'Dans la grande majorité des cas, pas besoin de jeter quoi que ce soit. On traite, vous gardez vos affaires.'
+        title: "Finition d'époque",
+        body: "Gomme-laque, huiles et cires d'origine plutôt que vernis modernes, pour garder la patine et la main du meuble."
       }
     ],
     detail: serviceDetail(),
     related: [
-      { _key: 'duplex-punaises-charny', _type: 'reference', _ref: 'project-duplex-punaises-fr' }
+      { _key: 'commode-restauration-carignan', _type: 'reference', _ref: 'project-commode-restauration-carignan-fr' }
     ],
     order: 4
   },
   {
-    _id: 'service-coquerelles-fr',
+    _id: 'service-commerces-fr',
     _type: 'service',
     language: 'fr',
-    title: 'Coquerelles et blattes',
-    slug: { _type: 'slug', current: 'coquerelles-et-blattes' },
-    summary: 'À la maison comme au restaurant, on élimine les coquerelles à la source et on garde votre cuisine en règle, discrètement.',
-    meta: 'Résidentiel et commercial',
+    title: 'Agencements pour commerces',
+    slug: { _type: 'slug', current: 'commerces' },
+    summary: 'Comptoirs, présentoirs et mobilier fixe pour cafés, boutiques et bureaux. Du bois qui tient le rythme commercial.',
+    meta: '8 à 14 semaines',
     image: {
       _type: 'figure',
-      alt: "Application d'un traitement en gel dans une cuisine contre les coquerelles.",
-      label: 'Coquerelles et blattes',
-      caption: 'Coquerelles et blattes',
+      image: { _imagePath: '/images/service-mobilier.jpg' },
+      alt: "Agencements pour commerces, réalisation d'Atelier Cormier.",
+      label: 'Agencements pour commerces',
+      caption: 'Agencements pour commerces',
       ratio: '4/3'
     },
     intro: [
-      "Apercevoir une coquerelle dans la cuisine, surtout le soir, ça veut souvent dire qu'il y en a d'autres bien cachées. Elles se reproduisent vite et trouvent l'eau et la nourriture là où on ne regarde pas.",
-      "On traite à la source, dans les fissures et derrière les électros, avec une méthode ciblée qui suit le cycle de l'insecte. Pour les restaurants et commerces, on intervient discrètement, hors des heures d'achalandage."
+      'Un comptoir de café encaisse mille mains par jour. Un présentoir de boutique se fait cogner, recharger, déplacer. Pour ces usages, je construis plus robuste encore que pour la maison.',
+      "Je travaille avec les petits commerces de la Rive-Sud pour des agencements qui ont du caractère sans coûter le prix d'un mobilier importé jetable."
     ],
     benefits: [
       {
         _key: 'benefit-1',
         _type: 'serviceBenefit',
-        title: 'Traitement ciblé',
-        body: 'On vise les cachettes et les voies de circulation des coquerelles plutôt que de pulvériser au hasard. Plus efficace, et plus propre.'
+        title: "Conçu pour l'usure",
+        body: 'Chants renforcés, finitions résistantes aux nettoyants commerciaux, structure pensée pour des années de service intensif.'
       },
       {
         _key: 'benefit-2',
         _type: 'serviceBenefit',
-        title: 'Discrétion commerciale',
-        body: "Pour les restaurants et commerces, on travaille hors des heures d'ouverture, dans la confidentialité, pour protéger votre réputation."
+        title: 'Image de marque en bois',
+        body: 'Un agencement en bois massif local raconte quelque chose à vos clients qu\'un comptoir stratifié ne dira jamais.'
       },
       {
         _key: 'benefit-3',
         _type: 'serviceBenefit',
-        title: 'Conseils qui tiennent',
-        body: "On vous montre les attraits à éliminer pour que la cuisine reste un endroit où les coquerelles n'ont rien à faire."
+        title: 'Coordination de chantier',
+        body: "Je m'arrime à votre échéancier d'ouverture et aux autres corps de métier, pose comprise hors heures d'affluence."
       }
     ],
     detail: serviceDetail(),
     related: [
-      { _key: 'restaurant-coquerelles-vieux-levis', _type: 'reference', _ref: 'project-restaurant-coquerelles-fr' }
+      { _key: 'cafe-amenagement-chambly', _type: 'reference', _ref: 'project-cafe-amenagement-chambly-fr' }
     ],
     order: 5
   },
 
-  // ── Interventions ─────────────────────────────────────────────────────────
+  // ── Projets ───────────────────────────────────────────────────────────────
   {
-    _id: 'project-restaurant-coquerelles-fr',
+    _id: 'project-cuisine-frene-saint-mathias-fr',
     _type: 'project',
     language: 'fr',
-    title: 'Restaurant du Vieux-Lévis: coquerelles éradiquées',
-    slug: { _type: 'slug', current: 'restaurant-coquerelles-vieux-levis' },
-    excerpt: "Un restaurant établi du Vieux-Lévis aux prises avec des coquerelles, remis en règle en deux visites discrètes, hors des heures de service.",
+    title: 'Cuisine en frêne, maison de 1910',
+    slug: { _type: 'slug', current: 'cuisine-frene-saint-mathias' },
+    excerpt: "Une cuisine complète en frêne massif pour une maison de ferme rénovée, mariée à des murs jamais d'équerre.",
     cover: {
       _type: 'figure',
-      alt: 'Cuisine de restaurant propre et dégagée après le traitement contre les coquerelles.',
-      label: 'Restaurant du Vieux-Lévis',
-      caption: 'Intervention commerciale, 4:3',
+      image: { _imagePath: '/images/service-cuisines.jpg' },
+      alt: 'Cuisine en frêne massif clair, îlot central et armoires sur mesure.',
+      label: 'Cuisine en frêne, Saint-Mathias',
+      caption: 'Cuisine complète, 4:3',
       ratio: '4/3'
     },
     gallery: [
       {
-        _key: 'cuisine',
+        _key: 'facades',
         _type: 'figure',
-        alt: 'Cuisine commerciale inspectée derrière les électros et le long des plinthes.',
-        label: 'Inspection de la cuisine',
-        caption: 'Inspection, 4:5',
+        image: { _imagePath: '/images/project-cuisine-facades.jpg' },
+        alt: 'Détail des façades en frêne et des charnières dissimulées.',
+        label: 'Façades en frêne',
+        caption: 'Détail façades, 4:5',
         ratio: '4/5'
       },
       {
-        _key: 'traitement',
+        _key: 'ilot',
         _type: 'figure',
-        alt: 'Application de gel dans les fissures et points de circulation des coquerelles.',
-        label: 'Traitement ciblé',
-        caption: 'Traitement, 4:5',
+        image: { _imagePath: '/images/project-cuisine-ilot.jpg' },
+        alt: 'Îlot central avec plan de travail en bois massif huilé.',
+        label: 'Îlot central',
+        caption: 'Îlot, 4:5',
         ratio: '4/5'
+      },
+      {
+        _key: 'raccord',
+        _type: 'figure',
+        image: { _imagePath: '/images/project-cuisine-raccord.jpg' },
+        alt: "Raccord de la cuisine avec un mur d'origine non d'équerre.",
+        label: 'Raccord au mur ancien',
+        caption: 'Ajustement, 4:3',
+        ratio: '4/3'
       }
     ],
-    location: 'Lévis (Vieux-Lévis)',
-    year: '2024',
-    challenge: "Un restaurant de quartier voyait des coquerelles le soir, surtout derrière les équipements de cuisine. Le propriétaire tenait à régler la situation vite et discrètement, avant son inspection.",
-    solution: "Inspection complète après la fermeture, traitement en gel ciblé dans les fissures, derrière les électros et le long des conduites, puis une seconde visite de contrôle. Tout en dehors des heures de service.",
-    result: "Plus aucune coquerelle en circulation après la deuxième visite. Le restaurant a passé son inspection sans la moindre note, et reste sous suivi préventif.",
+    location: 'Saint-Mathias-sur-Richelieu',
+    year: '2022',
+    challenge: "La maison de 1910 n'avait pas un seul mur droit ni un seul angle à 90 degrés. Une cuisine standard aurait laissé des jours béants partout.",
+    solution: "Relevé complet au laser, fabrication en tenant compte de chaque déviation, et façades en frêne massif débité à l'atelier pour s'harmoniser aux boiseries d'origine.",
+    result: "Une cuisine qui épouse la maison au point qu'on la croirait d'époque. Trois ans plus tard, aucune porte n'a bougé.",
     stats: [
-      { _key: 'delai', _type: 'projectStat', label: 'Délai', value: '24 h' },
-      { _key: 'visites', _type: 'projectStat', label: 'Visites', value: '2' },
-      { _key: 'resultat', _type: 'projectStat', label: 'Résultat', value: '0 nuisible' }
+      { _key: 'duree', _type: 'projectStat', label: 'Durée', value: '11 semaines' },
+      { _key: 'essence', _type: 'projectStat', label: 'Essence', value: 'Frêne local' },
+      { _key: 'armoires', _type: 'projectStat', label: 'Armoires', value: '24 caissons' }
     ],
     detail: projectDetail(),
-    service: { _type: 'reference', _ref: 'service-coquerelles-fr' },
-    testimonial: { _type: 'reference', _ref: 'testimonial-marc-andre-fr' },
+    service: { _type: 'reference', _ref: 'service-cuisines-fr' },
+    testimonial: { _type: 'reference', _ref: 'testimonial-catherine-dufresne-fr' },
     featured: true,
     order: 1
   },
   {
-    _id: 'project-duplex-punaises-fr',
+    _id: 'project-table-noyer-chambly-fr',
     _type: 'project',
     language: 'fr',
-    title: 'Duplex à Charny: punaises de lit, traitement thermique',
-    slug: { _type: 'slug', current: 'duplex-punaises-charny' },
-    excerpt: "Un duplex de Charny débarrassé de ses punaises de lit en une seule journée grâce au traitement thermique, sans que les occupants aient à jeter leurs meubles.",
+    title: 'Table de huit en noyer noir',
+    slug: { _type: 'slug', current: 'table-noyer-chambly' },
+    excerpt: 'Une grande table de salle à manger en noyer pour réunir trois générations, livrée pour un anniversaire.',
     cover: {
       _type: 'figure',
-      alt: 'Chambre préparée pour un traitement thermique contre les punaises de lit.',
-      label: 'Duplex à Charny',
-      caption: 'Traitement thermique, 4:3',
+      image: { _imagePath: '/images/service-mobilier.jpg' },
+      alt: 'Grande table de salle à manger en noyer noir, piètement massif.',
+      label: 'Table en noyer, Chambly',
+      caption: 'Table de salle à manger, 4:3',
       ratio: '4/3'
     },
     gallery: [
       {
-        _key: 'inspection',
+        _key: 'pietement',
         _type: 'figure',
-        alt: 'Inspection des coutures de matelas et des plinthes à la recherche de punaises.',
-        label: 'Inspection',
-        caption: 'Détection, 4:5',
+        image: { _imagePath: '/images/project-table-noyer-pietement.jpg' },
+        alt: "Détail de l'assemblage tenon-mortaise du piètement.",
+        label: 'Assemblage du piètement',
+        caption: 'Joinage, 4:5',
         ratio: '4/5'
       },
       {
-        _key: 'chaleur',
+        _key: 'plateau',
         _type: 'figure',
-        alt: "Équipement de traitement thermique en place dans une pièce du duplex.",
-        label: 'Montée en température',
-        caption: 'Traitement, 4:5',
-        ratio: '4/5'
+        image: { _imagePath: '/images/project-table-noyer-plateau.jpg' },
+        alt: "Plateau en noyer noir aux veines marquées, fini à l'huile.",
+        label: 'Plateau en noyer',
+        caption: 'Plateau, 16:9',
+        ratio: '16/9'
       }
     ],
-    location: 'Charny',
-    year: '2024',
-    challenge: "Une famille du duplex se réveillait avec des piqûres depuis des semaines. La crainte de tout perdre, meubles et matelas, ajoutait au stress.",
-    solution: "Inspection pour confirmer l'infestation et son étendue, puis traitement thermique de l'appartement touché, montant la température au-delà du seuil mortel pour les œufs comme pour les adultes, en une journée.",
-    result: "Plus aucune piqûre dès la nuit suivante. Une visite de contrôle a confirmé l'élimination complète, et aucun meuble n'a eu à être jeté.",
+    location: 'Chambly',
+    year: '2023',
+    challenge: 'Réunir huit convives sans piètement central qui gêne les jambes, sur un plateau assez stable pour ne jamais gauchir.',
+    solution: 'Un piètement en H chevillé, des allonges à rallonge dissimulées, et un plateau en noyer massif contre-fibré pour bloquer le mouvement du bois.',
+    result: 'Livrée trois mois après le premier croquis, pile pour les soixante-dix ans du père de famille. Une pièce conçue pour passer aux petits-enfants.',
     stats: [
-      { _key: 'delai', _type: 'projectStat', label: 'Traitement', value: '1 journée' },
-      { _key: 'meubles', _type: 'projectStat', label: 'Meubles jetés', value: 'Aucun' },
-      { _key: 'resultat', _type: 'projectStat', label: 'Résultat', value: '0 nuisible' }
+      { _key: 'places', _type: 'projectStat', label: 'Places', value: '8 à 10' },
+      { _key: 'essence', _type: 'projectStat', label: 'Essence', value: 'Noyer noir' },
+      { _key: 'delai', _type: 'projectStat', label: 'Délai', value: '12 semaines' }
     ],
     detail: projectDetail(),
-    service: { _type: 'reference', _ref: 'service-punaises-fr' },
-    testimonial: { _type: 'reference', _ref: 'testimonial-patrick-fr' },
+    service: { _type: 'reference', _ref: 'service-mobilier-fr' },
+    testimonial: { _type: 'reference', _ref: 'testimonial-jean-philippe-rousseau-fr' },
     featured: true,
     order: 2
   },
   {
-    _id: 'project-entrepot-rongeurs-fr',
+    _id: 'project-bibliotheque-merisier-longueuil-fr',
     _type: 'project',
     language: 'fr',
-    title: 'Entrepôt à Saint-Romuald: programme antirongeurs',
-    slug: { _type: 'slug', current: 'entrepot-rongeurs-saint-romuald' },
-    excerpt: "Un entrepôt de Saint-Romuald protégé des souris par un programme de stations et de scellement des entrées, avec suivi régulier.",
+    title: 'Bibliothèque murale en merisier',
+    slug: { _type: 'slug', current: 'bibliotheque-merisier-longueuil' },
+    excerpt: 'Un mur de rangement intégré du plancher au plafond dans un salon ancien, ajusté à ses irrégularités.',
     cover: {
       _type: 'figure',
-      alt: "Station de contrôle des rongeurs installée le long du mur d'un entrepôt.",
-      label: 'Entrepôt à Saint-Romuald',
-      caption: 'Programme antirongeurs, 16:9',
-      ratio: '16/9'
-    },
-    gallery: [
-      {
-        _key: 'station',
-        _type: 'figure',
-        alt: "Station de surveillance sécuritaire placée le long d'une voie de circulation.",
-        label: 'Station de surveillance',
-        caption: 'Dispositif, 4:5',
-        ratio: '4/5'
-      },
-      {
-        _key: 'scellement',
-        _type: 'figure',
-        alt: "Scellement d'un point d'entrée le long de la fondation de l'entrepôt.",
-        label: 'Scellement des entrées',
-        caption: 'Prévention, 4:5',
-        ratio: '4/5'
-      }
-    ],
-    location: 'Saint-Romuald',
-    year: '2023',
-    challenge: "Des souris s'introduisaient dans la réserve de marchandise d'un entrepôt, abîmant l'inventaire et inquiétant l'équipe. Les grandes portes de quai compliquaient le contrôle.",
-    solution: "Cartographie des points d'entrée, scellement des passages le long des fondations et des quais, puis pose d'un réseau de stations sécuritaires avec visites de surveillance régulières.",
-    result: "Plus aucun signe d'activité après le premier mois. Le programme de suivi maintient l'entrepôt sous contrôle et protège l'inventaire en continu.",
-    stats: [
-      { _key: 'suivi', _type: 'projectStat', label: 'Suivi', value: '60 jours' },
-      { _key: 'stations', _type: 'projectStat', label: 'Stations', value: '18' },
-      { _key: 'resultat', _type: 'projectStat', label: 'Résultat', value: '0 nuisible' }
-    ],
-    detail: projectDetail(),
-    service: { _type: 'reference', _ref: 'service-rongeurs-fr' },
-    testimonial: { _type: 'reference', _ref: 'testimonial-julie-fr' },
-    featured: true,
-    order: 3
-  },
-  {
-    _id: 'project-maison-fourmis-fr',
-    _type: 'project',
-    language: 'fr',
-    title: 'Maison à Saint-Nicolas: fourmis charpentières arrêtées',
-    slug: { _type: 'slug', current: 'fourmis-charpentieres-saint-nicolas' },
-    excerpt: "Des fourmis charpentières installées dans une poutre de sous-sol, traitées à la source avant que les dégâts au bois ne s'aggravent.",
-    cover: {
-      _type: 'figure',
-      alt: 'Poutre de bois inspectée à la recherche de galeries de fourmis charpentières.',
-      label: 'Maison à Saint-Nicolas',
-      caption: 'Fourmis charpentières, 4:3',
+      image: { _imagePath: '/images/service-bibliotheques.jpg' },
+      alt: 'Bibliothèque intégrée en merisier couvrant un mur complet de salon.',
+      label: 'Bibliothèque en merisier, Longueuil',
+      caption: 'Bibliothèque intégrée, 4:3',
       ratio: '4/3'
     },
     gallery: [
       {
-        _key: 'poutre',
+        _key: 'moulures',
         _type: 'figure',
-        alt: 'Galeries creusées par les fourmis charpentières dans une poutre.',
-        label: 'Atteinte au bois',
-        caption: 'Diagnostic, 4:5',
+        image: { _imagePath: '/images/project-biblio-moulures.jpg' },
+        alt: 'Moulures de la bibliothèque raccordées à celles de la pièce.',
+        label: 'Raccord des moulures',
+        caption: 'Moulures, 4:5',
         ratio: '4/5'
       },
       {
-        _key: 'pourtour',
+        _key: 'tablettes',
         _type: 'figure',
-        alt: 'Inspection du pourtour extérieur de la maison à la recherche du nid.',
-        label: 'Recherche du nid',
-        caption: 'Inspection, 4:3',
-        ratio: '4/3'
+        image: { _imagePath: '/images/project-biblio-tablettes.jpg' },
+        alt: 'Tablettes ajustées et éclairage intégré.',
+        label: 'Tablettes et éclairage',
+        caption: 'Détail, 4:5',
+        ratio: '4/5'
       }
     ],
-    location: 'Saint-Nicolas',
+    location: 'Longueuil',
     year: '2023',
-    challenge: "Une propriétaire entendait du grattement dans une poutre du sous-sol et s'inquiétait pour la structure de sa maison sans savoir l'ampleur du problème.",
-    solution: "Repérage du nid principal et des nids satellites, traitement ciblé à la source, évaluation de l'atteinte au bois et scellement des points d'entrée extérieurs.",
-    result: "Activité stoppée dès les jours suivants. La structure était encore saine, et un contrôle a confirmé qu'aucune nouvelle colonie ne s'était réinstallée.",
-    stats: [
-      { _key: 'delai', _type: 'projectStat', label: 'Délai', value: '24 h' },
-      { _key: 'structure', _type: 'projectStat', label: 'Structure', value: 'Préservée' },
-      { _key: 'resultat', _type: 'projectStat', label: 'Résultat', value: '0 nuisible' }
-    ],
+    challenge: "Un salon de 1910 aux murs gondolés et au plafond qui n'était nulle part à la même hauteur.",
+    solution: 'Caissons fabriqués légèrement en retrait, puis ajustés sur place avec des couvre-joints en merisier suivant chaque ondulation du mur et du plafond.',
+    result: "Un mur de rangement qui semble avoir été bâti avec la maison. La cliente jure qu'on ne devine aucun joint.",
     detail: projectDetail(),
-    service: { _type: 'reference', _ref: 'service-fourmis-fr' },
-    testimonial: { _type: 'reference', _ref: 'testimonial-genevieve-fr' },
+    service: { _type: 'reference', _ref: 'service-bibliotheques-fr' },
+    testimonial: { _type: 'reference', _ref: 'testimonial-sophie-tremblay-fr' },
+    featured: false,
+    order: 3
+  },
+  {
+    _id: 'project-buffet-erable-saint-bruno-fr',
+    _type: 'project',
+    language: 'fr',
+    title: 'Buffet en érable ondé',
+    slug: { _type: 'slug', current: 'buffet-erable-saint-bruno' },
+    excerpt: 'Un buffet de salle à manger en érable, à la fois rangement de tous les jours et pièce de caractère.',
+    cover: {
+      _type: 'figure',
+      image: { _imagePath: '/images/service-mobilier.jpg' },
+      alt: 'Buffet bas en érable ondé, portes à panneaux et quincaillerie en laiton.',
+      label: 'Buffet en érable, Saint-Bruno',
+      caption: 'Buffet sur mesure, 4:3',
+      ratio: '4/3'
+    },
+    gallery: [
+      {
+        _key: 'erable-onde',
+        _type: 'figure',
+        image: { _imagePath: '/images/project-buffet-erable-onde.jpg' },
+        alt: "Détail des veines ondées de l'érable sur une porte.",
+        label: 'Érable ondé',
+        caption: 'Détail, 4:5',
+        ratio: '4/5'
+      }
+    ],
+    location: 'Saint-Bruno-de-Montarville',
+    year: '2024',
+    challenge: "Un meuble qui devait être beau sans devenir précieux, capable d'encaisser des années de soupers de famille.",
+    solution: 'Érable ondé sélectionné pour son veinage, portes à panneaux flottants pour absorber le mouvement, finition huile-cire qui se retouche en deux minutes.',
+    result: "Trois ans de service quotidien plus tard, le buffet n'a aucune marque qui dérange. Robuste, comme demandé.",
+    detail: projectDetail(),
+    service: { _type: 'reference', _ref: 'service-mobilier-fr' },
+    testimonial: { _type: 'reference', _ref: 'testimonial-marc-andre-gagnon-fr' },
     featured: false,
     order: 4
   },
   {
-    _id: 'project-garderie-guepes-fr',
+    _id: 'project-commode-restauration-carignan-fr',
     _type: 'project',
     language: 'fr',
-    title: 'Garderie à Lévis: gros nid de guêpes retiré',
-    slug: { _type: 'slug', current: 'nid-guepes-garderie-levis' },
-    excerpt: "Un gros nid de guêpes au-dessus de l'entrée d'une garderie de Lévis, retiré en toute sécurité le jour même de l'appel.",
+    title: "Restauration d'une commode familiale",
+    slug: { _type: 'slug', current: 'commode-restauration-carignan' },
+    excerpt: 'Une commode héritée de grand-mère, remise en service sans effacer un siècle de patine.',
     cover: {
       _type: 'figure',
-      alt: "Entrée de garderie dégagée après le retrait sécuritaire d'un nid de guêpes.",
-      label: 'Garderie à Lévis',
-      caption: 'Retrait de nid, 4:3',
+      image: { _imagePath: '/images/service-restauration.jpg' },
+      alt: "Commode ancienne restaurée, tiroirs réajustés, patine d'origine conservée.",
+      label: 'Commode restaurée, Carignan',
+      caption: 'Restauration, 4:3',
       ratio: '4/3'
     },
     gallery: [
       {
-        _key: 'nid',
+        _key: 'recollage',
         _type: 'figure',
-        alt: "Gros nid de guêpes logé sous un avant-toit, au-dessus d'une porte.",
-        label: 'Le nid avant retrait',
-        caption: 'Situation, 4:5',
-        ratio: '4/5'
-      },
-      {
-        _key: 'retrait',
-        _type: 'figure',
-        alt: 'Technicien équipé procédant au retrait sécuritaire du nid.',
-        label: 'Retrait en sécurité',
-        caption: 'Intervention, 4:5',
+        image: { _imagePath: '/images/project-commode-recollage.jpg' },
+        alt: "Tiroir démonté montrant le recollage des assemblages à queue d'aronde.",
+        label: 'Recollage des tiroirs',
+        caption: 'Atelier, 4:5',
         ratio: '4/5'
       }
     ],
-    location: 'Lévis',
-    year: '2024',
-    challenge: "Un nid de guêpes important s'était formé juste au-dessus de la porte d'une garderie, sur le passage quotidien des enfants et du personnel.",
-    solution: "Déplacement le jour même de l'appel, retrait complet du nid avec équipement de protection pendant que la zone était dégagée, puis traitement du point d'attache pour empêcher une reconstruction.",
-    result: "Entrée sécurisée dès la fin de l'intervention. Aucune piqûre, aucun retour de colonie au même endroit lors du suivi de fin de saison.",
-    stats: [
-      { _key: 'delai', _type: 'projectStat', label: 'Délai', value: 'Jour même' },
-      { _key: 'securite', _type: 'projectStat', label: 'Enfants', value: 'En sécurité' },
-      { _key: 'resultat', _type: 'projectStat', label: 'Résultat', value: '0 nuisible' }
-    ],
+    location: 'Carignan',
+    year: '2022',
+    challenge: "Les assemblages se défaisaient, deux tiroirs ne fermaient plus, mais la cliente tenait à garder l'âme du meuble intacte.",
+    solution: "Démontage complet, recollage à la colle de peau réversible, remplacement des coulisses usées en bois d'époque, ravivage de la gomme-laque sans décapage.",
+    result: 'Une commode qui refonctionne pour cent ans de plus, avec sa patine et son histoire au complet.',
     detail: projectDetail(),
-    service: { _type: 'reference', _ref: 'service-guepes-fr' },
-    testimonial: { _type: 'reference', _ref: 'testimonial-sophie-fr' },
+    service: { _type: 'reference', _ref: 'service-restauration-fr' },
+    testimonial: { _type: 'reference', _ref: 'testimonial-marie-helene-belanger-fr' },
     featured: false,
     order: 5
+  },
+  {
+    _id: 'project-cafe-amenagement-chambly-fr',
+    _type: 'project',
+    language: 'fr',
+    title: "Agencement d'un café de quartier",
+    slug: { _type: 'slug', current: 'cafe-amenagement-chambly' },
+    excerpt: 'Comptoir, tablettes et mobilier fixe pour un café indépendant, conçus pour le rythme commercial.',
+    cover: {
+      _type: 'figure',
+      image: { _imagePath: '/images/project-cafe-comptoir.jpg' },
+      alt: 'Comptoir de café en bois massif avec tablettes murales assorties.',
+      label: 'Café Le Moulin, Chambly',
+      caption: 'Agencement de commerce, 16:9',
+      ratio: '16/9'
+    },
+    gallery: [
+      {
+        _key: 'comptoir-detail',
+        _type: 'figure',
+        image: { _imagePath: '/images/project-cafe-comptoir-detail.jpg' },
+        alt: 'Comptoir de service vu de côté, chant renforcé.',
+        label: 'Comptoir de service',
+        caption: 'Détail, 4:5',
+        ratio: '4/5'
+      },
+      {
+        _key: 'tablettes',
+        _type: 'figure',
+        image: { _imagePath: '/images/project-cafe-tablettes.jpg' },
+        alt: 'Tablettes murales chargées de tasses et de sacs de café.',
+        label: 'Tablettes murales',
+        caption: 'Détail, 4:5',
+        ratio: '4/5'
+      }
+    ],
+    location: 'Chambly',
+    year: '2024',
+    challenge: 'Un comptoir qui devait encaisser des centaines de cafés par jour, résister aux nettoyants commerciaux, et donner le ton à toute la place.',
+    solution: "Structure surdimensionnée, chants en bois dur renforcés, finition de qualité commerciale, le tout posé hors des heures d'ouverture pour ne pas retarder le démarrage.",
+    result: 'Le comptoir tient le rythme depuis l\'ouverture et donne au café une signature en bois massif local que les clients remarquent.',
+    stats: [
+      { _key: 'service', _type: 'projectStat', label: 'Service', value: '300+ cafés/jour' },
+      { _key: 'pose', _type: 'projectStat', label: 'Pose', value: 'Hors affluence' },
+      { _key: 'bois', _type: 'projectStat', label: 'Bois', value: 'Érable local' }
+    ],
+    detail: projectDetail(),
+    service: { _type: 'reference', _ref: 'service-commerces-fr' },
+    testimonial: { _type: 'reference', _ref: 'testimonial-le-moulin-cafe-fr' },
+    featured: true,
+    order: 6
   }
 ]

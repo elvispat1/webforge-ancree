@@ -1,60 +1,39 @@
-/* Marque Rempart Extermination — tokens spécifiques à ce démo.
+/* Marque Atelier Cormier — tokens spécifiques à ce démo.
  *
- * Ce fichier contient ce qui est VRAI pour la démo Rempart seulement:
- * palette de surfaces, couleurs de texte, accents (bleu confiance + ambre
- * d'appel). Un autre client de la famille Ancrée aurait son propre fichier
- * avec d'autres valeurs (la variante éco-sauge de DESIGN.md, par exemple,
- * ne change QUE --accent-1 ici).
+ * Ce fichier contient ce qui est VRAI pour Atelier Cormier seulement:
+ * palette de surfaces, couleurs de texte, accents (vert forêt). Un autre
+ * client Minimaliste aurait son propre fichier avec d'autres valeurs.
  *
- * Importé après `family/tokens.css` dans `nuxt.config.ts` pour que la cascade
- * soit cohérente.
- *
- * Contrastes validés WCAG AA au figeage (18 juin 2026):
- *   - texte de base #16243F sur crème #F5F0E8 ............ ~13:1 (AAA)
- *   - texte ardoise #5C6678 sur crème #F5F0E8 ............ ~5.1:1 (AA)
- *   - bleu #1E6FB0 sur crème #F5F0E8 (liens, emphase) .... ~4.7:1 (AA)
- *   - blanc sur bouton bleu #1E6FB0 ..................... ~5.3:1 (AA)
- *   - encre #16243F sur bouton ambre #FBBF24 (appel) .... ~9.3:1 (AAA)
+ * Importé après `family/tokens.css` dans `nuxt.config.ts`
+ * pour que la cascade soit cohérente.
  */
 
 :root {
-  /* Couleurs de base — swatches canoniques de la marque.
-   * --white: surface pure posée sur le crème (cartes, panneaux, texte sur
-   *   fond foncé). On évite le blanc clinique en GRAND fond (le fond de page
-   *   reste le crème), mais une carte blanche sur crème est juste et chaude.
-   * --black: bleu nuit, l'encre de base. Plus chaud qu'un noir pur, et il
-   *   TEINTE les ombres douces (color-mix avec --black) d'un voile bleuté,
-   *   jamais d'un gris sale. */
-  --white: #FFFFFF;
-  --black: #16243F;
+  /* Couleurs de base — swatches canoniques de la marque, à référencer
+   * partout où on veut un blanc ou un noir « pur » (fond de carte sombre,
+   * texte sur fond accent, etc.) plutôt que via leurs alias sémantiques.
+   * --bg-base et --text-base ci-dessous pointent ici par défaut. */
+  --white: #FAFAF7;
+  --black: #1A1A1A;
 
-  /* Surfaces sémantiques — le crème porte la chaleur, jamais le blanc pur. */
-  --bg-base: #F5F0E8;   /* crème chaud, fond de page */
-  --bg-alt:  #FBF8F2;   /* crème clair, sections en alternance */
-  --surface: var(--white); /* cartes et panneaux posés sur le crème */
+  /* Surfaces sémantiques */
+  --bg-base: var(--white);
+  --bg-alt:  #F2EFE9;
 
   /* Texte */
-  --text-base:  var(--black); /* bleu nuit #16243F */
-  --text-muted: #5C6678;      /* ardoise */
+  --text-base:  var(--black);
+  --text-muted: #6B675F;
 
-  /* Accent de marque — bleu confiance. Cohérent avec l'identité du créneau et
-   * avec le logo de Combat (le vrai client), jamais copié. Sert au texte
-   * d'emphase, aux liens, au bouton primaire (fill), aux filets actifs. */
-  --accent-1: #1E6FB0;
+  /* Accent — couleur de marque unique (vert forêt). Sert au texte d'emphase,
+   * au bouton primary (fill), aux liens, etc. La famille Minimaliste tient sur
+   * un seul accent: tout ce qui demandait une seconde couleur (hover du bouton,
+   * etc.) passe par --black. */
+  --accent-1: #2D4A3E;
 
-  /* Accent chaud — ambre, RÉSERVÉ aux appels à l'action de conversion à fort
-   * niveau (bouton d'appel téléphonique, barre d'appel collante). À petite
-   * dose, toujours avec de l'encre foncée par-dessus (--accent-warm-ink).
-   * DESIGN.md: « un seul accent chaud à fort niveau ». */
-  --accent-warm:      #FBBF24;
-  --accent-warm-ink:  var(--black);  /* texte foncé sur l'ambre, 9.3:1 */
-  --accent-warm-hover: #F0AE07;      /* survol du bouton d'appel (ambre soutenu) */
-
-  /* Couleur fonctionnelle d'erreur (rouge doux), STRICTEMENT réservée au
-   * micro-signal d'erreur de formulaire. DESIGN.md bannit le rouge du branding
-   * (il réactive le registre poison/danger qu'on veut désamorcer).
+  /* Couleur fonctionnelle d'erreur (rouge doux), distincte des accents de marque.
    * --error: texte, bordure, icône d'erreur (contraste >= 4.5:1 sur surface claire).
-   * --error-soft: variante claire pour les fonds. */
+   * --error-soft: variante claire pour les fonds, lisible avec du texte par-dessus.
+   * Même rouge pour la bannière de soumission et les erreurs de champ. */
   --error:      #C0453B;
   --error-soft: color-mix(in oklch, var(--error) 10%, var(--bg-base));
 }

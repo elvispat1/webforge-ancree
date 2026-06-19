@@ -7,7 +7,7 @@
 // sous-typé, BreadcrumbList, Article, LocalBusiness, FAQPage). Bâti par-dessus
 // les primitives du module @nuxtjs/seo (useSeoMeta, useSchemaOrg, define*).
 //
-// Agnostique de la famille: aucun import Ancrée ni contenu de site. La
+// Agnostique de la famille: aucun import Minimaliste ni contenu de site. La
 // marque vient de la config de site (nuxt.config `site`) et des arguments;
 // les replis globaux (description et og:image par défaut, spec 12.10) viennent
 // du payload (siteSettings.seo), lus par usePayload sans toucher la signature.

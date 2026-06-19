@@ -18,10 +18,6 @@ import type { CtaBandContent } from '../content/cta-band'
 import type { ProcessContent } from '../content/process'
 import type { StatsContent } from '../content/stats'
 import type { HighlightsContent } from '../content/highlights'
-import type { ReassuranceContent } from '../content/reassurance'
-import type { ServiceAreaContent } from '../content/service-area'
-import type { BeforeAfterContent } from '../content/before-after'
-import type { QuoteFormContent } from '../content/quote-form'
 import type { LogosContent } from '../content/logos'
 import type { ProjectsPreviewContent } from '../content/projects-preview'
 import type { BlogPreviewContent } from '../content/blog-preview'
@@ -55,16 +51,12 @@ export type TestimonialsBlock = BlockBase<'testimonials'> & TestimonialsContent
 export type FaqBlock          = BlockBase<'faq'>          & FaqContent & { faqSchema?: boolean }
 export type ContactBlock      = BlockBase<'contact'>      & ContactContent
 
-// Blocs multipage (famille Ancrée).
+// Blocs multipage (famille Minimaliste).
 export type MediaTextBlock        = BlockBase<'media-text'>        & MediaTextContent
 export type CtaBandBlock          = BlockBase<'cta-band'>          & CtaBandContent
 export type ProcessBlock          = BlockBase<'process'>          & ProcessContent
 export type StatsBlock            = BlockBase<'stats'>            & StatsContent
 export type HighlightsBlock       = BlockBase<'highlights'>       & HighlightsContent
-export type ReassuranceBlock      = BlockBase<'reassurance'>      & ReassuranceContent
-export type ServiceAreaBlock      = BlockBase<'service-area'>     & ServiceAreaContent
-export type BeforeAfterBlock      = BlockBase<'before-after'>     & BeforeAfterContent
-export type QuoteFormBlock        = BlockBase<'quote-form'>       & QuoteFormContent
 export type LogosBlock            = BlockBase<'logos'>            & LogosContent
 export type ProjectsPreviewBlock  = BlockBase<'projects-preview'> & ProjectsPreviewContent
 export type BlogPreviewBlock      = BlockBase<'blog-preview'>     & BlogPreviewContent
@@ -84,10 +76,6 @@ export type PageBlock =
   | ProcessBlock
   | StatsBlock
   | HighlightsBlock
-  | ReassuranceBlock
-  | ServiceAreaBlock
-  | BeforeAfterBlock
-  | QuoteFormBlock
   | LogosBlock
   | ProjectsPreviewBlock
   | BlogPreviewBlock

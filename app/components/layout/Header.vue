@@ -160,15 +160,12 @@ onBeforeUnmount(() => {
            par langue). Lien <a> plein chargement, voir LangSwitcher.vue. Caché
            sous le breakpoint nav (il vit alors dans le menu mobile). -->
       <LangSwitcher v-if="mode === 'multipage'" class="wf-header-lang" />
-      <!-- Soumission gratuite (CTA secondaire), desktop seulement: l'appel reste
-           l'action numéro un. -->
       <Button
         v-if="mode === 'landing'"
         :href="home + site.nav.landing.cta.anchor"
         kind="anchor"
         size="sm"
-        variant="ghost"
-        :icon="false"
+        icon="lucide:chevron-right"
         class="wf-header-cta"
       >
         {{ site.nav.landing.cta.label }}
@@ -178,24 +175,10 @@ onBeforeUnmount(() => {
         :href="site.nav.multipage.cta.route"
         kind="internal"
         size="sm"
-        variant="ghost"
-        :icon="false"
+        icon="lucide:chevron-right"
         class="wf-header-cta"
       >
         {{ site.nav.multipage.cta.label }}
-      </Button>
-      <!-- APPEL: le numéro tel: TOUJOURS visible (DESIGN.md), bouton ambre de
-           conversion. Reste affiché sous le breakpoint mobile, contrairement au
-           CTA secondaire. -->
-      <Button
-        :href="`tel:${site.contact.phoneE164}`"
-        kind="anchor"
-        size="sm"
-        icon="lucide:phone"
-        class="wf-btn-call wf-header-call"
-        :aria-label="t('a11y.call_label', { phone: site.contact.phone })"
-      >
-        {{ site.contact.phone }}
       </Button>
       <!-- Burger: ouvre le menu mobile (overlay plein écran) via le store.
            Visible uniquement sous le breakpoint nav. La fermeture se fait par

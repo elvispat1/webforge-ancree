@@ -88,38 +88,6 @@ export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
     lead,
     items[]{ icon, title, body }
   },
-  _type == "reassurance" => {
-    eyebrow,
-    heading,
-    lead,
-    items[]{ icon, label }
-  },
-  _type == "serviceArea" => {
-    eyebrow,
-    heading,
-    lead,
-    areas[]{ name },
-    note
-  },
-  _type == "beforeAfter" => {
-    eyebrow,
-    heading,
-    lead,
-    items[]{ "before": before ${FIGURE_PROJECTION}, "after": after ${FIGURE_PROJECTION}, caption }
-  },
-  _type == "quoteForm" => {
-    eyebrow,
-    heading,
-    lead,
-    nameLabel,
-    phoneLabel,
-    serviceLabel,
-    serviceOptions[]{ label },
-    submitLabel,
-    successTitle,
-    successBody,
-    privacyNote
-  },
   _type == "logos" => {
     eyebrow,
     heading,

@@ -25,8 +25,6 @@ const PreviewBanner = __WF_PREVIEW__
       <slot />
     </main>
     <Footer />
-    <!-- Barre d'appel collante (mobile seulement, pilotée par @container site). -->
-    <CallBar />
     <Consent :policy-href="policyHref" />
     <!-- En fin de layout comme la carte consent (position:fixed, slot DOM libre):
          le premier Tab atterrit sur le skip link, pas sur « Quitter la prévisualisation ». -->

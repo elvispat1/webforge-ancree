@@ -569,18 +569,14 @@ export default defineNuxtConfig({
     detectBrowserLanguage: false
   },
 
-  // Système à deux fontes (famille Ancrée). Graisses réellement consommées par
-  // le CSS (typography.css + global.css):
-  //   Plus Jakarta Sans (display): 600 (wf-h1..h3, nav, boutons), 700 (wf-h4..h5,
-  //     wf-caption, chips). 500 chargé en réserve pour le chrome léger.
-  //   Source Sans 3 (corps): 400 (wf-body-1/2/3), 600 (emphase, liens forts).
-  //   JetBrains Mono: 400, réservé à la vitrine de style (dev).
-  // Sans `weights`, @nuxt/fonts ne résout que la 400 et le navigateur synthétise
-  // les graisses (faux-gras incohérent). Styles normal seulement (pas d'italique).
+  // Graisses réellement consommées par le CSS (typography.css + global.css):
+  // Archivo 400 (corps), 500 (wf-h1..h3, wf-caption), 600 (wf-h4..h5, boutons,
+  // nav, accordéon). Sans `weights`, @nuxt/fonts ne résout que la 400 et le
+  // navigateur synthétise les 500/600 (faux-gras incohérent entre navigateurs).
+  // Pas d'italique dans l'app (grep font-style/em vide): styles normal seulement.
   fonts: {
     families: [
-      { name: 'Plus Jakarta Sans', provider: 'google', weights: [500, 600, 700], styles: ['normal'] },
-      { name: 'Source Sans 3', provider: 'google', weights: [400, 600], styles: ['normal'] },
+      { name: 'Archivo', provider: 'google', weights: [400, 500, 600], styles: ['normal'] },
       { name: 'JetBrains Mono', provider: 'google', weights: [400], styles: ['normal'] }
     ]
   },

@@ -220,18 +220,15 @@ body {
   gap: calc(var(--spacing-unit) * 2); /* 16px @1440 entre label et chevron-exit en état default */
   padding: var(--pad-y) var(--pad-x);
   background: var(--accent-1);
-  color: var(--white);
+  color: var(--bg-base);
   border-radius: var(--radius);
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.6rem; /* body-2, échelle typo */
   letter-spacing: -0.01em;
   text-decoration: none;
   border: 1px solid var(--accent-1);
-  /* Ombre douce: la signature de chaleur d'Ancrée. Le bouton se détache du crème
-   * sans trait lourd. Le ghost et l'état désactivé la retirent (voir plus bas). */
-  box-shadow: var(--shadow-sm);
-  transition: background-color var(--motion-duration-hover) ease, border-color var(--motion-duration-hover) ease, color var(--motion-duration-hover) ease, box-shadow var(--motion-duration-hover) ease, transform var(--motion-duration-hover) ease;
+  transition: background-color var(--motion-duration-hover) ease, border-color var(--motion-duration-hover) ease, color var(--motion-duration-hover) ease;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
@@ -303,13 +300,10 @@ body {
 .wf-btn.is-loading .wf-btn-label { transform: none; }
 
 /* Hover conditionné à :not(:disabled): un bouton désactivé ne réagit pas.
- * Le bleu de repos s'assombrit en bleu nuit au survol, le bouton se soulève
- * d'un cran (ombre plus prononcée): chaleur d'Ancrée, jamais sec. */
+ * Le vert de repos s'assombrit en noir au survol (accent unique, cf. tokens). */
 .wf-btn:not(:disabled):hover {
   background: var(--black);
   border-color: var(--black);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
 }
 .wf-btn:not(:disabled):hover .wf-btn-chevron--exit {
   opacity: 0;
@@ -331,8 +325,6 @@ body {
   cursor: not-allowed;
   background: var(--text-muted);
   border-color: var(--text-muted);
-  box-shadow: none;
-  transform: none;
 }
 .wf-btn-sm {
   --pad-y: calc(var(--spacing-unit) * 1.25);
@@ -348,28 +340,11 @@ body {
   background: transparent;
   color: var(--accent-1);
   border-color: var(--accent-1);
-  box-shadow: none; /* l'outline ne porte pas d'ombre au repos */
 }
-.wf-btn-ghost:not(:disabled):hover {
+.wf-btn-ghost:hover {
   background: var(--accent-1);
   border-color: var(--accent-1);
-  color: var(--white);
-  box-shadow: var(--shadow-sm);
-}
-
-/* .wf-btn-call — modifier d'appel à l'action de CONVERSION (téléphone). Ambre
- * sur encre foncée, l'unique accent chaud à fort niveau de la famille Ancrée
- * (DESIGN.md). Réservé au bouton d'appel: header collant, barre d'appel mobile,
- * bouton d'appel du héros. À petite dose: jamais le bouton générique. */
-.wf-btn-call {
-  background: var(--accent-warm);
-  color: var(--accent-warm-ink);
-  border-color: var(--accent-warm);
-}
-.wf-btn-call:not(:disabled):hover {
-  background: var(--accent-warm-hover);
-  border-color: var(--accent-warm-hover);
-  color: var(--accent-warm-ink);
+  color: var(--bg-base);
 }
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -416,12 +391,7 @@ body {
   left: 0;
   right: 0;
   z-index: 50;
-  /* Barre collante crisp et claire (surface blanche) posée sur le crème de la
-   * page: signal de propreté et de professionnalisme, et fond net pour le bouton
-   * d'appel ambre. Hairline + ombre douce d'Ancrée pour la détacher du contenu. */
-  background: var(--surface);
-  border-bottom: var(--line-hair);
-  box-shadow: var(--shadow-sm);
+  background: var(--bg-base); /* fond blanc uni, sans backdrop ni bordure */
   transition: transform 280ms ease;
 }
 /* Auto-hide au scroll down, réapparition au scroll up. */
@@ -440,51 +410,10 @@ body {
 :not(.wf-showcase-layout) > main#main { padding-top: var(--header-height); }
 .wf-header-row {
   display: grid;
-  /* logo | nav | cta secondaire | appel (toujours visible). En multipage avec
-   * switcher de langue, la classe has-lang ajoute une colonne (voir plus bas). */
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: calc(var(--spacing-unit) * 2.4);
+  gap: calc(var(--spacing-unit) * 3);
   height: var(--header-height); /* défini dans family/tokens.css */
-}
-/* Le bouton d'appel reste affiché à tous les paliers (le numéro tel: toujours
- * visible, DESIGN.md), contrairement au CTA secondaire caché sur mobile. */
-.wf-header-call { white-space: nowrap; }
-
-/* ── BARRE D'APPEL COLLANTE (mobile) ─────────────────────────────────────────
-   Le téléphone est le héros: rappel d'appel permanent en bas d'écran sur mobile,
-   pleine largeur, cible tactile confortable. Ambre de conversion. Visibilité par
-   @container site (masquée en desktop, où le bouton d'appel du header suffit). */
-.wf-callbar { display: none; }
-.wf-callbar-icon { width: 2rem; height: 2rem; flex-shrink: 0; }
-.wf-callbar-num { font-variant-numeric: tabular-nums; }
-@container site (max-width: 1023.98px) {
-  .wf-callbar {
-    display: flex;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 45; /* sous le header (50), barre du bas distincte */
-    align-items: center;
-    justify-content: center;
-    gap: calc(var(--spacing-unit) * 1.2);
-    min-height: var(--call-bar-height); /* >= 48px cible tactile (DESIGN.md) */
-    padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 2);
-    /* Respecte le home indicator iOS (zone sûre du bas). */
-    padding-bottom: max(calc(var(--spacing-unit) * 1.2), env(safe-area-inset-bottom));
-    background: var(--accent-warm);
-    color: var(--accent-warm-ink);
-    box-shadow: var(--shadow-lg);
-    text-decoration: none;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.7rem;
-    transition: background-color var(--motion-duration-hover) ease;
-  }
-  .wf-callbar:active { background: var(--accent-warm-hover); }
-  /* Espace en bas pour que la barre ne masque jamais le pied de page. */
-  .wf-site { padding-bottom: var(--call-bar-height); }
 }
 .wf-logo {
   display: inline-flex;
@@ -552,12 +481,7 @@ body {
   .wf-nav { display: none; }
   .wf-header-cta { display: none; }
   .wf-burger { display: inline-flex; }
-  .wf-header-row { grid-template-columns: 1fr auto auto; } /* logo | appel | burger */
-  /* Sur mobile, le bouton d'appel du header devient icône seule (la place
-   * manque pour logo + numéro + burger). Le NUMÉRO reste visible en bas via la
-   * barre d'appel collante. L'aria-label (call_label) garde l'accessibilité. */
-  .wf-header-call { --pad-x: var(--pad-y); gap: 0; }
-  .wf-header-call .wf-btn-label { display: none; }
+  .wf-header-row { grid-template-columns: 1fr auto; }
 }
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -578,7 +502,7 @@ body {
 /* Header multipage desktop: 4e colonne entre la nav et le CTA (la rangée de
  * base reste à 3 colonnes pour le mode landing, sans switcher). */
 @container site (min-width: 1024px) {
-  .wf-header-row.has-lang { grid-template-columns: auto 1fr auto auto auto; }
+  .wf-header-row.has-lang { grid-template-columns: auto 1fr auto auto; }
 }
 /* Sous le breakpoint nav, le switcher du header disparaît avec elle: il vit
  * alors dans le menu mobile (.wf-mobile-menu__lang). */
@@ -669,32 +593,20 @@ body {
   gap: calc(var(--spacing-unit) * 1.5);
   flex-wrap: wrap;
 }
-/* Chips de confiance du héros (note Google, licence, années): pilules blanches
- * posées sur le crème, ombre douce d'Ancrée. La preuve est MONTRÉE, pas
- * affirmée (DESIGN.md). Réutilise le vocabulaire .wf-chip de la famille. */
-.wf-hero-chips {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: calc(var(--spacing-unit) * 1.5);
+.wf-hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--spacing-unit) * 3);
   margin: calc(var(--spacing-unit) * 4) 0 0;
-  padding: 0;
+  padding-top: calc(var(--spacing-unit) * 4);
+  border-top: var(--line-hair);
 }
-.wf-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: calc(var(--spacing-unit) * 0.9);
-  padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.7);
-  background: var(--surface);
-  border: var(--line-soft);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-sm);
-  font-family: var(--font-display);
-  line-height: 1.2;
-}
-.wf-chip-icon { width: 1.8rem; height: 1.8rem; color: var(--accent-1); flex-shrink: 0; }
-.wf-chip-value { font-weight: 700; font-size: 1.5rem; color: var(--text-base); }
-.wf-chip-label { font-size: 1.3rem; color: var(--text-muted); font-weight: 600; }
+/* space-between + cellules étirées à la même hauteur (align-items stretch par
+ * défaut sur la grille): le label reste en haut, la valeur tombe au bas. Les
+ * valeurs s'alignent donc toutes sur la ligne du bas même si un label wrappe. */
+.wf-hero-meta > div { display: flex; flex-direction: column; justify-content: space-between; gap: 4px; }
+/* Labels en .wf-caption et valeurs en .wf-h4 directement dans le template:
+ * la meta consomme l'échelle typo du système au lieu de tailles bespoke. */
 
 /* Art direction du visuel (D23, contrat §15.4): UNE <picture> — <source media>
  * sert le cadrage mobile paysage, le <img> de repli le portrait desktop. Un
@@ -1089,17 +1001,12 @@ body {
   }
 }
 .wf-testimonial {
-  /* Carte de citation blanche posée sur le crème-alt: chaleur et propreté.
-   * Ombre douce d'Ancrée + rayon généreux, le filet reste très léger pour la
-   * définition (pas un cadre dur). */
-  background: var(--surface);
-  padding: calc(var(--spacing-unit) * 2.5); /* 25px, un peu plus aéré (Ancrée) */
+  background: var(--bg-base);
+  padding: calc(var(--spacing-unit) * 2); /* 20px @1440, padding de carte fluide (= Services) */
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: 20px; /* fixe, rythme interne de carte (cf. convention px) */
   border: var(--line-soft);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
   position: relative;
 }
 /* Décoratif: gros guillemet typographique en tête de citation. Exception
@@ -1506,8 +1413,8 @@ body {
   background: var(--error);
   color: var(--bg-base);
   font-size: 1.1rem;
-  /* 700 chargé (Plus Jakarta Sans 500/600/700): badge dense, graisse forte. */
-  font-weight: 700;
+  /* 600 = graisse max chargée (Archivo 400/500/600); un 700 serait synthétisé. */
+  font-weight: 600;
 }
 
 /* ── Interrupteur pilule (composant <Switch>) ─────────────────────────────── */
@@ -2446,7 +2353,7 @@ body {
 /* Tête de texte (fil d'Ariane .wf-hero-breadcrumb épinglé haut-gauche, 30px sous,
    défini plus bas; titre; intro; CTA optionnel) puis image de couverture pleine
    largeur EN DESSOUS. Silhouette distincte du héros détail (split), partagée avec
-   le héros article. Sans image (faq, contact): la tête seule, Ancrée pur. */
+   le héros article. Sans image (faq, contact): la tête seule, Minimaliste pur. */
 /* Padding-bas: 0 hérité de la base .wf-hero (la section suivante possède
    l'écart, ~80px standard inter-sections). La mécanique, initiée ici pour le
    masthead, vit maintenant sur la base et couvre les quatre héros. */
@@ -2792,7 +2699,7 @@ body {
    HIGHLIGHTS — différenciateurs/engagements en liste à icônes (3 à 4 points)
    ──────────────────────────────────────────────────────────────────────── */
 /* Grille de différenciateurs. Chaque point est coiffé d'un filet fin (signature
- * Ancrée): le rythme visuel naît des lignes, pas des cadres. auto-fit +
+ * Minimaliste): le rythme visuel naît des lignes, pas des cadres. auto-fit +
  * minmax encaisse 3 ou 4 items sans paramètre de comptage: en deçà de la largeur
  * mini, les colonnes retombent proprement (1 puis 2). Container queries only. */
 .wf-highlights-grid {
@@ -2844,140 +2751,6 @@ body {
 .wf-highlight-body {
   margin: 0;
 }
-
-/* ────────────────────────────────────────────────────────────────────────
-   REASSURANCE — engagements en chips icône + libellé (rangée qui s'enroule)
-   ──────────────────────────────────────────────────────────────────────── */
-/* En-tête optionnel via <SectionHead> (.wf-shead, son margin-bottom porte
-   l'espacement avant la rangée). La rangée réutilise le vocabulaire .wf-chip de
-   la famille (pilule blanche, filet doux, ombre légère); ici chaque chip porte
-   une icône + un libellé, jamais de valeur. Container queries only. */
-.wf-reassurance-chips {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: calc(var(--spacing-unit) * 1.5); /* 15px, aligné sur les chips du héros */
-}
-
-/* ────────────────────────────────────────────────────────────────────────
-   SERVICE AREA — zones desservies en chips épingle + nom, puis note muted
-   ──────────────────────────────────────────────────────────────────────── */
-/* En-tête via <SectionHead>. La liste de zones réutilise .wf-chip (épingle +
-   nom) et s'enroule librement. La note suit la liste, en retrait léger. */
-.wf-area-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: calc(var(--spacing-unit) * 1.5); /* 15px, même rythme que reassurance */
-}
-.wf-area-note {
-  margin: calc(var(--spacing-unit) * 3) 0 0; /* 30px sous la liste de zones */
-}
-
-/* ────────────────────────────────────────────────────────────────────────
-   BEFORE / AFTER — galerie de paires avant/après, badges sur chaque figure
-   ──────────────────────────────────────────────────────────────────────── */
-/* En-tête optionnel via <SectionHead>. Grille de paires: une colonne en mobile,
-   deux dès qu'il y a la place (chaque paire tient déjà deux figures côte à
-   côte). À l'intérieur d'une paire, les deux cadres se partagent la largeur. */
-.wf-before-after-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: calc(var(--spacing-unit) * 4); /* 40px entre paires empilées */
-}
-@container site (min-width: 1024px) {
-  .wf-before-after-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 4.8rem; /* gouttière de .section-grid en desktop */
-  }
-}
-
-/* Une paire: les deux cadres avant/après, puis la légende dessous. */
-.wf-ba-frames {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: calc(var(--spacing-unit) * 1.5); /* 15px entre les deux cadres */
-}
-
-/* Cadre d'une figure: position relative pour ancrer le badge en coin. margin 0
-   neutralise la marge UA du <figure>. */
-.wf-ba-figure {
-  position: relative;
-  margin: 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-/* Badge « Avant » / « Après »: pilule posée en haut à gauche de la figure,
-   encre sur surface, typo display. Décoratif au sens où il double l'ordre
-   visuel; le contenu réel (légende, alt) reste porté par la figure. */
-.wf-ba-badge {
-  position: absolute;
-  top: calc(var(--spacing-unit) * 1.2); /* 12px du bord */
-  left: calc(var(--spacing-unit) * 1.2);
-  z-index: 1;
-  padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 1.2);
-  background: var(--surface);
-  color: var(--text-base);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-sm);
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-/* Légende de paire sous les cadres (wf-figcap porte déjà sa typo). */
-.wf-ba-caption {
-  margin-top: calc(var(--spacing-unit) * 1.5); /* 15px sous la paire */
-}
-
-/* ────────────────────────────────────────────────────────────────────────
-   QUOTE FORM — panneau de conversion (formulaire de soumission simulé)
-   ──────────────────────────────────────────────────────────────────────── */
-/* Panneau surélevé: surface blanche, ombre douce, grand rayon. Centré et borné
-   en largeur (un formulaire court n'a pas besoin de toute la page). */
-.wf-quote-panel {
-  max-width: 52rem;
-  margin-inline: auto;
-  background: var(--surface);
-  border: var(--line-soft);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: calc(var(--spacing-unit) * 4); /* 40px */
-}
-@container site (min-width: 640px) {
-  .wf-quote-panel { padding: calc(var(--spacing-unit) * 5); } /* 50px, plus aéré dès qu'il y a la place */
-}
-
-/* En-tête du panneau: rythme owl (surtitre -> titre -> lead). */
-.wf-quote-head { display: flex; flex-direction: column; }
-.wf-quote-head > * + * { margin-top: calc(var(--spacing-unit) * 3); }              /* 30px défaut */
-.wf-quote-head > .wf-caption + .wf-h2 { margin-top: calc(var(--spacing-unit) * 1); } /* 10px surtitre -> titre */
-.wf-quote-head > .wf-h2 + p { margin-top: var(--space-title-lead); }               /* 20px titre -> lead */
-
-/* Champs du formulaire: empilés, même rythme que le formulaire de contact. */
-.wf-quote-fields {
-  margin-top: calc(var(--spacing-unit) * 4); /* 40px en-tête -> champs */
-  display: grid;
-  gap: calc(var(--spacing-unit) * 4);        /* 40px entre champs */
-}
-.wf-quote-submit { justify-self: start; }
-.wf-quote-privacy { margin: 0; }
-
-/* État succès: rythme titre -> corps, aligné à gauche dans le panneau. */
-.wf-quote-success {
-  margin-top: calc(var(--spacing-unit) * 4); /* 40px en-tête -> confirmation */
-}
-.wf-quote-success > .wf-h3 + p { margin-top: var(--space-title-lead); } /* 20px titre -> corps */
 
 /* ────────────────────────────────────────────────────────────────────────
    LOGOS (bande de confiance: certifications/affiliations en libellés texte)
@@ -3141,7 +2914,7 @@ body {
   margin-top: calc(var(--spacing-unit) * 1.6); /* ~16px sous-titre -> contenu */
 }
 
-/* Liste à puces. Filet fin en guise de puce (esprit Ancrée: pas de point
+/* Liste à puces. Filet fin en guise de puce (esprit Minimaliste: pas de point
  * lourd), indentation par token, interligne entre items distinct du rythme de
  * paragraphe pour aérer sans rompre la mesure. */
 .wf-article-rich-text-list {
@@ -3522,16 +3295,8 @@ body {
   margin: 0; /* neutralise le défaut UA de <figure> */
   aspect-ratio: var(--ratio-tile); /* cadre uniforme: toutes les tuiles, même hauteur */
   overflow: hidden;
-  border-radius: var(--radius-lg); /* Ancrée: rayon de carte généreux */
+  border-radius: var(--radius);
   background: var(--bg-alt);
-  /* Ombre douce d'Ancrée: la carte image se détache du crème. S'accentue au
-   * survol (la carte se soulève légèrement). L'ombre n'est pas écrêtée par
-   * overflow:hidden (elle est hors de la box). */
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--motion-duration-hover) var(--motion-ease-settle);
-}
-@media (hover: hover) and (pointer: fine) {
-  .wf-project-card-link:hover .wf-project-card-figure { box-shadow: var(--shadow-md); }
 }
 /* L'image (réelle ou placeholder) remplit le cadre et le recadre en cover, quel
  * que soit son ratio source. Sélecteurs simples préfixés par le lien: global.css
@@ -3670,13 +3435,8 @@ body {
 .wf-article-card-media {
   position: relative; /* ancre le tag de catégorie superposé */
   margin: 0; /* neutralise le défaut UA de <figure> */
-  border-radius: var(--radius-lg); /* Ancrée: rayon de carte généreux */
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-sm); /* ombre douce d'Ancrée, accentuée au survol */
-  transition: box-shadow var(--motion-duration-hover) var(--motion-ease-settle);
-}
-@media (hover: hover) and (pointer: fine) {
-  .wf-article-card:hover .wf-article-card-media { box-shadow: var(--shadow-md); }
 }
 /* L'image se rapproche légèrement au survol (desktop pointeur fin). Décoratif. */
 .wf-article-card-media .wf-image,

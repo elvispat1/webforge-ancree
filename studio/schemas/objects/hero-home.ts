@@ -65,12 +65,6 @@ export const heroHome = defineType({
           type: 'object',
           fields: [
             defineField({
-              name: 'icon',
-              title: 'Icône',
-              description: 'Nom Iconify lucide, ex. lucide:star (chip de confiance du héros)',
-              type: 'string',
-            }),
-            defineField({
               name: 'label',
               title: 'Libellé',
               type: 'string',
