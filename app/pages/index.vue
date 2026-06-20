@@ -10,6 +10,9 @@
  * un type de page d'accueil Sanity. Les gestes qui pointaient vers une ancre du
  * one-pager (#contact) sont recables vers la vraie route /contact. */
 import type { HeroHomeBlock, PageBlock } from '~/types/blocks'
+import type { SiteIdentity } from '~/content/site'
+import { siteFixture } from '~/content/site'
+import { HOME_SEO_QUERY } from '~/sanity/content'
 
 const { t, locale } = useI18n()
 const isEn = computed(() => locale.value === 'en')
@@ -49,9 +52,35 @@ const blocks = computed<PageBlock[]>(() =>
     })
 )
 
-useSeoMeta({
-  title: () => t('home.title'),
-  description: () => t('home.lead')
+// SEO + identite de l'accueil (Sanity au build, repli fixtures/i18n). Le
+// seoTitle/seoDescription du document homePage alimente le SEO de la racine (MEME
+// source que le one-pager); le NAP de siteSettings alimente le LocalBusiness.
+// Snapshot setup-once: le SEO de tete n'est pas reactif.
+const { data: homeRaw } = await useSanityBuildQuery<{ seo: { title?: string; description?: string } | null; site: SiteIdentity | null } | null>(
+  `home-seo:${locale.value}`,
+  HOME_SEO_QUERY,
+  { lang: locale.value }
+)
+const identity = homeRaw.value?.site ?? siteFixture(isEn.value)
+const siteConfig = useSiteConfig()
+
+// Accueil (racine): titre/description du CMS (homePage), repli i18n. Titre COMPLET
+// (porte deja la marque) -> gabarit neutralise pour ne pas doubler le suffixe.
+// Visuel OG du heros. Nom du LocalBusiness = site.name, la source UNIQUE de la
+// marque (alignee sur le noeud Organization du graphe, aucun repli divergent).
+// Pas de fil d'Ariane (page racine). Suit le patron Minimaliste de l'accueil.
+usePageSeo({
+  title: homeRaw.value?.seo?.title || t('home.title'),
+  description: homeRaw.value?.seo?.description || t('home.lead'),
+  titleTemplate: null,
+  image: hero.value.visual.src,
+  localBusiness: {
+    name: String(siteConfig.name ?? ''),
+    ...(identity.phoneHref ? { telephone: identity.phoneHref.replace(/^tel:/, '') } : {}),
+    ...(identity.emailHref ? { email: identity.emailHref.replace(/^mailto:/, '') } : {}),
+    ...(identity.areaName ? { areaServed: [identity.areaName] } : {}),
+    image: hero.value.visual.src
+  }
 })
 </script>
 

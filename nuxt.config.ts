@@ -77,6 +77,21 @@ for (const locale of SUPPORTED_LOCALES) {
   }
 }
 
+// Nom de marque depuis Sanity (siteSettings.brandName, langue par defaut): alimente
+// site.name -> gabarit de titre « %s | {marque} » du module @nuxtjs/seo ET l'identite
+// du graphe Schema.org (Organization/WebSite via usePageSeo). Le seed porte le meme
+// nom dans les deux langues. Repli gracieux sur le nom de famille si indisponible.
+let siteBrandName = 'Ancrée'
+try {
+  const brand = await sanityBuildClient.fetch<string | null>(
+    '*[_type == "siteSettings" && language == $lang][0].brandName',
+    { lang: DEFAULT_LOCALE }
+  )
+  if (brand) siteBrandName = brand
+} catch (cause) {
+  console.warn(`[webforge] Fetch Sanity du nom de marque echoue: repli sur « ${siteBrandName} ».`, cause)
+}
+
 // ── URLs des documents dynamiques (prefixe de locale inclus) ──────────────────
 // Definies une seule fois, consommees par le prerendu ET le sitemap.
 const homeUrl = (locale: Locale): string => routePath('home', locale)
@@ -297,7 +312,11 @@ export default defineNuxtConfig({
 
   site: {
     url: siteUrl,
-    name: 'Ancrée',
+    // Nom de marque du DEMO (siteSettings.brandName depuis Sanity, fetch au build):
+    // alimente le gabarit de titre « %s | {marque} » et l'identite Schema.org. Le
+    // nom de famille « Ancrée » est le repli si Sanity est injoignable. Suit le
+    // patron Minimaliste (site.name = suffixe de titres depuis le CMS).
+    name: siteBrandName,
     defaultLocale: 'fr',
     // Gabarit non indexable tant qu'aucun vrai site n'est en ligne.
     indexable: false

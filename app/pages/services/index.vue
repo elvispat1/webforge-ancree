@@ -37,9 +37,12 @@ const services = computed(() => {
   return fromSanity && fromSanity.length ? fromSanity : fallback.value
 })
 
-useSeoMeta({
-  title: () => `${t('pages.services_heading')} | Rempart Extermination`,
-  description: () => t('pages.services_lead')
+// CollectionPage (index de services). Fil d'Ariane = route-map.
+usePageSeo({
+  title: t('pages.services_heading'),
+  description: t('pages.services_lead'),
+  webPageType: 'CollectionPage',
+  breadcrumbs: breadcrumbsFor('services', undefined, locale.value as 'fr' | 'en')
 })
 </script>
 

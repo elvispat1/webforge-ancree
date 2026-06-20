@@ -4,6 +4,7 @@
  * le document est absent, pour que le build statique ne tombe jamais en 404.
  * En-tete solide (pas de heros), donc on reserve la hauteur de l'en-tete. */
 import { SERVICE_CITY_QUERY, transformServiceCity } from '~/sanity/content'
+import { breadcrumbsFromTrail } from '~/config/route-map'
 
 const { t, locale } = useI18n()
 const route = useRoute()
@@ -26,9 +27,17 @@ const services = computed(() => page.value?.services ?? [])
 const phoneHref = computed(() => page.value?.phoneHref || t('contact.phone_href'))
 const phoneDisplay = computed(() => page.value?.phoneDisplay || t('contact.phone_display'))
 
-useSeoMeta({
-  title: () => page.value?.seo.title || `${heading.value} | Rempart Extermination`,
-  description: () => page.value?.seo.description || lead.value
+// Page service-ville (SEO local): ItemPage + fil d'Ariane home -> ville. Le
+// seoTitle Sanity est un titre COMPLET (la marque y est deja, comme le homePage):
+// on neutralise le gabarit pour ne pas doubler le suffixe. Le repli (heading nu,
+// derive du slug) garde le gabarit « %s | {marque} » pour porter la marque.
+const hasSanityTitle = !!page.value?.seo.title
+usePageSeo({
+  title: page.value?.seo.title || heading.value,
+  titleTemplate: hasSanityTitle ? null : undefined,
+  description: page.value?.seo.description || lead.value,
+  webPageType: 'ItemPage',
+  breadcrumbs: breadcrumbsFromTrail(locale.value as 'fr' | 'en', { label: cityName.value })
 })
 </script>
 

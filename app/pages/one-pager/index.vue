@@ -21,9 +21,16 @@ const blocksFallback = useHomeBlocks()
 const hero = computed(() => home.value?.hero ?? heroFallback.value)
 const blocks = computed(() => home.value?.blocks ?? blocksFallback)
 
-useSeoMeta({
-  title: () => home.value?.seo.title || t('home.title'),
-  description: () => home.value?.seo.description || t('home.lead')
+// One-pager: gabarit de titre neutralise (le doc porte le titre complet de
+// marque), visuel OG du heros. Sous-arbre NOINDEX (vitrine du palier 1 qui
+// duplique le multipage), aussi exclu du sitemap (nuxt.config). Le flag reste du
+// code (pattern du gabarit), conserve meme si le site bascule indexable.
+usePageSeo({
+  title: home.value?.seo.title || t('home.title'),
+  titleTemplate: null,
+  description: home.value?.seo.description || t('home.lead'),
+  image: hero.value.visual.src,
+  noindex: true
 })
 </script>
 

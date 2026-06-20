@@ -11,9 +11,13 @@ import type { HeroPageBlock } from '~/types/blocks'
 definePageMeta({ layout: 'showcase' })
 
 const { t, locale } = useI18n()
-useSeoMeta({
-  title: () => `${t('showcase.title')} — ${t('showcase.subtitle')}`,
-  robots: 'noindex, nofollow'
+// Vitrine interne, NOINDEX (point niveau page + exclue du sitemap). Gabarit de
+// titre local « %s, WebForge Ancrée » (la marque de la famille, pas du demo).
+usePageSeo({
+  title: t('showcase.subtitle'),
+  description: t('showcase.lead'),
+  titleTemplate: '%s, WebForge Ancrée',
+  noindex: true
 })
 
 const heroSample = useHeroContent()

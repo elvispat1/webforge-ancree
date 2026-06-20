@@ -37,9 +37,13 @@ const blocks = computed<PageBlock[]>(() => {
   ]
 })
 
-useSeoMeta({
-  title: () => `${t('pages.faq_heading')} | Rempart Extermination`,
-  description: () => t('pages.faq_lead')
+// FAQPage: /faq est la SEULE page du site a baliser ses questions (mainEntity du
+// noeud WebPage). Meme source et meme ordre que l'accordeon rendu (faqFixture).
+usePageSeo({
+  title: t('pages.faq_heading'),
+  description: t('pages.faq_lead'),
+  breadcrumbs: breadcrumbsFor('faq', undefined, locale.value as 'fr' | 'en'),
+  faq: faqFixture(isEn.value).items.map((it) => ({ question: it.q, answer: it.a }))
 })
 </script>
 

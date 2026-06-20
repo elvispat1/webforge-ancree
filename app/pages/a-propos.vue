@@ -37,9 +37,13 @@ const blocks = computed<PageBlock[]>(() => {
   ]
 })
 
-useSeoMeta({
-  title: () => `${t('pages.about_heading')} | Rempart Extermination`,
-  description: () => t('pages.about_lead')
+// AboutPage explicite: l'inference du module ne reconnait pas le chemin francais
+// (/a-propos). Fil d'Ariane = meme source route-map que le masthead visible.
+usePageSeo({
+  title: t('pages.about_heading'),
+  description: t('pages.about_lead'),
+  webPageType: 'AboutPage',
+  breadcrumbs: breadcrumbsFor('about', undefined, locale.value as 'fr' | 'en')
 })
 </script>
 

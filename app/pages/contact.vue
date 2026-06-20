@@ -26,9 +26,11 @@ const blocks = computed<PageBlock[]>(() => [
   { _type: 'contact', _key: 'contact', ...contactFixture(isEn.value), eyebrow: undefined }
 ])
 
-useSeoMeta({
-  title: () => `${t('pages.contact_heading')} | Rempart Extermination`,
-  description: () => t('contact.phone_display')
+// ContactPage infere du chemin /contact par le module. Fil d'Ariane = route-map.
+usePageSeo({
+  title: t('pages.contact_heading'),
+  description: t('pages.contact_lead'),
+  breadcrumbs: breadcrumbsFor('contact', undefined, locale.value as 'fr' | 'en')
 })
 </script>
 

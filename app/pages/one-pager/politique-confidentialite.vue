@@ -14,7 +14,13 @@ const heroBlock = computed<HeroPageBlock>(() => ({
   title: t('pages.privacy_heading')
 }))
 
-useSeoMeta({ title: () => `${t('pages.privacy_heading')} | Rempart Extermination` })
+// Sous-arbre one-pager: NOINDEX (exclu du sitemap aussi). Pas de fil d'Ariane
+// (hors de l'arbre de breadcrumbs multipage).
+usePageSeo({
+  title: t('pages.privacy_heading'),
+  description: t('pages.legal_body'),
+  noindex: true
+})
 </script>
 
 <template>

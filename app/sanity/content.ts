@@ -55,6 +55,14 @@ export const SERVICE_CITY_QUERY = `*[_type == "serviceCity" && language == $lang
   "services": *[_type == "service" && language == $lang] | order(order asc, title asc){ _id, icon, title, body }
 }`
 
+/* SEO + identite de l'accueil: le seoTitle/seoDescription du document homePage
+ * (meme source que le one-pager) ET l'identite du site (siteSettings) pour le
+ * noeud LocalBusiness. Une seule requete au build (repli fixtures si vide). */
+export const HOME_SEO_QUERY = `{
+  "seo": *[_type == "homePage" && language == $lang][0]{ "title": seoTitle, "description": seoDescription },
+  "site": *[_type == "siteSettings" && language == $lang][0]{ brandName, tagline, phoneDisplay, phoneHref, emailDisplay, emailHref, areaName }
+}`
+
 /* Index des services (page /services). */
 export const SERVICES_INDEX_QUERY = `{
   "services": *[_type == "service" && language == $lang] | order(order asc, title asc){ _id, "slug": slug.current, icon, title, body, featured },

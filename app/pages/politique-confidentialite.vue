@@ -14,7 +14,11 @@ const heroBlock = computed<HeroPageBlock>(() => ({
   title: t('pages.privacy_heading')
 }))
 
-useSeoMeta({ title: () => `${t('pages.privacy_heading')} | Rempart Extermination` })
+usePageSeo({
+  title: t('pages.privacy_heading'),
+  description: t('pages.legal_body'),
+  breadcrumbs: breadcrumbsFor('privacy', undefined, locale.value as 'fr' | 'en')
+})
 </script>
 
 <template>
