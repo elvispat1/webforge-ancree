@@ -11,7 +11,7 @@ defineProps<TrustBarBlock>()
 <template>
   <section class="trust">
     <div class="wf-container">
-      <dl class="trust__row" data-reveal-stagger>
+      <dl class="trust__row">
         <div v-for="item in items" :key="item.value" class="trust__item">
           <Icon :name="item.icon" class="trust__icon" aria-hidden="true" />
           <div class="trust__text">
@@ -67,7 +67,7 @@ defineProps<TrustBarBlock>()
   }
   .trust__item + .trust__item {
     padding-left: 3rem;
-    border-left: 1px solid color-mix(in oklch, white 16%, transparent);
+    border-left: var(--line-ondeep);
   }
 }
 </style>

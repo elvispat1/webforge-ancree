@@ -38,6 +38,8 @@
   --line-width: 1px;
   --line-hair: var(--line-width) solid color-mix(in oklch, var(--text-base) 10%, transparent);
   --line-soft: var(--line-width) solid color-mix(in oklch, var(--text-base) 6%, transparent);
+  /* Filet sur fond sombre (bandes navy): derive du blanc, sinon il disparait. */
+  --line-ondeep: var(--line-width) solid color-mix(in oklch, white 15%, transparent);
 
   /* Elevations: ombres chaudes, douces, en couches. Les blocs semblent poses,
    * stables, ancres au sol (DESIGN.md). --shadow-tint vient de la marque. */
