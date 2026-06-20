@@ -19,7 +19,10 @@
     "breadcrumb": "Fil d’Ariane",
     "open_menu": "Ouvrir le menu",
     "close_menu": "Fermer le menu",
-    "category_filter": "Filtrer par catégorie"
+    "category_filter": "Filtrer par catégorie",
+    "pagination": "Pagination des articles",
+    "previous_page": "Page précédente",
+    "next_page": "Page suivante"
   },
   "ui": {
     "learn_more": "En savoir plus",
@@ -27,7 +30,9 @@
       "reading_time": "{n} min de lecture",
       "all": "Tous les sujets",
       "read": "Lire l’article",
-      "related": "À lire aussi"
+      "related": "À lire aussi",
+      "page_label": "Page {n}",
+      "pagination_description": "Page {n} des articles du blogue."
     }
   },
   "nav": {

@@ -7,6 +7,7 @@ import { articlesFixture, type ArticleContent } from '~/content/article'
 import { categoriesFixture, type CategoryContent } from '~/content/blog'
 import { BLOG_QUERY, transformBlog } from '~/sanity/content'
 import { routePath, type Locale } from '~/config/route-map'
+import { ARTICLES_PER_PAGE } from '~/content/blog-guards'
 import type { ArticleFigure } from '~/content/article-blocks'
 
 export interface ArticleCardData {
@@ -55,6 +56,25 @@ export function toCard(article: ArticleContent, locale: Locale): ArticleCardData
       ? { title: article.category.title, slug: article.category.slug, href: categoryHref(article.category.slug, locale) }
       : undefined
   }
+}
+
+/* ---------- Pagination ---------- */
+
+export interface Paginated<T> {
+  items: T[]
+  page: number
+  totalPages: number
+  total: number
+}
+
+/** Tranche une liste en page (1-indexee). totalPages >= 1 (jamais 0, meme vide).
+ *  La page demandee est bornee dans [1, totalPages]. */
+export function paginate<T>(items: T[], page: number, perPage = ARTICLES_PER_PAGE): Paginated<T> {
+  const total = items.length
+  const totalPages = Math.max(1, Math.ceil(total / perPage))
+  const current = Math.min(Math.max(1, page), totalPages)
+  const start = (current - 1) * perPage
+  return { items: items.slice(start, start + perPage), page: current, totalPages, total }
 }
 
 export type BlogRouteMatch =

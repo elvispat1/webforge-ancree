@@ -19,7 +19,10 @@
     "breadcrumb": "Breadcrumb",
     "open_menu": "Open menu",
     "close_menu": "Close menu",
-    "category_filter": "Filter by topic"
+    "category_filter": "Filter by topic",
+    "pagination": "Article pagination",
+    "previous_page": "Previous page",
+    "next_page": "Next page"
   },
   "ui": {
     "learn_more": "Learn more",
@@ -27,7 +30,9 @@
       "reading_time": "{n} min read",
       "all": "All topics",
       "read": "Read the article",
-      "related": "Read next"
+      "related": "Read next",
+      "page_label": "Page {n}",
+      "pagination_description": "Page {n} of the blog articles."
     }
   },
   "nav": {

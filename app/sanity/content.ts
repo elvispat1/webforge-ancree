@@ -75,7 +75,7 @@ export const SERVICES_INDEX_QUERY = `{
  * coller aux contrats des blocs d'article. */
 export const BLOG_QUERY = `{
   "categories": *[_type == "category" && language == $lang] | order(order asc, title asc){ "slug": slug.current, title, description },
-  "articles": *[_type == "article" && language == $lang] | order(date desc){
+  "articles": *[_type == "article" && language == $lang && defined(slug.current)] | order(date desc){
     "slug": slug.current, title, excerpt,
     "cover": cover{ src, alt },
     date, author, readingMinutes,

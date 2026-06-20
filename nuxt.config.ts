@@ -20,6 +20,8 @@ import {
   DOC_ROUTES,
   type Locale
 } from './app/config/route-map'
+// Config + garde du blog (PUR TS, importable hors contexte d'alias Nuxt).
+import { ARTICLES_PER_PAGE, assertBlogCollections } from './app/content/blog-guards'
 
 // Connexion Sanity: constantes de code, override env OPTIONNEL (identité du
 // site, invariante par environnement; un fork change ce bloc, pas l'env).
@@ -77,6 +79,22 @@ for (const locale of SUPPORTED_LOCALES) {
   }
 }
 
+// Garde du blog (schema d'URL court + plafond d'archive + segment « page »
+// reserve), par langue, sur les slugs Sanity injectes. Echec CLAIR du build
+// plutot qu'une 404 silencieuse ou des liens de pagination morts. Sur un fetch
+// echoue (slugs vides), la garde passe (rien a valider).
+for (const locale of SUPPORTED_LOCALES) {
+  try {
+    assertBlogCollections({
+      articlesPerPage: ARTICLES_PER_PAGE,
+      articles: slugsByLocale[locale].articles,
+      categories: slugsByLocale[locale].categories.map((c) => c.slug)
+    })
+  } catch (cause) {
+    throw new Error(`[webforge] Garde du blog echouee pour la langue « ${locale} »`, { cause })
+  }
+}
+
 // Nom de marque depuis Sanity (siteSettings.brandName, langue par defaut): alimente
 // site.name -> gabarit de titre « %s | {marque} » du module @nuxtjs/seo ET l'identite
 // du graphe Schema.org (Organization/WebSite via usePageSeo). Le seed porte le meme
@@ -104,6 +122,14 @@ const articleUrl = (locale: Locale, slug: string, category: string | null): stri
   const base = routePath('blog', locale)
   return category ? `${base}/${category}/${slug}` : `${base}/${slug}`
 }
+// Pages de pagination de la liste (n >= 2): /blog/page/N. Page 1 = /blog nu. Vide
+// quand la liste tient sur une page (cas de la demo, 3 articles). Hors sitemap
+// (noindex au niveau page), seulement prerendues.
+const paginationUrls = (count: number, base: string): string[] =>
+  Array.from(
+    { length: Math.max(0, Math.ceil(count / ARTICLES_PER_PAGE) - 1) },
+    (_, i) => `${base}/page/${i + 2}`
+  )
 
 // ── Sitemap: pages indexables, alternates hreflang (modele slug partage) ──────
 // La source auto i18n:pages couvre les pages FIXES (route-map, alternates inclus).
@@ -196,7 +222,8 @@ const DYNAMIC_PRERENDER_ROUTES = SUPPORTED_LOCALES.flatMap((locale) => {
   return [
     ...slugs.cities.map((c) => cityUrl(locale, c.slug)),
     ...slugs.articles.map((a) => articleUrl(locale, a.slug, a.category)),
-    ...slugs.categories.map((c) => categoryUrl(locale, c.slug))
+    ...slugs.categories.map((c) => categoryUrl(locale, c.slug)),
+    ...paginationUrls(slugs.articles.length, routePath('blog', locale))
   ]
 })
 const PRERENDER_ROUTES = [

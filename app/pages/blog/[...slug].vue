@@ -100,8 +100,13 @@ const archiveHero = computed<HeroPageBlock | null>(() => {
     lead: ar.category.description
   }
 })
+// Archive de categorie en page 1. La garde de build (assertBlogCollections)
+// plafonne chaque categorie a ARTICLES_PER_PAGE, donc une seule page: <Pagination>
+// reste masque (pas de route /blog/<cat>/page/N). Cable pour la coherence et le
+// jour ou la pagination d'archive sera implementee.
+const archivePage = computed(() => (archive.value ? paginate(archive.value.articles, 1) : null))
 const archiveCards = computed<ArticleCardData[]>(() =>
-  archive.value ? archive.value.articles.map((x) => toCard(x, loc.value)) : []
+  archivePage.value ? archivePage.value.items.map((x) => toCard(x, loc.value)) : []
 )
 
 // ── SEO + Schema.org ──────────────────────────────────────────────────────────
@@ -170,6 +175,12 @@ if (seoMatch?.type === 'article') {
       <div class="wf-container">
         <FilterBar :categories="categories" :active-slug="archive.category.slug" />
         <ArticleGrid :cards="archiveCards" class="blog-list__grid" />
+        <Pagination
+          v-if="archivePage"
+          :page="archivePage.page"
+          :total-pages="archivePage.totalPages"
+          :base-path="categoryHref(archive.category.slug, loc)"
+        />
       </div>
     </section>
   </div>

@@ -3,13 +3,17 @@
  * + grille d'articles. Contenu en fixtures pour l'instant (le fetch Sanity au
  * build s'y branchera sur le moule de services/index.vue). */
 import type { HeroPageBlock } from '~/types/blocks'
-import { breadcrumbsFor, type Locale } from '~/config/route-map'
+import { breadcrumbsFor, routePath, type Locale } from '~/config/route-map'
 
 const { t, locale } = useI18n()
 const loc = computed(() => locale.value as Locale)
 
 const { articles, categories } = await useBlog()
-const cards = computed(() => articles.value.map((a) => toCard(a, loc.value)))
+// Page 1 de la liste. La pagination ne s'affiche qu'au-dela d'ARTICLES_PER_PAGE
+// (la demo a 3 articles -> une seule page, <Pagination> masque). Les pages
+// suivantes vivent sur /blog/page/[n].
+const pageData = computed(() => paginate(articles.value, 1))
+const cards = computed(() => pageData.value.items.map((a) => toCard(a, loc.value)))
 
 const heroBlock = computed<HeroPageBlock>(() => ({
   _type: 'hero-page',
@@ -37,6 +41,7 @@ usePageSeo({
       <div class="wf-container">
         <FilterBar :categories="categories" />
         <ArticleGrid :cards="cards" class="blog-list__grid" />
+        <Pagination :page="pageData.page" :total-pages="pageData.totalPages" :base-path="routePath('blog', loc)" />
       </div>
     </section>
   </div>
