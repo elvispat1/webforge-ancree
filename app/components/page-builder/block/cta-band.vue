@@ -71,7 +71,7 @@ function linkKind(href: string): 'internal' | 'external' | 'anchor' {
 
 <style scoped>
 .ctaband {
-  padding-block: var(--space-block-default);
+  padding-block: var(--space-block-loose);
   background: var(--bg-base);
 }
 

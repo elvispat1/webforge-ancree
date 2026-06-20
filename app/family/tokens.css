@@ -15,7 +15,8 @@
   /* Geometrie. Rayons doux autour de 10px (DESIGN.md: matiere et chaleur). */
   --radius-sm:   0.8rem; /* 8px,  puces et petits elements */
   --radius:      1.2rem; /* 12px, cartes et boutons */
-  --radius-lg:   2rem;   /* 20px, grande image du heros */
+  --radius-md:   1.6rem; /* 16px, cartes en liste (villes), surfaces moyennes */
+  --radius-lg:   2rem;   /* 20px, grande image du heros, cartes vedettes */
   --radius-pill: 99rem;  /* pastilles d'ancrage local */
 
   --header-height: 7.2rem; /* 72px, en-tete collant */
@@ -34,8 +35,9 @@
   /* Rythme d'espacement. La base Tailwind (--spacing, @theme) vaut 0.5rem; ici
    * les paliers verticaux de bloc et les espaces typographiques intra-bloc. */
   --spacing-unit: calc(var(--spacing) * 2); /* 1rem, alias pour le CSS brut */
-  --space-block-tight:   5rem; /* palier de section serre */
-  --space-block-default: 9rem; /* palier standard, genereux (chaleur) */
+  --space-block-tight:   5rem;  /* palier de section serre */
+  --space-block-default: 10rem; /* palier standard, genereux (la chaleur vient de l'air) */
+  --space-block-loose:   13rem; /* palier ample, moments signatures (conversion) */
   --space-title-lead: 20px; /* titre vers texte, px fixe assume */
   --space-lead-cta:   36px; /* texte vers bouton */
 

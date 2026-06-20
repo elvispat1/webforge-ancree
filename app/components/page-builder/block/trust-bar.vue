@@ -13,7 +13,9 @@ defineProps<TrustBarBlock>()
     <div class="wf-container">
       <dl class="trust__row">
         <div v-for="item in items" :key="item.value" class="trust__item">
-          <Icon :name="item.icon" class="trust__icon" aria-hidden="true" />
+          <span class="trust__chip" aria-hidden="true">
+            <Icon :name="item.icon" class="trust__icon" />
+          </span>
           <div class="trust__text">
             <dt class="trust__value">{{ item.value }}</dt>
             <dd class="trust__label">{{ item.label }}</dd>
@@ -41,10 +43,20 @@ defineProps<TrustBarBlock>()
   align-items: center;
   gap: 1.2rem;
 }
-.trust__icon {
-  width: 2.8rem;
-  height: 2.8rem;
+/* Puce de matiere sous l'icone: meme traitement que la carte vedette navy des
+ * services (lift clair, icone ambre). Lie les surfaces navy et casse le plat. */
+.trust__chip {
+  display: grid;
+  place-items: center;
+  width: 4.2rem;
+  height: 4.2rem;
   flex: none;
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklch, white 8%, transparent);
+}
+.trust__icon {
+  width: 2.4rem;
+  height: 2.4rem;
   color: var(--accent-call);
 }
 .trust__value {

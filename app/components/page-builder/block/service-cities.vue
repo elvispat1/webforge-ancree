@@ -139,8 +139,7 @@ function cityKind(href: string): 'internal' | 'external' {
   height: 100%;
   padding: 1.8rem 2rem;
   background: var(--bg-lift);
-  border: var(--line-soft);
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   box-shadow: var(--elev-low);
   color: var(--text-base);
   text-decoration: none;
