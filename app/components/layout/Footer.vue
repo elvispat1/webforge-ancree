@@ -5,10 +5,24 @@
  * legales). L'annee est figee au build via useState pour eviter un decalage
  * d'hydratation. Au mobile, marge basse supplementaire pour degager la barre
  * d'appel collante. */
+/* Le pied de page suit le mode (comme l'en-tete): en multipage la nav pointe vers
+ * des routes; en landing (one-pager), vers les ancres qualifiees par la racine du
+ * one-pager. */
+const props = withDefaults(
+  defineProps<{ mode?: 'multipage' | 'landing'; home?: string }>(),
+  { mode: 'multipage', home: '/' }
+)
+
 const { t } = useI18n()
 const localePath = useLocalePath()
 const links = useSiteNav()
+const multipageLinks = useMultipageNav()
 const year = useState<number>('site-year', () => new Date().getFullYear())
+
+const brandTo = computed(() => (props.mode === 'multipage' ? localePath('/') : props.home))
+function landingHref(href: string): string {
+  return props.home && props.home !== '/' ? `${props.home}${href}` : href
+}
 </script>
 
 <template>
@@ -22,7 +36,7 @@ const year = useState<number>('site-year', () => new Date().getFullYear())
     <div class="wf-container footer__inner">
       <div class="footer__top">
         <div class="footer__brand-col">
-          <NuxtLink :to="localePath('/')" class="footer__brand" :aria-label="t('site.home_aria')">
+          <NuxtLink :to="brandTo" class="footer__brand" :aria-label="t('site.home_aria')">
             <span class="footer__mark" aria-hidden="true"><Icon name="lucide:shield-check" /></span>
             <span class="footer__word"><strong>Rempart</strong><span>Extermination</span></span>
           </NuxtLink>
@@ -31,9 +45,16 @@ const year = useState<number>('site-year', () => new Date().getFullYear())
 
         <nav class="footer__col" :aria-label="t('footer.nav_heading')">
           <p class="footer__heading wf-caption">{{ t('footer.nav_heading') }}</p>
-          <a v-for="link in links" :key="link.href" :href="link.href" class="footer__link">
-            {{ t(link.labelKey) }}
-          </a>
+          <template v-if="mode === 'multipage'">
+            <NuxtLink v-for="link in multipageLinks" :key="link.to" :to="link.to" class="footer__link">
+              {{ link.label }}
+            </NuxtLink>
+          </template>
+          <template v-else>
+            <a v-for="link in links" :key="link.href" :href="landingHref(link.href)" class="footer__link">
+              {{ t(link.labelKey) }}
+            </a>
+          </template>
         </nav>
 
         <div class="footer__col">

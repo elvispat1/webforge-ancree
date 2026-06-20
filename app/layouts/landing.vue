@@ -16,7 +16,7 @@ const home = computed(() => onePagerPath('index', locale.value as 'fr' | 'en'))
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer mode="landing" :home="home" />
     <CallBar />
   </div>
 </template>

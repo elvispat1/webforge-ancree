@@ -4,7 +4,7 @@
  * fois le heros quitte au defilement; solide d'emblee sur une page sans heros.
  * Deux modes: 'landing' (one-pager: ancres + scrollspy, qualifiees par la racine
  * `home`) et 'multipage' (liens de route via le route-map). */
-import { routePath, routeLabel, type RouteKey } from '~/config/route-map'
+import { routePath } from '~/config/route-map'
 
 const props = withDefaults(
   defineProps<{
@@ -21,16 +21,8 @@ const switchLocalePath = useSwitchLocalePath()
 const links = useSiteNav()
 const otherLocalePath = computed(() => switchLocalePath(locale.value === 'fr' ? 'en' : 'fr'))
 
-// Nav multipage: liens de route localises depuis le route-map. `blog` reviendra
-// quand la page /blog existera (sinon le link checker casse: la page doit exister
-// avant d'etre liee). `about` (/a-propos) est une vraie page, donc dans la nav.
-const MULTIPAGE_NAV: RouteKey[] = ['services', 'about', 'faq', 'contact']
-const multipageLinks = computed(() =>
-  MULTIPAGE_NAV.map((key) => ({
-    to: routePath(key, locale.value as 'fr' | 'en'),
-    label: routeLabel(key, locale.value as 'fr' | 'en')
-  }))
-)
+// Nav multipage: source partagee avec le pied de page (useMultipageNav).
+const multipageLinks = useMultipageNav()
 
 // Liens du menu mobile, normalises {label, href} selon le mode (route ou ancre).
 const menuLinks = computed(() =>
