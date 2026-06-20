@@ -18,10 +18,17 @@
     "main_nav": "Main navigation",
     "breadcrumb": "Breadcrumb",
     "open_menu": "Open menu",
-    "close_menu": "Close menu"
+    "close_menu": "Close menu",
+    "category_filter": "Filter by topic"
   },
   "ui": {
-    "learn_more": "Learn more"
+    "learn_more": "Learn more",
+    "blog": {
+      "reading_time": "{n} min read",
+      "all": "All topics",
+      "read": "Read the article",
+      "related": "Read next"
+    }
   },
   "nav": {
     "services": "Services",
@@ -61,6 +68,8 @@
     "contact_lead": "Phone, email or the form, whichever you prefer. We answer fast.",
     "about_heading": "Rooted on the North Shore",
     "about_lead": "A neighbourhood company, born on the North Shore, that still answers its own phone.",
+    "blog_heading": "The Rempart blog",
+    "blog_lead": "Clear advice to keep your home healthy: prevention, signs to watch for, and the right reflexes before you call.",
     "privacy_heading": "Privacy policy",
     "terms_heading": "Terms of use",
     "legal_body": "This is a demo template. The real legal content will be written before the site goes live."

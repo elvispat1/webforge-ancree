@@ -18,10 +18,17 @@
     "main_nav": "Navigation principale",
     "breadcrumb": "Fil d’Ariane",
     "open_menu": "Ouvrir le menu",
-    "close_menu": "Fermer le menu"
+    "close_menu": "Fermer le menu",
+    "category_filter": "Filtrer par catégorie"
   },
   "ui": {
-    "learn_more": "En savoir plus"
+    "learn_more": "En savoir plus",
+    "blog": {
+      "reading_time": "{n} min de lecture",
+      "all": "Tous les sujets",
+      "read": "Lire l’article",
+      "related": "À lire aussi"
+    }
   },
   "nav": {
     "services": "Services",
@@ -61,6 +68,8 @@
     "contact_lead": "Téléphone, courriel ou formulaire, comme vous préférez. On répond vite.",
     "about_heading": "Ancrés sur la Rive-Nord",
     "about_lead": "Une entreprise de quartier, née sur la Rive-Nord, qui répond encore au téléphone elle-même.",
+    "blog_heading": "Le blogue de Rempart",
+    "blog_lead": "Des conseils clairs pour garder votre maison saine: prévention, signes à surveiller, et les bons réflexes avant d’appeler.",
     "privacy_heading": "Politique de confidentialité",
     "terms_heading": "Conditions d’utilisation",
     "legal_body": "Ceci est un gabarit de démonstration. Le contenu légal réel sera rédigé avant la mise en ligne du site."

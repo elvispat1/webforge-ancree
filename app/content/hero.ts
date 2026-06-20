@@ -41,3 +41,19 @@ export interface HeroPageContent {
   lead?: string
   cta?: { label: string; href: string } // appel unique, optionnel
 }
+
+/* Masthead d'un article (hero-article): meme grammaire posee que hero-page (fond
+ * clair, titre slab a l'axe gauche, ligne d'horizon ambre), enrichie d'une puce
+ * de categorie (lien vers l'archive), d'une meta de lecture (date, auteur, duree)
+ * et d'une image de couverture posee au sol. Compose par la page, pas saisi au CMS. */
+export interface HeroArticleContent {
+  crumbs?: Crumb[] // fil d'Ariane localise (du route-map)
+  category?: { label: string; href: string } // puce vers l'archive de categorie
+  title: string
+  excerpt?: string // accroche, sous le titre
+  date: string // date ISO de publication
+  dateLabel: string // date deja formatee dans la locale (transformation pure)
+  author?: string
+  readingMinutes?: number // duree de lecture estimee
+  cover?: HeroVisual // image de couverture (posee sous le masthead)
+}

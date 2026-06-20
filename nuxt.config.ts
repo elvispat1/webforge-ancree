@@ -9,7 +9,7 @@ import tailwindcss from '@tailwindcss/vite'
 import type { CustomRoutePages } from '@nuxtjs/i18n'
 // Route-map: source unique du mapping URL <-> contenu. Import RELATIF (jamais ~):
 // la fermeture nuxt.config est typecheckee hors du contexte d'alias Nuxt. Plain TS.
-import { SUPPORTED_LOCALES, routePath, staticPagePaths, buildI18nPages } from './app/config/route-map'
+import { SUPPORTED_LOCALES, staticPagePaths, buildI18nPages } from './app/config/route-map'
 
 // Connexion Sanity: constantes de code, override env OPTIONNEL (identité du
 // site, invariante par environnement; un fork change ce bloc, pas l'env).
@@ -23,13 +23,12 @@ const sanityApiVersion = process.env.NUXT_PUBLIC_SANITY_API_VERSION || '2026-06-
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://webforge-ancree.patoinestudio.ca'
 
 // Routes de prerendu: toutes les pages statiques du route-map (segments EN
-// localises par customRoutes), SAUF blog (page pas encore batie). Les pages
-// dynamiques (serviceCity /extermination/[slug]) sont decouvertes par crawlLinks
-// depuis le bloc villes de l'accueil. Quand le blog arrivera, retirer le filtre et
-// ajouter le fetch des slugs d'articles (comme la reference Minimaliste).
-const PRERENDER_ROUTES = SUPPORTED_LOCALES.flatMap((locale) =>
-  staticPagePaths(locale).filter((path) => path !== routePath('blog', locale))
-)
+// localises par customRoutes), blog inclus. Les pages dynamiques (serviceCity
+// /extermination/[slug], articles et archives de categorie /blog/...) sont
+// decouvertes par crawlLinks depuis les liens rendus (accueil + liste du blog).
+// Quand le contenu blog vivra dans Sanity, ajouter ici un fetch des slugs
+// d'articles (comme la reference Minimaliste) pour ne pas dependre du seul crawl.
+const PRERENDER_ROUTES = SUPPORTED_LOCALES.flatMap((locale) => staticPagePaths(locale))
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',

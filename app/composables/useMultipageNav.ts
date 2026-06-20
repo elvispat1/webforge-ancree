@@ -2,12 +2,11 @@
  * le menu mobile et le pied de page. En mode multipage la nav pointe vers des
  * routes (et non les ancres du one-pager, qui vivent dans useSiteNav).
  *
- * `blog` est volontairement ABSENT tant que la page /blog n'existe pas: une page
- * doit exister avant d'etre liee, sinon le link checker casse. On la rajoutera
- * ici en meme temps que la page blog. `about` est une vraie page, donc presente. */
+ * `about` est une vraie page, donc presente. `blog` est rejoint depuis que la
+ * liste /blog et les articles existent (etape 4). */
 import { routePath, routeLabel, type RouteKey } from '~/config/route-map'
 
-export const MULTIPAGE_NAV_KEYS: readonly RouteKey[] = ['services', 'about', 'faq', 'contact']
+export const MULTIPAGE_NAV_KEYS: readonly RouteKey[] = ['services', 'blog', 'about', 'faq', 'contact']
 
 export interface RouteNavLink {
   to: string
