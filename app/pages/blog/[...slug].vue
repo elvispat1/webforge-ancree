@@ -41,8 +41,8 @@ const segments = computed<string[]>(() => {
 const setI18nParams = useSetI18nParams()
 setI18nParams({ fr: { slug: segments.value }, en: { slug: segments.value } })
 
-// Contenu Sanity au build (repli fixtures).
-const { articles, categories } = await useBlog()
+// Contenu du blog depuis le payload unique (plugin 01.content), repli fixtures.
+const { articles, categories } = useBlog()
 
 const match = computed(() => resolveBlogRoute(segments.value, articles.value, categories.value))
 if (!match.value) {

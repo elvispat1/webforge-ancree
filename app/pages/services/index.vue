@@ -2,7 +2,6 @@
 /* Index des services. Liste tous les services depuis Sanity (langue courante),
  * repli sur la fixture si vide. Masthead = bloc hero-page (catalogue de heros),
  * fil d'Ariane localise depuis le route-map. */
-import { SERVICES_INDEX_QUERY } from '~/sanity/content'
 import { breadcrumbsFor } from '~/config/route-map'
 import type { HeroPageBlock } from '~/types/blocks'
 
@@ -20,22 +19,8 @@ const heroBlock = computed<HeroPageBlock>(() => ({
   cta: { label: t('hero.cta_primary'), href: t('contact.phone_href') }
 }))
 
-const { data: raw } = await useSanityBuildQuery<{ services?: Array<{ _id: string; icon?: string; title: string; body?: string; featured?: boolean }> }>(
-  `services-index:${locale.value}`,
-  SERVICES_INDEX_QUERY,
-  { lang: locale.value }
-)
-
-// Repli: items du bloc services de la fixture d'accueil.
-const fallback = computed(() => {
-  const block = useHomeBlocks().find((b) => b._type === 'services') as { items?: Array<{ icon?: string; title: string; body?: string; featured?: boolean }> } | undefined
-  return block?.items ?? []
-})
-
-const services = computed(() => {
-  const fromSanity = raw.value?.services
-  return fromSanity && fromSanity.length ? fromSanity : fallback.value
-})
+// Cartes de services depuis le payload unique (plugin 01.content), repli fixtures.
+const services = useServicesIndex()
 
 // CollectionPage (index de services). Fil d'Ariane = route-map.
 usePageSeo({

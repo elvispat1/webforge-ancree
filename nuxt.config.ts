@@ -284,7 +284,8 @@ export default defineNuxtConfig({
     useCdn: false,
     // Lecture publique: perspective 'published' (le defaut 'raw' du client exige un
     // token et renvoie 403 sur le dataset public). Aucune requete a l'execution: la
-    // lecture se fait au build (useSanityBuildQuery), jamais depuis le navigateur.
+    // lecture se fait au build (plugin 01.content, fetch serveur), jamais depuis le
+    // navigateur.
     perspective: 'published'
   },
 

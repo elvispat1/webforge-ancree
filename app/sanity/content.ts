@@ -6,6 +6,7 @@
 import type { HeroHomeBlock, PageBlock, ArticleBlock } from '~/types/blocks'
 import type { ArticleContent } from '~/content/article'
 import type { CategoryContent } from '~/content/blog'
+import type { SiteIdentity } from '~/content/site'
 import { contactFixture } from '~/content/contact'
 
 type Locale = 'fr' | 'en'
@@ -29,72 +30,11 @@ function toParagraphs(arr: any): string[] {
     .filter((s: string) => s.length > 0)
 }
 
-/* Une requete: la page d'accueil (heros + blocs) plus les collections de la
- * langue courante, imbriquees. Null si la page n'existe pas (-> fixtures). */
-export const HOME_QUERY = `*[_type == "homePage" && language == $lang][0]{
-  seoTitle,
-  seoDescription,
-  hero{ kicker, title, lead, primaryCta, secondaryCta, meta[]{ _key, icon, value, label }, visual{ src, alt } },
-  pageBuilder[]{ _key, _type, ... },
-  "site": *[_type == "siteSettings" && language == $lang][0]{ brandName, tagline, phoneDisplay, phoneHref, emailDisplay, emailHref, areaName, hours },
-  "services": *[_type == "service" && language == $lang] | order(order asc, title asc){ _id, "slug": slug.current, icon, title, body, featured },
-  "cities": *[_type == "serviceCity" && language == $lang] | order(order asc, city asc){ _id, "slug": slug.current, city, note, featured },
-  "testimonials": *[_type == "testimonial" && language == $lang] | order(order asc){ _id, quote, name, city },
-  "faq": *[_type == "faqItem" && language == $lang] | order(order asc){ _id, question, answer }
-}`
-
-/* Slugs des villes (prerender des pages service-ville). */
-export const CITY_SLUGS_QUERY = `*[_type == "serviceCity" && defined(slug.current)]{ "slug": slug.current }`
-
-/* Une page service-ville (par slug + langue). */
-export const SERVICE_CITY_QUERY = `*[_type == "serviceCity" && language == $lang && slug.current == $slug][0]{
-  city, region, note,
-  "slug": slug.current,
-  heading, lead, body, seoTitle, seoDescription,
-  "site": *[_type == "siteSettings" && language == $lang][0]{ brandName, phoneDisplay, phoneHref, areaName },
-  "services": *[_type == "service" && language == $lang] | order(order asc, title asc){ _id, icon, title, body }
-}`
-
-/* SEO + identite de l'accueil: le seoTitle/seoDescription du document homePage
- * (meme source que le one-pager) ET l'identite du site (siteSettings) pour le
- * noeud LocalBusiness. Une seule requete au build (repli fixtures si vide). */
-export const HOME_SEO_QUERY = `{
-  "seo": *[_type == "homePage" && language == $lang][0]{ "title": seoTitle, "description": seoDescription },
-  "site": *[_type == "siteSettings" && language == $lang][0]{ brandName, tagline, phoneDisplay, phoneHref, emailDisplay, emailHref, areaName }
-}`
-
-/* Index des services (page /services). */
-export const SERVICES_INDEX_QUERY = `{
-  "services": *[_type == "service" && language == $lang] | order(order asc, title asc){ _id, "slug": slug.current, icon, title, body, featured },
-  "site": *[_type == "siteSettings" && language == $lang][0]{ phoneHref }
-}`
-
-/* Blog: tous les articles (corps complet) + categories de la langue. Le site est
- * statique et la demo a peu d'articles: une seule requete au build suffit a la
- * liste, aux archives, aux articles et aux relies. Corps projete par _type pour
- * coller aux contrats des blocs d'article. */
-export const BLOG_QUERY = `{
-  "categories": *[_type == "category" && language == $lang] | order(order asc, title asc){ "slug": slug.current, title, description },
-  "articles": *[_type == "article" && language == $lang && defined(slug.current)] | order(date desc){
-    "slug": slug.current, title, excerpt,
-    "cover": cover{ src, alt },
-    date, author, readingMinutes,
-    "category": category->{ "slug": slug.current, title },
-    body[]{
-      _key, _type,
-      _type == "articleLead" => { text },
-      _type == "articleRichText" => { "body": body[]{ _key, _type, style, listItem, level, "children": children[]{ _key, text, marks }, "markDefs": markDefs[]{ _key, _type, href } } },
-      _type == "articleImage" => { "image": image{ src, alt }, caption },
-      _type == "articleQuote" => { quote, attribution },
-      _type == "articleGallery" => { "items": items[]{ src, alt } },
-      _type == "articleCallout" => { tone, title, text },
-      _type == "articleInlineCta" => { text, "cta": cta{ label, href } }
-    }
-  }
-}`
-
-/* Slugs des articles (prerender, si on veut s'affranchir du seul crawlLinks). */
-export const ARTICLE_SLUGS_QUERY = `*[_type == "article" && defined(slug.current)]{ "slug": slug.current, "category": category->slug.current }`
+/* Les requetes PAR PAGE (homePage, serviceCity, services, blog) ont ete remplacees
+ * par CONTENT_GRAPH_QUERY (plus bas): UNE lecture au build, deposee dans le payload
+ * par le plugin 01.content, lue en synchrone par usePayload(). Les transforms
+ * ci-dessous (transformHome/transformServiceCity/transformBlog) restent: ils sont
+ * reutilises par transformGraph. */
 
 /* ---------- Transformations ---------- */
 
@@ -335,4 +275,104 @@ export function transformBlog(data: any): BlogContent | null {
     body: transformArticleBody(a.body)
   }))
   return { articles, categories }
+}
+
+/* ---------- Graphe de contenu unique (pipeline de payload, etape 5) ---------- */
+
+/* UNE requete par langue: tout le contenu du site (accueil, identite, services,
+ * villes, temoignages, faq, blog) en un seul appel au build. Le plugin
+ * 01.content la lit, transforme via transformGraph, depose le ContentPayload dans
+ * le payload Nuxt de la route -> usePayload() le lit en synchrone, AUCUN fetch
+ * navigateur. Reutilise les memes projections que les requetes par page. */
+export const CONTENT_GRAPH_QUERY = `{
+  "home": *[_type == "homePage" && language == $lang][0]{
+    seoTitle, seoDescription,
+    hero{ kicker, title, lead, primaryCta, secondaryCta, meta[]{ _key, icon, value, label }, visual{ src, alt } },
+    pageBuilder[]{ _key, _type, ... }
+  },
+  "site": *[_type == "siteSettings" && language == $lang][0]{ brandName, tagline, phoneDisplay, phoneHref, emailDisplay, emailHref, areaName },
+  "services": *[_type == "service" && language == $lang] | order(order asc, title asc){ _id, "slug": slug.current, icon, title, body, featured },
+  "cities": *[_type == "serviceCity" && language == $lang] | order(order asc, city asc){ _id, "slug": slug.current, city, region, note, featured, heading, lead, body, seoTitle, seoDescription },
+  "testimonials": *[_type == "testimonial" && language == $lang] | order(order asc){ _id, quote, name, city },
+  "faq": *[_type == "faqItem" && language == $lang] | order(order asc){ _id, question, answer },
+  "blog": {
+    "categories": *[_type == "category" && language == $lang] | order(order asc, title asc){ "slug": slug.current, title, description },
+    "articles": *[_type == "article" && language == $lang && defined(slug.current)] | order(date desc){
+      "slug": slug.current, title, excerpt,
+      "cover": cover{ src, alt },
+      date, author, readingMinutes,
+      "category": category->{ "slug": slug.current, title },
+      body[]{
+        _key, _type,
+        _type == "articleLead" => { text },
+        _type == "articleRichText" => { "body": body[]{ _key, _type, style, listItem, level, "children": children[]{ _key, text, marks }, "markDefs": markDefs[]{ _key, _type, href } } },
+        _type == "articleImage" => { "image": image{ src, alt }, caption },
+        _type == "articleQuote" => { quote, attribution },
+        _type == "articleGallery" => { "items": items[]{ src, alt } },
+        _type == "articleCallout" => { tone, title, text },
+        _type == "articleInlineCta" => { text, "cta": cta{ label, href } }
+      }
+    }
+  }
+}`
+
+/** Carte de service pour l'index /services. */
+export interface ServiceIndexItem {
+  slug?: string
+  icon?: string
+  title: string
+  body?: string
+  featured?: boolean
+}
+
+/** Le contenu complet du site pour une langue, lu en synchrone par les
+ *  composables. Chaque champ peut etre null si Sanity est vide: le composable
+ *  appelant retombe alors sur ses fixtures (le site ne casse jamais). */
+export interface ContentPayload {
+  home: HomeContent | null
+  site: SiteIdentity | null
+  servicesIndex: ServiceIndexItem[]
+  serviceCities: Record<string, ServiceCityPage>
+  blog: BlogContent | null
+}
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export function transformGraph(graph: any, locale: Locale): ContentPayload {
+  if (!graph) {
+    return { home: null, site: null, servicesIndex: [], serviceCities: {}, blog: null }
+  }
+
+  // L'accueil reutilise transformHome: on lui recompose la forme HOME_QUERY
+  // (collections imbriquees) depuis les champs de tete du graphe.
+  const home = transformHome(
+    { ...graph.home, site: graph.site, services: graph.services, cities: graph.cities, testimonials: graph.testimonials, faq: graph.faq },
+    locale
+  )
+
+  // Une page service-ville par slug, transformee avec l'identite + les services
+  // partages (transformServiceCity attend doc.site et doc.services).
+  const serviceCities: Record<string, ServiceCityPage> = {}
+  for (const city of graph.cities || []) {
+    if (!city?.slug) continue
+    const page = transformServiceCity({ ...city, site: graph.site, services: graph.services })
+    if (page) serviceCities[city.slug] = page
+  }
+
+  const servicesIndex: ServiceIndexItem[] = (graph.services || []).map((s: any) => ({
+    slug: s.slug, icon: s.icon, title: s.title, body: s.body, featured: s.featured
+  }))
+
+  const site: SiteIdentity | null = graph.site
+    ? {
+        brandName: graph.site.brandName,
+        tagline: graph.site.tagline,
+        phoneDisplay: graph.site.phoneDisplay,
+        phoneHref: graph.site.phoneHref,
+        emailDisplay: graph.site.emailDisplay,
+        emailHref: graph.site.emailHref,
+        areaName: graph.site.areaName
+      }
+    : null
+
+  return { home, site, servicesIndex, serviceCities, blog: transformBlog(graph.blog) }
 }

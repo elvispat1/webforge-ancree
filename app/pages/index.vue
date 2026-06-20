@@ -6,13 +6,10 @@
  * la nav multipage; on ne le duplique pas ici. En-tete en mode multipage (liens
  * de route), via le layout default.
  *
- * Contenu de demo via fixtures (comme les autres pages multipage), en attendant
- * un type de page d'accueil Sanity. Les gestes qui pointaient vers une ancre du
- * one-pager (#contact) sont recables vers la vraie route /contact. */
+ * Contenu via le payload unique (plugin 01.content, repli fixtures). Les gestes
+ * qui pointaient vers une ancre du one-pager (#contact) sont recables vers la
+ * vraie route /contact. */
 import type { HeroHomeBlock, PageBlock } from '~/types/blocks'
-import type { SiteIdentity } from '~/content/site'
-import { siteFixture } from '~/content/site'
-import { HOME_SEO_QUERY } from '~/sanity/content'
 
 const { t, locale } = useI18n()
 const isEn = computed(() => locale.value === 'en')
@@ -26,14 +23,18 @@ function toContactRoute(href: string | undefined): string | undefined {
   return href === '#contact' ? `${localePrefix.value}/contact` : href
 }
 
-const heroBase = useHeroContent()
+// Contenu de l'accueil depuis le payload unique (plugin 01.content), repli fixtures.
+const home = useHome()
+const identity = useSiteIdentity()
+const siteConfig = useSiteConfig()
+
 const hero = computed<HeroHomeBlock>(() => ({
-  ...heroBase.value,
-  secondaryCta: { ...heroBase.value.secondaryCta, href: `${localePrefix.value}/contact` }
+  ...home.value.hero,
+  secondaryCta: { ...home.value.hero.secondaryCta, href: `${localePrefix.value}/contact` }
 }))
 
 const blocks = computed<PageBlock[]>(() =>
-  useHomeBlocks()
+  home.value.blocks
     .filter((b) => GATEWAY_BLOCKS.has(b._type))
     .map((b) => {
       // Bandeau d'appel: geste secondaire vers la vraie route /contact.
@@ -52,33 +53,21 @@ const blocks = computed<PageBlock[]>(() =>
     })
 )
 
-// SEO + identite de l'accueil (Sanity au build, repli fixtures/i18n). Le
-// seoTitle/seoDescription du document homePage alimente le SEO de la racine (MEME
-// source que le one-pager); le NAP de siteSettings alimente le LocalBusiness.
-// Snapshot setup-once: le SEO de tete n'est pas reactif.
-const { data: homeRaw } = await useSanityBuildQuery<{ seo: { title?: string; description?: string } | null; site: SiteIdentity | null } | null>(
-  `home-seo:${locale.value}`,
-  HOME_SEO_QUERY,
-  { lang: locale.value }
-)
-const identity = homeRaw.value?.site ?? siteFixture(isEn.value)
-const siteConfig = useSiteConfig()
-
-// Accueil (racine): titre/description du CMS (homePage), repli i18n. Titre COMPLET
-// (porte deja la marque) -> gabarit neutralise pour ne pas doubler le suffixe.
-// Visuel OG du heros. Nom du LocalBusiness = site.name, la source UNIQUE de la
-// marque (alignee sur le noeud Organization du graphe, aucun repli divergent).
-// Pas de fil d'Ariane (page racine). Suit le patron Minimaliste de l'accueil.
+// Accueil (racine): titre/description du CMS (homePage via payload), repli i18n.
+// Titre COMPLET (porte deja la marque) -> gabarit neutralise pour ne pas doubler
+// le suffixe. Visuel OG du heros. Nom du LocalBusiness = site.name, source UNIQUE
+// de la marque (alignee sur Organization, aucun repli divergent). Pas de fil
+// d'Ariane (page racine). Suit le patron Minimaliste de l'accueil.
 usePageSeo({
-  title: homeRaw.value?.seo?.title || t('home.title'),
-  description: homeRaw.value?.seo?.description || t('home.lead'),
+  title: home.value.seo.title || t('home.title'),
+  description: home.value.seo.description || t('home.lead'),
   titleTemplate: null,
   image: hero.value.visual.src,
   localBusiness: {
     name: String(siteConfig.name ?? ''),
-    ...(identity.phoneHref ? { telephone: identity.phoneHref.replace(/^tel:/, '') } : {}),
-    ...(identity.emailHref ? { email: identity.emailHref.replace(/^mailto:/, '') } : {}),
-    ...(identity.areaName ? { areaServed: [identity.areaName] } : {}),
+    ...(identity.value.phoneHref ? { telephone: identity.value.phoneHref.replace(/^tel:/, '') } : {}),
+    ...(identity.value.emailHref ? { email: identity.value.emailHref.replace(/^mailto:/, '') } : {}),
+    ...(identity.value.areaName ? { areaServed: [identity.value.areaName] } : {}),
     image: hero.value.visual.src
   }
 })

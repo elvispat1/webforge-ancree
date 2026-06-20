@@ -8,7 +8,7 @@ import { breadcrumbsFor, routePath, type Locale } from '~/config/route-map'
 const { t, locale } = useI18n()
 const loc = computed(() => locale.value as Locale)
 
-const { articles, categories } = await useBlog()
+const { articles, categories } = useBlog()
 // Page 1 de la liste. La pagination ne s'affiche qu'au-dela d'ARTICLES_PER_PAGE
 // (la demo a 3 articles -> une seule page, <Pagination> masque). Les pages
 // suivantes vivent sur /blog/page/[n].

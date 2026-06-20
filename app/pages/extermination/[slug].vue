@@ -3,7 +3,6 @@
  * de Sanity (serviceCity par slug + langue). Repli generique a partir du slug si
  * le document est absent, pour que le build statique ne tombe jamais en 404.
  * En-tete solide (pas de heros), donc on reserve la hauteur de l'en-tete. */
-import { SERVICE_CITY_QUERY, transformServiceCity } from '~/sanity/content'
 import { breadcrumbsFromTrail } from '~/config/route-map'
 
 const { t, locale } = useI18n()
@@ -13,8 +12,9 @@ const slug = computed(() => String(route.params.slug || ''))
 const setI18nParams = useSetI18nParams()
 setI18nParams({ fr: { slug: slug.value }, en: { slug: slug.value } })
 
-const { data: raw } = await useSanityBuildQuery<unknown>(`serviceCity:${locale.value}:${slug.value}`, SERVICE_CITY_QUERY, { lang: locale.value, slug: slug.value })
-const page = computed(() => transformServiceCity(raw.value))
+// Page service-ville depuis le payload unique (plugin 01.content), reactif au
+// slug. null si absente -> repli generique derive du slug ci-dessous (jamais 404).
+const page = useServiceCity(slug)
 
 // Repli: titre derive du slug (ex "saint-eustache" -> "Saint-Eustache").
 const cityName = computed(() => page.value?.city || slug.value.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('-'))

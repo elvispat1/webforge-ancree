@@ -1,11 +1,10 @@
-/* Logique du blog. Lecture Sanity au BUILD via useSanityBuildQuery (null cote
- * client -> repli fixtures, le site ne casse jamais), sur le moule des autres
- * pages. Source unique des helpers d'URL d'article, de mise en carte, de
- * resolution du catch-all /blog et de formatage de date. i18n document-level:
- * slug partage fr/en, l'URL ne differe que par le prefixe de locale. */
+/* Logique du blog. Le contenu vient du payload unique (plugin 01.content) via
+ * usePayload().blog, avec repli fixtures (le site ne casse jamais). Source unique
+ * des helpers d'URL d'article, de mise en carte, de resolution du catch-all /blog,
+ * de pagination et de formatage de date. i18n document-level: slug partage fr/en,
+ * l'URL ne differe que par le prefixe de locale. */
 import { articlesFixture, type ArticleContent } from '~/content/article'
 import { categoriesFixture, type CategoryContent } from '~/content/blog'
-import { BLOG_QUERY, transformBlog } from '~/sanity/content'
 import { routePath, type Locale } from '~/config/route-map'
 import { ARTICLES_PER_PAGE } from '~/content/blog-guards'
 import type { ArticleFigure } from '~/content/article-blocks'
@@ -113,24 +112,21 @@ export function resolveBlogRoute(
   return null
 }
 
-/** Contenu du blog (articles tries + categories), Sanity au build avec repli
- *  fixtures. Async: a appeler avec await en setup (Suspense Nuxt). */
-export async function useBlog() {
+/** Contenu du blog (articles tries + categories), lu du payload unique (plugin
+ *  01.content) avec repli fixtures. Lecture synchrone. */
+export function useBlog() {
   const { locale } = useI18n()
   const loc = computed(() => locale.value as Locale)
   const isEn = computed(() => loc.value === 'en')
 
-  const { data: raw } = await useSanityBuildQuery<unknown>(`blog:${loc.value}`, BLOG_QUERY, { lang: loc.value })
-  const fromSanity = computed(() => transformBlog(raw.value))
-
   const articles = computed<ArticleContent[]>(() => {
-    const s = fromSanity.value
-    if (s && s.articles.length) return s.articles
+    const blog = usePayload()?.blog
+    if (blog && blog.articles.length) return blog.articles
     return articlesFixture(isEn.value).slice().sort((a, b) => b.date.localeCompare(a.date))
   })
   const categories = computed<CategoryContent[]>(() => {
-    const s = fromSanity.value
-    if (s && s.categories.length) return s.categories
+    const blog = usePayload()?.blog
+    if (blog && blog.categories.length) return blog.categories
     return categoriesFixture(isEn.value)
   })
 

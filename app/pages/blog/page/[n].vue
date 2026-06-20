@@ -22,7 +22,7 @@ const n = Number(rawN)
 const setI18nParams = useSetI18nParams()
 setI18nParams({ fr: { n: rawN }, en: { n: rawN } })
 
-const { articles, categories } = await useBlog()
+const { articles, categories } = useBlog()
 const pageData = computed(() => paginate(articles.value, n))
 
 // Borne: entier CANONIQUE >= 2 et <= totalPages, sinon 404 (la page 1 vit sur
