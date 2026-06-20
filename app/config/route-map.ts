@@ -54,11 +54,8 @@ export const ROUTES = {
     pageName: 'services/index'
   },
   about: {
-    // PROVISOIRE: EN garde le segment FR (/a-propos) tant que les customRoutes
-    // i18n ne sont pas branches (etape de cablage). about est LIE par la nav
-    // multipage via routePath, donc son segment doit exister; on le localisera en
-    // '/about' en meme temps qu'on branche buildI18nPages dans nuxt.config.
-    path: { fr: '/a-propos', en: '/a-propos' },
+    // EN localise via les customRoutes i18n (buildI18nPages branche dans nuxt.config).
+    path: { fr: '/a-propos', en: '/about' },
     label: { fr: 'À propos', en: 'About' },
     parent: 'home',
     pageName: 'a-propos'

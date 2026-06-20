@@ -6,6 +6,10 @@
 // déploiement Cloudflare). AUCUN bloc, contenu, schéma ni preview: la
 // reconstruction (design + architecture Sanity) repart d'ici.
 import tailwindcss from '@tailwindcss/vite'
+import type { CustomRoutePages } from '@nuxtjs/i18n'
+// Route-map: source unique du mapping URL <-> contenu. Import RELATIF (jamais ~):
+// la fermeture nuxt.config est typecheckee hors du contexte d'alias Nuxt. Plain TS.
+import { SUPPORTED_LOCALES, routePath, staticPagePaths, buildI18nPages } from './app/config/route-map'
 
 // Connexion Sanity: constantes de code, override env OPTIONNEL (identité du
 // site, invariante par environnement; un fork change ce bloc, pas l'env).
@@ -17,6 +21,15 @@ const sanityApiVersion = process.env.NUXT_PUBLIC_SANITY_API_VERSION || '2026-06-
 // URL canonique: partagée site.url (@nuxtjs/seo) et i18n.baseUrl (hreflang
 // absolus). Posée par Worker sur Cloudflare (NUXT_PUBLIC_SITE_URL).
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://webforge-ancree.patoinestudio.ca'
+
+// Routes de prerendu: toutes les pages statiques du route-map (segments EN
+// localises par customRoutes), SAUF blog (page pas encore batie). Les pages
+// dynamiques (serviceCity /extermination/[slug]) sont decouvertes par crawlLinks
+// depuis le bloc villes de l'accueil. Quand le blog arrivera, retirer le filtre et
+// ajouter le fetch des slugs d'articles (comme la reference Minimaliste).
+const PRERENDER_ROUTES = SUPPORTED_LOCALES.flatMap((locale) =>
+  staticPagePaths(locale).filter((path) => path !== routePath('blog', locale))
+)
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -112,6 +125,11 @@ export default defineNuxtConfig({
       { code: 'fr', language: 'fr-CA', name: 'Français', file: 'fr.json' },
       { code: 'en', language: 'en-CA', name: 'English', file: 'en.json' }
     ],
+    // Segments EN traduits (about, terms-of-use...) depuis le route-map, source
+    // unique. buildI18nPages -> Record<string, Record<Locale, string>>; cast a la
+    // frontiere (route-map reste plain TS, importable du Studio).
+    customRoutes: 'config',
+    pages: buildI18nPages() as CustomRoutePages,
     detectBrowserLanguage: false
   },
 
@@ -130,29 +148,9 @@ export default defineNuxtConfig({
     preset: 'static',
     prerender: {
       crawlLinks: true,
-      // Accueil bilingue + pages multipage simples. PROVISOIRE: l'etape de cablage
-      // du routage (route-map -> i18n customRoutes + staticPagePaths) remplacera
-      // cette liste; d'ici la, ces pages ne sont liees par aucune nav (le Header
-      // multipage est dormant), donc on les prerend explicitement. Les segments EN
-      // restent /en/<fr> tant que les customRoutes i18n ne sont pas branches.
-      routes: [
-        '/',
-        '/en',
-        '/one-pager',
-        '/en/one-pager',
-        '/one-pager/conditions-utilisation',
-        '/en/one-pager/conditions-utilisation',
-        '/one-pager/politique-confidentialite',
-        '/en/one-pager/politique-confidentialite',
-        '/services',
-        '/en/services',
-        '/a-propos',
-        '/en/a-propos',
-        '/faq',
-        '/en/faq',
-        '/contact',
-        '/en/contact'
-      ]
+      // Pages statiques calculees depuis le route-map (segments EN localises).
+      // Le reste (serviceCity) est decouvert par crawlLinks.
+      routes: PRERENDER_ROUTES
     }
   }
 })
