@@ -19,9 +19,14 @@ const heroBlock = computed<HeroPageBlock>(() => ({
   lead: t('pages.blog_lead')
 }))
 
-useSeoMeta({
-  title: () => t('pages.blog_heading'),
-  description: () => t('pages.blog_lead')
+// Liste du blog: CollectionPage indexable + BreadcrumbList (route-map). Le nœud
+// Article n'est porté que par les pages d'article (catch-all). Schema.org et
+// métas via usePageSeo, source unique du SEO de page (port de Minimaliste).
+usePageSeo({
+  title: t('pages.blog_heading'),
+  description: t('pages.blog_lead'),
+  webPageType: 'CollectionPage',
+  breadcrumbs: breadcrumbsFor('blog', undefined, loc.value)
 })
 </script>
 

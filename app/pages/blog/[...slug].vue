@@ -27,7 +27,17 @@ const segments = computed<string[]>(() => {
   return Array.isArray(s) ? (s as string[]) : s ? [String(s)] : []
 })
 
-// Slug partage fr/en: le changement de langue garde les memes segments.
+// Slug partage fr/en: le changement de langue garde les memes segments. Les deux
+// locales sont declarees INCONDITIONNELLEMENT -> les liens hreflang page-level
+// (useLocaleHead seo dans app.vue) pointent toujours fr ET en.
+// DIVERGENCE ASSUMEE (constat de revue, doc): le sitemap, lui, est presence-aware
+// (alternativesFor dans nuxt.config) et n'emet une alternative que si la
+// traduction existe vraiment. Sur le seed actuel (tous les docs apparies fr+en)
+// les deux signaux coincident. Pour un doc MONO-LANGUE futur, le hreflang
+// page-level pointerait une 404 dans l'autre langue: le repli presence-aware
+// page-level exige des slugs cross-langue que useBlog ne charge pas (il requete
+// la seule locale courante). Reconciliation au pipeline de payload unique
+// (etape 5), qui exposera la presence par langue. Site noindex d'ici la.
 const setI18nParams = useSetI18nParams()
 setI18nParams({ fr: { slug: segments.value }, en: { slug: segments.value } })
 
@@ -94,12 +104,41 @@ const archiveCards = computed<ArticleCardData[]>(() =>
   archive.value ? archive.value.articles.map((x) => toCard(x, loc.value)) : []
 )
 
-// ── SEO ──────────────────────────────────────────────────────────────────────
-useSeoMeta({
-  title: () => article.value?.title ?? archive.value?.category.title ?? '',
-  description: () => article.value?.excerpt ?? archive.value?.category.description ?? '',
-  ogType: () => (article.value ? 'article' : 'website')
-})
+// ── SEO + Schema.org ──────────────────────────────────────────────────────────
+// Branche figée au setup (snapshot du match résolu après l'await): article =
+// og:type article + métas article:* + nœud Schema.org Article (cover en image,
+// publisher, mainEntityOfPage); archive de catégorie = CollectionPage. Les deux
+// portent un BreadcrumbList dérivé du même route-map que le fil d'Ariane visible.
+// Archives INDEXABLES (contenu propre: titre + description + liste de billets),
+// au sitemap; seule la pagination /blog/page/N reste noindex (point 2).
+const seoMatch = match.value
+if (seoMatch?.type === 'article') {
+  const a = seoMatch.article
+  const trail: Crumb[] = [{ label: routeLabel('blog', loc.value), to: routePath('blog', loc.value) }]
+  if (a.category) trail.push({ label: a.category.title, to: categoryHref(a.category.slug, loc.value) })
+  trail.push({ label: a.title })
+  usePageSeo({
+    title: a.title,
+    description: a.excerpt,
+    type: 'article',
+    webPageType: 'ItemPage',
+    image: a.cover.src,
+    breadcrumbs: breadcrumbsFromTrail(loc.value, ...trail),
+    article: {
+      datePublished: a.date,
+      dateModified: a.date,
+      author: a.author || undefined,
+      image: a.cover.src
+    }
+  })
+} else if (seoMatch?.type === 'category') {
+  usePageSeo({
+    title: `${seoMatch.category.title}, ${routeLabel('blog', loc.value)}`,
+    description: seoMatch.category.description,
+    webPageType: 'CollectionPage',
+    breadcrumbs: breadcrumbsFor('blog', { label: seoMatch.category.title }, loc.value)
+  })
+}
 </script>
 
 <template>

@@ -6,10 +6,20 @@
 // déploiement Cloudflare). AUCUN bloc, contenu, schéma ni preview: la
 // reconstruction (design + architecture Sanity) repart d'ici.
 import tailwindcss from '@tailwindcss/vite'
+import { createClient } from '@sanity/client'
 import type { CustomRoutePages } from '@nuxtjs/i18n'
 // Route-map: source unique du mapping URL <-> contenu. Import RELATIF (jamais ~):
 // la fermeture nuxt.config est typecheckee hors du contexte d'alias Nuxt. Plain TS.
-import { SUPPORTED_LOCALES, staticPagePaths, buildI18nPages } from './app/config/route-map'
+import {
+  SUPPORTED_LOCALES,
+  DEFAULT_LOCALE,
+  localePrefix,
+  routePath,
+  staticPagePaths,
+  buildI18nPages,
+  DOC_ROUTES,
+  type Locale
+} from './app/config/route-map'
 
 // Connexion Sanity: constantes de code, override env OPTIONNEL (identité du
 // site, invariante par environnement; un fork change ce bloc, pas l'env).
@@ -22,13 +32,162 @@ const sanityApiVersion = process.env.NUXT_PUBLIC_SANITY_API_VERSION || '2026-06-
 // absolus). Posée par Worker sur Cloudflare (NUXT_PUBLIC_SITE_URL).
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://webforge-ancree.patoinestudio.ca'
 
-// Routes de prerendu: toutes les pages statiques du route-map (segments EN
-// localises par customRoutes), blog inclus. Les pages dynamiques (serviceCity
-// /extermination/[slug], articles et archives de categorie /blog/...) sont
-// decouvertes par crawlLinks depuis les liens rendus (accueil + liste du blog).
-// Quand le contenu blog vivra dans Sanity, ajouter ici un fetch des slugs
-// d'articles (comme la reference Minimaliste) pour ne pas dependre du seul crawl.
-const PRERENDER_ROUTES = SUPPORTED_LOCALES.flatMap((locale) => staticPagePaths(locale))
+// ── Slugs des routes dynamiques, fetches au BUILD (parade au seul crawl) ──────
+// Client @sanity/client direct: le module @nuxtjs/sanity n'existe pas dans le
+// contexte de la fermeture nuxt.config. Lecture publique, contenu PUBLIE, CDN.
+// Une seule source pour DEUX consommateurs (zero divergence possible): les
+// routes de prerendu explicites ET les URLs du sitemap (alternates hreflang).
+const sanityBuildClient = createClient({
+  projectId: sanityProjectId,
+  dataset: sanityDataset,
+  apiVersion: sanityApiVersion,
+  useCdn: true,
+  perspective: 'published'
+})
+
+// i18n document-level: un doc par langue, SLUG PARTAGE fr/en. On fetch par langue
+// (chaque arbre de routes a son jeu), puis l'alternate hreflang se deduit du meme
+// slug sous l'autre prefixe de locale.
+const ROUTE_SLUGS_QUERY = `{
+  "articles": *[_type == "article" && language == $lang && defined(slug.current)]{ "slug": slug.current, "category": category->slug.current },
+  "categories": *[_type == "category" && language == $lang && defined(slug.current)]{ "slug": slug.current },
+  "cities": *[_type == "serviceCity" && language == $lang && defined(slug.current)]{ "slug": slug.current }
+}`
+
+interface SlugRef { slug: string }
+interface ArticleSlugRef extends SlugRef { category: string | null }
+interface RouteSlugs { articles: ArticleSlugRef[]; categories: SlugRef[]; cities: SlugRef[] }
+const EMPTY_SLUGS: RouteSlugs = { articles: [], categories: [], cities: [] }
+
+// Fetch GRACIEUX: un reseau coupe ne casse pas le build (Ancree retombe partout
+// sur ses fixtures). Sans slugs: sitemap dynamique reduit, prerendu rabattu sur
+// le crawl. Le site reste noindex tant qu'il n'est pas en ligne; l'avertissement
+// signale la degradation sans la masquer.
+const slugsByLocale = {} as Record<Locale, RouteSlugs>
+for (const locale of SUPPORTED_LOCALES) {
+  try {
+    slugsByLocale[locale] = await sanityBuildClient.fetch<RouteSlugs>(ROUTE_SLUGS_QUERY, { lang: locale })
+  } catch (cause) {
+    console.warn(
+      `[webforge] Fetch Sanity des slugs (${locale}) echoue (project ${sanityProjectId}, `
+      + `dataset ${sanityDataset}): sitemap dynamique et prerendu explicite rabattus sur le crawl.`,
+      cause
+    )
+    slugsByLocale[locale] = EMPTY_SLUGS
+  }
+}
+
+// ── URLs des documents dynamiques (prefixe de locale inclus) ──────────────────
+// Definies une seule fois, consommees par le prerendu ET le sitemap.
+const homeUrl = (locale: Locale): string => routePath('home', locale)
+// Segment derive du route-map (source unique URL<->contenu): si l'URL EN de
+// serviceCity se localise un jour, sitemap et prerendu suivent sans divergence.
+const cityUrl = (locale: Locale, slug: string): string =>
+  `${localePrefix(locale)}${DOC_ROUTES.serviceCity.urls[locale].replace('[slug]', slug)}`
+const categoryUrl = (locale: Locale, slug: string): string => `${routePath('blog', locale)}/${slug}`
+const articleUrl = (locale: Locale, slug: string, category: string | null): string => {
+  const base = routePath('blog', locale)
+  return category ? `${base}/${category}/${slug}` : `${base}/${slug}`
+}
+
+// ── Sitemap: pages indexables, alternates hreflang (modele slug partage) ──────
+// La source auto i18n:pages couvre les pages FIXES (route-map, alternates inclus).
+// Restent a fournir: l'accueil (pageName null, hors i18n.pages) et TOUTES les
+// pages dynamiques (serviceCity, articles, archives de categorie). Slug partage
+// fr/en: l'alternate d'un doc = le meme chemin sous l'autre prefixe, emis
+// seulement si la traduction existe vraiment (presence par langue ci-dessous).
+const LOCALE_HREFLANG: Record<Locale, string> = { fr: 'fr-CA', en: 'en-CA' }
+
+interface SitemapAlternative { hreflang: string; href: string }
+interface SitemapUrlEntry { loc: string; _sitemap: string; alternatives: SitemapAlternative[] }
+
+// Presence d'un slug par langue (le doc existe dans la langue ou son slug figure
+// au fetch de cette langue): fonde les alternates sans supposer un appariement.
+const presenceBySlug = (pick: (s: RouteSlugs) => SlugRef[]): Map<string, Set<Locale>> => {
+  const map = new Map<string, Set<Locale>>()
+  for (const locale of SUPPORTED_LOCALES) {
+    for (const { slug } of pick(slugsByLocale[locale])) {
+      if (!map.has(slug)) map.set(slug, new Set())
+      map.get(slug)!.add(locale)
+    }
+  }
+  return map
+}
+const articlePresence = presenceBySlug((s) => s.articles)
+const categoryPresence = presenceBySlug((s) => s.categories)
+const cityPresence = presenceBySlug((s) => s.cities)
+// Categorie d'un article (identique entre langues, modele partage): pour batir
+// l'URL de l'alternate de l'autre langue.
+const articleCategoryBySlug = new Map<string, string | null>()
+for (const locale of SUPPORTED_LOCALES) {
+  for (const a of slugsByLocale[locale].articles) {
+    if (!articleCategoryBySlug.has(a.slug)) articleCategoryBySlug.set(a.slug, a.category ?? null)
+  }
+}
+
+// Alternates d'un doc dynamique: une entree par langue ou il existe + x-default
+// sur la langue par defaut (si presente). hrefs relatifs, resolus en absolu par
+// le module sitemap.
+const alternativesFor = (presence: Set<Locale> | undefined, toUrl: (l: Locale) => string): SitemapAlternative[] => {
+  const locales = SUPPORTED_LOCALES.filter((l) => presence?.has(l))
+  const alternatives = locales.map((l) => ({ hreflang: LOCALE_HREFLANG[l], href: toUrl(l) }))
+  // x-default: langue par defaut si presente, sinon la premiere langue disponible
+  // (doc mono-langue, ex. EN seul): signale explicitement la page de repli
+  // inter-langues plutot que de laisser le doc sans x-default.
+  const fallback = locales.includes(DEFAULT_LOCALE) ? DEFAULT_LOCALE : locales[0]
+  if (fallback) alternatives.push({ hreflang: 'x-default', href: toUrl(fallback) })
+  return alternatives
+}
+
+const SITEMAP_DYNAMIC_URLS: SitemapUrlEntry[] = [
+  // Accueil des deux locales (jamais dans i18n.pages: pageName null).
+  ...SUPPORTED_LOCALES.map((locale) => ({
+    loc: homeUrl(locale),
+    _sitemap: LOCALE_HREFLANG[locale],
+    alternatives: [
+      ...SUPPORTED_LOCALES.map((l) => ({ hreflang: LOCALE_HREFLANG[l], href: homeUrl(l) })),
+      { hreflang: 'x-default', href: homeUrl(DEFAULT_LOCALE) }
+    ]
+  })),
+  // Pages dynamiques de chaque locale. La pagination /blog/page/N reste absente
+  // (noindex, point 2).
+  ...SUPPORTED_LOCALES.flatMap((locale) => {
+    const slugs = slugsByLocale[locale]
+    return [
+      ...slugs.cities.map((c) => ({
+        loc: cityUrl(locale, c.slug),
+        _sitemap: LOCALE_HREFLANG[locale],
+        alternatives: alternativesFor(cityPresence.get(c.slug), (l) => cityUrl(l, c.slug))
+      })),
+      ...slugs.articles.map((a) => ({
+        loc: articleUrl(locale, a.slug, a.category),
+        _sitemap: LOCALE_HREFLANG[locale],
+        alternatives: alternativesFor(articlePresence.get(a.slug), (l) => articleUrl(l, a.slug, articleCategoryBySlug.get(a.slug) ?? null))
+      })),
+      ...slugs.categories.map((c) => ({
+        loc: categoryUrl(locale, c.slug),
+        _sitemap: LOCALE_HREFLANG[locale],
+        alternatives: alternativesFor(categoryPresence.get(c.slug), (l) => categoryUrl(l, c.slug))
+      }))
+    ]
+  })
+]
+
+// Routes de prerendu: pages statiques du route-map (segments EN localises par
+// customRoutes) + pages dynamiques explicites depuis les slugs Sanity (plus le
+// seul crawl). crawlLinks reste actif en complement (images _ipx, liens).
+const DYNAMIC_PRERENDER_ROUTES = SUPPORTED_LOCALES.flatMap((locale) => {
+  const slugs = slugsByLocale[locale]
+  return [
+    ...slugs.cities.map((c) => cityUrl(locale, c.slug)),
+    ...slugs.articles.map((a) => articleUrl(locale, a.slug, a.category)),
+    ...slugs.categories.map((c) => categoryUrl(locale, c.slug))
+  ]
+})
+const PRERENDER_ROUTES = [
+  ...SUPPORTED_LOCALES.flatMap((locale) => staticPagePaths(locale)),
+  ...DYNAMIC_PRERENDER_ROUTES
+]
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -145,15 +304,59 @@ export default defineNuxtConfig({
   },
 
   // Pas de génération d'OG en runtime (aucune dépendance chromium en V1).
+  // Les og:image sont servies en statique par usePageSeo: visuel propre a la
+  // page (cover d'article) en URL absolue derivee de site.url. Repli de marque
+  // (og-image par defaut) = point 7 SEO.
   ogImage: { enabled: false },
+
+  // Sitemap: pages indexables, alternates hreflang. Pages FIXES couvertes par la
+  // source auto i18n:pages (depuis i18n.pages, alternates inclus). Accueil
+  // (pageName null) et pages DYNAMIQUES (serviceCity, articles, archives) par la
+  // source webforge:dynamic (memes slugs que le prerendu). On exclut la source
+  // auto nuxt:prerender: elle re-listerait les pages dynamiques SANS alternates,
+  // en doublon. Showcase et one-pager: noindex au niveau page, hors sitemap.
+  sitemap: {
+    exclude: ['/showcase', '/en/showcase', '/one-pager/**', '/en/one-pager/**'],
+    excludeAppSources: ['nuxt:prerender'],
+    sources: [
+      {
+        context: {
+          name: 'webforge:dynamic',
+          description: 'Accueil + pages dynamiques (serviceCity, articles, archives) depuis les slugs Sanity. Split par locale + alternates hreflang.'
+        },
+        urls: SITEMAP_DYNAMIC_URLS
+      }
+    ]
+  },
+
+  // Graphe Schema.org: noeuds par defaut du module DESACTIVES. usePageSeo est la
+  // source UNIQUE du graphe (Organization, WebSite, WebPage, BreadcrumbList, et
+  // selon la page Article / LocalBusiness / FAQPage), emis sur chaque page qui
+  // l'appelle. Les pages hors blog encore sur useSeoMeta direct n'ont pas de
+  // graphe tant que le point 7 ne les migre pas (sans impact: site noindex).
+  schemaOrg: {
+    defaults: false
+  },
+
+  // nuxt-seo-utils: fallbackTitle desactive. Les pages posent leur titre via
+  // usePageSeo / useSeoMeta; le repli reapplique sinon un titre « {code} -
+  // {message} » reactif sur la page d'erreur, battant le titre localise.
+  seo: {
+    fallbackTitle: false
+  },
 
   nitro: {
     preset: 'static',
     prerender: {
       crawlLinks: true,
-      // Pages statiques calculees depuis le route-map (segments EN localises).
-      // Le reste (serviceCity) est decouvert par crawlLinks.
-      routes: PRERENDER_ROUTES
+      // Pages statiques du route-map (segments EN localises) + pages dynamiques
+      // explicites (serviceCity, articles, archives) depuis les slugs Sanity.
+      // crawlLinks reste actif en complement (images _ipx, liens internes).
+      routes: PRERENDER_ROUTES,
+      // /en/sitemap.xml: page fantome du prerendu en mode multi-sitemaps (i18n).
+      // Le /sitemap.xml FR aboutit sur la routeRule (redirect vers l'index); son
+      // jumeau EN n'a ni routeRule ni page -> rendu de l'app. On l'ecarte.
+      ignore: ['/en/sitemap.xml']
     }
   }
 })
