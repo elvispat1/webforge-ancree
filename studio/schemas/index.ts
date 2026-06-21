@@ -23,7 +23,7 @@ import {
   ImageIcon,
   UsersIcon,
   CheckmarkCircleIcon,
-  PhoneIcon,
+  MobileDeviceIcon,
   DocumentTextIcon,
   TagIcon,
   ImagesIcon,
@@ -195,7 +195,7 @@ const ctaBandBlock = defineType({
   name: 'ctaBand',
   title: 'Bandeau d’appel',
   type: 'object',
-  icon: PhoneIcon,
+  icon: MobileDeviceIcon,
   fields: [
     defineField({ name: 'title', title: 'Titre', type: 'string', validation: (r) => r.required() }),
     defineField({ name: 'subtitle', title: 'Sous-titre', type: 'text', rows: 2 }),
@@ -472,7 +472,7 @@ const articleInlineCta = defineType({
   name: 'articleInlineCta',
   title: 'Appel a l’action',
   type: 'object',
-  icon: PhoneIcon,
+  icon: MobileDeviceIcon,
   fields: [
     defineField({ name: 'text', title: 'Texte', type: 'text', rows: 2, validation: (r) => r.required() }),
     defineField({ name: 'cta', title: 'Bouton', type: 'link', validation: (r) => r.required() })
