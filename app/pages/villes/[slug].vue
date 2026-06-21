@@ -29,7 +29,6 @@ const lead = computed(() => page.value?.lead || (locale.value === 'en'
   ? `Local, certified pest control in ${cityName.value} and across the North Shore. A technician at your door, often the same day.`
   : `Extermination locale et certifiée à ${cityName.value} et partout sur la Rive-Nord. Un technicien à votre porte, souvent le jour même.`))
 const body = computed(() => page.value?.body ?? [])
-const services = computed(() => page.value?.services ?? [])
 const phoneHref = computed(() => page.value?.phoneHref || t('contact.phone_href'))
 const phoneDisplay = computed(() => page.value?.phoneDisplay || t('contact.phone_display'))
 
@@ -90,7 +89,7 @@ usePageSeo({
           <Button :href="phoneHref" kind="anchor" variant="call" icon="lucide:phone" :pulse="true">
             {{ phoneDisplay }}
           </Button>
-          <Button v-if="services.length" :href="`#services`" kind="anchor" variant="ghost" tone="ondark" icon="lucide:arrow-down">
+          <Button :href="`#services`" kind="anchor" variant="ghost" tone="ondark" icon="lucide:arrow-down">
             {{ t('nav.services') }}
           </Button>
         </div>
@@ -102,15 +101,9 @@ usePageSeo({
         <p v-for="(para, i) in body" :key="i" class="wf-body-1 wf-text-muted city__para">{{ para }}</p>
       </div>
 
-      <section v-if="services.length" id="services" class="city__services">
-        <h2 class="wf-h3 city__services-title">{{ t('nav.services') }}</h2>
-        <ul class="city__services-grid">
-          <li v-for="s in services" :key="s.title" class="city__service">
-            <Icon v-if="s.icon" :name="s.icon" class="city__service-icon" aria-hidden="true" />
-            <h3 class="wf-h5">{{ s.title }}</h3>
-            <p v-if="s.body" class="wf-body-3">{{ s.body }}</p>
-          </li>
-        </ul>
+      <section id="services" class="city__services">
+        <h2 class="wf-h3 city__services-title">{{ t('pages.city_services', { city: cityName }) }}</h2>
+        <ServicesGrid />
       </section>
     </div>
 
@@ -167,44 +160,5 @@ usePageSeo({
 }
 .city__services-title {
   margin-bottom: 2.8rem;
-}
-.city__services-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-.city__service {
-  padding: 2.4rem;
-  background: var(--bg-lift);
-  border: var(--line-soft);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--elev-low);
-}
-.city__service-icon {
-  width: 2.8rem;
-  height: 2.8rem;
-  color: var(--accent-trust);
-  margin-bottom: 1.4rem;
-}
-.city__service h3 {
-  margin: 0;
-}
-.city__service p {
-  margin-top: 1rem;
-  color: var(--text-muted);
-}
-
-@container site (min-width: 640px) {
-  .city__services-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@container site (min-width: 1024px) {
-  .city__services-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 </style>
