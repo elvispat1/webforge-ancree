@@ -291,7 +291,7 @@ export const CONTENT_GRAPH_QUERY = `{
     hero{ kicker, title, lead, primaryCta, secondaryCta, meta[]{ _key, icon, value, label }, visual{ src, alt } },
     pageBuilder[]{ _key, _type, ... }
   },
-  "site": *[_type == "siteSettings" && language == $lang][0]{ brandName, tagline, phoneDisplay, phoneHref, emailDisplay, emailHref, areaName },
+  "site": *[_type == "siteSettings" && language == $lang][0]{ brandName, tagline, phoneDisplay, phoneHref, emailDisplay, emailHref, areaName, address{ streetAddress, addressLocality, addressRegion, postalCode, addressCountry } },
   "services": *[_type == "service" && language == $lang] | order(order asc, title asc){ _id, "slug": slug.current, icon, title, body, featured },
   "cities": *[_type == "serviceCity" && language == $lang] | order(order asc, city asc){ _id, "slug": slug.current, city, region, note, featured, heading, lead, body, seoTitle, seoDescription },
   "testimonials": *[_type == "testimonial" && language == $lang] | order(order asc){ _id, quote, name, city },
@@ -371,7 +371,28 @@ export function transformGraph(graph: any, locale: Locale): ContentPayload {
         phoneHref: graph.site.phoneHref,
         emailDisplay: graph.site.emailDisplay,
         emailHref: graph.site.emailHref,
-        areaName: graph.site.areaName
+        areaName: graph.site.areaName,
+        // Adresse incluse seulement si les CINQ champs sont presents (« adresse
+        // complete ou rien »). En GROQ, une projection address{...} renvoie null
+        // pour chaque sous-champ absent du document: tester le seul streetAddress
+        // laisserait passer un noeud PostalAddress a champs nuls. La fixture et le
+        // seed sont toujours complets; un doc Sanity partiel est donc ignore.
+        ...(graph.site.address
+          && graph.site.address.streetAddress
+          && graph.site.address.addressLocality
+          && graph.site.address.addressRegion
+          && graph.site.address.postalCode
+          && graph.site.address.addressCountry
+          ? {
+              address: {
+                streetAddress: graph.site.address.streetAddress,
+                addressLocality: graph.site.address.addressLocality,
+                addressRegion: graph.site.address.addressRegion,
+                postalCode: graph.site.address.postalCode,
+                addressCountry: graph.site.address.addressCountry
+              }
+            }
+          : {})
       }
     : null
 

@@ -12,7 +12,14 @@
         "emailDisplay": "bonjour@rempart-extermination.ca",
         "emailHref": "mailto:bonjour@rempart-extermination.ca",
         "areaName": "Rive-Nord de Montréal et Laval",
-        "hours": "Du lundi au dimanche, de 7 h à 21 h"
+        "hours": "Du lundi au dimanche, de 7 h à 21 h",
+        "address": {
+          "streetAddress": "1450, boulevard Industriel",
+          "addressLocality": "Terrebonne",
+          "addressRegion": "QC",
+          "postalCode": "J6Y 1W8",
+          "addressCountry": "CA"
+        }
       }
     },
     {
@@ -27,7 +34,14 @@
         "emailDisplay": "bonjour@rempart-extermination.ca",
         "emailHref": "mailto:bonjour@rempart-extermination.ca",
         "areaName": "North Shore of Montreal and Laval",
-        "hours": "Monday to Sunday, 7 a.m. to 9 p.m."
+        "hours": "Monday to Sunday, 7 a.m. to 9 p.m.",
+        "address": {
+          "streetAddress": "1450, boulevard Industriel",
+          "addressLocality": "Terrebonne",
+          "addressRegion": "QC",
+          "postalCode": "J6Y 1W8",
+          "addressCountry": "CA"
+        }
       }
     },
     {

@@ -68,6 +68,7 @@ usePageSeo({
     name: String(siteConfig.name ?? ''),
     ...(identity.value.phoneHref ? { telephone: identity.value.phoneHref.replace(/^tel:/, '') } : {}),
     ...(identity.value.emailHref ? { email: identity.value.emailHref.replace(/^mailto:/, '') } : {}),
+    ...(identity.value.address ? { address: identity.value.address } : {}),
     ...(identity.value.areaName ? { areaServed: [identity.value.areaName] } : {}),
     image: hero.value.visual.src
   }

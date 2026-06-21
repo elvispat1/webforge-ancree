@@ -250,7 +250,20 @@ const siteSettings = defineType({
     defineField({ name: 'emailDisplay', title: 'Courriel (affiche)', type: 'string' }),
     defineField({ name: 'emailHref', title: 'Courriel (href mailto:)', type: 'string' }),
     defineField({ name: 'areaName', title: 'Zone de service', type: 'string' }),
-    defineField({ name: 'hours', title: 'Heures', type: 'string' })
+    defineField({ name: 'hours', title: 'Heures', type: 'string' }),
+    // Adresse postale du siege (noeud LocalBusiness du SEO). Forme Schema.org.
+    defineField({
+      name: 'address',
+      title: 'Adresse postale',
+      type: 'object',
+      fields: [
+        defineField({ name: 'streetAddress', title: 'Rue et numero', type: 'string' }),
+        defineField({ name: 'addressLocality', title: 'Ville', type: 'string' }),
+        defineField({ name: 'addressRegion', title: 'Province', type: 'string' }),
+        defineField({ name: 'postalCode', title: 'Code postal', type: 'string' }),
+        defineField({ name: 'addressCountry', title: 'Pays', type: 'string' })
+      ]
+    })
   ],
   preview: { select: { language: 'language' }, prepare: ({ language }) => ({ title: 'Reglages du site', subtitle: (language || '').toUpperCase() }) }
 })
