@@ -34,6 +34,13 @@ export interface ContactForm {
     title: string
     body: string
   }
+  // Banniere affichee si la soumission echoue (reseau, refus Turnstile, erreur
+  // serveur). Le formulaire reste en place pour reessayer. Absente en demo (le
+  // succes y est toujours simule), mais le contenu existe pour le vrai endpoint.
+  errorBanner: {
+    title: string
+    body: string
+  }
   privacyNote?: string // note de confidentialite sous le bouton
 }
 
@@ -87,6 +94,10 @@ export function contactFixture(isEn: boolean): ContactContent {
           title: 'Message received, thank you.',
           body: 'A Rempart technician will get back to you shortly to set up a visit. For anything urgent, call us at 450 555 0199.'
         },
+        errorBanner: {
+          title: 'Your message did not go through.',
+          body: 'Please try again in a moment, or call us directly at 450 555 0199. We really do want to hear from you.'
+        },
         privacyNote: 'Your information stays with us and is only used to reply to your request.'
       }
     }
@@ -127,6 +138,10 @@ export function contactFixture(isEn: boolean): ContactContent {
       success: {
         title: 'Message reçu, merci.',
         body: 'Un technicien de Rempart vous revient sous peu pour fixer une visite. Pour une urgence, appelez-nous au 450 555 0199.'
+      },
+      errorBanner: {
+        title: 'L’envoi n’a pas fonctionné.',
+        body: 'Réessayez dans un moment, ou appelez-nous directement au 450 555 0199. On veut vraiment vous lire.'
       },
       privacyNote: 'Vos informations restent chez nous et servent seulement à répondre à votre demande.'
     }

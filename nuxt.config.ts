@@ -405,5 +405,24 @@ export default defineNuxtConfig({
       // jumeau EN n'a ni routeRule ni page -> rendu de l'app. On l'ecarte.
       ignore: ['/en/sitemap.xml']
     }
+  },
+
+  // Plomberie backend du formulaire de contact (TERRAIN, niveau demo; pattern
+  // adapte de webforge-minimaliste, voir server/api/contact.post.ts). Les cles
+  // privees restent cote serveur; turnstileSiteKey est publique (le widget la
+  // rend dans le navigateur). EN STATIQUE PUR (preset 'static', cas de la demo):
+  // contactDemo: true -> useContactForm simule le succes cote client, AUCUN
+  // backend appele, et la route /api/contact n'est meme pas bundlee. Un VRAI
+  // site client met contactDemo a false, pose les cles (Resend + Turnstile) et
+  // deploie en SSR (preset Workers): submit() poste alors vers /api/contact.
+  runtimeConfig: {
+    resendApiKey: process.env.RESEND_API_KEY,
+    turnstileSecretKey: process.env.TURNSTILE_SECRET_KEY,
+    contactToEmail: process.env.CONTACT_TO_EMAIL,
+    contactFromEmail: process.env.CONTACT_FROM_EMAIL,
+    public: {
+      turnstileSiteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY,
+      contactDemo: true
+    }
   }
 })

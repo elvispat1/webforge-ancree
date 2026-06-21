@@ -2,11 +2,13 @@
 /* Contact: le formulaire d'appel pose A COTE des coordonnees et de la zone de
  * service. Asymetrie posee (DESIGN.md): un panneau bleu nuit « coordonnees + zone »
  * avec le motif de couverture radial repris du bloc service-cities, et a cote la
- * carte blanche du formulaire. Le formulaire est FACTICE pour l'instant (composable
- * client-only, aucun backend, pas de Turnstile): il valide cote client, deplace le
- * focus vers le premier champ en faute, et bascule vers un panneau de confirmation
- * au succes. Le bouton d'envoi n'est JAMAIS desactive; la double soumission est
- * gardee par status === 'loading'. Aucune numerotation. */
+ * carte blanche du formulaire. Le formulaire valide cote client, deplace le focus
+ * vers le premier champ en faute, et bascule vers un panneau de confirmation au
+ * succes. Plomberie reelle TERRAIN (useContactForm + honeypot + Turnstile + route
+ * /api/contact, niveau demo): en statique pur le succes est simule cote client
+ * (contactDemo), Turnstile dormant (aucune cle publique). Le bouton d'envoi n'est
+ * JAMAIS desactive; la double soumission est gardee par status === 'loading'.
+ * Aucune numerotation. */
 import type { BlockBase } from '~/types/blocks'
 import type { ContactContent } from '~/content/contact'
 import { useContactForm, type ContactField } from '~/composables/useContactForm'
@@ -14,7 +16,7 @@ import { useContactForm, type ContactField } from '~/composables/useContactForm'
 type ContactBlock = BlockBase<'contact'> & ContactContent
 
 defineProps<ContactBlock>()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // Messages d'erreur (chrome i18n, pas du contenu): generiques et reutilisables.
 const errorMessages: Record<ContactField, string> = {
@@ -23,7 +25,13 @@ const errorMessages: Record<ContactField, string> = {
   message: ''
 }
 
-const { status, values, errors, submit, validate } = useContactForm(errorMessages)
+const { status, values, errors, turnstileToken, honeypot, submit, validate } = useContactForm(errorMessages)
+
+// Cle publique Turnstile: vide en demo -> le widget n'est pas rendu (le geste
+// anti-bot est TERRAIN, actif seulement sur un vrai site client). Le widget reste
+// monte/demonte par le v-if; on garde une ref pour le reinitialiser apres erreur.
+const { public: { turnstileSiteKey } } = useRuntimeConfig()
+const turnstile = ref<{ reset: () => void } | null>(null)
 
 // Identifiants stables des champs, pour l'association label / aria-describedby.
 const fieldId: Record<ContactField, string> = {
@@ -34,8 +42,8 @@ const fieldId: Record<ContactField, string> = {
 
 const successPanel = ref<{ focus: () => void } | null>(null)
 
-function onSubmit(): void {
-  submit((firstInvalid) => {
+async function onSubmit(): Promise<void> {
+  await submit((firstInvalid) => {
     // Replace le focus sur le premier champ en faute (accessibilite).
     const el = document.getElementById(fieldId[firstInvalid])
     el?.focus()
@@ -43,11 +51,16 @@ function onSubmit(): void {
 }
 
 // Au succes, on deplace le focus vers le panneau de confirmation pour que le
-// lecteur d'ecran annonce le changement d'etat.
+// lecteur d'ecran annonce le changement d'etat. A l'echec, un nouveau jeton
+// Turnstile est requis pour reessayer: on vide le jeton et on reinitialise le
+// widget (la banniere d'erreur, elle, s'annonce via role="alert").
 watch(status, async (next) => {
   if (next === 'success') {
     await nextTick()
     successPanel.value?.focus()
+  } else if (next === 'error') {
+    turnstileToken.value = ''
+    turnstile.value?.reset()
   }
 })
 
@@ -107,7 +120,7 @@ const NuxtLink = resolveComponent('NuxtLink')
           </div>
         </aside>
 
-        <!-- Formulaire d'appel (factice) ou confirmation au succes. -->
+        <!-- Formulaire d'appel ou confirmation au succes. -->
         <div class="contact__form-col" data-reveal>
           <FormSuccess
             v-if="status === 'success'"
@@ -116,6 +129,20 @@ const NuxtLink = resolveComponent('NuxtLink')
             :body="form.success.body"
           />
           <form v-else class="contact__form" novalidate @submit.prevent="onSubmit">
+            <!-- Honeypot anti-bot: hors ecran, ignore des humains, rempli par les
+                 robots. Le serveur renvoie un succes silencieux s'il est rempli. -->
+            <div class="contact__hp" aria-hidden="true">
+              <label for="contact-website">Website</label>
+              <input
+                id="contact-website"
+                v-model="honeypot"
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              >
+            </div>
+
             <Input
               :id="fieldId.name"
               v-model="values.name"
@@ -157,6 +184,33 @@ const NuxtLink = resolveComponent('NuxtLink')
                 {{ status === 'loading' ? form.submitLoading : form.submitIdle }}
               </Button>
             </div>
+
+            <!-- Banniere d'echec: le formulaire reste en place pour reessayer.
+                 role="alert" annonce le changement au lecteur d'ecran. Bord plein
+                 ambre/brique (jamais de filet lateral), ton chaud, posee. -->
+            <div v-if="status === 'error'" class="contact__error" role="alert">
+              <Icon name="lucide:triangle-alert" class="contact__error-icon" aria-hidden="true" />
+              <div class="contact__error-text">
+                <p class="contact__error-title">{{ form.errorBanner.title }}</p>
+                <p class="contact__error-body wf-body-3">{{ form.errorBanner.body }}</p>
+              </div>
+            </div>
+
+            <!-- Anti-bot Turnstile, sous le bouton. Rendu seulement si une cle
+                 publique est configuree (donc absent en demo). La boite est rendue
+                 par Cloudflare; la langue suit la locale du site. -->
+            <ClientOnly>
+              <TurnstileWidget
+                v-if="turnstileSiteKey"
+                ref="turnstile"
+                :site-key="turnstileSiteKey"
+                action="contact"
+                :language="locale"
+                @success="(token: string) => (turnstileToken = token)"
+                @expired="() => (turnstileToken = '')"
+                @error="() => (turnstileToken = '')"
+              />
+            </ClientOnly>
 
             <p v-if="form.privacyNote" class="contact__privacy wf-body-3">
               <Icon name="lucide:lock" class="contact__privacy-icon" aria-hidden="true" />
@@ -277,6 +331,50 @@ const NuxtLink = resolveComponent('NuxtLink')
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Honeypot: hors ecran sans perturber la mise en page, hors tabulation. */
+.contact__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Banniere d'echec: region teintee a bord plein (pas de filet lateral, banni),
+ * ton brique chaud derive de --error, icone et titre slab poses. */
+.contact__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.8rem 2rem;
+  background: var(--error-soft);
+  border: var(--line-width) solid color-mix(in oklch, var(--error) 38%, transparent);
+  border-radius: var(--radius);
+}
+.contact__error-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  flex: none;
+  margin-top: 0.2rem;
+  color: var(--error);
+}
+.contact__error-text {
+  display: grid;
+  gap: 0.4rem;
+}
+.contact__error-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.3;
+  color: var(--text-base);
+}
+.contact__error-body {
+  margin: 0;
+  color: var(--text-muted);
 }
 .contact__privacy {
   display: flex;
