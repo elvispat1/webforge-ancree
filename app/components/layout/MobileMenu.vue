@@ -1,25 +1,64 @@
 <script setup lang="ts">
-/* Menu mobile: panneau plein ecran ouvert depuis le burger de l'en-tete. Ferme
- * au clic sur un lien, sur le fond, ou avec Echap; verrouille le defilement et
- * pose le focus sur le premier lien. Rendu en position fixe (pas de Teleport,
- * pour rester sain au SSR). Recoit des liens deja normalises {label, href}
- * (l'en-tete les construit selon le mode: ancres en landing, routes en multipage). */
+/* Menu mobile ouvert depuis le burger de l'en-tete: plein ecran au telephone,
+ * tiroir lateral en tablette (768-1024). Ferme au clic sur un lien, sur le fond,
+ * ou avec Echap. Modale accessible: verrouille le defilement, pose le focus a
+ * l'ouverture, piege le focus tant qu'elle est ouverte (aria-modal), et rend le
+ * focus au burger a la fermeture. Rendu en position fixe (pas de Teleport, pour
+ * rester sain au SSR). Recoit des liens deja normalises {label, href} (l'en-tete
+ * les construit selon le mode: ancres en landing, routes en multipage). */
 interface MenuLink {
   label: string
   href: string
 }
 
-const props = defineProps<{ open: boolean; links: MenuLink[] }>()
+const props = withDefaults(
+  defineProps<{ open: boolean; mode?: 'multipage' | 'landing'; links: MenuLink[] }>(),
+  { mode: 'landing' }
+)
 const emit = defineEmits<{ close: [] }>()
 
 const { t, locale } = useI18n()
 const panelRef = ref<HTMLElement | null>(null)
+// Element focalise avant l'ouverture (le burger): on lui rend le focus a la
+// fermeture, pour ne pas perdre l'utilisateur clavier au milieu de la page.
+let lastFocused: HTMLElement | null = null
 
 function close(): void {
   emit('close')
 }
+
+// Cibles focalisables de la modale, dans l'ordre du DOM (base du piege de focus).
+function focusables(): HTMLElement[] {
+  if (!panelRef.value) return []
+  return Array.from(
+    panelRef.value.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  )
+}
+
 function onKeydown(e: KeyboardEvent): void {
-  if (e.key === 'Escape') close()
+  if (e.key === 'Escape') {
+    close()
+    return
+  }
+  // Piege de focus: Tab boucle a l'interieur. aria-modal le promet aux lecteurs
+  // d'ecran; ceci tient la promesse au clavier, sinon le focus file derriere la
+  // modale, sur la page masquee.
+  if (e.key !== 'Tab') return
+  const items = focusables()
+  if (items.length === 0) return
+  const first = items[0]
+  const last = items[items.length - 1]
+  const active = document.activeElement as HTMLElement | null
+  const inside = !!active && !!panelRef.value?.contains(active)
+  if (e.shiftKey && (active === first || !inside)) {
+    e.preventDefault()
+    last.focus()
+  } else if (!e.shiftKey && (active === last || !inside)) {
+    e.preventDefault()
+    first.focus()
+  }
 }
 
 watch(
@@ -28,12 +67,13 @@ watch(
     if (!import.meta.client) return
     document.body.style.overflow = isOpen ? 'hidden' : ''
     if (isOpen) {
+      lastFocused = document.activeElement as HTMLElement | null
       window.addEventListener('keydown', onKeydown)
-      nextTick(() => {
-        panelRef.value?.querySelector<HTMLElement>('a, button')?.focus()
-      })
+      nextTick(() => focusables()[0]?.focus())
     } else {
       window.removeEventListener('keydown', onKeydown)
+      lastFocused?.focus()
+      lastFocused = null
     }
   }
 )
@@ -60,9 +100,18 @@ onBeforeUnmount(() => {
         </div>
 
         <nav class="mm__nav" :aria-label="t('a11y.main_nav')">
-          <a v-for="link in links" :key="link.href" :href="link.href" class="mm__link" @click="close">
-            {{ link.label }}
-          </a>
+          <!-- Multipage: routes internes en NuxtLink (navigation instantanee, pas de
+               rechargement). Landing: ancres du one-pager en <a> (defilement en page). -->
+          <template v-if="mode === 'multipage'">
+            <NuxtLink v-for="link in links" :key="link.href" :to="link.href" class="mm__link" @click="close">
+              {{ link.label }}
+            </NuxtLink>
+          </template>
+          <template v-else>
+            <a v-for="link in links" :key="link.href" :href="link.href" class="mm__link" @click="close">
+              {{ link.label }}
+            </a>
+          </template>
         </nav>
 
         <div class="mm__actions">
@@ -100,11 +149,18 @@ onBeforeUnmount(() => {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: min(86vw, 40rem);
+  width: 100%; /* mobile: la modale prend tout l'ecran */
   height: 100%;
   padding: 2.4rem;
   background: var(--bg-base);
   box-shadow: var(--elev-high);
+}
+/* Tablette (768-1024): tiroir lateral, pas plein ecran (le burger disparait des
+   1024, ou la nav desktop reprend). */
+@container site (min-width: 768px) {
+  .mm__panel {
+    width: min(86vw, 40rem);
+  }
 }
 .mm__bar {
   display: flex;
