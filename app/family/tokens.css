@@ -19,7 +19,8 @@
   --radius-lg:   2rem;   /* 20px, grande image du heros, cartes vedettes */
   --radius-pill: 99rem;  /* pastilles d'ancrage local */
 
-  --header-height: 7.2rem; /* 72px, en-tete collant */
+  --header-height: 7.2rem; /* 72px, en-tete collant (etat docke/solide). Reference des offsets (scroll-padding, sticky, padding heros). */
+  --header-height-open: 8rem; /* 80px, en-tete a peine deploye au sommet du heros (transparent); compaction discrete vers --header-height en dockant */
 
   /* Focus clavier: anneau de confiance, jamais supprime. Tokenise pour que les
    * composants (bouton) l'epousent au lieu d'un rayon en dur. */

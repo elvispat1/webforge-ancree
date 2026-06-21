@@ -54,11 +54,12 @@
     "see_all": "See all cities"
   },
   "contact": {
-    "phone_display": "450 555 0199",
+    "phone_display": "450 555-0199",
     "phone_href": "tel:+14505550199",
     "email_display": "bonjour{'@'}rempart-extermination.ca",
     "email_href": "mailto:bonjour{'@'}rempart-extermination.ca",
     "call_short": "Call",
+    "urgent_aria": "Emergency, call {number}",
     "error_name": "Please enter your name.",
     "error_contact": "Please enter a valid phone number or email.",
     "required": "required",

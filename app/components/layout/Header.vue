@@ -1,9 +1,11 @@
 <script setup lang="ts">
-/* En-tete collant avec numero (langage de conversion grave de la famille).
- * Transparent et clair par-dessus le heros full bleed; devient blanc solide une
- * fois le heros quitte au defilement; solide d'emblee sur une page sans heros.
- * Deux modes: 'landing' (one-pager: ancres + scrollspy, qualifiees par la racine
- * `home`) et 'multipage' (liens de route via le route-map). */
+/* En-tete collant avec numero d'urgence (langage de conversion grave de la
+ * famille). Par-dessus le heros full bleed: transparent, clair et un cran plus
+ * haut (deploye). Des qu'on descend (SOLID_AFTER), il dock: passe au blanc solide
+ * et se compacte a sa hauteur collante, d'un seul geste. Solide d'emblee sur une
+ * page sans heros. Se masque au defilement vers le bas, revient vers le haut.
+ * Deux modes: 'landing' (one-pager: ancres, qualifiees par la racine `home`) et
+ * 'multipage' (liens de route via le route-map). */
 import { routePath } from '~/config/route-map'
 
 const props = withDefaults(
@@ -27,11 +29,18 @@ const otherLocale = computed<'fr' | 'en'>(() => (locale.value === 'fr' ? 'en' : 
 // Nav multipage: source partagee avec le pied de page (useMultipageNav).
 const multipageLinks = useMultipageNav()
 
+// La FAQ ne vit que dans le pied de page: on la retire de l'en-tete (nav desktop
+// ET menu mobile) sans toucher aux sources partagees, que le pied de page
+// continue de consommer telles quelles.
+const faqRoute = computed(() => routePath('faq', locale.value as 'fr' | 'en'))
+const headerMultipageLinks = computed(() => multipageLinks.value.filter((l) => l.to !== faqRoute.value))
+const headerLandingLinks = computed(() => links.filter((l) => l.labelKey !== 'nav.faq'))
+
 // Liens du menu mobile, normalises {label, href} selon le mode (route ou ancre).
 const menuLinks = computed(() =>
   props.mode === 'multipage'
-    ? multipageLinks.value.map((l) => ({ label: l.label, href: l.to }))
-    : links.map((l) => ({ label: t(l.labelKey), href: landingHref(l.href) }))
+    ? headerMultipageLinks.value.map((l) => ({ label: l.label, href: l.to }))
+    : headerLandingLinks.value.map((l) => ({ label: t(l.labelKey), href: landingHref(l.href) }))
 )
 const brandTo = computed(() =>
   props.mode === 'multipage' ? routePath('home', locale.value as 'fr' | 'en') : localePath('/')
@@ -44,22 +53,62 @@ function landingHref(href: string): string {
 
 const solid = ref(false)
 const menuOpen = ref(false)
+// Bascule transparent -> solide tres pres du haut: le heros garde un bref moment
+// pleine image, puis l'en-tete passe au blanc lisible. Petit seuil pour que la nav
+// ne flotte jamais, illisible, par-dessus le titre clair du heros.
+const SOLID_AFTER = 24
 let heroH = 0
+
+// Auto-masquage au defilement (mecanique reprise de la famille Minimaliste):
+// l'en-tete se retire vers le haut quand on descend (au-dela de sa propre
+// hauteur, pour ne pas disparaitre trop tot), et revient des qu'on remonte.
+// Hysteresis de quelques pixels pour ignorer les micro-mouvements (anti-jitter).
+// Le seuil = la hauteur REELLE de l'en-tete, mesuree au montage et suivie au
+// redimensionnement: --header-height est fluide, un px en dur se desynchroniserait.
+const headerRef = ref<HTMLElement | null>(null)
+const hidden = ref(false)
+const hideAfter = ref(0)
+const JITTER = 4
+let lastScrollY = 0
+let headerObserver: ResizeObserver | null = null
 
 function measureHero(): void {
   const hero = document.querySelector('.hero') as HTMLElement | null
   heroH = hero ? hero.offsetHeight : 0
 }
 function onScroll(): void {
-  solid.value = heroH === 0 ? true : window.scrollY > Math.max(0, heroH - 140)
+  const y = window.scrollY
+  // Transparent uniquement tout en haut du heros; solide des qu'on descend.
+  // Page sans heros (heroH === 0) = solide d'emblee.
+  solid.value = heroH === 0 ? true : y > SOLID_AFTER
+
+  const delta = y - lastScrollY
+  if (delta > JITTER && y > hideAfter.value) {
+    hidden.value = true
+  } else if (delta < -JITTER) {
+    hidden.value = false
+  }
+  lastScrollY = y
 }
 function onResize(): void {
   measureHero()
   onScroll()
 }
+// Garde clavier (miroir du :focus-within CSS): si le focus entre dans l'en-tete
+// masque, on le revele pour qu'il ne se recache pas brutalement au tab suivant.
+function onHeaderFocusIn(): void {
+  hidden.value = false
+}
 
 onMounted(() => {
   measureHero()
+  if (headerRef.value) {
+    hideAfter.value = headerRef.value.offsetHeight
+    headerObserver = new ResizeObserver(() => {
+      if (headerRef.value) hideAfter.value = headerRef.value.offsetHeight
+    })
+    headerObserver.observe(headerRef.value)
+  }
   onScroll()
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('resize', onResize, { passive: true })
@@ -67,6 +116,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll)
   window.removeEventListener('resize', onResize)
+  headerObserver?.disconnect()
 })
 
 // L'en-tete vit dans le layout persistant: il ne se remonte pas au changement de
@@ -86,7 +136,12 @@ watch(() => route.fullPath, () => {
 </script>
 
 <template>
-  <header class="header" :class="{ 'header--solid': solid }">
+  <header
+    ref="headerRef"
+    class="header"
+    :class="{ 'header--solid': solid, 'header--hidden': hidden }"
+    @focusin="onHeaderFocusIn"
+  >
     <div class="wf-container header__row">
       <NuxtLink :to="brandTo" class="header__brand" :aria-label="t('site.home_aria')">
         <span class="header__mark" aria-hidden="true">
@@ -100,12 +155,12 @@ watch(() => route.fullPath, () => {
 
       <nav class="header__nav" :aria-label="t('a11y.main_nav')">
         <template v-if="mode === 'multipage'">
-          <NuxtLink v-for="link in multipageLinks" :key="link.to" :to="link.to" class="header__link">
+          <NuxtLink v-for="link in headerMultipageLinks" :key="link.to" :to="link.to" class="header__link">
             {{ link.label }}
           </NuxtLink>
         </template>
         <template v-else>
-          <a v-for="link in links" :key="link.href" :href="landingHref(link.href)" class="header__link">
+          <a v-for="link in headerLandingLinks" :key="link.href" :href="landingHref(link.href)" class="header__link">
             {{ t(link.labelKey) }}
           </a>
         </template>
@@ -113,19 +168,20 @@ watch(() => route.fullPath, () => {
 
       <div class="header__actions">
         <SwitchLocalePathLink class="header__lang" :locale="otherLocale">{{ t('home.switch') }}</SwitchLocalePathLink>
-        <a class="header__phone" :href="t('contact.phone_href')">
-          <Icon name="lucide:phone" class="header__phone-icon" aria-hidden="true" />
-          {{ t('contact.phone_display') }}
-        </a>
+        <!-- CTA d'urgence: un seul geste d'appel. Le libelle EST le numero (confiance
+             + clic-pour-appeler), precede d'une icone cercle-alerte (alerte douce) de la
+             meme couleur que le texte. Bouton ambre, langage d'appel de la famille.
+             L'aria porte le contexte « urgence » que l'icone seule ne dit pas. -->
         <Button
           :href="t('contact.phone_href')"
+          :aria-label="t('contact.urgent_aria', { number: t('contact.phone_display') })"
           kind="anchor"
           variant="call"
           size="sm"
-          icon="lucide:phone"
+          icon="lucide:circle-alert"
           class="header__cta"
         >
-          {{ t('contact.call_short') }}
+          {{ t('contact.phone_display') }}
         </Button>
         <button
           type="button"
@@ -140,7 +196,7 @@ watch(() => route.fullPath, () => {
       </div>
     </div>
 
-    <MobileMenu :open="menuOpen" :links="menuLinks" @close="menuOpen = false" />
+    <MobileMenu :open="menuOpen" :mode="mode" :links="menuLinks" @close="menuOpen = false" />
   </header>
 </template>
 
@@ -151,9 +207,19 @@ watch(() => route.fullPath, () => {
   z-index: 50;
   color: var(--text-ondeep);
   transition:
+    transform var(--motion-duration-expand) var(--motion-ease-settle),
     background-color var(--motion-duration-line) var(--motion-ease-settle),
     color var(--motion-duration-line) var(--motion-ease-settle),
     box-shadow var(--motion-duration-line) var(--motion-ease-settle);
+}
+/* Auto-masquage: l'en-tete se retire vers le haut (il deborde hors viewport).
+   Le focus clavier le rappelle: une cible focalisee ne doit jamais rester
+   hors-champ (miroir du garde onHeaderFocusIn). */
+.header--hidden {
+  transform: translateY(-100%);
+}
+.header--hidden:focus-within {
+  transform: none;
 }
 .header--solid {
   background: var(--bg-base);
@@ -167,6 +233,10 @@ watch(() => route.fullPath, () => {
   justify-content: space-between;
   gap: 2rem;
   min-height: var(--header-height);
+  /* Compaction au dock, synchronisee avec le passage au blanc (meme courbe et
+     duree). L'en-tete etant fixe, ce changement de hauteur ne reflue pas la
+     page: il ne recadre que la rangee, c'est fluide. */
+  transition: min-height var(--motion-duration-line) var(--motion-ease-settle);
 }
 
 .header__brand {
@@ -245,23 +315,6 @@ watch(() => route.fullPath, () => {
   align-items: center;
   gap: 1.4rem;
 }
-.header__phone {
-  display: none;
-  align-items: center;
-  gap: 0.7rem;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: inherit;
-  text-decoration: none;
-}
-.header__phone:hover {
-  color: var(--accent-trust);
-}
-.header__phone-icon {
-  width: 1.8rem;
-  height: 1.8rem;
-}
 .header__lang {
   display: none;
   align-items: center;
@@ -296,12 +349,15 @@ watch(() => route.fullPath, () => {
 }
 
 @container site (min-width: 1024px) {
+  /* Dock: deploye (plus haut) au sommet du heros, puis compacte a la hauteur
+     collante des qu'il dock (passage au solide). Desktop seulement: au mobile il
+     reste compact pour ne pas manger le petit viewport. */
+  .header:not(.header--solid) .header__row {
+    min-height: var(--header-height-open);
+  }
   .header__nav {
     display: flex;
     gap: 2.8rem;
-  }
-  .header__phone {
-    display: inline-flex;
   }
   .header__lang {
     display: inline-flex;
