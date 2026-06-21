@@ -65,6 +65,21 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll)
   window.removeEventListener('resize', onResize)
 })
+
+// L'en-tete vit dans le layout persistant: il ne se remonte pas au changement de
+// route. Sans ca, la hauteur de heros mesuree au montage reste figee, et arriver
+// de l'accueil full bleed (classe .hero) sur une page interne claire (masthead
+// page-hero, sans .hero) laisse l'en-tete en mode transparent: texte blanc
+// invisible sur fond clair. On re-mesure et on reevalue l'etat solide a chaque
+// navigation (aucune transition de page configuree -> le DOM de la nouvelle page
+// est present au nextTick).
+const route = useRoute()
+watch(() => route.fullPath, () => {
+  nextTick(() => {
+    measureHero()
+    onScroll()
+  })
+})
 </script>
 
 <template>
