@@ -19,6 +19,10 @@ export default defineCliConfig({
   // À CHANGER au transfert client (sinon `sanity deploy` viserait l'URL de la démo).
   studioHost: 'webforge-ancree',
   // deployment.appId: figé au PREMIER `sanity deploy` de la famille Ancrée (le
-  // CLI l'inscrit ici lui-même). Retiré du gabarit Minimaliste: l'app Studio
-  // d'Ancrée a sa propre identité, distincte de celle de la démo Minimaliste.
+  // CLI le propose, on le fige ici pour rendre les déploiements suivants non
+  // interactifs). Propre à l'app Studio d'Ancrée (webforge-ancree.sanity.studio),
+  // distincte de la démo Minimaliste. À CHANGER au transfert client.
+  deployment: {
+    appId: 'cj30bl1gqvc56km7d170ksyq',
+  },
 })
