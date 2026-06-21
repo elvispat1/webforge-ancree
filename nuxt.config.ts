@@ -366,14 +366,20 @@ export default defineNuxtConfig({
     // patron Minimaliste (site.name = suffixe de titres depuis le CMS).
     name: siteBrandName,
     defaultLocale: 'fr',
+    // Og-image de marque par defaut (repli social quand une page ne fournit pas
+    // son propre visuel): carte typographique Ancree/Rempart, fabriquee EXACTEMENT
+    // en 1200x630 (public/og-rempart-extermination.png). Chemin relatif, resolu en
+    // URL absolue par usePageSeo. Cle custom du site config, lue via useSiteConfig().
+    defaultOgImage: '/og-rempart-extermination.png',
     // Gabarit non indexable tant qu'aucun vrai site n'est en ligne.
     indexable: false
   },
 
   // Pas de génération d'OG en runtime (aucune dépendance chromium en V1).
   // Les og:image sont servies en statique par usePageSeo: visuel propre a la
-  // page (cover d'article) en URL absolue derivee de site.url. Repli de marque
-  // (og-image par defaut) = point 7 SEO.
+  // page (cover d'article) en URL absolue derivee de site.url, avec repli sur
+  // l'og-image de marque (site.defaultOgImage ci-dessus) quand la page n'en
+  // fournit pas. La carte de marque est un asset prerendu dans public/.
   ogImage: { enabled: false },
 
   // Sitemap: pages indexables, alternates hreflang. Pages FIXES couvertes par la

@@ -8,12 +8,12 @@
 // @nuxtjs/seo (useSeoMeta, useSchemaOrg, define*).
 //
 // PORT de webforge-minimaliste (plomberie SEO éprouvée), adapté à Ancrée:
-//   - Pas de dépendance usePayload: la pipeline de payload unique (plugin
-//     01.content) est une étape ultérieure du roadmap. Les replis SEO globaux
-//     du CMS (description et og:image par défaut, siteSettings.seo) s'y
-//     brancheront au même point — la signature ci-dessous ne change pas.
-//   - og:image émise UNIQUEMENT quand la page fournit un visuel: pas de repli
-//     code en dur tant que l'og-image de marque n'existe pas (point 7 SEO).
+//   - Pas de dépendance usePayload: la source des défauts SEO est la config de
+//     site (nuxt.config), pas le payload CMS. Un repli de description global
+//     pourra s'y ajouter au même point sans changer la signature.
+//   - og:image: visuel propre à la page, avec repli sur l'og-image de marque
+//     par défaut (site.defaultOgImage). Dimensions 1200x630 déclarées quand
+//     elles sont garanties (crop CDN ou carte de marque purpose-built).
 //
 // Agnostique de la famille: aucun contenu de site ici. La marque vient de la
 // config de site (nuxt.config `site`) et des arguments.
@@ -140,18 +140,25 @@ export function usePageSeo(input: PageSeoInput): void {
 
   // ── Métas: titre, description, OpenGraph, robots ────────────────────────
   const meta: UseSeoMetaInput = { title: input.title }
-  // og:image servie UNIQUEMENT quand la page fournit un visuel. Le repli de
-  // marque (og-image par défaut) et les replis CMS arrivent au point 7 SEO /
-  // étape 5 pipeline, sans toucher cette signature.
-  if (input.image) {
-    const og = resolveImage(input.image, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT)
+  // Chaîne og:image: visuel propre à la page -> og-image de marque par défaut
+  // (site.defaultOgImage, nuxt.config). La page d'accueil et les billets portent
+  // leur propre visuel; les pages sans visuel (légales, FAQ, contact...) tombent
+  // sur la carte de marque, fabriquée exactement en 1200x630.
+  const defaultOgImage = site.defaultOgImage ? String(site.defaultOgImage) : undefined
+  // `||` (pas `??`): une image de page vide ('' d'un champ Sanity optionnel) doit
+  // retomber sur le defaut de marque, pas court-circuiter l'og:image.
+  const ogSource = input.image || defaultOgImage
+  if (ogSource) {
+    const usingDefault = !input.image && defaultOgImage !== undefined
+    const og = resolveImage(ogSource, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT)
     meta.ogImage = og.url
-    // Dimensions déclarées UNIQUEMENT quand le crop CDN les garantit (URL
-    // Sanity). Sur une image locale non recadrée (fixtures démo), on les omet:
-    // annoncer 1200x630 mentirait aux scrapers sociaux si le fichier a un autre
-    // format (ex. un visuel portrait), qui rogneraient mal l'aperçu. Sans
-    // dimensions, ils lisent les vraies du fichier.
-    if (og.cropped) {
+    // Dimensions déclarées seulement quand elles sont GARANTIES: crop CDN (URL
+    // Sanity, normalisée à 1200x630) OU og-image de marque par défaut (asset
+    // fabriqué exactement à ces dimensions). Sur une image locale propre à la
+    // page, de format inconnu, on les omet: annoncer 1200x630 mentirait aux
+    // scrapers sociaux si le fichier a un autre format. Sans dimensions, ils
+    // lisent les vraies du fichier.
+    if (og.cropped || usingDefault) {
       meta.ogImageWidth = OG_IMAGE_WIDTH
       meta.ogImageHeight = OG_IMAGE_HEIGHT
     }
