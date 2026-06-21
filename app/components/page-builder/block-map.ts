@@ -9,6 +9,7 @@ import Testimonials from './block/testimonials.vue'
 import Faq from './block/faq.vue'
 import CtaBand from './block/cta-band.vue'
 import Contact from './block/contact.vue'
+import Process from './block/process.vue'
 
 export const regularBlockMap = {
   'trust-bar': TrustBar,
@@ -18,7 +19,8 @@ export const regularBlockMap = {
   testimonials: Testimonials,
   faq: Faq,
   'cta-band': CtaBand,
-  contact: Contact
+  contact: Contact,
+  process: Process
 } as const
 
 export type RegularBlockType = keyof typeof regularBlockMap

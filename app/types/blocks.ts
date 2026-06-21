@@ -8,6 +8,7 @@ import type { TestimonialsContent } from '~/content/testimonials'
 import type { FaqContent } from '~/content/faq'
 import type { CtaBandContent } from '~/content/cta-band'
 import type { ContactContent } from '~/content/contact'
+import type { ProcessContent } from '~/content/process'
 import type {
   ArticleLeadContent,
   ArticleRichTextContent,
@@ -35,6 +36,7 @@ export type TestimonialsBlock = BlockBase<'testimonials'> & TestimonialsContent
 export type FaqBlock = BlockBase<'faq'> & FaqContent
 export type CtaBandBlock = BlockBase<'cta-band'> & CtaBandContent
 export type ContactBlock = BlockBase<'contact'> & ContactContent
+export type ProcessBlock = BlockBase<'process'> & ProcessContent
 
 export type PageBlock =
   | TrustBarBlock
@@ -45,6 +47,7 @@ export type PageBlock =
   | FaqBlock
   | CtaBandBlock
   | ContactBlock
+  | ProcessBlock
 
 // Blocs du corps d'article (catalogue a part, comme les heros). _type courts.
 export type ArticleLeadBlock = BlockBase<'lead'> & ArticleLeadContent

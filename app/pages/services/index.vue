@@ -1,11 +1,17 @@
 <script setup lang="ts">
 /* Index des services. Liste tous les services depuis Sanity (langue courante),
  * repli sur la fixture si vide. Masthead = bloc hero-page (catalogue de heros),
- * fil d'Ariane localise depuis le route-map. */
+ * fil d'Ariane localise depuis le route-map. Sous la grille, un corps de page:
+ * un bloc « processus » (comment on intervient) puis la REUTILISATION des blocs
+ * villes (SEO local) et bandeau d'appel du payload de l'accueil (contenu reel
+ * partage, repli fixtures), pour que la page ait du corps et mene a la conversion. */
 import { breadcrumbsFor } from '~/config/route-map'
-import type { HeroPageBlock } from '~/types/blocks'
+import { processFixture } from '~/content/process'
+import type { HeroPageBlock, PageBlock, CtaBandBlock, ServiceCitiesBlock } from '~/types/blocks'
 
 const { t, locale } = useI18n()
+const isEn = computed(() => locale.value === 'en')
+const localePrefix = computed(() => (isEn.value ? '/en' : ''))
 
 // Masthead de la page (bloc du catalogue de heros, rendu par <Hero>). L'eyebrow
 // reprend la zone de service (motif local d'Ancree), distinct du fil d'Ariane.
@@ -22,6 +28,37 @@ const heroBlock = computed<HeroPageBlock>(() => ({
 // Cartes de services depuis le payload unique (plugin 01.content), repli fixtures.
 const services = useServicesIndex()
 
+// Contenu de l'accueil (payload unique, repli fixtures): on y puise les blocs a
+// reutiliser plus bas, sans dupliquer le contenu.
+const home = useHome()
+
+// Recable une ancre du one-pager (#contact) vers la vraie route /contact (meme
+// traitement que l'accueil pour le geste secondaire du bandeau d'appel).
+function toContactRoute(href: string | undefined): string | undefined {
+  return href === '#contact' ? `${localePrefix.value}/contact` : href
+}
+
+// Corps de page sous la grille: nouveau bloc processus, puis villes + bandeau
+// d'appel repris de l'accueil (presents seulement s'ils existent au payload).
+const bodyBlocks = computed<PageBlock[]>(() => {
+  const out: PageBlock[] = [
+    { _type: 'process', _key: 'process', ...processFixture(isEn.value) }
+  ]
+  const cities = home.value.blocks.find((b): b is ServiceCitiesBlock => b._type === 'service-cities')
+  if (cities) out.push({ ...cities, _key: 'cities' })
+  const cta = home.value.blocks.find((b): b is CtaBandBlock => b._type === 'cta-band')
+  if (cta) {
+    out.push({
+      ...cta,
+      _key: 'cta-band',
+      secondaryCta: cta.secondaryCta
+        ? { ...cta.secondaryCta, href: toContactRoute(cta.secondaryCta.href)! }
+        : undefined
+    })
+  }
+  return out
+})
+
 // CollectionPage (index de services). Fil d'Ariane = route-map.
 usePageSeo({
   title: t('pages.services_heading'),
@@ -37,7 +74,7 @@ usePageSeo({
 
     <div class="wf-container svc__body">
       <ul class="svc__grid">
-        <li v-for="(s, i) in services" :key="s.title" class="svc__card" :class="{ 'svc__card--featured': s.featured }">
+        <li v-for="s in services" :key="s.title" class="svc__card" :class="{ 'svc__card--featured': s.featured }">
           <span class="svc__icon-wrap">
             <Icon v-if="s.icon" :name="s.icon" class="svc__icon" aria-hidden="true" />
           </span>
@@ -46,6 +83,8 @@ usePageSeo({
         </li>
       </ul>
     </div>
+
+    <PageBuilder :blocks="bodyBlocks" reveal />
   </div>
 </template>
 
