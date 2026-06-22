@@ -6207,7 +6207,7 @@
           "current": "prevention"
         },
         "description": "Des gestes simples pour garder les nuisibles dehors avant qu'ils ne s'installent.",
-        "order": 0
+        "order": 2
       }
     },
     {
@@ -6221,7 +6221,7 @@
           "current": "prevention"
         },
         "description": "Simple habits to keep pests out before they ever settle in.",
-        "order": 0
+        "order": 2
       }
     },
     {

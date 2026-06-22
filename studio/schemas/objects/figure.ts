@@ -27,12 +27,16 @@ export const figure = defineType({
       type: 'image',
       options: { hotspot: true },
     }),
-    // Texte alternatif RECOMMANDÉ, jamais bloquant: validation .warning() (et non
-    // .required() comme label et caption). Choix délibéré: au rendu, l'attribut alt
-    // est TOUJOURS présent, vide au pire (alt=""). Un attribut absent serait un échec
-    // WCAG, tandis qu'un alt vide marque correctement une image décorative pour les
-    // lecteurs d'écran. D'où l'absence de champ « décorative » distinct: une image
-    // décorative se déclare en laissant l'alt vide.
+    // Texte alternatif RECOMMANDÉ, jamais bloquant: validation .warning(). Au rendu,
+    // l'attribut alt est TOUJOURS présent, vide au pire (alt=""). Un attribut absent
+    // serait un échec WCAG, tandis qu'un alt vide marque correctement une image
+    // décorative pour les lecteurs d'écran. D'où l'absence de champ « décorative »
+    // distinct: une image décorative se déclare en laissant l'alt vide.
+    //
+    // DIVERGENCE ASSUMÉE vs Minimaliste (label + caption y sont required): dans la
+    // peau Ancrée, label et caption restent OPTIONNELS. Les héros pleine image
+    // n'affichent jamais de légende; exiger une légende partout forcerait du texte
+    // jamais rendu. Posture fail-fast honnête: on exige ce qui est rendu.
     defineField({
       name: 'alt',
       title: 'Texte alternatif',

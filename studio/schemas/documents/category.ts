@@ -47,10 +47,9 @@ export const category = defineType({
     defineField({
       name: 'order',
       title: 'Ordre',
-      description: 'Position dans le filtre de catégories du blogue.',
+      description: 'Position dans le filtre de catégories du blogue (1 = premier).',
       type: 'number',
-      initialValue: 0,
-      validation: (R) => R.required().integer(),
+      validation: (R) => R.required().integer().positive(),
     }),
   ],
   orderings: [
