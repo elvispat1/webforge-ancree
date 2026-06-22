@@ -22,8 +22,12 @@ const localePath = useLocalePath()
 // (ancres du one-pager en landing, routes en multipage); les liens legaux viennent
 // de footer.utility, requalifies vers le sous-arbre one-pager en mode landing.
 const site = useContent('site')
+// Normalise en { label, href } selon le mode (routes en multipage, ancres en
+// landing): le template ne connait qu'une forme, comme le Menu mobile.
 const footerNav = computed(() =>
-  props.mode === 'multipage' ? site.value.nav.multipage.primary : site.value.nav.landing.primary
+  props.mode === 'multipage'
+    ? site.value.nav.multipage.primary.map((l) => ({ label: l.label, href: l.route }))
+    : site.value.nav.landing.primary.map((l) => ({ label: l.label, href: l.anchor }))
 )
 const year = useState<number>('site-year', () => new Date().getFullYear())
 
@@ -90,9 +94,9 @@ function legalHref(href: string): string {
 
       <div class="footer__bottom">
         <p class="footer__copy">© {{ year }} Rempart Extermination. {{ t('footer.rights') }}</p>
-        <p v-if="site.footer.credit" class="footer__credit">
+        <p class="footer__credit">
           {{ site.footer.credit.label }}
-          <a v-if="site.footer.credit.href" :href="site.footer.credit.href" target="_blank" rel="noopener noreferrer">{{ t('footer.studio') }}</a>
+          <a :href="site.footer.credit.studioUrl" target="_blank" rel="noopener noreferrer">{{ site.footer.credit.studio }}</a>
         </p>
         <nav class="footer__legal" :aria-label="t('footer.nav_heading')">
           <NuxtLink

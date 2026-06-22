@@ -32,7 +32,7 @@ export const siteSettings = defineType({
       fields: [
         defineField({
           name: 'name',
-          title: 'Nom de la marque',
+          title: 'Nom',
           type: 'string',
           validation: (R) => R.required(),
         }),
@@ -41,24 +41,26 @@ export const siteSettings = defineType({
           title: 'Logo',
           description: 'Logo affiché dans l\'entête et le pied de page.',
           type: 'image',
+          validation: (R) => R.required(),
         }),
         defineField({
           name: 'homeAriaLabel',
           title: 'Libellé d\'accessibilité du lien logo',
           description: 'Lu par les lecteurs d\'écran sur le lien de retour à l\'accueil.',
           type: 'string',
+          validation: (R) => R.required(),
         }),
         defineField({
           name: 'tagline',
-          title: 'Slogan',
-          type: 'text',
-          rows: 2,
+          title: 'Devise',
+          type: 'string',
+          validation: (R) => R.required(),
         }),
         defineField({
           name: 'foundedYear',
           title: 'Année de fondation',
           type: 'number',
-          validation: (R) => R.integer(),
+          validation: (R) => R.required().integer(),
         }),
       ],
     }),
@@ -68,69 +70,90 @@ export const siteSettings = defineType({
       title: 'Coordonnées',
       type: 'object',
       group: 'contact',
-      // Forme Schema.org conservée telle quelle: ces sous-champs sont seedés et
-      // lus par usePageSeo et le noeud LocalBusiness. Ne pas renommer.
       fields: [
+        // Le format E.164 n'est PAS stocké: dérivé en code depuis phone (spec §12.13).
         defineField({
-          name: 'phoneDisplay',
-          title: 'Téléphone (affiché)',
+          name: 'phone',
+          title: 'Téléphone affiché, ex. 450 555 0188',
           type: 'string',
+          validation: (R) => R.required(),
         }),
         defineField({
-          name: 'phoneHref',
-          title: 'Téléphone (href tel:)',
+          name: 'email',
+          title: 'Courriel',
           type: 'string',
+          validation: (R) => R.required().email(),
         }),
-        defineField({
-          name: 'emailDisplay',
-          title: 'Courriel (affiché)',
-          type: 'string',
-        }),
-        defineField({
-          name: 'emailHref',
-          title: 'Courriel (href mailto:)',
-          type: 'string',
-        }),
-        defineField({
-          name: 'areaName',
-          title: 'Zone de service',
-          type: 'string',
-        }),
-        defineField({
-          name: 'hours',
-          title: 'Heures',
-          type: 'string',
-        }),
-        // Adresse postale du siège (noeud LocalBusiness du SEO). Forme Schema.org.
         defineField({
           name: 'address',
-          title: 'Adresse postale',
+          title: 'Adresse',
           type: 'object',
           fields: [
             defineField({
-              name: 'streetAddress',
-              title: 'Rue et numéro',
+              name: 'line1',
+              title: 'Adresse (ligne 1)',
               type: 'string',
+              validation: (R) => R.required(),
             }),
             defineField({
-              name: 'addressLocality',
+              name: 'cityProv',
+              title: 'Ville et province affichées',
+              type: 'string',
+              validation: (R) => R.required(),
+            }),
+            defineField({
+              name: 'city',
               title: 'Ville',
+              description: 'Champs structurés pour le Schema.org PostalAddress.',
               type: 'string',
+              validation: (R) => R.required(),
             }),
             defineField({
-              name: 'addressRegion',
+              name: 'region',
               title: 'Province',
+              description: 'Champs structurés pour le Schema.org PostalAddress.',
               type: 'string',
+              validation: (R) => R.required(),
             }),
             defineField({
-              name: 'postalCode',
-              title: 'Code postal',
-              type: 'string',
-            }),
-            defineField({
-              name: 'addressCountry',
+              name: 'country',
               title: 'Pays',
+              description: 'Champs structurés pour le Schema.org PostalAddress.',
               type: 'string',
+              validation: (R) => R.required(),
+            }),
+            defineField({
+              name: 'postal',
+              title: 'Code postal',
+              description: 'Champs structurés pour le Schema.org PostalAddress.',
+              type: 'string',
+              validation: (R) => R.required(),
+            }),
+          ],
+        }),
+        defineField({
+          name: 'areaServed',
+          title: 'Zone desservie',
+          type: 'array',
+          of: [defineArrayMember({ type: 'string' })],
+          validation: (R) => R.required().min(1),
+        }),
+        defineField({
+          name: 'hours',
+          title: 'Horaires',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'weekdays',
+              title: 'Semaine',
+              type: 'string',
+              validation: (R) => R.required(),
+            }),
+            defineField({
+              name: 'weekend',
+              title: 'Fin de semaine',
+              type: 'string',
+              validation: (R) => R.required(),
             }),
           ],
         }),
@@ -253,7 +276,7 @@ export const siteSettings = defineType({
           of: [defineArrayMember({ type: 'link' })],
           validation: (R) => R.required().min(1),
         }),
-        // Optionnels: vides ou absents, normalisés en [] à la résolution.
+        // Optionnels: vides ou absents, normalisés en [] à la résolution (spec §12.12).
         defineField({
           name: 'utility',
           title: 'Liens utilitaires, ex. FAQ',
@@ -319,6 +342,7 @@ export const siteSettings = defineType({
           description:
             'Ajouté à la fin du titre de chaque page, sauf l\'accueil et le one-pager qui portent leur titre complet.',
           type: 'string',
+          validation: (R) => R.required(),
         }),
         defineField({
           name: 'defaultDescription',

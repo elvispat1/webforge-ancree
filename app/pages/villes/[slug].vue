@@ -32,8 +32,8 @@ const city = computed(() => useServiceCity(slug) ?? maybeCity)
 
 // Coordonnees d'appel: NAP de la marque (siteSettings), plus du document ville.
 const site = useContent('site')
-const phoneHref = computed(() => site.value.phoneHref ?? t('contact.phone_href'))
-const phoneDisplay = computed(() => site.value.phoneDisplay ?? t('contact.phone_display'))
+const phoneHref = computed(() => `tel:${site.value.contact.phoneE164}`)
+const phoneDisplay = computed(() => site.value.contact.phone)
 
 const cityName = computed(() => city.value.city)
 const heading = computed(() => city.value.heading ?? city.value.city)

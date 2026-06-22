@@ -18,7 +18,8 @@
 // edition). En <script>, passer par `.value`.
 
 import { computed, type ComputedRef } from 'vue'
-import type { LegalContent, SiteRuntime } from '~/sanity/transform'
+import type { LegalContent } from '~/sanity/transform'
+import type { SiteContent } from '~/content/site'
 
 /** Categorie de temoins reellement installee sur ce site (config de code, jamais
  *  editorial). Forme minimale: identifiant + drapeau « requise » (les requises ne
@@ -42,7 +43,7 @@ export const CONSENT_CONFIG: ConsentConfig = {
 }
 
 type ContentSources = {
-  site: SiteRuntime
+  site: SiteContent
   legal: LegalContent
   consent: ConsentConfig
 }

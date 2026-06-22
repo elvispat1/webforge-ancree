@@ -68,12 +68,22 @@ usePageSeo({
   titleTemplate: null,
   image: hero.value.visual.src,
   localBusiness: {
-    name: site.brandName,
-    ...(site.phoneHref ? { telephone: site.phoneHref.replace(/^tel:/, '') } : {}),
-    ...(site.emailHref ? { email: site.emailHref.replace(/^mailto:/, '') } : {}),
-    ...(site.address ? { address: site.address } : {}),
-    ...(site.areaName ? { areaServed: [site.areaName] } : {}),
-    image: hero.value.visual.src
+    name: site.brand.name,
+    telephone: site.contact.phoneE164,
+    email: site.contact.email,
+    // Cles Schema.org reconstruites au point de consommation depuis la NAP
+    // imbriquee (cityProv sert l'affichage; city/region/country/postal sont les
+    // champs structures du PostalAddress). Voir transformSiteSettings.
+    address: {
+      streetAddress: site.contact.address.line1,
+      addressLocality: site.contact.address.city,
+      addressRegion: site.contact.address.region,
+      postalCode: site.contact.address.postal,
+      addressCountry: site.contact.address.country
+    },
+    areaServed: site.contact.areaServed,
+    image: hero.value.visual.src,
+    foundingDate: String(site.brand.foundedYear)
   }
 })
 </script>

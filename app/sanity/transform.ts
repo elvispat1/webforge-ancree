@@ -29,7 +29,7 @@
 
 import { routePath, onePagerPath, serviceCityPath, legalRouteKeyForId } from '../config/route-map'
 import { SOCIAL_PLATFORMS, type SocialPlatform } from '../config/socials'
-import type { SiteIdentity, SiteNav, SiteNavSet, SiteNavLink, SiteFooter, SiteFooterCredit } from '../content/site'
+import type { SiteContent } from '../content/site'
 import type { HeroContent, HeroPageContent } from '../content/hero'
 import type {
   TrustBarContent,
@@ -259,24 +259,23 @@ interface SanitySiteSettings {
   brand: {
     name: string
     logo: { src?: Maybe<string> }
-    tagline?: Maybe<string>
-    foundedYear?: Maybe<number>
-    homeAriaLabel?: Maybe<string>
+    tagline: string
+    foundedYear: number
+    homeAriaLabel: string
   }
   contact: {
-    phoneDisplay?: Maybe<string>
-    phoneHref?: Maybe<string>
-    emailDisplay?: Maybe<string>
-    emailHref?: Maybe<string>
-    areaName?: Maybe<string>
-    hours?: Maybe<string[]>
-    address?: Maybe<{
-      streetAddress?: Maybe<string>
-      addressLocality?: Maybe<string>
-      addressRegion?: Maybe<string>
-      postalCode?: Maybe<string>
-      addressCountry?: Maybe<string>
-    }>
+    phone: string
+    email: string
+    address: {
+      line1: string
+      cityProv: string
+      city: string
+      region: string
+      country: string
+      postal: string
+    }
+    areaServed: string[]
+    hours: { weekdays: string; weekend: string }
   }
   nav: {
     landing: { primary: SanityLink[]; cta: SanityLink }
@@ -669,20 +668,12 @@ export interface LegalContent {
   confidentialite: LegalDoc
 }
 
-/** Identite du site posee sur le payload: le sous-ensemble SEO (SiteIdentity, NAP +
- *  zone desservie, source unique du graphe Schema.org) ENRICHI de la navigation,
- *  du pied de page et des reseaux sociaux deja resolus. L'En-tete, le Menu mobile et
- *  le Pied de page lisent nav/footer/socials; usePageSeo lit les champs plats de
- *  SiteIdentity. Un seul objet, lu de deux maniere selon le consommateur. */
-export interface SiteRuntime extends SiteIdentity {
-  nav: SiteNav
-  footer: SiteFooter
-  socials: SocialLink[]
-}
-
 /** Le modele de contenu complet, fetche et transforme une fois par langue. */
 export interface ContentPayload {
-  site: SiteRuntime
+  /** Globales du site, forme monolithique SiteContent (miroir 1:1 de Minimaliste):
+   *  brand, contact NAP imbriquee (phoneE164 derive), nav, footer, socials et seo.
+   *  Source unique de l'En-tete, du Menu mobile, du Pied de page et de usePageSeo. */
+  site: SiteContent
   legal: LegalContent
   heroes: {
     home: HeroHomeBlock
@@ -1142,7 +1133,7 @@ function resolveSeo(
 
 function transformBlock(
   block: SanityRawBlock,
-  site: SiteWithHours,
+  site: SiteContent,
   contactUi: ContactUiText,
   locale: WfLocale
 ): PayloadPageBlock {
@@ -1240,28 +1231,22 @@ function transformBlock(
  */
 function transformContactBlock(
   block: SanityContactBlock,
-  site: SiteWithHours,
+  site: SiteContent,
   contactUi: ContactUiText,
   key: string
 ): ContactBlock {
+  // NAP jointe depuis siteSettings.contact (12.4): le bloc Sanity ne porte que
+  // eyebrow/heading/lead; les valeurs (numero, courriel, zone, heures) ont un seul
+  // point d'edition. Le format machine tel:/mailto: est DERIVE en code (phoneE164),
+  // jamais saisi. Les libelles du panneau restent de l'interface (contactUi, i18n).
+  const c = site.contact
   const labels = contactUi.metaLabels
-  const meta: ContactMetaItem[] = []
-  // Telephone: valeur + href tel:, depuis la NAP structuree.
-  if (site.phoneDisplay) {
-    meta.push({ label: labels.phone, value: site.phoneDisplay, href: opt(site.phoneHref) })
-  }
-  // Courriel: valeur + href mailto:.
-  if (site.emailDisplay) {
-    meta.push({ label: labels.email, value: site.emailDisplay, href: opt(site.emailHref) })
-  }
-  // Zone de service: une ligne (le nom de lieu desservi).
-  if (site.areaName) {
-    meta.push({ label: labels.area, lines: [site.areaName] })
-  }
-  // Heures: plusieurs lignes (depuis siteSettings.contact.hours).
-  if (site.hours && site.hours.length) {
-    meta.push({ label: labels.hours, lines: site.hours })
-  }
+  const meta: ContactMetaItem[] = [
+    { label: labels.phone, value: c.phone, href: `tel:${c.phoneE164}` },
+    { label: labels.email, value: c.email, href: `mailto:${c.email}` },
+    { label: labels.area, lines: c.areaServed },
+    { label: labels.hours, lines: [c.hours.weekdays, c.hours.weekend] }
+  ]
   return {
     _type: 'contact',
     _key: key,
@@ -1276,7 +1261,7 @@ function transformContactBlock(
 
 export function transformPageBuilder(
   blocks: Maybe<SanityRawBlock[]>,
-  site: SiteWithHours,
+  site: SiteContent,
   contactUi: ContactUiText,
   locale: WfLocale
 ): PayloadPageBlock[] {
@@ -1336,49 +1321,22 @@ export function transformArticleBody(blocks: Maybe<SanityRawArticleBlock[]>, loc
 
 // ── Globales (siteSettings) ───────────────────────────────────────────────────
 
-/** siteSettings FULL -> SiteIdentity. La forme suit la NAP native d'Ancree
- *  (phoneDisplay/phoneHref/emailDisplay/emailHref + address structuree + hours). */
-export function transformSiteSettings(raw: SanitySiteSettings): SiteIdentity {
-  const a = raw.contact.address
-  // Adresse incluse seulement si les CINQ champs sont presents (« adresse complete
-  // ou rien »): un noeud PostalAddress a champs nuls casserait le LocalBusiness.
-  const address =
-    a && a.streetAddress && a.addressLocality && a.addressRegion && a.postalCode && a.addressCountry
-      ? {
-          streetAddress: a.streetAddress,
-          addressLocality: a.addressLocality,
-          addressRegion: a.addressRegion,
-          postalCode: a.postalCode,
-          addressCountry: a.addressCountry
-        }
-      : undefined
-  return {
-    brandName: raw.brand.name,
-    tagline: opt(raw.brand.tagline),
-    phoneDisplay: opt(raw.contact.phoneDisplay),
-    phoneHref: opt(raw.contact.phoneHref),
-    emailDisplay: opt(raw.contact.emailDisplay),
-    emailHref: opt(raw.contact.emailHref),
-    areaName: opt(raw.contact.areaName),
-    ...(address ? { address } : {})
-  }
-}
-
-/** Heures de bureau (siteSettings.contact.hours), pour le panneau contact. Hors
- *  SiteIdentity (qui suit le contrat SEO): expose a part pour la jointure NAP. */
-function siteHours(raw: SanitySiteSettings): string[] {
-  return (raw.contact.hours ?? []).filter((h): h is string => typeof h === 'string' && h.length > 0)
-}
-
-// SiteIdentity + heures, pour la jointure du contactBlock (les heures ne sont pas
-// dans le contrat SEO SiteIdentity mais le panneau contact en a besoin).
-interface SiteWithHours extends SiteIdentity {
-  hours?: string[]
+/**
+ * Telephone affiche -> E.164 (12.13, jamais stocke): retirer tout caractere non
+ * numerique, prefixer `+1` (10 chiffres, plan nord-americain) ou `+` (11 chiffres
+ * commencant par 1). Autre forme: `+` + chiffres, au mieux.
+ */
+export function derivePhoneE164(phone: string): string {
+  const digits = phone.replace(/\D/g, '')
+  if (digits.length === 10) return `+1${digits}`
+  if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`
+  return `+${digits}`
 }
 
 // ── Reseaux sociaux (top-level, pour le Footer) ───────────────────────────────
 
-/** Reseau social resolu: icone + libelle derives de la plateforme (map code). */
+/** Reseau social resolu: icone + libelle derives de la plateforme (map code).
+ *  Structurellement identique a SiteContent['socials'][number]. */
 export interface SocialLink {
   platform: SocialPlatform
   url: string
@@ -1386,7 +1344,7 @@ export interface SocialLink {
   label: string
 }
 
-export function transformSocials(raw: Maybe<Array<{ platform: string; url: string }>>): SocialLink[] {
+function transformSocials(raw: Maybe<Array<{ platform: string; url: string }>>): SocialLink[] {
   return (raw ?? []).flatMap((s) => {
     const platform = cleanLogic(s.platform) as SocialPlatform
     const url = cleanLogic(s.url)
@@ -1396,54 +1354,82 @@ export function transformSocials(raw: Maybe<Array<{ platform: string; url: strin
   })
 }
 
-// ── Navigation et pied de page (liens deja resolus en href) ───────────────────
+// ── Navigation et pied de page (liens deja resolus) ───────────────────────────
 
-/** Lien de navigation: { label, href } resolu par le route-map. linkPair gere les
- *  trois types (interne, ancre, externe); jamais un objet link Sanity brut servi au
- *  template. C'est le SiteNavLink du contrat (app/content/site.ts). */
-function navLink(link: SanityLink, locale: WfLocale): SiteNavLink {
-  return linkPair(link, locale)
-}
-
-/** Un jeu de navigation (landing ou multipage): liens primaires + appel a l'action
- *  optionnel. Le CTA est absent si Sanity ne le porte pas (le template le garde). */
-function transformNavSet(
-  raw: { primary?: Maybe<SanityLink[]>; cta?: Maybe<SanityLink> },
-  locale: WfLocale
-): SiteNavSet {
+/** Navigation FULL (siteSettings.nav): deux jeux. `landing` rend des ANCRES (#x)
+ *  pour le one-pager, `multipage` des ROUTES reelles: cles distinctes (anchor vs
+ *  route), miroir du contrat SiteContent. Source unique de l'En-tete et du Menu
+ *  mobile; aucune nav codee en dur cote composant. */
+function transformNav(raw: SanitySiteSettings['nav'], locale: WfLocale): SiteContent['nav'] {
   return {
-    primary: (raw.primary ?? []).map((link) => navLink(link, locale)),
-    ...(raw.cta ? { cta: navLink(raw.cta, locale) } : {})
+    landing: {
+      primary: raw.landing.primary.map((link) => ({ label: link.label, anchor: resolveLink(link, locale) })),
+      cta: { label: raw.landing.cta.label, anchor: resolveLink(raw.landing.cta, locale) }
+    },
+    multipage: {
+      primary: raw.multipage.primary.map((link) => ({ label: link.label, route: resolveLink(link, locale) })),
+      cta: { label: raw.multipage.cta.label, route: resolveLink(raw.multipage.cta, locale) }
+    }
   }
 }
 
-/** Navigation FULL (siteSettings.nav): deux jeux, landing (ancres du one-pager) et
- *  multipage (routes reelles). Source unique de l'En-tete, du Menu mobile et du
- *  Pied de page; aucune nav codee en dur cote composant. */
-export function transformNav(raw: SanitySiteSettings['nav'], locale: WfLocale): SiteNav {
+/** Pied de page FULL (siteSettings.footer): liens primaires (liste dediee, 6.1),
+ *  utilitaires et raccourcis (resolus en href), texte de droits et credit du
+ *  studio (4 champs label/studio/studioUrl/product). Optionnels normalises en []
+ *  (12.12: interfaces front non optionnelles). */
+function transformFooter(raw: SanitySiteSettings['footer'], locale: WfLocale): SiteContent['footer'] {
   return {
-    landing: transformNavSet(raw.landing, locale),
-    multipage: transformNavSet(raw.multipage, locale)
-  }
-}
-
-/** Pied de page FULL (siteSettings.footer): liens primaires, utilitaires et
- *  raccourcis de pages (tous resolus en href), texte de droits et credit du studio
- *  (libelle + lien optionnel). Le credit du document porte studio + studioUrl
- *  separes; on les replie en { label, href } du contrat SiteFooterCredit. */
-export function transformFooter(raw: SanitySiteSettings['footer'], locale: WfLocale): SiteFooter {
-  const credit: SiteFooterCredit | undefined = raw.credit
-    ? {
-        label: raw.credit.label,
-        ...(raw.credit.studioUrl ? { href: raw.credit.studioUrl } : {})
-      }
-    : undefined
-  return {
-    primary: (raw.primary ?? []).map((link) => navLink(link, locale)),
-    utility: (raw.utility ?? []).map((link) => navLink(link, locale)),
-    pageLinks: (raw.pageLinks ?? []).map((link) => navLink(link, locale)),
+    primary: raw.primary.map((link) => linkPair(link, locale)),
+    utility: (raw.utility ?? []).map((link) => ({ href: resolveLink(link, locale), label: link.label })),
+    pageLinks: (raw.pageLinks ?? []).map((link) => ({ href: resolveLink(link, locale), label: link.label })),
     copyright: raw.copyright,
-    ...(credit ? { credit } : {})
+    credit: {
+      label: raw.credit.label,
+      studio: raw.credit.studio,
+      studioUrl: raw.credit.studioUrl,
+      product: raw.credit.product
+    }
+  }
+}
+
+/** siteSettings FULL -> SiteContent (monolithe, miroir 1:1 de Minimaliste). NAP
+ *  imbriquee: phoneE164 + tel:/mailto: DERIVES en code (jamais saisis); adresse
+ *  d'affichage (cityProv) + structuree (les cles Schema.org sont reconstruites au
+ *  point de consommation, index.vue); zone desservie en array; heures
+ *  {weekdays, weekend}. seo inclus (replis description/og + suffixe de titre). */
+export function transformSiteSettings(raw: SanitySiteSettings, locale: WfLocale): SiteContent {
+  return {
+    brand: {
+      name: raw.brand.name,
+      // Logo resolu en src (12.14); alt vide: le lien porte homeAriaLabel.
+      logo: { src: opt(raw.brand.logo.src) },
+      tagline: raw.brand.tagline,
+      foundedYear: raw.brand.foundedYear,
+      homeAriaLabel: raw.brand.homeAriaLabel
+    },
+    contact: {
+      phone: raw.contact.phone,
+      phoneE164: derivePhoneE164(raw.contact.phone),
+      email: raw.contact.email,
+      address: {
+        line1: raw.contact.address.line1,
+        cityProv: raw.contact.address.cityProv,
+        city: raw.contact.address.city,
+        region: raw.contact.address.region,
+        country: raw.contact.address.country,
+        postal: raw.contact.address.postal
+      },
+      areaServed: raw.contact.areaServed,
+      hours: { weekdays: raw.contact.hours.weekdays, weekend: raw.contact.hours.weekend }
+    },
+    nav: transformNav(raw.nav, locale),
+    footer: transformFooter(raw.footer, locale),
+    socials: transformSocials(raw.socials),
+    seo: {
+      titleSuffix: raw.seo.titleSuffix,
+      defaultDescription: opt(raw.seo.defaultDescription),
+      defaultOgImage: opt(raw.seo.defaultOgImage)
+    }
   }
 }
 
@@ -1635,22 +1621,13 @@ export function transformGraph(raw: SanityGraph, locale: WfLocale, contactUi: Co
   const contactPage = requireDoc(raw.contactPage, 'contactPage')
   const onePager = requireDoc(raw.onePager, 'onePager')
 
-  const identity = transformSiteSettings(siteSettings)
-  // Identite SEO (SiteIdentity) ENRICHIE de la nav, du pied de page et des reseaux
-  // sociaux deja resolus: un seul objet `site` du payload. usePageSeo lit les champs
-  // plats; l'En-tete/Menu mobile/Pied de page lisent nav/footer/socials.
-  const site: SiteRuntime = {
-    ...identity,
-    nav: transformNav(siteSettings.nav, locale),
-    footer: transformFooter(siteSettings.footer, locale),
-    socials: transformSocials(siteSettings.socials)
-  }
-  // Site enrichi des heures, pour la jointure NAP du contactBlock (les heures ne
-  // sont pas dans le contrat SEO SiteIdentity mais le panneau contact les rend).
-  const siteForContact: SiteWithHours = { ...identity, hours: siteHours(siteSettings) }
-  const seoDefaults = siteSettings.seo
+  // Globales monolithiques (SiteContent): un seul objet `site` du payload, source
+  // unique de l'En-tete/Menu mobile/Pied de page ET de usePageSeo (site.seo,
+  // site.contact pour le LocalBusiness). Le contactBlock joint site.contact.
+  const site = transformSiteSettings(siteSettings, locale)
+  const seoDefaults = site.seo
   const builder = (blocks: Maybe<SanityRawBlock[]>): PayloadPageBlock[] =>
-    transformPageBuilder(blocks, siteForContact, contactUi, locale)
+    transformPageBuilder(blocks, site, contactUi, locale)
 
   const heroes = {
     home: asHomeHero(homePage.hero, 'homePage', locale),

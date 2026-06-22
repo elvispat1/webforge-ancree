@@ -35,8 +35,8 @@ const otherLocale = computed<'fr' | 'en'>(() => (locale.value === 'fr' ? 'en' : 
 // ancres sont qualifiees par la racine du one-pager (landingHref).
 const menuLinks = computed(() =>
   props.mode === 'multipage'
-    ? headerMultipageLinks.value.map((l) => ({ label: l.label, href: l.href }))
-    : headerLandingLinks.value.map((l) => ({ label: l.label, href: landingHref(l.href) }))
+    ? headerMultipageLinks.value.map((l) => ({ label: l.label, href: l.route }))
+    : headerLandingLinks.value.map((l) => ({ label: l.label, href: landingHref(l.anchor) }))
 )
 const brandTo = computed(() =>
   props.mode === 'multipage' ? routePath('home', locale.value as 'fr' | 'en') : localePath('/')
@@ -151,12 +151,12 @@ watch(() => route.fullPath, () => {
 
       <nav class="header__nav" :aria-label="t('a11y.main_nav')">
         <template v-if="mode === 'multipage'">
-          <NuxtLink v-for="link in headerMultipageLinks" :key="link.href" :to="link.href" class="header__link">
+          <NuxtLink v-for="link in headerMultipageLinks" :key="link.route" :to="link.route" class="header__link">
             {{ link.label }}
           </NuxtLink>
         </template>
         <template v-else>
-          <a v-for="link in headerLandingLinks" :key="link.href" :href="landingHref(link.href)" class="header__link">
+          <a v-for="link in headerLandingLinks" :key="link.anchor" :href="landingHref(link.anchor)" class="header__link">
             {{ link.label }}
           </a>
         </template>

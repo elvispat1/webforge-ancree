@@ -1,137 +1,89 @@
-/* Contrats de contenu des globales du site (siteSettings Sanity, lot B). Fichier
- * TYPE-ONLY: aucune fonction de repli, aucune valeur. La transformation Sanity
- * (app/sanity/transform.ts) produit ces formes; les composables les lisent. La
- * posture est fail-fast: si le dataset manque, le transform lance, il ne replie
- * jamais sur une fixture. AUCUNE valeur design ni de contenu ici, que des champs.
- *
- * Deux contrats cohabitent:
- *   - SiteContent: la forme FULL (brand, contact NAP d'Ancree, nav, footer,
- *     socials, seo), telle que la consomment l'En-tete, le Pied de page et le
- *     switcher. Miroir 1:1 du document siteSettings du lot B.
- *   - SiteIdentity: le sous-ensemble SEO (Organization + LocalBusiness de
- *     l'accueil: NAP + zone desservie), ce que transformSiteSettings emet pour le
- *     graphe Schema.org. */
+// Contenu global du site (brand, nav, footer, coordonnées) — CONTRAT.
+//
+// V2 (Sanity, actuel): la source de vérité est le document `siteSettings`
+// (payload via useContent('site')). Ce fichier ne garde que l'interface,
+// miroir exact du schéma Sanity siteSettings après transformation (liens
+// résolus en ancres/routes string).
+//
+// Nav mode-aware: deux jeux distincts. `landing` (ancres) sert le one-pager
+// (/one-pager), `multipage` (routes) sert le site multipage (/). Les items
+// diffèrent d'un mode à l'autre, d'où deux listes plutôt qu'une seule à double
+// cible. Le Header/Footer/MobileMenu choisissent selon leur prop `mode`.
 
-// ── Marque ──────────────────────────────────────────────────────────────────
+import type { SocialPlatform } from '../config/socials'
 
-export interface SiteBrandLogo {
-  src: string // URL CDN deja resolue (jamais un objet asset Sanity)
-  alt: string
-}
-
-export interface SiteBrand {
-  name: string
-  logo?: SiteBrandLogo
-  tagline?: string
-  foundedYear?: number // annee de fondation (motif de confiance, derive SEO)
-  homeAriaLabel: string // libelle accessible du lien vers l'accueil (logo)
-}
-
-// ── Coordonnees (NAP structuree d'Ancree) ─────────────────────────────────────
-
-// Adresse postale du siege, forme Schema.org (noeud LocalBusiness de l'accueil).
-// Identique entre langues (adresse du Quebec, non traduite). Optionnelle: absente
-// -> le LocalBusiness omet l'adresse.
-export interface SiteAddress {
-  streetAddress: string
-  addressLocality: string
-  addressRegion: string
-  postalCode: string
-  addressCountry: string
-}
-
-// La forme NAP propre a Ancree: l'affichage et le lien sont des champs separes
-// (phoneDisplay vs phoneHref, emailDisplay vs emailHref), pas une seule valeur a
-// reformater. Le panneau contact joint ces champs structures aux etiquettes i18n.
-export interface SiteContact {
-  phoneDisplay?: string
-  phoneHref?: string // tel:+1...
-  emailDisplay?: string
-  emailHref?: string // mailto:...
-  areaName?: string // zone desservie (nom de lieu), motif SEO local
-  hours?: string[] // heures d'ouverture, plusieurs lignes (panneau contact)
-  address?: SiteAddress
-}
-
-// ── Navigation (liens deja resolus en href) ──────────────────────────────────
-
-// Un lien de navigation: libelle + href deja resolu par le route-map (jamais un
-// objet link Sanity brut). Sert l'En-tete, le Pied de page et les CTA de nav.
-export interface SiteNavLink {
-  label: string
-  href: string
-}
-
-// Deux jeux de navigation: landing (one-pager, ancres internes) et multipage
-// (routes reelles). Chacun porte ses liens primaires et son appel a l'action.
-export interface SiteNavSet {
-  primary: SiteNavLink[]
-  cta?: SiteNavLink
-}
-
-export interface SiteNav {
-  landing: SiteNavSet
-  multipage: SiteNavSet
-}
-
-// ── Pied de page ──────────────────────────────────────────────────────────────
-
-// Credit du pied de page (signature du studio): libelle + lien optionnel.
-export interface SiteFooterCredit {
-  label: string
-  href?: string
-}
-
-export interface SiteFooter {
-  primary: SiteNavLink[] // liens principaux du pied
-  utility: SiteNavLink[] // liens utilitaires (legaux, secondaires)
-  pageLinks: SiteNavLink[] // raccourcis vers les pages (plan du site condense)
-  copyright: string
-  credit?: SiteFooterCredit
-}
-
-// ── Reseaux sociaux ───────────────────────────────────────────────────────────
-
-// Lien social brut du document: la plateforme (code) et l'URL. L'icone et le
-// libelle sont derives par transformSocials (map des plateformes), pas saisis ici.
-export interface SiteSocial {
-  platform: string
-  url: string
-}
-
-// ── SEO (valeurs par defaut des globales) ─────────────────────────────────────
-
-export interface SiteSeo {
-  titleSuffix?: string // suffixe de titre applique aux pages
-  defaultDescription?: string // description de repli
-  defaultOgImage?: string // URL CDN de l'image og par defaut
-}
-
-// ── Contrat FULL ──────────────────────────────────────────────────────────────
-
-/** Globales du site, forme FULL (miroir du document siteSettings, lot B). */
 export interface SiteContent {
-  brand: SiteBrand
-  contact: SiteContact
-  nav: SiteNav
-  footer: SiteFooter
-  socials: SiteSocial[]
-  seo: SiteSeo
-}
-
-// ── Contrat SEO (sous-ensemble emis pour le graphe Schema.org) ────────────────
-
-/** Identite SEO du site: ce que transformSiteSettings emet pour l'accueil
- *  (Organization + noeud LocalBusiness: NAP + zone desservie). Le nom de
- *  l'entreprise vient de brandName; l'adresse, optionnelle, est incluse seulement
- *  si elle est complete (sinon le LocalBusiness l'omet). */
-export interface SiteIdentity {
-  brandName: string
-  tagline?: string
-  phoneDisplay?: string
-  phoneHref?: string // tel:+1...
-  emailDisplay?: string
-  emailHref?: string // mailto:...
-  areaName?: string // zone desservie (nom de lieu), motif SEO local
-  address?: SiteAddress
+  brand: {
+    name: string
+    /** Logo d'entête et de pied (asset Sanity résolu en URL, SVG pour le démo).
+     *  `src` absent: aucun pictogramme rendu, le nom texte porte seul la marque.
+     *  `alt` reste vide en pratique: le lien porte homeAriaLabel. */
+    logo: { src?: string; alt?: string }
+    tagline: string
+    foundedYear: number
+    homeAriaLabel: string
+  }
+  contact: {
+    phone: string
+    /** Format machine (liens tel:, Schema.org), DÉRIVÉ de `phone` au transform
+     *  (spec 12.13): jamais stocké dans Sanity. */
+    phoneE164: string
+    email: string
+    address: {
+      line1: string
+      /** Affichage (footer, bloc contact). */
+      cityProv: string
+      /** Champs structurés (PostalAddress Schema.org via usePageSeo). */
+      city: string
+      region: string
+      country: string
+      postal: string
+    }
+    /** Zone desservie (noms de lieux), nœud LocalBusiness de l'accueil. */
+    areaServed: string[]
+    hours: {
+      weekdays: string
+      weekend: string
+    }
+  }
+  nav: {
+    landing: {
+      primary: Array<{ label: string; anchor: string }>
+      cta: { label: string; anchor: string }
+    }
+    multipage: {
+      primary: Array<{ label: string; route: string }>
+      cta: { label: string; route: string }
+    }
+  }
+  footer: {
+    /** Liens principaux du pied de page: liste dédiée (siteSettings.footer.primary),
+     *  indépendante de la nav multipage depuis l'amendement 6.1 de la spec. */
+    primary: Array<{ label: string; href: string }>
+    // Liens utilitaires propres au multipage (FAQ): rôle SEO et maillage, rangés
+    // au pied avec les légales plutôt que dans la nav principale.
+    utility: Array<{ href: string; label: string }>
+    pageLinks: Array<{ href: string; label: string }>
+    /** Garde son jeton {year} (remplacé par Footer.vue, année courante au build). */
+    copyright: string
+    credit: {
+      label: string
+      studio: string
+      studioUrl: string
+      product: string
+    }
+  }
+  /** Réseaux sociaux (top-level, hors footer): l'éditeur choisit une plateforme
+   *  dans une liste fermée et saisit l'URL; l'icône (`icon`) et le libellé
+   *  accessible (`label`) sont dérivés en code (app/config/socials.ts). Une
+   *  plateforme sans URL est exclue au transform. */
+  socials: Array<{ platform: SocialPlatform; url: string; icon: string; label: string }>
+  /** SEO globaux (spec 12.10): suffixe du gabarit de titre + replis quand la
+   *  page n'a pas sa propre description ou image de partage. */
+  seo: {
+    titleSuffix: string
+    defaultDescription?: string
+    /** URL CDN de l'image de partage par défaut (repli avant /og/og-default.jpg). */
+    defaultOgImage?: string
+  }
 }
