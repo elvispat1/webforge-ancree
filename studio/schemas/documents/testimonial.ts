@@ -31,6 +31,7 @@ export const testimonial = defineType({
       title: 'Contexte',
       description: 'Mention de lieu affichée sous le nom, par exemple Propriétaire à Laval.',
       type: 'string',
+      validation: (R) => R.required(),
     }),
     defineField({
       name: 'service',
