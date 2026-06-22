@@ -5239,7 +5239,7 @@
         "region": "Rive-Nord",
         "note": "Résidentiel et commercial",
         "featured": true,
-        "order": 0,
+        "order": 1,
         "heading": "Extermination à Laval",
         "lead": "De Sainte-Rose au Carrefour Laval, une équipe d'ici intervient vite et traite la cause, pas seulement le symptôme.",
         "body": [
@@ -5278,7 +5278,7 @@
         "region": "North Shore",
         "note": "Residential and commercial",
         "featured": true,
-        "order": 0,
+        "order": 1,
         "heading": "Pest control in Laval",
         "lead": "From Sainte-Rose to Carrefour Laval, a local team shows up fast and treats the cause, not just the symptom.",
         "body": [
@@ -5317,7 +5317,7 @@
         "region": "Rive-Nord",
         "note": "Résidentiel et commercial",
         "featured": false,
-        "order": 1,
+        "order": 2,
         "heading": "Extermination à Terrebonne",
         "lead": "Du Vieux-Terrebonne aux quartiers de La Plaine et Lachenaie, on protège votre maison contre les nuisibles de la région.",
         "body": [
@@ -5356,7 +5356,7 @@
         "region": "North Shore",
         "note": "Residential and commercial",
         "featured": false,
-        "order": 1,
+        "order": 2,
         "heading": "Pest control in Terrebonne",
         "lead": "From Vieux-Terrebonne to the La Plaine and Lachenaie neighbourhoods, we protect your home against the region's pests.",
         "body": [
@@ -5395,7 +5395,7 @@
         "region": "Rive-Nord",
         "note": "Résidentiel et commercial",
         "featured": false,
-        "order": 2,
+        "order": 3,
         "heading": "Extermination à Repentigny",
         "lead": "Le long du fleuve comme dans Le Gardeur, on règle les infestations vite et proprement, avec une garantie qui tient.",
         "body": [
@@ -5434,7 +5434,7 @@
         "region": "North Shore",
         "note": "Residential and commercial",
         "featured": false,
-        "order": 2,
+        "order": 3,
         "heading": "Pest control in Repentigny",
         "lead": "Along the river and through Le Gardeur, we clear infestations fast and clean, with a guarantee that holds.",
         "body": [
@@ -5473,7 +5473,7 @@
         "region": "Rive-Nord",
         "note": "Résidentiel et commercial",
         "featured": false,
-        "order": 3,
+        "order": 4,
         "heading": "Extermination à Blainville",
         "lead": "Des quartiers familiaux du Fontainebleau aux commerces de la 117, on intervient avec discrétion et méthode.",
         "body": [
@@ -5512,7 +5512,7 @@
         "region": "North Shore",
         "note": "Residential and commercial",
         "featured": false,
-        "order": 3,
+        "order": 4,
         "heading": "Pest control in Blainville",
         "lead": "From the family neighbourhoods of Fontainebleau to the businesses along Route 117, we work with discretion and method.",
         "body": [
@@ -5551,7 +5551,7 @@
         "region": "Rive-Nord",
         "note": "Résidentiel et commercial",
         "featured": false,
-        "order": 4,
+        "order": 5,
         "heading": "Extermination à Mascouche",
         "lead": "Entre les terres agricoles et les nouveaux quartiers, on protège votre maison des nuisibles qui viennent du champ.",
         "body": [
@@ -5590,7 +5590,7 @@
         "region": "North Shore",
         "note": "Residential and commercial",
         "featured": false,
-        "order": 4,
+        "order": 5,
         "heading": "Pest control in Mascouche",
         "lead": "Between farmland and new neighbourhoods, we protect your home from the pests that come in off the fields.",
         "body": [
@@ -5629,7 +5629,7 @@
         "region": "Rive-Nord",
         "note": "Résidentiel et commercial",
         "featured": false,
-        "order": 5,
+        "order": 6,
         "heading": "Extermination à Boisbriand",
         "lead": "Des quartiers résidentiels au Faubourg, on règle les nuisibles avec un plan clair et un prix honnête.",
         "body": [
@@ -5668,7 +5668,7 @@
         "region": "North Shore",
         "note": "Residential and commercial",
         "featured": false,
-        "order": 5,
+        "order": 6,
         "heading": "Pest control in Boisbriand",
         "lead": "From residential streets to the Faubourg, we deal with pests on a clear plan and an honest price.",
         "body": [
@@ -5707,7 +5707,7 @@
         "region": "Rive-Nord",
         "note": "Résidentiel et commercial",
         "featured": false,
-        "order": 6,
+        "order": 7,
         "heading": "Extermination à Saint-Eustache",
         "lead": "Du Vieux-Saint-Eustache aux abords de la rivière, on traite les infestations avec soin et discrétion.",
         "body": [
@@ -5746,7 +5746,7 @@
         "region": "North Shore",
         "note": "Residential and commercial",
         "featured": false,
-        "order": 6,
+        "order": 7,
         "heading": "Pest control in Saint-Eustache",
         "lead": "From Vieux-Saint-Eustache to the riverbanks, we treat infestations with care and discretion.",
         "body": [

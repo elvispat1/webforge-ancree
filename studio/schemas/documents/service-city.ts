@@ -90,10 +90,10 @@ export const serviceCity = defineType({
     defineField({
       name: 'order',
       title: 'Ordre',
-      description: 'Position dans la grille des villes.',
+      description: 'Position dans la grille des villes (1 = premier).',
       type: 'number',
       group: 'relations',
-      initialValue: 0,
+      validation: (R) => R.required().integer().positive(),
     }),
   ],
   orderings: [
