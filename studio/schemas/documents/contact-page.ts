@@ -6,7 +6,7 @@ import { EnvelopeIcon } from '@sanity/icons'
  *
  * Patron porté de Minimaliste: champ `hero` verrouillé à un seul bloc `pageHero`
  * (mini-builder à un élément), suivi du `pageBuilder` libre, puis du bloc `seo`.
- * Le formulaire de contact réel vit dans un bloc `contactBlock` du pageBuilder,
+ * Le formulaire de contact réel vit dans un bloc `contact` du pageBuilder,
  * pas dans un champ propre de la page.
  *
  * i18n document-level via le plugin document-internationalization: le champ
@@ -56,13 +56,13 @@ export const contactPage = defineType({
       },
       of: [
         defineArrayMember({ type: 'trustBar' }),
-        defineArrayMember({ type: 'servicesBlock' }),
-        defineArrayMember({ type: 'serviceCitiesBlock' }),
-        defineArrayMember({ type: 'aboutBlock' }),
-        defineArrayMember({ type: 'testimonialsBlock' }),
-        defineArrayMember({ type: 'faqBlock' }),
+        defineArrayMember({ type: 'services' }),
+        defineArrayMember({ type: 'serviceCities' }),
+        defineArrayMember({ type: 'about' }),
+        defineArrayMember({ type: 'testimonials' }),
+        defineArrayMember({ type: 'faq' }),
         defineArrayMember({ type: 'ctaBand' }),
-        defineArrayMember({ type: 'contactBlock' }),
+        defineArrayMember({ type: 'contact' }),
       ],
     }),
     defineField({

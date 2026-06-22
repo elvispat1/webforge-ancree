@@ -4,8 +4,8 @@ import { PinIcon } from '@sanity/icons'
 // Bloc intelligent: la resolution des villes de service vit en GROQ cote app.
 // Mapping verrouille Ancree: refs vers serviceCity (jamais project). Peau
 // d'Ancree (icone, libelles, champs de zone).
-export const serviceCitiesBlock = defineType({
-  name: 'serviceCitiesBlock',
+export const serviceCities = defineType({
+  name: 'serviceCities',
   title: 'Services par ville',
   type: 'object',
   icon: PinIcon,

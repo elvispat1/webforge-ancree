@@ -7,8 +7,8 @@ import { UsersIcon } from '@sanity/icons'
  * `diffs`/`figcaption` de Minimaliste), conventions alignées sur l'analogue
  * Minimaliste (objects/blocks/about.ts).
  */
-export const aboutBlock = defineType({
-  name: 'aboutBlock',
+export const about = defineType({
+  name: 'about',
   title: 'Bloc: à propos',
   type: 'object',
   icon: UsersIcon,

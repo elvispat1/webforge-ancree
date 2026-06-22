@@ -3,8 +3,8 @@ import { BugIcon } from '@sanity/icons'
 
 // Bloc intelligent: stocke la copie et les parametres de selection, la
 // resolution des items vit en GROQ cote app. Peau d'Ancree (icone, libelles).
-export const servicesBlock = defineType({
-  name: 'servicesBlock',
+export const services = defineType({
+  name: 'services',
   title: 'Services',
   type: 'object',
   icon: BugIcon,

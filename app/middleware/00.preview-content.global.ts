@@ -8,7 +8,7 @@
 // composables relisent la cle sans le savoir: aucune modification de la couche
 // composable ni de la prod statique.
 //
-// Contact: le contactBlock porte ses propres libelles + message de succes au
+// Contact: le bloc contact porte ses propres libelles + message de succes au
 // Studio (1:1 Minimaliste); transformGraph ne prend que (graph, locale).
 //
 // Garde de compile __WF_PREVIEW__: false hors preview -> Rollup elimine tout le

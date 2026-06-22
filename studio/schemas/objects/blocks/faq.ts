@@ -4,8 +4,8 @@ import { HelpCircleIcon } from '@sanity/icons'
 // Selection manuelle PURE: pas de champ mode ni limit (la page FAQ porte sa
 // propre liste ordonnee). La resolution des refs vit en GROQ cote app. Peau
 // d'Ancree (icone, libelles).
-export const faqBlock = defineType({
-  name: 'faqBlock',
+export const faq = defineType({
+  name: 'faq',
   title: 'FAQ',
   type: 'object',
   icon: HelpCircleIcon,

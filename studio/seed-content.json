@@ -1209,7 +1209,7 @@
           },
           {
             "_key": "b2",
-            "_type": "servicesBlock",
+            "_type": "services",
             "eyebrow": "Ce qu'on règle",
             "heading": "Un nuisible, une solution claire",
             "lead": "Résidentiel et commercial, traités par des techniciens certifiés avec des produits sûrs pour la famille et les animaux.",
@@ -1226,7 +1226,7 @@
           },
           {
             "_key": "b3",
-            "_type": "serviceCitiesBlock",
+            "_type": "serviceCities",
             "eyebrow": "Près de chez vous",
             "heading": "On dessert toute la Rive-Nord",
             "lead": "Une équipe locale, déjà dans votre secteur, qui connaît les nuisibles de la région.",
@@ -1237,7 +1237,7 @@
           },
           {
             "_key": "b4",
-            "_type": "aboutBlock",
+            "_type": "about",
             "eyebrow": "Qui on est",
             "heading": "Une équipe d'ici qui traite votre maison comme la sienne",
             "body": [
@@ -1286,14 +1286,14 @@
           },
           {
             "_key": "b5",
-            "_type": "testimonialsBlock",
+            "_type": "testimonials",
             "eyebrow": "Ce qu'on dit de nous",
             "heading": "La Rive-Nord nous fait déjà confiance",
             "mode": "featured"
           },
           {
             "_key": "b6",
-            "_type": "faqBlock",
+            "_type": "faq",
             "eyebrow": "Bon à savoir",
             "heading": "Les questions qu'on entend avant chaque intervention",
             "items": [
@@ -1339,7 +1339,7 @@
           },
           {
             "_key": "b8",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Nous joindre",
             "heading": "Dites-nous ce qui vous tracasse",
             "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
@@ -1493,7 +1493,7 @@
           },
           {
             "_key": "b2",
-            "_type": "servicesBlock",
+            "_type": "services",
             "eyebrow": "What we handle",
             "heading": "One pest, one clear solution",
             "lead": "Residential and commercial, handled by certified technicians with products safe for family and pets.",
@@ -1510,7 +1510,7 @@
           },
           {
             "_key": "b3",
-            "_type": "serviceCitiesBlock",
+            "_type": "serviceCities",
             "eyebrow": "Close to home",
             "heading": "We cover the whole North Shore",
             "lead": "A local crew, already in your area, that knows the region's pests.",
@@ -1521,7 +1521,7 @@
           },
           {
             "_key": "b4",
-            "_type": "aboutBlock",
+            "_type": "about",
             "eyebrow": "Who we are",
             "heading": "A local team that treats your home like its own",
             "body": [
@@ -1570,14 +1570,14 @@
           },
           {
             "_key": "b5",
-            "_type": "testimonialsBlock",
+            "_type": "testimonials",
             "eyebrow": "What clients say",
             "heading": "The North Shore already trusts us",
             "mode": "featured"
           },
           {
             "_key": "b6",
-            "_type": "faqBlock",
+            "_type": "faq",
             "eyebrow": "Good to know",
             "heading": "The questions we hear before every job",
             "items": [
@@ -1623,7 +1623,7 @@
           },
           {
             "_key": "b8",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Get in touch",
             "heading": "Tell us what you are dealing with",
             "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",
@@ -1713,7 +1713,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "servicesBlock",
+            "_type": "services",
             "eyebrow": "Ce qu'on règle",
             "heading": "Un nuisible, une solution claire",
             "lead": "Résidentiel et commercial, traités par des techniciens certifiés avec des produits sûrs pour la famille et les animaux.",
@@ -1721,7 +1721,7 @@
           },
           {
             "_key": "b2",
-            "_type": "serviceCitiesBlock",
+            "_type": "serviceCities",
             "eyebrow": "Près de chez vous",
             "heading": "On dessert toute la Rive-Nord",
             "lead": "Une équipe locale, déjà dans votre secteur, qui connaît les nuisibles de la région.",
@@ -1750,7 +1750,7 @@
           },
           {
             "_key": "b4",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Nous joindre",
             "heading": "Dites-nous ce qui vous tracasse",
             "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
@@ -1840,7 +1840,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "servicesBlock",
+            "_type": "services",
             "eyebrow": "What we handle",
             "heading": "One pest, one clear solution",
             "lead": "Residential and commercial, handled by certified technicians with products safe for family and pets.",
@@ -1848,7 +1848,7 @@
           },
           {
             "_key": "b2",
-            "_type": "serviceCitiesBlock",
+            "_type": "serviceCities",
             "eyebrow": "Close to home",
             "heading": "We cover the whole North Shore",
             "lead": "A local crew, already in your area, that knows the region's pests.",
@@ -1877,7 +1877,7 @@
           },
           {
             "_key": "b4",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Get in touch",
             "heading": "Tell us what you are dealing with",
             "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",
@@ -1961,7 +1961,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "serviceCitiesBlock",
+            "_type": "serviceCities",
             "eyebrow": "Près de chez vous",
             "heading": "On dessert toute la Rive-Nord",
             "lead": "Une équipe locale, déjà dans votre secteur, qui connaît les nuisibles de la région.",
@@ -1990,7 +1990,7 @@
           },
           {
             "_key": "b3",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Nous joindre",
             "heading": "Dites-nous ce qui vous tracasse",
             "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
@@ -2074,7 +2074,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "serviceCitiesBlock",
+            "_type": "serviceCities",
             "eyebrow": "Close to home",
             "heading": "We cover the whole North Shore",
             "lead": "A local crew, already in your area, that knows the region's pests.",
@@ -2103,7 +2103,7 @@
           },
           {
             "_key": "b3",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Get in touch",
             "heading": "Tell us what you are dealing with",
             "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",
@@ -2187,7 +2187,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "aboutBlock",
+            "_type": "about",
             "eyebrow": "Qui on est",
             "heading": "Une équipe d'ici qui traite votre maison comme la sienne",
             "body": [
@@ -2236,7 +2236,7 @@
           },
           {
             "_key": "b2",
-            "_type": "testimonialsBlock",
+            "_type": "testimonials",
             "eyebrow": "Ce qu'on dit de nous",
             "heading": "La Rive-Nord nous fait déjà confiance",
             "mode": "featured"
@@ -2261,7 +2261,7 @@
           },
           {
             "_key": "b4",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Nous joindre",
             "heading": "Dites-nous ce qui vous tracasse",
             "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
@@ -2345,7 +2345,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "aboutBlock",
+            "_type": "about",
             "eyebrow": "Who we are",
             "heading": "A local team that treats your home like its own",
             "body": [
@@ -2394,7 +2394,7 @@
           },
           {
             "_key": "b2",
-            "_type": "testimonialsBlock",
+            "_type": "testimonials",
             "eyebrow": "What clients say",
             "heading": "The North Shore already trusts us",
             "mode": "featured"
@@ -2419,7 +2419,7 @@
           },
           {
             "_key": "b4",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Get in touch",
             "heading": "Tell us what you are dealing with",
             "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",
@@ -2554,7 +2554,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Nous joindre",
             "heading": "Dites-nous ce qui vous tracasse",
             "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
@@ -2689,7 +2689,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Get in touch",
             "heading": "Tell us what you are dealing with",
             "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",
@@ -2856,7 +2856,7 @@
           },
           {
             "_key": "b2",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Nous joindre",
             "heading": "Dites-nous ce qui vous tracasse",
             "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
@@ -3023,7 +3023,7 @@
           },
           {
             "_key": "b2",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Get in touch",
             "heading": "Tell us what you are dealing with",
             "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",
@@ -3100,7 +3100,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Nous joindre",
             "heading": "Dites-nous ce qui vous tracasse",
             "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
@@ -3195,7 +3195,7 @@
         "pageBuilder": [
           {
             "_key": "b1",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Get in touch",
             "heading": "Tell us what you are dealing with",
             "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",
@@ -3367,7 +3367,7 @@
           },
           {
             "_key": "b2",
-            "_type": "servicesBlock",
+            "_type": "services",
             "eyebrow": "Ce qu'on règle",
             "heading": "Un nuisible, une solution claire",
             "lead": "Résidentiel et commercial, traités par des techniciens certifiés avec des produits sûrs pour la famille et les animaux.",
@@ -3384,7 +3384,7 @@
           },
           {
             "_key": "b3",
-            "_type": "serviceCitiesBlock",
+            "_type": "serviceCities",
             "eyebrow": "Près de chez vous",
             "heading": "On dessert toute la Rive-Nord",
             "lead": "Une équipe locale, déjà dans votre secteur, qui connaît les nuisibles de la région.",
@@ -3395,7 +3395,7 @@
           },
           {
             "_key": "b4",
-            "_type": "aboutBlock",
+            "_type": "about",
             "eyebrow": "Qui on est",
             "heading": "Une équipe d'ici qui traite votre maison comme la sienne",
             "body": [
@@ -3444,14 +3444,14 @@
           },
           {
             "_key": "b5",
-            "_type": "testimonialsBlock",
+            "_type": "testimonials",
             "eyebrow": "Ce qu'on dit de nous",
             "heading": "La Rive-Nord nous fait déjà confiance",
             "mode": "featured"
           },
           {
             "_key": "b6",
-            "_type": "faqBlock",
+            "_type": "faq",
             "eyebrow": "Bon à savoir",
             "heading": "Les questions qu'on entend avant chaque intervention",
             "items": [
@@ -3497,7 +3497,7 @@
           },
           {
             "_key": "b8",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Nous joindre",
             "heading": "Dites-nous ce qui vous tracasse",
             "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
@@ -3651,7 +3651,7 @@
           },
           {
             "_key": "b2",
-            "_type": "servicesBlock",
+            "_type": "services",
             "eyebrow": "What we handle",
             "heading": "One pest, one clear solution",
             "lead": "Residential and commercial, handled by certified technicians with products safe for family and pets.",
@@ -3668,7 +3668,7 @@
           },
           {
             "_key": "b3",
-            "_type": "serviceCitiesBlock",
+            "_type": "serviceCities",
             "eyebrow": "Close to home",
             "heading": "We cover the whole North Shore",
             "lead": "A local crew, already in your area, that knows the region's pests.",
@@ -3679,7 +3679,7 @@
           },
           {
             "_key": "b4",
-            "_type": "aboutBlock",
+            "_type": "about",
             "eyebrow": "Who we are",
             "heading": "A local team that treats your home like its own",
             "body": [
@@ -3728,14 +3728,14 @@
           },
           {
             "_key": "b5",
-            "_type": "testimonialsBlock",
+            "_type": "testimonials",
             "eyebrow": "What clients say",
             "heading": "The North Shore already trusts us",
             "mode": "featured"
           },
           {
             "_key": "b6",
-            "_type": "faqBlock",
+            "_type": "faq",
             "eyebrow": "Good to know",
             "heading": "The questions we hear before every job",
             "items": [
@@ -3781,7 +3781,7 @@
           },
           {
             "_key": "b8",
-            "_type": "contactBlock",
+            "_type": "contact",
             "eyebrow": "Get in touch",
             "heading": "Tell us what you are dealing with",
             "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",

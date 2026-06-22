@@ -152,7 +152,7 @@ interface SanityTrustBarBlock {
   items?: Maybe<Array<{ icon: string; value: string; label: string }>>
 }
 interface SanityServicesBlock {
-  _type: 'servicesBlock'
+  _type: 'services'
   _key: string
   eyebrow: string
   heading: string
@@ -163,7 +163,7 @@ interface SanityServicesBlock {
   limit?: Maybe<number>
 }
 interface SanityServiceCitiesBlock {
-  _type: 'serviceCitiesBlock'
+  _type: 'serviceCities'
   _key: string
   eyebrow: string
   heading: string
@@ -176,7 +176,7 @@ interface SanityServiceCitiesBlock {
   limit?: Maybe<number>
 }
 interface SanityAboutBlock {
-  _type: 'aboutBlock'
+  _type: 'about'
   _key: string
   eyebrow?: Maybe<string>
   heading: string
@@ -185,7 +185,7 @@ interface SanityAboutBlock {
   stats?: Maybe<Array<{ value: string; label: string }>>
 }
 interface SanityTestimonialsBlock {
-  _type: 'testimonialsBlock'
+  _type: 'testimonials'
   _key: string
   eyebrow: string
   heading: string
@@ -196,7 +196,7 @@ interface SanityTestimonialsBlock {
   limit?: Maybe<number>
 }
 interface SanityFaqBlock {
-  _type: 'faqBlock'
+  _type: 'faq'
   _key: string
   eyebrow?: Maybe<string>
   heading: string
@@ -207,7 +207,7 @@ interface SanityCtaBandBlock extends SanityCtaBand {
   _key: string
 }
 interface SanityContactBlock {
-  _type: 'contactBlock'
+  _type: 'contact'
   _key: string
   eyebrow: string
   heading: string
@@ -759,13 +759,13 @@ function requireDoc<T>(doc: Maybe<T>, name: string): T {
 
 const PAGE_BLOCK_TYPE_MAP = {
   trustBar: 'trust-bar',
-  servicesBlock: 'services',
-  serviceCitiesBlock: 'service-cities',
-  aboutBlock: 'about',
-  testimonialsBlock: 'testimonials',
-  faqBlock: 'faq',
+  services: 'services',
+  serviceCities: 'service-cities',
+  about: 'about',
+  testimonials: 'testimonials',
+  faq: 'faq',
   ctaBand: 'cta-band',
-  contactBlock: 'contact'
+  contact: 'contact'
 } as const
 
 const ARTICLE_BLOCK_TYPE_MAP = {
@@ -801,13 +801,13 @@ export function mapBlockType(sanityType: string): string {
  *  on les remappe pour que tout ancrage resolve. A PRESERVER. */
 const ANCHOR_KEY: Record<SanityRawBlock['_type'], string> = {
   trustBar: 'trust',
-  servicesBlock: 'services',
-  serviceCitiesBlock: 'cities',
-  aboutBlock: 'about',
-  testimonialsBlock: 'testimonials',
-  faqBlock: 'faq',
+  services: 'services',
+  serviceCities: 'cities',
+  about: 'about',
+  testimonials: 'testimonials',
+  faq: 'faq',
   ctaBand: 'cta-band',
-  contactBlock: 'contact'
+  contact: 'contact'
 }
 
 // ── Liens, localises (prefixe /en inclus en EN via le route-map) ──────────────
@@ -1127,7 +1127,7 @@ function transformBlock(
         _key: key,
         items: (block.items ?? []).map((i) => ({ icon: i.icon, value: i.value, label: i.label }))
       }
-    case 'servicesBlock':
+    case 'services':
       return {
         _type: 'services',
         _key: key,
@@ -1142,7 +1142,7 @@ function transformBlock(
           limit: opt(block.limit)
         }
       }
-    case 'serviceCitiesBlock':
+    case 'serviceCities':
       return {
         _type: 'service-cities',
         _key: key,
@@ -1158,7 +1158,7 @@ function transformBlock(
           limit: opt(block.limit)
         }
       }
-    case 'aboutBlock':
+    case 'about':
       return {
         _type: 'about',
         _key: key,
@@ -1171,7 +1171,7 @@ function transformBlock(
         })(),
         stats: (block.stats ?? []).map((s) => ({ value: s.value, label: s.label }))
       }
-    case 'testimonialsBlock':
+    case 'testimonials':
       return {
         _type: 'testimonials',
         _key: key,
@@ -1185,7 +1185,7 @@ function transformBlock(
           limit: opt(block.limit)
         }
       }
-    case 'faqBlock':
+    case 'faq':
       return {
         _type: 'faq',
         _key: key,
@@ -1196,7 +1196,7 @@ function transformBlock(
       }
     case 'ctaBand':
       return { _type: 'cta-band', _key: key, ...transformCtaBand(block, locale) }
-    case 'contactBlock':
+    case 'contact':
       return transformContactBlock(block, site, locale, key)
     default:
       return assertNever(block)
@@ -1204,7 +1204,7 @@ function transformBlock(
 }
 
 /**
- * Compose le contactBlock final. Le bloc Sanity porte les LIBELLES (etiquettes NAP,
+ * Compose le contact final. Le bloc Sanity porte les LIBELLES (etiquettes NAP,
  * champs du formulaire, bouton, banniere d'echec, consentement) ET le message de
  * succes, tous editables au Studio (parite 1:1 Minimaliste). La NAP (telephone,
  * courriel, adresse, heures) est JOINTE depuis siteSettings.contact: le format
@@ -1622,7 +1622,7 @@ export function transformGraph(raw: SanityGraph, locale: WfLocale): ContentPaylo
 
   // Globales monolithiques (SiteContent): un seul objet `site` du payload, source
   // unique de l'En-tete/Menu mobile/Pied de page ET de usePageSeo (site.seo,
-  // site.contact pour le LocalBusiness). Le contactBlock joint site.contact.
+  // site.contact pour le LocalBusiness). Le contact joint site.contact.
   const site = transformSiteSettings(siteSettings, locale)
   const seoDefaults = site.seo
   const builder = (blocks: Maybe<SanityRawBlock[]>): PayloadPageBlock[] =>

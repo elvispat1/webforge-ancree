@@ -9,8 +9,8 @@ import { CommentIcon } from '@sanity/icons'
  * à la résolution. Les flags required des champs restent en code. Conventions
  * alignées 1:1 sur l'analogue Minimaliste (objects/blocks/contact.ts).
  */
-export const contactBlock = defineType({
-  name: 'contactBlock',
+export const contact = defineType({
+  name: 'contact',
   title: 'Bloc: contact',
   type: 'object',
   icon: CommentIcon,

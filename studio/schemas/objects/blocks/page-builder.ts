@@ -14,8 +14,8 @@ import { defineField, defineArrayMember } from 'sanity'
  * (la convention des singletons Minimaliste).
  *
  * Les 8 blocs d'Ancrée listés par leur `name`:
- *   trustBar, servicesBlock, serviceCitiesBlock, aboutBlock,
- *   testimonialsBlock, faqBlock, ctaBand, contactBlock.
+ *   trustBar, services, serviceCities, about,
+ *   testimonials, faq, ctaBand, contact.
  *
  * insertMenu: replique EXACTEMENT la config de Minimaliste (vues grid + list,
  * aperçus SVG sous /static/block-previews/<typeName>.svg, filtre actif).
@@ -36,12 +36,12 @@ export const pageBuilderField = defineField({
   },
   of: [
     defineArrayMember({ type: 'trustBar' }),
-    defineArrayMember({ type: 'servicesBlock' }),
-    defineArrayMember({ type: 'serviceCitiesBlock' }),
-    defineArrayMember({ type: 'aboutBlock' }),
-    defineArrayMember({ type: 'testimonialsBlock' }),
-    defineArrayMember({ type: 'faqBlock' }),
+    defineArrayMember({ type: 'services' }),
+    defineArrayMember({ type: 'serviceCities' }),
+    defineArrayMember({ type: 'about' }),
+    defineArrayMember({ type: 'testimonials' }),
+    defineArrayMember({ type: 'faq' }),
     defineArrayMember({ type: 'ctaBand' }),
-    defineArrayMember({ type: 'contactBlock' }),
+    defineArrayMember({ type: 'contact' }),
   ],
 })

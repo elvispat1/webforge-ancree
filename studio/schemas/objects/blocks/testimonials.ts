@@ -4,8 +4,8 @@ import { StarIcon } from '@sanity/icons'
 // Bloc intelligent: la resolution des temoignages vit en GROQ cote app.
 // Mapping verrouille Ancree: le mode « par ville » reference serviceCity (jamais
 // project). Peau d'Ancree (icone, libelles).
-export const testimonialsBlock = defineType({
-  name: 'testimonialsBlock',
+export const testimonials = defineType({
+  name: 'testimonials',
   title: 'Temoignages',
   type: 'object',
   icon: StarIcon,

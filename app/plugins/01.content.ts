@@ -17,7 +17,7 @@
 // une transformation qui echoue rend createError fatal. Un generate sans contenu
 // doit ECHOUER, jamais produire un site vide. Aucun repli fixtures runtime.
 //
-// Contact: depuis l'arrimage 1:1 Minimaliste, le contactBlock porte ses propres
+// Contact: depuis l'arrimage 1:1 Minimaliste, le bloc contact porte ses propres
 // libelles (etiquettes NAP, champs du formulaire, bouton, banniere, consentement)
 // et son message de succes, tous editables au Studio. Le transform les lit du bloc
 // (plus d'injection i18n): transformGraph ne prend que (raw, locale).

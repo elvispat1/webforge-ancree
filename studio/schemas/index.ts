@@ -19,13 +19,13 @@ import { stat } from './objects/stat'
 
 // Blocs réguliers (union PageBlock côté Vue, peau et libellés propres d'Ancrée)
 import { trustBar } from './objects/blocks/trust-bar'
-import { servicesBlock } from './objects/blocks/services'
-import { serviceCitiesBlock } from './objects/blocks/service-cities'
-import { aboutBlock } from './objects/blocks/about'
-import { testimonialsBlock } from './objects/blocks/testimonials'
-import { faqBlock } from './objects/blocks/faq'
+import { services } from './objects/blocks/services'
+import { serviceCities } from './objects/blocks/service-cities'
+import { about } from './objects/blocks/about'
+import { testimonials } from './objects/blocks/testimonials'
+import { faq } from './objects/blocks/faq'
 import { ctaBand } from './objects/blocks/cta-band'
-import { contactBlock } from './objects/blocks/contact'
+import { contact } from './objects/blocks/contact'
 
 // Blocs article (union ArticleBlock côté Vue)
 import { articleLead } from './objects/article-blocks/article-lead'
@@ -75,13 +75,13 @@ export const schemaTypes = [
 
   // Blocs réguliers
   trustBar,
-  servicesBlock,
-  serviceCitiesBlock,
-  aboutBlock,
-  testimonialsBlock,
-  faqBlock,
+  services,
+  serviceCities,
+  about,
+  testimonials,
+  faq,
   ctaBand,
-  contactBlock,
+  contact,
 
   // Blocs article
   articleLead,

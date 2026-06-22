@@ -3,11 +3,11 @@
 // contenu de page compose au Studio. Imports RELATIFS (fermeture nuxt.config).
 //
 // Les 8 blocs d'Ancree (et UNIQUEMENT ceux-la, pas de bloc Minimaliste absent):
-//   trustBar, servicesBlock, serviceCitiesBlock, aboutBlock,
-//   testimonialsBlock, faqBlock, ctaBand, contactBlock.
+//   trustBar, services, serviceCities, about,
+//   testimonials, faq, ctaBand, contact.
 //
-// Blocs intelligents (servicesBlock, serviceCitiesBlock, testimonialsBlock,
-// faqBlock): on ne projette QUE les parametres de selection, jamais les items
+// Blocs intelligents (services, serviceCities, testimonials,
+// faq): on ne projette QUE les parametres de selection, jamais les items
 // resolus. La resolution des items vit dans resolveBlocks (couche composable),
 // qui reutilise les collections du payload.
 //   - refs de services et de villes -> slugs (collections indexees par slug);
@@ -20,7 +20,7 @@
 // semantique stable par type (anchorKey) pour que les ancres #services...#contact
 // resolvent sur la nav.
 //
-// Le contactBlock porte ses libelles (metaLabels, form, success) editables au
+// Le contact porte ses libelles (metaLabels, form, success) editables au
 // Studio; les VALEURS des coordonnees (NAP) sont jointes depuis siteSettings.contact
 // au transform. La privacy.link est resolue via LINK_PROJECTION (route de la
 // politique de confidentialite).
@@ -35,7 +35,7 @@ export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
   _type == "trustBar" => {
     items[]{ icon, value, label }
   },
-  _type == "servicesBlock" => {
+  _type == "services" => {
     eyebrow,
     heading,
     lead,
@@ -44,7 +44,7 @@ export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
     "refs": items[]->slug.current,
     limit
   },
-  _type == "serviceCitiesBlock" => {
+  _type == "serviceCities" => {
     eyebrow,
     heading,
     lead,
@@ -55,14 +55,14 @@ export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
     "refs": items[]->slug.current,
     limit
   },
-  _type == "aboutBlock" => {
+  _type == "about" => {
     eyebrow,
     heading,
     body,
     "photo": photo ${FIGURE_PROJECTION},
     stats[]{ value, label }
   },
-  _type == "testimonialsBlock" => {
+  _type == "testimonials" => {
     eyebrow,
     heading,
     mode,
@@ -71,13 +71,13 @@ export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
     "refs": items[]->_id,
     limit
   },
-  _type == "faqBlock" => {
+  _type == "faq" => {
     eyebrow,
     heading,
     "refs": items[]->_id
   },
   _type == "ctaBand" => ${CTA_BAND_PROJECTION},
-  _type == "contactBlock" => {
+  _type == "contact" => {
     eyebrow,
     heading,
     lead,
