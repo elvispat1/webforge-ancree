@@ -2789,6 +2789,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@iconify-json/simple-icons@npm:^1.2.87":
+  version: 1.2.87
+  resolution: "@iconify-json/simple-icons@npm:1.2.87"
+  dependencies:
+    "@iconify/types": "npm:*"
+  checksum: 10c0/b4279a79f5ab86d872f44f6ee6ab6dfe96870558f66029dfb6fe4a7f8354384d5ec13405aba4d0f9310333911454719b0fd1760b5de6ba088d230a4ffa3b9dd9
+  languageName: node
+  linkType: hard
+
 "@iconify/collections@npm:^1.0.679":
   version: 1.0.689
   resolution: "@iconify/collections@npm:1.0.689"
@@ -20816,6 +20825,7 @@ __metadata:
   resolution: "webforge-ancree@workspace:."
   dependencies:
     "@iconify-json/lucide": "npm:^1.2.111"
+    "@iconify-json/simple-icons": "npm:^1.2.87"
     "@nuxt/fonts": "npm:^0.14.0"
     "@nuxt/icon": "npm:^2.2.2"
     "@nuxt/image": "npm:^2.0.0"
