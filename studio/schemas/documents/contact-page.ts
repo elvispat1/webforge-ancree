@@ -1,5 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { EnvelopeIcon } from '@sanity/icons'
+import { maxItemsInput } from '../../components/maxItemsInput'
 
 /**
  * Page Contact (singleton de niveau 2, un document par langue).
@@ -39,6 +40,7 @@ export const contactPage = defineType({
       // Verrouillé à un seul bloc héros (mini-builder): on choisit ou échange le
       // héros, jamais plus d'un. Les variantes futures s'ajoutent à `of`.
       validation: (R) => R.required().length(1),
+      components: { input: maxItemsInput(1) },
     }),
     defineField({
       name: 'pageBuilder',

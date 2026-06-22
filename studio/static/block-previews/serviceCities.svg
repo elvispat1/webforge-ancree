@@ -1,0 +1,44 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" fill="#FAFAF7"/>
+  <!-- SectionHead: eyebrow, h2, lead -->
+  <rect x="24" y="20" width="36" height="5" rx="2" fill="#6B675F"/>
+  <rect x="24" y="32" width="148" height="10" rx="2" fill="#6B675F"/>
+  <rect x="24" y="50" width="180" height="4" rx="2" fill="#6B675F"/>
+  <!-- Grille de villes: 2 rangees x 3 cartes, chacune avec un pin et un libelle -->
+  <g>
+    <rect x="24" y="72" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
+    <circle cx="38" cy="88" r="3.5" fill="#2D4A3E"/>
+    <rect x="48" y="85" width="48" height="5" rx="2" fill="#6B675F"/>
+    <rect x="36" y="100" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+  </g>
+  <g>
+    <rect x="118" y="72" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
+    <circle cx="132" cy="88" r="3.5" fill="#6B675F"/>
+    <rect x="142" y="85" width="42" height="5" rx="2" fill="#6B675F"/>
+    <rect x="130" y="100" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+  </g>
+  <g>
+    <rect x="212" y="72" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
+    <circle cx="226" cy="88" r="3.5" fill="#6B675F"/>
+    <rect x="236" y="85" width="46" height="5" rx="2" fill="#6B675F"/>
+    <rect x="224" y="100" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+  </g>
+  <g>
+    <rect x="24" y="124" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
+    <circle cx="38" cy="140" r="3.5" fill="#6B675F"/>
+    <rect x="48" y="137" width="44" height="5" rx="2" fill="#6B675F"/>
+    <rect x="36" y="152" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+  </g>
+  <g>
+    <rect x="118" y="124" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
+    <circle cx="132" cy="140" r="3.5" fill="#6B675F"/>
+    <rect x="142" y="137" width="48" height="5" rx="2" fill="#6B675F"/>
+    <rect x="130" y="152" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+  </g>
+  <g>
+    <rect x="212" y="124" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
+    <circle cx="226" cy="140" r="3.5" fill="#6B675F"/>
+    <rect x="236" y="137" width="40" height="5" rx="2" fill="#6B675F"/>
+    <rect x="224" y="152" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+  </g>
+</svg>

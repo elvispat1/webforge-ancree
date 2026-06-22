@@ -1,0 +1,28 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" fill="#FAFAF7"/>
+  <!-- SectionHead: eyebrow, h2, lead -->
+  <rect x="24" y="22" width="36" height="5" rx="2" fill="#6B675F"/>
+  <rect x="24" y="34" width="132" height="10" rx="2" fill="#6B675F"/>
+  <rect x="24" y="52" width="170" height="4" rx="2" fill="#6B675F"/>
+  <!-- Filets verticaux entre les tuiles -->
+  <rect x="110" y="70" width="1" height="96" fill="#D8D5CE"/>
+  <rect x="205" y="70" width="1" height="96" fill="#D8D5CE"/>
+  <!-- Tuile 1: titre, corps, cue accent (En savoir plus) -->
+  <rect x="24" y="74" width="56" height="6" rx="2" fill="#6B675F"/>
+  <rect x="24" y="88" width="74" height="4" rx="2" fill="#6B675F"/>
+  <rect x="24" y="96" width="66" height="4" rx="2" fill="#6B675F"/>
+  <rect x="24" y="152" width="38" height="4" rx="2" fill="#2D4A3E"/>
+  <path d="M68 150 l4 4 l-4 4" fill="none" stroke="#2D4A3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Tuile 2 -->
+  <rect x="119" y="74" width="60" height="6" rx="2" fill="#6B675F"/>
+  <rect x="119" y="88" width="74" height="4" rx="2" fill="#6B675F"/>
+  <rect x="119" y="96" width="58" height="4" rx="2" fill="#6B675F"/>
+  <rect x="119" y="152" width="38" height="4" rx="2" fill="#6B675F"/>
+  <path d="M163 150 l4 4 l-4 4" fill="none" stroke="#6B675F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Tuile 3 -->
+  <rect x="214" y="74" width="52" height="6" rx="2" fill="#6B675F"/>
+  <rect x="214" y="88" width="74" height="4" rx="2" fill="#6B675F"/>
+  <rect x="214" y="96" width="62" height="4" rx="2" fill="#6B675F"/>
+  <rect x="214" y="152" width="38" height="4" rx="2" fill="#6B675F"/>
+  <path d="M258 150 l4 4 l-4 4" fill="none" stroke="#6B675F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

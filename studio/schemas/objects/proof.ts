@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { CheckmarkCircleIcon } from '@sanity/icons'
+import { LucideIconInput } from '../../components/lucideIconInput'
 
 /**
  * Preuve de confiance: petit trio { icon, value, label } réutilisé dans les
@@ -16,6 +17,7 @@ export const proof = defineType({
       name: 'icon',
       title: 'Icône (Iconify lucide)',
       type: 'string',
+      components: { input: LucideIconInput },
     }),
     defineField({
       name: 'value',

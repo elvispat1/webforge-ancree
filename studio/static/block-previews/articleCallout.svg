@@ -1,0 +1,9 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="200" fill="#FAFAF7"/>
+  <!-- Encadre: boite teintee, bordure d'accent a gauche, titre + corps -->
+  <rect x="72" y="62" width="176" height="58" rx="2" fill="#D8D5CE"/>
+  <rect x="72" y="62" width="3" height="58" rx="1.5" fill="#2D4A3E"/>
+  <rect x="88" y="76" width="64" height="6" rx="2" fill="#6B675F"/>
+  <rect x="88" y="92" width="144" height="4" rx="2" fill="#6B675F"/>
+  <rect x="88" y="100" width="128" height="4" rx="2" fill="#6B675F"/>
+</svg>
