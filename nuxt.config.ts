@@ -21,7 +21,7 @@ import {
   type Locale
 } from './app/config/route-map'
 // Config + garde du blog (PUR TS, importable hors contexte d'alias Nuxt).
-import { ARTICLES_PER_PAGE, assertBlogCollections } from './app/content/blog-guards'
+import { ARTICLES_PER_PAGE, assertBlogCollections } from './app/content/guards'
 // Icônes de marque des réseaux sociaux: sous-ensemble simple-icons bundlé au build.
 import { SOCIAL_ICON_NAMES } from './app/config/socials'
 import simpleIconsData from '@iconify-json/simple-icons/icons.json'

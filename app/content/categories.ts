@@ -4,7 +4,7 @@
  * le meme slug (la desambiguisation d'URL vient du prefixe de locale, jamais du
  * slug). AUCUNE valeur design ni de contenu ici, que des champs. */
 
-export interface CategoryContent {
+export interface Category {
   title: string
   slug: string // partage fr/en
   description?: string // amorce de la page d'archive

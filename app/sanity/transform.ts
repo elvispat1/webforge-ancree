@@ -43,8 +43,8 @@ import type { FaqContent } from '../content/faq'
 import type { CtaBandContent } from '../content/cta-band'
 import type { ContactContent } from '../content/contact'
 import type { ProcessContent } from '../content/process'
-import type { CategoryContent } from '../content/blog'
-import type { ArticleContent } from '../content/article'
+import type { Category } from '../content/categories'
+import type { Article } from '../content/articles'
 import type {
   ArticleFigure,
   PortableTextBlock
@@ -662,8 +662,8 @@ export interface ContentPayload {
   collections: {
     services: ServiceWithMeta[]
     serviceCities: ServiceCityWithDetail[]
-    articles: Translated<ArticleContent>[]
-    categories: Translated<CategoryContent>[]
+    articles: Translated<Article>[]
+    categories: Translated<Category>[]
     testimonials: TestimonialPayload[]
     faqItems: FaqItemPayload[]
   }
@@ -1546,7 +1546,7 @@ function transformServiceCity(raw: SanityServiceCity, locale: WfLocale): Service
   }
 }
 
-function transformArticle(raw: SanityArticle, locale: WfLocale): Translated<ArticleContent> {
+function transformArticle(raw: SanityArticle, locale: WfLocale): Translated<Article> {
   return {
     slug: cleanLogic(raw.slug),
     title: raw.title,
@@ -1562,7 +1562,7 @@ function transformArticle(raw: SanityArticle, locale: WfLocale): Translated<Arti
   }
 }
 
-function transformCategory(raw: SanityCategory): Translated<CategoryContent> {
+function transformCategory(raw: SanityCategory): Translated<Category> {
   return {
     title: raw.title,
     slug: cleanLogic(raw.slug),

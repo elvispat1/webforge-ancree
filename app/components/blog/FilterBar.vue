@@ -2,10 +2,10 @@
 /* Filtre du blog, base sur l'URL (chaque option est un lien crawlable vers une
  * archive de categorie, jamais un etat client). Une seule categorie a la fois.
  * « Tous les sujets » ramene a /blog. L'option active porte aria-current. */
-import type { CategoryContent } from '~/content/blog'
+import type { Category } from '~/content/categories'
 import { routePath, type Locale } from '~/config/route-map'
 
-const props = defineProps<{ categories: CategoryContent[]; activeSlug?: string }>()
+const props = defineProps<{ categories: Category[]; activeSlug?: string }>()
 
 const { locale, t } = useI18n()
 const loc = computed(() => locale.value as Locale)

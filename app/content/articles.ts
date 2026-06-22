@@ -12,7 +12,7 @@ export interface ArticleCategoryRef {
   slug: string
 }
 
-export interface ArticleContent {
+export interface Article {
   slug: string // partage fr/en
   title: string
   excerpt: string

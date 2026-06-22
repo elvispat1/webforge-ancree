@@ -84,7 +84,7 @@ export function assertBlogCollections(options: BlogCollectionsInput): void {
 
   if (problems.length > 0) {
     throw new Error(
-      '[webforge] Collections de blog invalides (garde du schema d\'URL court, app/content/blog-guards.ts):\n'
+      '[webforge] Collections de blog invalides (garde du schema d\'URL court, app/content/guards.ts):\n'
       + problems.map((p) => `  - ${p}`).join('\n')
     )
   }

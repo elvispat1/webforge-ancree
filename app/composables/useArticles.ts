@@ -5,10 +5,10 @@
  * pagination et de formatage de date. i18n document-level: slug partage fr/en,
  * l'URL ne differe que par le prefixe de locale. */
 import { computed } from 'vue'
-import type { ArticleContent } from '~/content/article'
-import type { CategoryContent } from '~/content/blog'
+import type { Article } from '~/content/articles'
+import type { Category } from '~/content/categories'
 import { routePath, type Locale } from '~/config/route-map'
-import { ARTICLES_PER_PAGE } from '~/content/blog-guards'
+import { ARTICLES_PER_PAGE } from '~/content/guards'
 import type { ArticleFigure } from '~/content/article-blocks'
 import type { Translated } from '~/sanity/transform'
 
@@ -24,7 +24,7 @@ export interface ArticleCardData {
 }
 
 /** URL complete d'un article: avec categorie -> /blog/<cat>/<slug>, sinon /blog/<slug>. */
-export function articleHref(article: ArticleContent, locale: Locale): string {
+export function articleHref(article: Article, locale: Locale): string {
   const base = routePath('blog', locale)
   return article.category ? `${base}/${article.category.slug}/${article.slug}` : `${base}/${article.slug}`
 }
@@ -45,7 +45,7 @@ export function formatArticleDate(iso: string, locale: Locale): string {
 }
 
 /** Met un article en forme de carte (liste, grille, relies). */
-export function toCard(article: ArticleContent, locale: Locale): ArticleCardData {
+export function toCard(article: Article, locale: Locale): ArticleCardData {
   return {
     slug: article.slug,
     title: article.title,
@@ -80,8 +80,8 @@ export function paginate<T>(items: T[], page: number, perPage = ARTICLES_PER_PAG
 }
 
 export type BlogRouteMatch =
-  | { type: 'article'; article: Translated<ArticleContent> }
-  | { type: 'category'; category: Translated<CategoryContent>; articles: ArticleContent[] }
+  | { type: 'article'; article: Translated<Article> }
+  | { type: 'category'; category: Translated<Category>; articles: Article[] }
   | null
 
 /** Resout les segments du catch-all /blog contre le jeu d'articles + categories.
@@ -89,8 +89,8 @@ export type BlogRouteMatch =
  *  ou 2 segments categorie+slug). */
 export function resolveBlogRoute(
   segments: string[],
-  articles: Translated<ArticleContent>[],
-  categories: Translated<CategoryContent>[]
+  articles: Translated<Article>[],
+  categories: Translated<Category>[]
 ): BlogRouteMatch {
   if (segments.length === 1) {
     const seg = segments[0]!
@@ -124,7 +124,7 @@ export interface ArticleQuery {
 }
 
 /** Articles tries par date decroissante (plus recent d'abord), filtres localement. */
-export function useArticles(query: ArticleQuery = {}): Translated<ArticleContent>[] {
+export function useArticles(query: ArticleQuery = {}): Translated<Article>[] {
   let out = [...usePayload().collections.articles].sort((a, b) => (a.date < b.date ? 1 : -1))
   if (query.category) out = out.filter((a) => a.category?.slug === query.category)
   if (query.exclude) out = out.filter((a) => a.slug !== query.exclude)
@@ -132,18 +132,18 @@ export function useArticles(query: ArticleQuery = {}): Translated<ArticleContent
   return out
 }
 
-export function useArticle(slug: string): Translated<ArticleContent> | undefined {
+export function useArticle(slug: string): Translated<Article> | undefined {
   return usePayload().collections.articles.find((a) => a.slug === slug)
 }
 
 /** Articles relies: meme categorie (ou plus recents si l'article n'en a pas), en
  *  excluant l'article courant. */
-export function useRelatedArticles(article: ArticleContent, limit = 2): Translated<ArticleContent>[] {
+export function useRelatedArticles(article: Article, limit = 2): Translated<Article>[] {
   return useArticles({ category: article.category?.slug, exclude: article.slug, limit })
 }
 
 /** Met un article en forme de carte (categorie resolue en titre affichable). */
-export function articleCard(article: ArticleContent, locale: Locale): ArticleCardData {
+export function articleCard(article: Article, locale: Locale): ArticleCardData {
   return toCard(article, locale)
 }
 
@@ -156,10 +156,10 @@ export function useBlog() {
   const loc = computed(() => locale.value as Locale)
   const isEn = computed(() => loc.value === 'en')
 
-  const articles = computed<Translated<ArticleContent>[]>(() =>
+  const articles = computed<Translated<Article>[]>(() =>
     [...usePayload().collections.articles].sort((a, b) => b.date.localeCompare(a.date))
   )
-  const categories = computed<Translated<CategoryContent>[]>(() => usePayload().collections.categories)
+  const categories = computed<Translated<Category>[]>(() => usePayload().collections.categories)
 
   return { locale: loc, isEn, articles, categories }
 }
