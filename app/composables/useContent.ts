@@ -20,27 +20,7 @@
 import { computed, type ComputedRef } from 'vue'
 import type { LegalContent } from '~/sanity/transform'
 import type { SiteContent } from '~/content/site'
-
-/** Categorie de temoins reellement installee sur ce site (config de code, jamais
- *  editorial). Forme minimale: identifiant + drapeau « requise » (les requises ne
- *  sont pas refusables, ex temoins strictement necessaires). */
-export interface ConsentCategory {
-  id: string
-  required: boolean
-}
-export interface ConsentConfig {
-  /** Version de la politique: un bump force un nouveau consentement. */
-  policyVersion: string
-  categories: ConsentCategory[]
-}
-
-/** Config de consentement de CE site (categories de temoins installees). Constante
- *  de code, jamais du contenu Sanity: elle decrit l'infrastructure du site, pas un
- *  texte editable. La demo Rempart n'installe aucun temoin non essentiel. */
-export const CONSENT_CONFIG: ConsentConfig = {
-  policyVersion: '2026-01',
-  categories: [{ id: 'necessary', required: true }]
-}
+import { CONSENT_CONFIG, type ConsentConfig } from '~/content/consent'
 
 type ContentSources = {
   site: SiteContent

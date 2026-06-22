@@ -7,6 +7,9 @@ import { onePagerPath } from '~/config/route-map'
 
 const { t, locale } = useI18n()
 const home = computed(() => onePagerPath('index', locale.value as 'fr' | 'en'))
+/* Lien politique de la bannière de consentement, qualifié pour le sous-arbre
+ * one-pager (la politique vit sous /one-pager). */
+const policyHref = computed(() => onePagerPath('privacy', locale.value as 'fr' | 'en'))
 </script>
 
 <template>
@@ -18,5 +21,6 @@ const home = computed(() => onePagerPath('index', locale.value as 'fr' | 'en'))
     </main>
     <Footer mode="landing" :home="home" />
     <CallBar />
+    <Consent :policy-href="policyHref" />
   </div>
 </template>

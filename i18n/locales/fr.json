@@ -109,5 +109,36 @@
     "not_found": "Page introuvable",
     "generic": "Une erreur est survenue",
     "home": "Retour à l’accueil"
+  },
+  "consent": {
+    "aria_label": "Préférences de témoins",
+    "title": "Témoins et confidentialité",
+    "body": "Ce site peut utiliser des témoins de mesure d'audience pour comprendre sa fréquentation. Ils ne se chargent qu’avec votre accord.",
+    "policy_prefix": "Détails dans notre",
+    "policy_link": "politique de confidentialité",
+    "accept_all": "Tout accepter",
+    "necessary_only": "Nécessaires seulement",
+    "customize": "Personnaliser",
+    "back": "Retour",
+    "save": "Enregistrer mes choix",
+    "required": "Requis",
+    "manage": "Gérer les témoins",
+    "categories": {
+      "necessary": {
+        "label": "Nécessaires",
+        "purpose": "Assurent le fonctionnement du site : sécurité du formulaire de contact et mémorisation de votre choix de témoins. Toujours actifs."
+      },
+      "analytics": {
+        "label": "Analytique",
+        "purpose": "Mesure d’audience anonyme : comprendre la fréquentation du site et l’améliorer. Désactivés tant que vous ne les avez pas acceptés."
+      }
+    },
+    "policy": {
+      "title": "Catégories de témoins",
+      "intro": "Voici les catégories de témoins pouvant être utilisées sur ce site et leur finalité. Votre choix est conservé six mois; passé ce délai, la bannière réapparaît.",
+      "status_required": "Requis",
+      "status_optional": "Optionnel",
+      "change_prefix": "Vous pouvez revoir ou modifier votre choix à tout moment :"
+    }
   }
 }

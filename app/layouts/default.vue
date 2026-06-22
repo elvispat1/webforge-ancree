@@ -1,7 +1,12 @@
 <script setup lang="ts">
 /* Coquille du mode MULTIPAGE (racine /): en-tete en mode multipage (liens de
  * route via le route-map). Le one-pager utilise le layout `landing` (ancres). */
+import { routePath } from '~/config/route-map'
+
 const { t } = useI18n()
+/* Cible du lien « politique de confidentialité » de la bannière de consentement,
+ * localisée (racine multipage). */
+const policyHref = routePath('privacy', useWfLocale())
 </script>
 
 <template>
@@ -13,5 +18,6 @@ const { t } = useI18n()
     </main>
     <Footer />
     <CallBar />
+    <Consent :policy-href="policyHref" />
   </div>
 </template>

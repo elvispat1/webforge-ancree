@@ -109,5 +109,36 @@
     "not_found": "Page not found",
     "generic": "Something went wrong",
     "home": "Back to home"
+  },
+  "consent": {
+    "aria_label": "Cookie preferences",
+    "title": "Cookies and privacy",
+    "body": "This site may use analytics cookies to understand its traffic. They only load with your consent.",
+    "policy_prefix": "Details in our",
+    "policy_link": "privacy policy",
+    "accept_all": "Accept all",
+    "necessary_only": "Necessary only",
+    "customize": "Customize",
+    "back": "Back",
+    "save": "Save my choices",
+    "required": "Required",
+    "manage": "Manage cookies",
+    "categories": {
+      "necessary": {
+        "label": "Necessary",
+        "purpose": "Keep the site working: contact form security and remembering your cookie choice. Always on."
+      },
+      "analytics": {
+        "label": "Analytics",
+        "purpose": "Anonymous audience measurement: understand site traffic and improve it. Off until you accept them."
+      }
+    },
+    "policy": {
+      "title": "Cookie categories",
+      "intro": "Here are the cookie categories that may be used on this site and their purpose. Your choice is kept for six months, after which the banner reappears.",
+      "status_required": "Required",
+      "status_optional": "Optional",
+      "change_prefix": "You can review or change your choice at any time:"
+    }
   }
 }

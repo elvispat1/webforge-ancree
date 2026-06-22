@@ -23,6 +23,9 @@ const localePath = useLocalePath()
 // de footer.utility, requalifies vers le sous-arbre one-pager en mode landing.
 const site = useContent('site')
 const socials = useSocials()
+// Réouverture de la bannière de consentement (revoir/modifier son choix de
+// témoins à tout moment, même après un choix valide). Le store pilote l'affichage.
+const consent = useConsentStore()
 // Normalise en { label, href } selon le mode (routes en multipage, ancres en
 // landing): le template ne connait qu'une forme, comme le Menu mobile.
 const footerNav = computed(() =>
@@ -125,6 +128,9 @@ function legalHref(href: string): string {
             :to="legalHref(link.href)"
             class="footer__legal-link"
           >{{ link.label }}</NuxtLink>
+          <button type="button" class="footer__legal-link footer__consent" @click="consent.reopen()">
+            {{ t('consent.manage') }}
+          </button>
         </nav>
       </div>
     </div>
@@ -276,6 +282,15 @@ function legalHref(href: string): string {
 .footer__legal-link {
   color: color-mix(in oklch, var(--text-ondeep) 88%, transparent);
   text-decoration: none;
+}
+/* Le déclencheur de consentement est un <button> (action JS), habillé comme les
+ * liens légaux: reset des styles natifs du bouton. */
+.footer__consent {
+  padding: 0;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
 }
 .footer__credit a:hover,
 .footer__legal-link:hover {
