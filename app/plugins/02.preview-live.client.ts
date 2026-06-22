@@ -17,7 +17,8 @@
 
 import { effectScope, watch, reactive } from 'vue'
 import { resolvePreviewQuery } from '~/queries/route-query-map'
-import { transformGraph, type ContentPayload, type SanityGraph } from '~/sanity/transform'
+import { transformGraph, type ContentPayload } from '~/sanity/transform'
+import type { SanityGraph } from '~/types/sanity'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   if (!__WF_PREVIEW__ || import.meta.server) return

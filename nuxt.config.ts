@@ -20,6 +20,9 @@ import {
   DOC_ROUTES,
   type Locale
 } from './app/config/route-map'
+// Types du payload Sanity brut: RouteSlugs (resultat de ROUTE_SLUGS_QUERY) + SlugRef,
+// importes par chemin RELATIF (la fermeture nuxt.config est typecheckee hors alias ~).
+import type { RouteSlugs, SlugRef } from './app/types/sanity'
 // Config + garde du blog (PUR TS, importable hors contexte d'alias Nuxt).
 import { ARTICLES_PER_PAGE, assertBlogCollections } from './app/content/guards'
 // Icônes de marque des réseaux sociaux: sous-ensemble simple-icons bundlé au build.
@@ -80,16 +83,6 @@ const ROUTE_SLUGS_QUERY = `{
   }
 }`
 
-interface SlugRef { slug: string }
-interface ArticleSlugRef extends SlugRef { category: string | null }
-interface SlugByLang { lang: Locale; slug: string | null }
-interface ServiceSlugRef extends SlugRef { slugByLang: SlugByLang[] | null }
-interface RouteSlugs {
-  articles: ArticleSlugRef[]
-  categories: SlugRef[]
-  cities: SlugRef[]
-  services: ServiceSlugRef[]
-}
 const EMPTY_SLUGS: RouteSlugs = { articles: [], categories: [], cities: [], services: [] }
 
 // Fetch GRACIEUX: un reseau coupe ne casse pas le build (Ancree retombe partout

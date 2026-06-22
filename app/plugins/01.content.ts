@@ -32,7 +32,8 @@
 
 import { CONTENT_GRAPH_QUERY } from '~/queries/documents'
 import { resolvePreviewQuery } from '~/queries/route-query-map'
-import { transformGraph, type SanityGraph, type WfLocale } from '~/sanity/transform'
+import { transformGraph, type WfLocale } from '~/sanity/transform'
+import type { SanityGraph } from '~/types/sanity'
 
 // Cache au niveau module: une promesse par langue, partagee entre toutes les
 // routes prerendues du meme process de generate.

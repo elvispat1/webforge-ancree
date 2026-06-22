@@ -19,27 +19,7 @@
 
 import { routePath, onePagerPath, type RouteKey } from '~/config/route-map'
 import { docPath, resolveLink, type WfLocale } from '~/sanity/transform'
-
-// Formes structurelles des objets de lien Sanity (projections LINK_PROJECTION).
-// Identiques aux interfaces internes du transform: la compatibilite structurelle de
-// TypeScript les rend assignables a docPath/resolveLink sans import depuis le module
-// transform (qui ne les exporte pas).
-export interface SanityLinkRef {
-  _type:
-    | 'homePage' | 'servicesPage' | 'villesPage' | 'aboutPage' | 'blogPage'
-    | 'faqPage' | 'contactPage' | 'onePager'
-    | 'service' | 'serviceCity' | 'article' | 'category' | 'legalPage'
-  _id: string
-  slug?: string | null
-  catSlug?: string | null
-}
-export interface SanityLink {
-  label: string
-  type: 'internal' | 'anchor' | 'external'
-  externalUrl?: string | null
-  anchor?: string | null
-  internalRef?: SanityLinkRef | null
-}
+import type { SanityLink, SanityLinkRef } from '~/types/sanity'
 
 export const useLinkResolver = () => {
   const locale = useWfLocale()
