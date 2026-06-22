@@ -5788,8 +5788,6 @@
           "_type": "reference",
           "_ref": "serviceCity-laval-fr"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 1
       }
@@ -5810,8 +5808,6 @@
           "_type": "reference",
           "_ref": "serviceCity-laval-en"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 1
       }
@@ -5832,8 +5828,6 @@
           "_type": "reference",
           "_ref": "serviceCity-terrebonne-fr"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 2
       }
@@ -5854,8 +5848,6 @@
           "_type": "reference",
           "_ref": "serviceCity-terrebonne-en"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 2
       }
@@ -5876,8 +5868,6 @@
           "_type": "reference",
           "_ref": "serviceCity-repentigny-fr"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 3
       }
@@ -5898,8 +5888,6 @@
           "_type": "reference",
           "_ref": "serviceCity-repentigny-en"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 3
       }
@@ -5920,8 +5908,6 @@
           "_type": "reference",
           "_ref": "serviceCity-blainville-fr"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 4
       }
@@ -5942,8 +5928,6 @@
           "_type": "reference",
           "_ref": "serviceCity-blainville-en"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 4
       }
@@ -5964,8 +5948,6 @@
           "_type": "reference",
           "_ref": "serviceCity-mascouche-fr"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 5
       }
@@ -5986,8 +5968,6 @@
           "_type": "reference",
           "_ref": "serviceCity-mascouche-en"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 5
       }
@@ -6008,8 +5988,6 @@
           "_type": "reference",
           "_ref": "serviceCity-boisbriand-fr"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 6
       }
@@ -6030,8 +6008,6 @@
           "_type": "reference",
           "_ref": "serviceCity-boisbriand-en"
         },
-        "note": 5,
-        "source": "Google",
         "featured": true,
         "order": 6
       }

@@ -29,7 +29,7 @@ export const testimonial = defineType({
     defineField({
       name: 'context',
       title: 'Contexte',
-      description: 'Mention affichée sous le nom, par exemple le secteur ou le quartier.',
+      description: 'Mention de lieu affichée sous le nom, par exemple Propriétaire à Laval.',
       type: 'string',
     }),
     defineField({
@@ -60,29 +60,6 @@ export const testimonial = defineType({
       },
     }),
     defineField({
-      name: 'avatar',
-      title: 'Photo du client',
-      type: 'figure',
-    }),
-    defineField({
-      name: 'note',
-      title: 'Note',
-      description: 'Appréciation sur cinq, affichée en étoiles.',
-      type: 'number',
-      validation: (R) => R.min(1).max(5),
-    }),
-    defineField({
-      name: 'source',
-      title: 'Provenance',
-      description: 'Origine du témoignage, par exemple Google ou une fiche client.',
-      type: 'string',
-    }),
-    defineField({
-      name: 'date',
-      title: 'Date',
-      type: 'date',
-    }),
-    defineField({
       name: 'featured',
       title: 'Témoignage vedette',
       description: 'Sélectionné par les blocs témoignages en mode vedettes.',
@@ -100,14 +77,13 @@ export const testimonial = defineType({
     { title: 'Ordre de la collection', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
   ],
   preview: {
-    select: { name: 'name', context: 'context', featured: 'featured', media: 'avatar.image', language: 'language' },
-    prepare: ({ name, context, featured, media, language }) => ({
+    select: { name: 'name', quote: 'quote', featured: 'featured', language: 'language' },
+    prepare: ({ name, quote, featured, language }) => ({
       title: name || '(sans nom)',
       subtitle:
         (featured ? 'Vedette, ' : '') +
-        (context || '') +
+        (quote ? quote.slice(0, 60) : '') +
         (language ? ' (' + language.toUpperCase() + ')' : ''),
-      media,
     }),
   },
 })

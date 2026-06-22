@@ -688,6 +688,8 @@ export interface TestimonialPayload {
   id: string
   quote: string
   name: string
+  /** Mention de lieu lisible (« Propriétaire à Laval »), AFFICHÉE sous le nom.
+   *  Distincte de `city` (slug serviceCity, sert au filtre des blocs). */
   context?: string
   service?: string
   city?: string
