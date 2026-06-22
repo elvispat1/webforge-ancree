@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* Accueil MULTIPAGE (mode Multipage, racine /). Une passerelle: le heros, puis
  * un choix d'apercus qui MENENT aux pages dediees (services -> /services, villes
  * -> pages service-ville, temoignages, bandeau d'appel -> /contact). Le contenu

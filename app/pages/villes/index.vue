@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* Hub des villes desservies (le « ou » du SEO local). Masthead hero-page (document
  * villesPage, fil Accueil -> Villes), puis le corps de page vient du pageBuilder du
  * meme document (la mosaique service-cities, chaque ville mene a /villes/[ville], et

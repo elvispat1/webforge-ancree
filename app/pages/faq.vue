@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* Page FAQ (multipage). Masthead hero-page (porte son propre fil d'Ariane, du
  * payload) puis le pageBuilder du document faqPage (bloc faq en accordeon,
  * bandeau d'appel de cloture). La copie et le SEO viennent du document Sanity

@@ -26,6 +26,6 @@ usePageSeo({
 <template>
   <article>
     <Hero :hero="heroBlock" />
-    <LegalBody :doc="doc" />
+    <LegalPage :doc="doc" />
   </article>
 </template>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* Page Contact (multipage). Masthead hero-page (porte son propre fil d'Ariane,
  * du payload) puis le bloc contact (coordonnees, zone de service, formulaire).
  * Pas de bandeau d'appel: la page EST le point de conversion. La copie et le SEO

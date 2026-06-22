@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* Liste du blog (/blog). Masthead hero-page + filtre de categories (route-based)
  * + grille d'articles + bandeau d'appel. Contenu du payload unique (fail-fast):
  * articles + categories de useBlog(), heros et copie du document blogPage, CTA de

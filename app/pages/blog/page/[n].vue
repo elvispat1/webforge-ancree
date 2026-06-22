@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* Blog: page de pagination [n] (n >= 2; la page 1 est /blog nu). Meme masthead +
  * filtre + grille + bandeau d'appel que la liste, sur la tranche n. Contenu du
  * payload unique (fail-fast): articles + categories de useBlog(), heros et copie du

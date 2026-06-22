@@ -4,7 +4,7 @@
  * interne, non indexee. Calquee sur la structure de la vitrine Minimaliste, peau
  * Ancree. Chaque bloc est rendu dans sa propre scene .wf-site (contexte de
  * requete de conteneur), via le meme block-map que la page-builder de prod. */
-import { regularBlockMap } from '~/components/page-builder/block-map'
+import { regularBlockMap } from '~/components/page-builder/regular/block-map'
 import { breadcrumbsFor } from '~/config/route-map'
 import type { HeroPageBlock, PageBlock } from '~/types/blocks'
 

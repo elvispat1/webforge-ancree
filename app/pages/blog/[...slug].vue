@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
+import ArticleBuilder from '~/components/page-builder/article/index.vue'
 /* Catch-all sous /blog. Resout les segments: 1 segment = archive de categorie
  * (priorite) ou article sans categorie; 2 segments = article categorise. Article:
  * masthead hero-article + corps (ArticleBuilder) + reliés + bandeau d'appel.

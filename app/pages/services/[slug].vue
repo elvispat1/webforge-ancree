@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* Page de service par nuisible (le « quoi » du SEO local). Contenu tire de Sanity
  * (collection service, par slug + langue). Le slug est RICHE en mots-cles et TRADUIT
  * par langue (FR extermination-fourmis-charpentieres <-> EN carpenter-ant-extermination);

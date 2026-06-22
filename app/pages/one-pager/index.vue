@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* One-pager de la demo Rempart Extermination (mode One-Pager, sous /one-pager).
  * Tout sur une page: heros + tous les blocs, nav par ancres + scrollspy (layout
  * landing, en-tete qualifie par la racine /one-pager).

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageBuilder from '~/components/page-builder/regular/index.vue'
 /* Index des services = hub des pages par nuisible. La grille liste les services
  * (collection Sanity) en cartes CLIQUABLES vers /services/<slug>. Masthead = bloc
  * hero-page (document servicesPage), le fil d'Ariane vient du route-map. Sous la
