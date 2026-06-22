@@ -30,6 +30,7 @@
 import { routePath, onePagerPath, serviceCityPath, legalRouteKeyForId } from '../config/route-map'
 import { SOCIAL_PLATFORMS, type SocialPlatform } from '../config/socials'
 import type { SiteContent } from '../content/site'
+import type { LegalBlock, LegalDoc, LegalContent } from '../content/legal'
 import type { HeroContent, HeroPageContent } from '../content/hero'
 import type {
   TrustBarContent,
@@ -305,18 +306,18 @@ interface SanitySiteSettings {
   }
 }
 
-/** Page legale (LEGAL_PROJECTION). */
-interface SanityLegalSectionBlock {
-  _type: string
-  text?: Maybe<string>
-  items?: Maybe<string[]>
-}
+/** Page legale (LEGAL_PROJECTION). Bloc en union discriminee par `_type`:
+ *  assertNever garantit l'exhaustivite au transform (fail-fast sur un type inconnu). */
+type SanityLegalBlock =
+  | { _type: 'legalParagraph'; text: string }
+  | { _type: 'legalList'; items: string[] }
+  | { _type: 'legalTodo'; text: string }
 interface SanityLegalPage {
   _id: string
   title: string
   effective?: Maybe<string>
   updated?: Maybe<string>
-  sections?: Maybe<Array<{ title: string; body?: Maybe<SanityLegalSectionBlock[]> }>>
+  sections?: Maybe<Array<{ title: string; body?: Maybe<SanityLegalBlock[]> }>>
 }
 
 /** Copie de page de detail d'un service (SERVICE_DETAIL_PROJECTION). */
@@ -634,22 +635,8 @@ export interface OnePagerPayload {
   seo: PageSeo
 }
 
-/** Document legal du payload (dates formatees, sections aplaties). */
-export interface LegalSectionBlock {
-  paragraph?: string
-  list?: string[]
-  todo?: string
-}
-export interface LegalDoc {
-  title: string
-  effective: string
-  updated: string
-  sections: Array<{ title: string; body: LegalSectionBlock[] }>
-}
-export interface LegalContent {
-  conditions: LegalDoc
-  confidentialite: LegalDoc
-}
+/** Contrats legaux (LegalBlock union, LegalDoc, LegalContent): relocalises dans
+ *  app/content/legal.ts (avec la doctrine du gabarit reutilisable), importes ici. */
 
 /** Le modele de contenu complet, fetche et transforme une fois par langue. */
 export interface ContentPayload {
@@ -722,7 +709,7 @@ function opt<T>(value: Maybe<T>): T | undefined {
  * langue) ils cassent l'egalite stricte et les URLs. On les retire donc des chaines
  * NON affichees. No-op en prod (aucun stega) et hors preview.
  */
-const STEGA_RE = /[​‌‍⁠⁡⁢⁣﻿\u{1D173}-\u{1D17A}]/gu
+const STEGA_RE = /[\u200B\u200C\u200D\u2060\u2061\u2062\u2063\uFEFF\u{1D173}-\u{1D17A}]/gu
 
 function cleanLogic<T extends string | null | undefined>(value: T): T {
   return (typeof value === 'string' ? value.replace(STEGA_RE, '') : value) as T
@@ -1442,18 +1429,19 @@ export function transformSiteSettings(raw: SanitySiteSettings, locale: WfLocale)
 
 // ── Pages legales ──────────────────────────────────────────────────────────────
 
-function transformLegalBlock(block: SanityLegalSectionBlock): LegalSectionBlock {
+function transformLegalBlock(block: SanityLegalBlock): LegalBlock {
   switch (block._type) {
     case 'legalParagraph':
-      return { paragraph: block.text ?? '' }
+      return block.text
     case 'legalList':
-      return { list: block.items ?? [] }
+      return { list: block.items }
     case 'legalTodo':
-      return { todo: block.text ?? '' }
+      return { todo: block.text }
     default:
-      // Bloc legal au type inattendu: paragraphe au mieux (jamais casser le rendu
-      // d'une page legale sur un type non prevu, le contenu reel viendra du seed).
-      return { paragraph: block.text ?? '' }
+      // Union exhaustive: un _type legal inconnu casse le build (fail-fast), jamais
+      // un rendu silencieux. Le contenu reel vient du seed (types legalParagraph/
+      // legalList/legalTodo uniquement).
+      return assertNever(block)
   }
 }
 

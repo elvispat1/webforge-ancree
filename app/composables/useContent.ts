@@ -18,7 +18,7 @@
 // edition). En <script>, passer par `.value`.
 
 import { computed, type ComputedRef } from 'vue'
-import type { LegalContent } from '~/sanity/transform'
+import type { LegalContent } from '~/content/legal'
 import type { SiteContent } from '~/content/site'
 import { CONSENT_CONFIG, type ConsentConfig } from '~/content/consent'
 

@@ -6,17 +6,18 @@
  * redacteur voie ce qui reste a remplir). Aucun texte legal en dur: tout vient du
  * document (useContent('legal') cote page). La mesure de lecture reste sobre, sur
  * la moitie gauche de la grille. */
-import type { LegalDoc, LegalSectionBlock } from '~/sanity/transform'
+import type { LegalDoc, LegalBlock } from '~/content/legal'
 
 defineProps<{ doc: LegalDoc }>()
 
 const { t } = useI18n()
 
-function isList(block: LegalSectionBlock): block is { list: string[] } {
-  return Array.isArray(block.list)
+// LegalBlock est une union: paragraphe = string nue, sinon { list } ou { todo }.
+function isList(block: LegalBlock): block is { list: string[] } {
+  return typeof block === 'object' && 'list' in block
 }
-function isTodo(block: LegalSectionBlock): block is { todo: string } {
-  return typeof block.todo === 'string'
+function isTodo(block: LegalBlock): block is { todo: string } {
+  return typeof block === 'object' && 'todo' in block
 }
 </script>
 
@@ -35,7 +36,7 @@ function isTodo(block: LegalSectionBlock): block is { todo: string } {
               <li v-for="(item, j) in block.list" :key="j">{{ item }}</li>
             </ul>
             <p v-else-if="isTodo(block)" class="legal__todo wf-body-1">{{ block.todo }}</p>
-            <p v-else class="legal__paragraph wf-body-1 wf-text-muted">{{ block.paragraph }}</p>
+            <p v-else class="legal__paragraph wf-body-1 wf-text-muted">{{ block }}</p>
           </template>
         </section>
       </div>
