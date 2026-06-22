@@ -36,7 +36,7 @@ const ctas = computed<SectionCta[]>(() =>
               <Icon :name="item.icon" class="services__icon" aria-hidden="true" />
             </span>
             <h3 class="services__title wf-h4">{{ item.title }}</h3>
-            <p class="services__body wf-body-2">{{ item.body }}</p>
+            <p class="services__body wf-body-2">{{ item.summary }}</p>
             <span v-if="item.href" class="services__more">
               {{ t('ui.learn_more') }}
               <Icon name="lucide:arrow-right" aria-hidden="true" />

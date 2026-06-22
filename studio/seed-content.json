@@ -3847,7 +3847,7 @@
           "_type": "slug",
           "current": "extermination-fourmis-charpentieres"
         },
-        "body": "Elles creusent le bois de la structure. On trouve le nid principal et les satellites, puis on traite à la source.",
+        "summary": "Elles creusent le bois de la structure. On trouve le nid principal et les satellites, puis on traite à la source.",
         "meta": "Service d’extermination",
         "image": {
           "image": {
@@ -3972,7 +3972,7 @@
           }
         ],
         "featured": true,
-        "order": 0
+        "order": 1
       }
     },
     {
@@ -3986,7 +3986,7 @@
           "_type": "slug",
           "current": "extermination-souris-rats"
         },
-        "body": "Inspection, scellement des points d’entrée et contrôle complet. On ferme la porte, pas seulement on piège.",
+        "summary": "Inspection, scellement des points d’entrée et contrôle complet. On ferme la porte, pas seulement on piège.",
         "meta": "Service d’extermination",
         "image": {
           "image": {
@@ -4111,7 +4111,7 @@
           }
         ],
         "featured": false,
-        "order": 1
+        "order": 2
       }
     },
     {
@@ -4125,7 +4125,7 @@
           "_type": "slug",
           "current": "extermination-punaises-de-lit"
         },
-        "body": "Traitement thermique et résiduel, discret et garanti, pour redormir tranquille au plus vite.",
+        "summary": "Traitement thermique et résiduel, discret et garanti, pour redormir tranquille au plus vite.",
         "meta": "Service d’extermination",
         "image": {
           "image": {
@@ -4250,7 +4250,7 @@
           }
         ],
         "featured": false,
-        "order": 2
+        "order": 3
       }
     },
     {
@@ -4264,7 +4264,7 @@
           "_type": "slug",
           "current": "extermination-guepes-frelons"
         },
-        "body": "Retrait sécuritaire des nids, en hauteur ou au sol, sans risque pour la famille.",
+        "summary": "Retrait sécuritaire des nids, en hauteur ou au sol, sans risque pour la famille.",
         "meta": "Service d’extermination",
         "image": {
           "image": {
@@ -4389,7 +4389,7 @@
           }
         ],
         "featured": false,
-        "order": 3
+        "order": 4
       }
     },
     {
@@ -4403,7 +4403,7 @@
           "_type": "slug",
           "current": "extermination-commerciale"
         },
-        "body": "Programmes préventifs pour restaurants, commerces et immeubles, conformes aux normes.",
+        "summary": "Programmes préventifs pour restaurants, commerces et immeubles, conformes aux normes.",
         "meta": "Service d’extermination",
         "image": {
           "image": {
@@ -4528,7 +4528,7 @@
           }
         ],
         "featured": false,
-        "order": 4
+        "order": 5
       }
     },
     {
@@ -4542,7 +4542,7 @@
           "_type": "slug",
           "current": "carpenter-ant-extermination"
         },
-        "body": "They tunnel through your structural wood. We find the main and satellite nests, then treat at the source.",
+        "summary": "They tunnel through your structural wood. We find the main and satellite nests, then treat at the source.",
         "meta": "Pest control service",
         "image": {
           "image": {
@@ -4667,7 +4667,7 @@
           }
         ],
         "featured": true,
-        "order": 0
+        "order": 1
       }
     },
     {
@@ -4681,7 +4681,7 @@
           "_type": "slug",
           "current": "rodent-extermination"
         },
-        "body": "Inspection, entry-point sealing and full control. We close the door, not just set traps.",
+        "summary": "Inspection, entry-point sealing and full control. We close the door, not just set traps.",
         "meta": "Pest control service",
         "image": {
           "image": {
@@ -4806,7 +4806,7 @@
           }
         ],
         "featured": false,
-        "order": 1
+        "order": 2
       }
     },
     {
@@ -4820,7 +4820,7 @@
           "_type": "slug",
           "current": "bed-bug-extermination"
         },
-        "body": "Heat and residual treatment, discreet and guaranteed, so you sleep easy again fast.",
+        "summary": "Heat and residual treatment, discreet and guaranteed, so you sleep easy again fast.",
         "meta": "Pest control service",
         "image": {
           "image": {
@@ -4945,7 +4945,7 @@
           }
         ],
         "featured": false,
-        "order": 2
+        "order": 3
       }
     },
     {
@@ -4959,7 +4959,7 @@
           "_type": "slug",
           "current": "wasp-hornet-extermination"
         },
-        "body": "Safe nest removal, up high or at ground level, with no risk to the family.",
+        "summary": "Safe nest removal, up high or at ground level, with no risk to the family.",
         "meta": "Pest control service",
         "image": {
           "image": {
@@ -5084,7 +5084,7 @@
           }
         ],
         "featured": false,
-        "order": 3
+        "order": 4
       }
     },
     {
@@ -5098,7 +5098,7 @@
           "_type": "slug",
           "current": "commercial-pest-control"
         },
-        "body": "Preventive programs for restaurants, shops and buildings, compliant with standards.",
+        "summary": "Preventive programs for restaurants, shops and buildings, compliant with standards.",
         "meta": "Pest control service",
         "image": {
           "image": {
@@ -5223,7 +5223,7 @@
           }
         ],
         "featured": false,
-        "order": 4
+        "order": 5
       }
     },
     {

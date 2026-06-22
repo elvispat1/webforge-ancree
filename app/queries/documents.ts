@@ -96,7 +96,7 @@ export const CONTENT_GRAPH_QUERY = /* groq */ `{
     "slug": slug.current,
     icon,
     title,
-    body,
+    summary,
     meta,
     "image": image ${FIGURE_PROJECTION},
     intro,

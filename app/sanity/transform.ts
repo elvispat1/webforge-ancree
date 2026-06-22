@@ -340,7 +340,7 @@ interface SanityService {
   slug: string
   icon?: Maybe<string>
   title: string
-  body?: Maybe<string>
+  summary?: Maybe<string>
   meta?: Maybe<string>
   image: SanityFigure
   intro?: Maybe<string[]>
@@ -568,7 +568,7 @@ export interface ServicePayload {
   slug: string
   icon?: string
   title: string
-  body?: string
+  summary?: string
   meta?: string
   /** Image en src string (contrat des blocs); figure sans image -> '' (placeholder). */
   image: string
@@ -1516,7 +1516,7 @@ function transformService(raw: SanityService, locale: WfLocale): ServiceWithMeta
     slug: cleanLogic(raw.slug),
     icon: opt(raw.icon),
     title: raw.title,
-    body: opt(raw.body),
+    summary: opt(raw.summary),
     meta: opt(raw.meta),
     image: figure.src ?? '',
     imageMeta: { alt: figure.alt, label: figure.label, caption: figure.caption },

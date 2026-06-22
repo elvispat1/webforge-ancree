@@ -50,7 +50,7 @@ const heroBlock = computed<HeroPageBlock>(() => ({
   crumbs: breadcrumbs.value,
   eyebrow: service.value.meta ?? t('hero.kicker'),
   title: service.value.title,
-  lead: service.value.body,
+  lead: service.value.summary,
   cta: { label: t('hero.cta_primary'), href: phoneHref.value }
 }))
 
@@ -69,7 +69,7 @@ const blocks = computed(() => useServiceBlocks(service.value))
 // Page nuisible (SEO local): ItemPage + fil Accueil > Services > [nuisible].
 usePageSeo({
   title: service.value.title,
-  description: service.value.body,
+  description: service.value.summary,
   image: service.value.image || undefined,
   webPageType: 'ItemPage',
   breadcrumbs: breadcrumbs.value

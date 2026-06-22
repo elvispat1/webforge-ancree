@@ -27,7 +27,7 @@ function href(slug: string): string {
           <Icon :name="s.icon ?? 'lucide:check'" class="sg__icon" aria-hidden="true" />
         </span>
         <component :is="headingLevel" class="sg__title wf-h4">{{ s.title }}</component>
-        <p class="sg__body wf-body-2">{{ s.body }}</p>
+        <p class="sg__body wf-body-2">{{ s.summary }}</p>
         <span class="sg__more">
           {{ t('ui.learn_more') }}
           <Icon name="lucide:arrow-right" aria-hidden="true" />

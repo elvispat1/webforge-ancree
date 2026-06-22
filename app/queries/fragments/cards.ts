@@ -28,7 +28,7 @@ export const SERVICE_CARD_FIELDS = /* groq */ `
   "slug": slug.current,
   icon,
   title,
-  body,
+  summary,
   meta,
   "image": image ${FIGURE_PROJECTION},
   intro,

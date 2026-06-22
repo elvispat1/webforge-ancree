@@ -9,7 +9,7 @@ import { BugIcon } from '@sanity/icons'
  * langue, champ `language` géré par le plugin (lecture seule, masqué), slug
  * PARTAGÉ entre les langues via documentInternationalization: { exclude: true }.
  *
- * Champs métier hérités du monolithe (icon, title, body, featured, order),
+ * Champs métier hérités du monolithe (icon, title, summary, featured, order),
  * enrichis vers le patron de collection riche: résumé, repère, image, intro,
  * bénéfices, page de détail composée et services par ville reliés.
  */
@@ -59,8 +59,8 @@ export const service = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
-      name: 'body',
-      title: 'Description',
+      name: 'summary',
+      title: 'Résumé',
       description: 'Texte court affiché sur la carte de la grille des services.',
       type: 'text',
       rows: 3,
@@ -76,6 +76,7 @@ export const service = defineType({
       description: 'Mention courte affichée sur la carte et le héros de détail, ex. Traitement et suivi.',
       type: 'string',
       group: 'content',
+      validation: (R) => R.required(),
     }),
     defineField({
       name: 'image',
@@ -83,21 +84,23 @@ export const service = defineType({
       description: 'Ratio 4:3 dans la grille et le détail.',
       type: 'figure',
       group: 'content',
+      validation: (R) => R.required(),
     }),
     defineField({
       name: 'intro',
       title: 'Paragraphes d\'introduction',
       description: 'Rendus dans le bloc texte et image de la page de détail.',
       type: 'array',
-      group: 'detail',
+      group: 'content',
       of: [defineArrayMember({ type: 'text', rows: 4 })],
+      validation: (R) => R.required().min(1),
     }),
     defineField({
       name: 'benefits',
       title: 'Bénéfices',
       description: 'Rendus en points forts sur la page de détail.',
       type: 'array',
-      group: 'detail',
+      group: 'content',
       of: [
         defineArrayMember({
           type: 'object',
@@ -123,9 +126,10 @@ export const service = defineType({
           },
         }),
       ],
+      validation: (R) => R.required().min(1),
     }),
     // La copie de la page de détail vit sur CHAQUE service: composée section par
-    // section, optionnelle tant qu'aucun service détaillé n'est en ligne.
+    // section. Requise (fail-fast): en prod statique, chaque service porte sa copie.
     defineField({
       name: 'detail',
       title: 'Page de détail',
@@ -133,6 +137,7 @@ export const service = defineType({
         'Copie de la page /services/<slug> de ce service, composée section par section.',
       type: 'object',
       group: 'detail',
+      validation: (R) => R.required(),
       fields: [
         defineField({
           name: 'benefits',
@@ -318,11 +323,10 @@ export const service = defineType({
       name: 'order',
       title: 'Ordre',
       description:
-        'Position dans la collection (0 = premier). Détermine l\'ordre d\'affichage de la grille.',
+        'Position dans la collection (1 = premier). Détermine l\'ordre d\'affichage de la grille.',
       type: 'number',
       group: 'relations',
-      initialValue: 0,
-      validation: (R) => R.integer(),
+      validation: (R) => R.required().integer().positive(),
     }),
   ],
   orderings: [

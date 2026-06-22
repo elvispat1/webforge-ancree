@@ -24,7 +24,7 @@ export interface TrustBarContent {
 export interface ServiceItem {
   icon: string
   title: string
-  body: string
+  summary: string
   href?: string // present en multipage (page service), absent en one-pager
   featured?: boolean // carte vedette plus large (asymetrie posee)
 }

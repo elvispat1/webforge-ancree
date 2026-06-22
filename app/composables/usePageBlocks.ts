@@ -72,7 +72,7 @@ function resolveServicesBlock(block: PendingServicesBlock): ServicesBlock {
     items: limited(pool, selection.limit).map((s) => ({
       icon: s.icon ?? '',
       title: s.title,
-      body: s.body ?? '',
+      summary: s.summary ?? '',
       // Lien vers la page de detail du service. Retire en CODE sur le one-pager
       // (pas de pages de detail), cf. useOnePagerBlocks: decision contextuelle,
       // jamais un champ Studio.
