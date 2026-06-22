@@ -22,6 +22,9 @@ import {
 } from './app/config/route-map'
 // Config + garde du blog (PUR TS, importable hors contexte d'alias Nuxt).
 import { ARTICLES_PER_PAGE, assertBlogCollections } from './app/content/blog-guards'
+// Icônes de marque des réseaux sociaux: sous-ensemble simple-icons bundlé au build.
+import { SOCIAL_ICON_NAMES } from './app/config/socials'
+import simpleIconsData from '@iconify-json/simple-icons/icons.json'
 
 // Connexion Sanity: constantes de code, override env OPTIONNEL (identité du
 // site, invariante par environnement; un fork change ce bloc, pas l'env).
@@ -299,6 +302,26 @@ const PRERENDER_ROUTES = [
   ...DYNAMIC_PRERENDER_ROUTES
 ]
 
+// ── Icônes de marque (réseaux sociaux), sous-ensemble bundlé ─────────────────
+// On NE bundle PAS la collection simple-icons entière (des milliers d'icônes): on
+// dérive une collection custom contenant SEULEMENT les plateformes de
+// app/config/socials.ts. Les bodies SVG sont lus au BUILD depuis
+// @iconify-json/simple-icons/icons.json (gros fichier, jamais expédié au client) et
+// inlinés. Le nom reste canonique `simple-icons:<slug>`; le préfixe n'est PAS dans
+// serverBundle.collections, donc la collection complète n'est jamais bundlée.
+const socialBrandIcons: Record<string, { body: string }> = {}
+for (const name of SOCIAL_ICON_NAMES) {
+  const slug = name.replace('simple-icons:', '')
+  const icon = (simpleIconsData.icons as Record<string, { body: string }>)[slug]
+  if (icon) socialBrandIcons[slug] = { body: icon.body }
+}
+const socialBrandCollection = {
+  prefix: 'simple-icons',
+  icons: socialBrandIcons,
+  width: simpleIconsData.width ?? 24,
+  height: simpleIconsData.height ?? 24
+}
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -340,6 +363,15 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/seo'
   ],
+
+  // Icônes: lucide bundlé en entier (UI), simple-icons réduit au sous-ensemble des
+  // réseaux sociaux via customCollections (inliné au build, pas de fetch runtime).
+  icon: {
+    serverBundle: {
+      collections: ['lucide']
+    },
+    customCollections: [socialBrandCollection]
+  },
 
   // Client Sanity (lecture publique, sans token). useCdn: false — le site est
   // genere statiquement, donc toutes les lectures se font au BUILD: l'API directe

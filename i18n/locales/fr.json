@@ -54,34 +54,9 @@
     "see_all": "Voir toutes les villes"
   },
   "contact": {
-    "phone_display": "450 555-0199",
-    "phone_href": "tel:+14505550199",
-    "email_display": "bonjour{'@'}rempart-extermination.ca",
-    "email_href": "mailto:bonjour{'@'}rempart-extermination.ca",
-    "call_short": "Appeler",
     "urgent_aria": "Urgence, appelez le {number}",
-    "error_name": "Entrez votre nom.",
-    "error_contact": "Entrez un téléphone ou un courriel valide.",
     "required": "requis",
-    "optional": "facultatif",
-    "meta": {
-      "phone": "Nous appeler",
-      "email": "Nous écrire",
-      "area": "Zone de service",
-      "hours": "Heures"
-    },
-    "form": {
-      "field_name": "Votre nom",
-      "field_contact": "Téléphone ou courriel",
-      "field_message": "Qu’est-ce qui se passe?",
-      "submit_idle": "Envoyer ma demande",
-      "submit_loading": "Envoi en cours...",
-      "success_title": "Message reçu, merci.",
-      "success_body": "Un technicien de Rempart vous revient sous peu pour fixer une visite. Pour une urgence, appelez-nous au 450 555-0199.",
-      "error_title": "L’envoi n’a pas fonctionné.",
-      "error_body": "Réessayez dans un moment, ou appelez-nous directement au 450 555-0199. On veut vraiment vous lire.",
-      "privacy_note": "Vos informations restent chez nous et servent seulement à répondre à votre demande."
-    }
+    "optional": "facultatif"
   },
   "callbar": {
     "estimate": "Estimation gratuite"
@@ -108,14 +83,8 @@
     "updated": "Dernière mise à jour le {date}."
   },
   "footer": {
-    "tagline": "Extermination résidentielle et commerciale, ancrée sur la Rive-Nord de Montréal.",
     "nav_heading": "Naviguer",
-    "contact_heading": "Nous joindre",
-    "rights": "Tous droits réservés.",
-    "credit": "Conçu par",
-    "studio": "Patoine Studio",
-    "privacy": "Politique de confidentialité",
-    "terms": "Conditions d’utilisation"
+    "contact_heading": "Nous joindre"
   },
   "home": {
     "title": "Rempart Extermination, extermination résidentielle sur la Rive-Nord",

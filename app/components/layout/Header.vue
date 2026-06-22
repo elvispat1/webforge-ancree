@@ -25,6 +25,15 @@ const localePath = useLocalePath()
 const site = useContent('site')
 const headerLandingLinks = computed(() => site.value.nav.landing.primary)
 const headerMultipageLinks = computed(() => site.value.nav.multipage.primary)
+// Logotype slab a deux tons: le premier mot du nom de marque (Sanity) en gras,
+// le reste en sous-titre. Nom depuis siteSettings (discipline 3), jamais en dur.
+const brandWords = computed(() => {
+  const name = site.value.brand.name
+  const i = name.indexOf(' ')
+  return i === -1 ? { lead: name, rest: '' } : { lead: name.slice(0, i), rest: name.slice(i + 1) }
+})
+// Coordonnees d'appel depuis la NAP Sanity (tel: derive de phoneE164).
+const phoneHref = computed(() => `tel:${site.value.contact.phoneE164}`)
 // Bascule de langue via <SwitchLocalePathLink>: ses routes sont resolues AVANT
 // l'envoi, en honorant setI18nParams (slug TRADUIT par langue des pages nuisible).
 // L'imperatif switchLocalePath garderait le slug brut au prerendu -> lien croise
@@ -139,13 +148,13 @@ watch(() => route.fullPath, () => {
     @focusin="onHeaderFocusIn"
   >
     <div class="wf-container header__row">
-      <NuxtLink :to="brandTo" class="header__brand" :aria-label="t('site.home_aria')">
+      <NuxtLink :to="brandTo" class="header__brand" :aria-label="site.brand.homeAriaLabel">
         <span class="header__mark" aria-hidden="true">
           <Icon name="lucide:shield-check" />
         </span>
         <span class="header__word">
-          <strong>Rempart</strong>
-          <span>Extermination</span>
+          <strong>{{ brandWords.lead }}</strong>
+          <span v-if="brandWords.rest">{{ brandWords.rest }}</span>
         </span>
       </NuxtLink>
 
@@ -169,15 +178,15 @@ watch(() => route.fullPath, () => {
              meme couleur que le texte. Bouton ambre, langage d'appel de la famille.
              L'aria porte le contexte « urgence » que l'icone seule ne dit pas. -->
         <Button
-          :href="t('contact.phone_href')"
-          :aria-label="t('contact.urgent_aria', { number: t('contact.phone_display') })"
+          :href="phoneHref"
+          :aria-label="t('contact.urgent_aria', { number: site.contact.phone })"
           kind="anchor"
           variant="call"
           size="sm"
           icon="lucide:circle-alert"
           class="header__cta"
         >
-          {{ t('contact.phone_display') }}
+          {{ site.contact.phone }}
         </Button>
         <button
           type="button"

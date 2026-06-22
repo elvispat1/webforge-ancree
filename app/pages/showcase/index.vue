@@ -21,6 +21,7 @@ usePageSeo({
 })
 
 const heroSample = useHeroContent()
+const site = useContent('site')
 
 // Masthead de page, echantillon de catalogue (fil d'Ariane reel, appel tel:
 // non crawle par le link checker).
@@ -31,7 +32,7 @@ const heroPageSample = computed<HeroPageBlock>(() => ({
   eyebrow: t('hero.kicker'),
   title: t('pages.services_heading'),
   lead: t('pages.services_lead'),
-  cta: { label: t('hero.cta_primary'), href: t('contact.phone_href') }
+  cta: { label: t('hero.cta_primary'), href: `tel:${site.value.contact.phoneE164}` }
 }))
 
 /* Echantillons = SNAPSHOT des blocs resolus de la home (useHomeBlocks().value:

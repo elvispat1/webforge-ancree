@@ -3,11 +3,14 @@
  * de l'ecran, masquee au desktop. Geste d'appel ambre dominant plus un lien
  * d'estimation. Reprend la respiration subtile du bouton d'appel. */
 const { t } = useI18n()
+// Numero d'appel depuis la NAP Sanity (tel: derive de phoneE164).
+const site = useContent('site')
+const phoneHref = computed(() => `tel:${site.value.contact.phoneE164}`)
 </script>
 
 <template>
   <div class="callbar">
-    <a class="callbar__call" :href="t('contact.phone_href')">
+    <a class="callbar__call" :href="phoneHref">
       <Icon name="lucide:phone" aria-hidden="true" />
       <span>{{ t('hero.cta_primary') }}</span>
     </a>

@@ -35,6 +35,10 @@ setI18nParams({ fr: { slug: slugFor('fr') }, en: { slug: slugFor('en') } })
 // si l'item disparait du graphe scope. Le template auto-unwrap ces computed.
 const service = computed(() => useService(slug) ?? maybeService)
 
+// Appel direct depuis la NAP Sanity (tel: derive de phoneE164), jamais en dur.
+const site = useContent('site')
+const phoneHref = computed(() => `tel:${site.value.contact.phoneE164}`)
+
 const breadcrumbs = computed(() => breadcrumbsFor('services', { label: service.value.title }, loc.value))
 
 // Masthead (bloc hero-page, rendu par <Hero>). Compose code depuis le document
@@ -47,7 +51,7 @@ const heroBlock = computed<HeroPageBlock>(() => ({
   eyebrow: service.value.meta ?? t('hero.kicker'),
   title: service.value.title,
   lead: service.value.body,
-  cta: { label: t('hero.cta_primary'), href: t('contact.phone_href') }
+  cta: { label: t('hero.cta_primary'), href: phoneHref.value }
 }))
 
 // Points forts: les benefices du service (collection), icone commune = icone du

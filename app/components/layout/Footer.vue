@@ -22,6 +22,7 @@ const localePath = useLocalePath()
 // (ancres du one-pager en landing, routes en multipage); les liens legaux viennent
 // de footer.utility, requalifies vers le sous-arbre one-pager en mode landing.
 const site = useContent('site')
+const socials = useSocials()
 // Normalise en { label, href } selon le mode (routes en multipage, ancres en
 // landing): le template ne connait qu'une forme, comme le Menu mobile.
 const footerNav = computed(() =>
@@ -30,6 +31,18 @@ const footerNav = computed(() =>
     : site.value.nav.landing.primary.map((l) => ({ label: l.label, href: l.anchor }))
 )
 const year = useState<number>('site-year', () => new Date().getFullYear())
+// Marque, coordonnees et zone depuis siteSettings (discipline 3): aucun NAP ni
+// nom de marque en dur. tel:/mailto: derives en code (phoneE164).
+const brandWords = computed(() => {
+  const name = site.value.brand.name
+  const i = name.indexOf(' ')
+  return i === -1 ? { lead: name, rest: '' } : { lead: name.slice(0, i), rest: name.slice(i + 1) }
+})
+const phoneHref = computed(() => `tel:${site.value.contact.phoneE164}`)
+const emailHref = computed(() => `mailto:${site.value.contact.email}`)
+const areaLine = computed(() => site.value.contact.areaServed.join(', '))
+// Copyright depuis Sanity: le jeton {year} est remplace par l'annee courante.
+const copyright = computed(() => site.value.footer.copyright.replace('{year}', String(year.value)))
 
 const brandTo = computed(() => (props.mode === 'multipage' ? localePath('/') : props.home))
 function landingHref(href: string): string {
@@ -60,11 +73,18 @@ function legalHref(href: string): string {
     <div class="wf-container footer__inner">
       <div class="footer__top">
         <div class="footer__brand-col">
-          <NuxtLink :to="brandTo" class="footer__brand" :aria-label="t('site.home_aria')">
+          <NuxtLink :to="brandTo" class="footer__brand" :aria-label="site.brand.homeAriaLabel">
             <span class="footer__mark" aria-hidden="true"><Icon name="lucide:shield-check" /></span>
-            <span class="footer__word"><strong>Rempart</strong><span>Extermination</span></span>
+            <span class="footer__word"><strong>{{ brandWords.lead }}</strong><span v-if="brandWords.rest">{{ brandWords.rest }}</span></span>
           </NuxtLink>
-          <p class="footer__tagline">{{ t('footer.tagline') }}</p>
+          <p class="footer__tagline">{{ site.brand.tagline }}</p>
+          <ul v-if="socials.length" class="footer__socials">
+            <li v-for="s in socials" :key="s.platform">
+              <a :href="s.url" class="footer__social" :aria-label="s.label" target="_blank" rel="noopener noreferrer">
+                <Icon :name="s.icon" aria-hidden="true" />
+              </a>
+            </li>
+          </ul>
         </div>
 
         <nav class="footer__col" :aria-label="t('footer.nav_heading')">
@@ -83,17 +103,17 @@ function legalHref(href: string): string {
 
         <div class="footer__col">
           <p class="footer__heading wf-caption">{{ t('footer.contact_heading') }}</p>
-          <a class="footer__link" :href="t('contact.phone_href')">{{ t('contact.phone_display') }}</a>
-          <a class="footer__link" :href="t('contact.email_href')">{{ t('contact.email_display') }}</a>
+          <a class="footer__link" :href="phoneHref">{{ site.contact.phone }}</a>
+          <a class="footer__link" :href="emailHref">{{ site.contact.email }}</a>
           <p class="footer__area">
             <Icon name="lucide:map-pin" class="footer__area-icon" aria-hidden="true" />
-            {{ t('hero.kicker') }}
+            {{ areaLine }}
           </p>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <p class="footer__copy">© {{ year }} Rempart Extermination. {{ t('footer.rights') }}</p>
+        <p class="footer__copy">{{ copyright }}</p>
         <p class="footer__credit">
           {{ site.footer.credit.label }}
           <a :href="site.footer.credit.studioUrl" target="_blank" rel="noopener noreferrer">{{ site.footer.credit.studio }}</a>
@@ -183,6 +203,31 @@ function legalHref(href: string): string {
   font-size: 1.6rem;
   line-height: 1.55;
   color: color-mix(in oklch, var(--text-ondeep) 80%, transparent);
+}
+
+.footer__socials {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  gap: 1.2rem;
+}
+.footer__social {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklch, var(--text-ondeep) 8%, transparent);
+  color: color-mix(in oklch, var(--text-ondeep) 88%, transparent);
+  transition: color var(--motion-duration-hover) var(--motion-ease-settle);
+}
+.footer__social svg {
+  width: 2rem;
+  height: 2rem;
+}
+.footer__social:hover {
+  color: var(--accent-call);
 }
 
 .footer__col {

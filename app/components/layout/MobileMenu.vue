@@ -18,6 +18,14 @@ const props = withDefaults(
 const emit = defineEmits<{ close: [] }>()
 
 const { t, locale } = useI18n()
+// Marque et numero d'appel depuis siteSettings (discipline 3): rien en dur.
+const site = useContent('site')
+const brandWords = computed(() => {
+  const name = site.value.brand.name
+  const i = name.indexOf(' ')
+  return i === -1 ? { lead: name, rest: '' } : { lead: name.slice(0, i), rest: name.slice(i + 1) }
+})
+const phoneHref = computed(() => `tel:${site.value.contact.phoneE164}`)
 const panelRef = ref<HTMLElement | null>(null)
 // Element focalise avant l'ouverture (le burger): on lui rend le focus a la
 // fermeture, pour ne pas perdre l'utilisateur clavier au milieu de la page.
@@ -93,7 +101,7 @@ onBeforeUnmount(() => {
       <div ref="panelRef" class="mm__panel">
         <div class="mm__bar">
           <span class="mm__brand" aria-hidden="true">
-            <strong>Rempart</strong> Extermination
+            <strong>{{ brandWords.lead }}</strong> {{ brandWords.rest }}
           </span>
           <button type="button" class="mm__close" :aria-label="t('a11y.close_menu')" @click="close">
             <Icon name="lucide:x" aria-hidden="true" />
@@ -117,7 +125,7 @@ onBeforeUnmount(() => {
 
         <div class="mm__actions">
           <Button
-            :href="t('contact.phone_href')"
+            :href="phoneHref"
             kind="anchor"
             variant="call"
             icon="lucide:phone"
@@ -125,7 +133,7 @@ onBeforeUnmount(() => {
           >
             {{ t('hero.cta_primary') }}
           </Button>
-          <a class="mm__phone" :href="t('contact.phone_href')">{{ t('contact.phone_display') }}</a>
+          <a class="mm__phone" :href="phoneHref">{{ site.contact.phone }}</a>
           <SwitchLocalePathLink class="mm__lang" :locale="locale === 'fr' ? 'en' : 'fr'" @click="close">{{ t('home.switch') }}</SwitchLocalePathLink>
         </div>
       </div>
