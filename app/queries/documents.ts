@@ -130,7 +130,7 @@ export const CONTENT_GRAPH_QUERY = /* groq */ `{
     "category": category->{ "slug": slug.current, title },
     date,
     author,
-    readingMinutes,
+    readingTime,
     ${ARTICLE_BODY_PROJECTION},
     "translations": ${TRANSLATIONS_PROJECTION}
   },

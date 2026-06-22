@@ -8,7 +8,7 @@ export const articleGallery = defineType({
   icon: ImagesIcon,
   fields: [
     defineField({
-      name: 'items',
+      name: 'images',
       title: 'Images',
       description: 'Pour une seule image, utiliser le bloc Article: image.',
       type: 'array',
@@ -17,10 +17,10 @@ export const articleGallery = defineType({
     }),
   ],
   preview: {
-    select: { items: 'items', media: 'items.0.image' },
-    prepare({ items, media }) {
+    select: { images: 'images', media: 'images.0.image' },
+    prepare({ images, media }) {
       return {
-        title: 'Galerie, ' + (items?.length ?? 0) + ' images',
+        title: 'Galerie, ' + (images?.length ?? 0) + ' images',
         subtitle: 'Article: galerie',
         media,
       }

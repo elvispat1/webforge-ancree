@@ -6279,7 +6279,7 @@
         },
         "date": "2026-05-28",
         "author": "L'équipe Rempart",
-        "readingMinutes": 6,
+        "readingTime": 6,
         "body": [
           {
             "_key": "b1",
@@ -6427,7 +6427,6 @@
           {
             "_key": "b3",
             "_type": "articleImage",
-            "caption": "Une inspection soignée trouve le nid, pas seulement les ouvrières.",
             "image": {
               "_type": "figure",
               "image": {
@@ -6439,7 +6438,7 @@
               },
               "alt": "Inspection rapprochée d'une charpente de bois",
               "label": "",
-              "caption": "",
+              "caption": "Une inspection soignée trouve le nid, pas seulement les ouvrières.",
               "ratio": "4/3"
             }
           },
@@ -6536,7 +6535,7 @@
         },
         "date": "2026-05-28",
         "author": "The Rempart team",
-        "readingMinutes": 6,
+        "readingTime": 6,
         "body": [
           {
             "_key": "b1",
@@ -6684,7 +6683,6 @@
           {
             "_key": "b3",
             "_type": "articleImage",
-            "caption": "A careful inspection finds the nest, not just the workers.",
             "image": {
               "_type": "figure",
               "image": {
@@ -6696,7 +6694,7 @@
               },
               "alt": "Close inspection of a wooden frame",
               "label": "",
-              "caption": "",
+              "caption": "A careful inspection finds the nest, not just the workers.",
               "ratio": "4/3"
             }
           },
@@ -6793,7 +6791,7 @@
         },
         "date": "2026-03-02",
         "author": "L'équipe Rempart",
-        "readingMinutes": 4,
+        "readingTime": 4,
         "body": [
           {
             "_key": "b1",
@@ -6859,7 +6857,7 @@
         },
         "date": "2026-03-02",
         "author": "The Rempart team",
-        "readingMinutes": 4,
+        "readingTime": 4,
         "body": [
           {
             "_key": "b1",
@@ -6925,7 +6923,7 @@
         },
         "date": "2026-04-15",
         "author": "L'équipe Rempart",
-        "readingMinutes": 5,
+        "readingTime": 5,
         "body": [
           {
             "_key": "b1",
@@ -7012,7 +7010,7 @@
           {
             "_key": "b3",
             "_type": "articleGallery",
-            "items": [
+            "images": [
               {
                 "_key": "g1",
                 "_type": "figure",
@@ -7086,7 +7084,7 @@
         },
         "date": "2026-04-15",
         "author": "The Rempart team",
-        "readingMinutes": 5,
+        "readingTime": 5,
         "body": [
           {
             "_key": "b1",
@@ -7173,7 +7171,7 @@
           {
             "_key": "b3",
             "_type": "articleGallery",
-            "items": [
+            "images": [
               {
                 "_key": "g1",
                 "_type": "figure",

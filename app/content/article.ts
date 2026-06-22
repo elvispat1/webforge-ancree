@@ -19,7 +19,7 @@ export interface ArticleContent {
   cover: ArticleFigure
   date: string // ISO de publication
   author: string
-  readingMinutes: number
+  readingTime: number
   category?: ArticleCategoryRef
   body: ArticleBlock[]
 }

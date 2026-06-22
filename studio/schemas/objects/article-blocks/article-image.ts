@@ -13,17 +13,12 @@ export const articleImage = defineType({
       type: 'figure',
       validation: (R) => R.required(),
     }),
-    defineField({
-      name: 'caption',
-      title: 'Legende',
-      type: 'string',
-    }),
   ],
   preview: {
-    select: { caption: 'caption', label: 'image.label', alt: 'image.alt', media: 'image.image' },
-    prepare({ caption, label, alt, media }) {
+    select: { label: 'image.label', caption: 'image.caption', alt: 'image.alt', media: 'image.image' },
+    prepare({ label, caption, alt, media }) {
       return {
-        title: caption || label || alt || '(image sans etiquette)',
+        title: label || caption || alt || '(image sans etiquette)',
         subtitle: 'Article: image',
         media,
       }

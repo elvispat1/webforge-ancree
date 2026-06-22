@@ -27,12 +27,11 @@ export const ARTICLE_BODY_PROJECTION = /* groq */ `body[]{
     }
   },
   _type == "articleImage" => {
-    "image": image ${FIGURE_PROJECTION},
-    caption
+    "image": image ${FIGURE_PROJECTION}
   },
   _type == "articleQuote" => { quote, attribution },
   _type == "articleGallery" => {
-    "items": items[] ${FIGURE_PROJECTION}
+    "images": images[] ${FIGURE_PROJECTION}
   },
   _type == "articleCallout" => { tone, title, text },
   _type == "articleInlineCta" => {

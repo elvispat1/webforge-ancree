@@ -17,8 +17,8 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
   <aside class="article-cta">
     <p class="article-cta__text wf-h5">{{ text }}</p>
     <div class="article-cta__action">
-      <Button :href="cta.href" :kind="ctaKind(cta.href)" variant="call" icon="lucide:phone">
-        {{ cta.label }}
+      <Button :href="ctaHref" :kind="ctaKind(ctaHref)" variant="call" icon="lucide:phone">
+        {{ ctaLabel }}
       </Button>
     </div>
   </aside>

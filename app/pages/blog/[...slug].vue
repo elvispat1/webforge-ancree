@@ -72,7 +72,7 @@ const articleHero = computed<HeroArticleBlock | null>(() => {
     date: a.date,
     dateLabel: formatArticleDate(a.date, loc.value),
     author: a.author,
-    readingMinutes: a.readingMinutes,
+    readingTime: a.readingTime,
     cover
   }
 })

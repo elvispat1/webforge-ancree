@@ -54,6 +54,6 @@ export interface HeroArticleContent {
   date: string // date ISO de publication
   dateLabel: string // date deja formatee dans la locale (transformation pure)
   author?: string
-  readingMinutes?: number // duree de lecture estimee
+  readingTime?: number // duree de lecture estimee
   cover?: HeroVisual // image de couverture (posee sous le masthead)
 }

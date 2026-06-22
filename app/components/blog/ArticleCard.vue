@@ -37,7 +37,7 @@ const { t } = useI18n()
       <p class="acard__meta">
         <span class="acard__meta-item">{{ card.dateLabel }}</span>
         <span class="acard__meta-sep" aria-hidden="true" />
-        <span class="acard__meta-item">{{ t('ui.blog.reading_time', { n: card.readingMinutes }) }}</span>
+        <span class="acard__meta-item">{{ t('ui.blog.reading_time', { n: card.readingTime }) }}</span>
         <Icon name="lucide:arrow-right" class="acard__arrow" aria-hidden="true" />
       </p>
     </div>

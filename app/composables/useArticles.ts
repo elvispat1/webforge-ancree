@@ -19,7 +19,7 @@ export interface ArticleCardData {
   cover: ArticleFigure
   href: string
   dateLabel: string
-  readingMinutes: number
+  readingTime: number
   category?: { title: string; slug: string; href: string }
 }
 
@@ -53,7 +53,7 @@ export function toCard(article: ArticleContent, locale: Locale): ArticleCardData
     cover: article.cover,
     href: articleHref(article, locale),
     dateLabel: formatArticleDate(article.date, locale),
-    readingMinutes: article.readingMinutes,
+    readingTime: article.readingTime,
     category: article.category
       ? { title: article.category.title, slug: article.category.slug, href: categoryHref(article.category.slug, locale) }
       : undefined

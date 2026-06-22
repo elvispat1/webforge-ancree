@@ -60,7 +60,7 @@ export interface ArticleQuoteContent {
 
 // Galerie: au moins deux figures, en grille.
 export interface ArticleGalleryContent {
-  items: ArticleFigure[]
+  images: ArticleFigure[]
 }
 
 // Encadre: une note ou un avertissement, titre optionnel.
@@ -73,5 +73,6 @@ export interface ArticleCalloutContent {
 // Appel a l'action en ligne, au fil du texte.
 export interface ArticleInlineCtaContent {
   text: string
-  cta: { label: string; href: string }
+  ctaLabel: string
+  ctaHref: string
 }

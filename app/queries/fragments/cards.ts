@@ -8,7 +8,7 @@
 //   - service: on retire `detail` (copie de page) et `translations`;
 //   - serviceCity: on retire `body` (corps de page) et `translations`;
 //   - article: on retire `body` (Portable Text) et `translations`.
-// Tout le reste (meta, intro, benefits, note, region, author, readingMinutes...)
+// Tout le reste (meta, intro, benefits, note, region, author, readingTime...)
 // est leger et reste present: ca evite de relacher des dizaines de types de
 // sortie, le gain de poids venant entierement des sous-arbres retires.
 //
@@ -59,4 +59,4 @@ export const ARTICLE_CARD_FIELDS = /* groq */ `
   "category": category->{ "slug": slug.current, title },
   date,
   author,
-  readingMinutes`
+  readingTime`

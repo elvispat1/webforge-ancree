@@ -119,14 +119,15 @@ export const article = defineType({
       title: 'Auteur',
       type: 'string',
       group: 'meta',
+      validation: (R) => R.required(),
     }),
     defineField({
-      name: 'readingMinutes',
+      name: 'readingTime',
       title: 'Durée de lecture (min)',
       description: 'Affichée au héros d\'article.',
       type: 'number',
       group: 'meta',
-      validation: (R) => R.integer().positive(),
+      validation: (R) => R.required().integer().positive(),
     }),
   ],
   orderings: [

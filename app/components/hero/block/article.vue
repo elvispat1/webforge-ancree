@@ -13,7 +13,7 @@ const { t } = useI18n()
 const metaItems = computed(() => {
   const items: string[] = [props.dateLabel]
   if (props.author) items.push(props.author)
-  if (props.readingMinutes) items.push(t('ui.blog.reading_time', { n: props.readingMinutes }))
+  if (props.readingTime) items.push(t('ui.blog.reading_time', { n: props.readingTime }))
   return items
 })
 </script>

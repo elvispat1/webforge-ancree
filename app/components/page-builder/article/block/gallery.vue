@@ -9,7 +9,7 @@ defineProps<BlockBase<'gallery'> & ArticleGalleryContent>()
 
 <template>
   <ul class="article-gallery">
-    <li v-for="(item, i) in items" :key="item.src + i" class="article-gallery__item">
+    <li v-for="(item, i) in images" :key="item.src + i" class="article-gallery__item">
       <figure class="article-gallery__figure">
         <div class="article-gallery__frame">
           <NuxtImg

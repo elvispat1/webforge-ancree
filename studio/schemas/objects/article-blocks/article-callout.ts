@@ -19,7 +19,6 @@ export const articleCallout = defineType({
         layout: 'radio',
       },
       initialValue: 'note',
-      validation: (R) => R.required(),
     }),
     defineField({
       name: 'title',

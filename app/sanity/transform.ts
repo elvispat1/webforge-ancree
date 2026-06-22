@@ -19,7 +19,7 @@
 // desservies) est le moteur SEO local et remplace projects. Le parametre GROQ est
 // $language partout. La SEO d'une ville vient de l'objet `seo` (title/description/
 // ogImage), pas de seoTitle/seoDescription. `article.category` est un objet
-// {slug,title} dereference, `readingMinutes` le nom du champ.
+// {slug,title} dereference, `readingTime` le nom du champ.
 //
 // Blocs intelligents (services, serviceCities, testimonials, faq): le payload les
 // garde SEMI-resolus (copie transformee SANS items + parametres de selection). La
@@ -250,9 +250,9 @@ interface SanityRawPortableBlock {
 type SanityRawArticleBlock =
   | { _type: 'articleLead'; _key: string; text: string }
   | { _type: 'articleRichText'; _key: string; body?: Maybe<SanityRawPortableBlock[]> }
-  | { _type: 'articleImage'; _key: string; image: SanityFigure; caption?: Maybe<string> }
+  | { _type: 'articleImage'; _key: string; image: SanityFigure }
   | { _type: 'articleQuote'; _key: string; quote: string; attribution?: Maybe<string> }
-  | { _type: 'articleGallery'; _key: string; items?: Maybe<SanityFigure[]> }
+  | { _type: 'articleGallery'; _key: string; images?: Maybe<SanityFigure[]> }
   | { _type: 'articleCallout'; _key: string; tone?: Maybe<string>; title?: Maybe<string>; text: string }
   | { _type: 'articleInlineCta'; _key: string; text: string; cta: SanityLink }
 
@@ -378,7 +378,7 @@ interface SanityArticle {
   category?: Maybe<{ slug: string; title: string }>
   date: string
   author?: Maybe<string>
-  readingMinutes?: Maybe<number>
+  readingTime?: Maybe<number>
   body?: Maybe<SanityRawArticleBlock[]>
   translations?: Maybe<SanityDocTranslation[]>
 }
@@ -940,12 +940,12 @@ export function resolveFigure(figure: Maybe<SanityFigure>, defaultRatio: string)
 
 /** Figure d'article (ArticleFigure: src/alt/caption?). src absent -> '' (le bloc
  *  image/galerie rend son placeholder). */
-function resolveArticleFigure(figure: Maybe<SanityFigure>, caption?: Maybe<string>): ArticleFigure {
+function resolveArticleFigure(figure: Maybe<SanityFigure>): ArticleFigure {
   const f = figure ?? {}
   return {
     src: opt(f.src) ?? '',
     alt: f.alt ?? '',
-    caption: opt(caption) ?? opt(f.caption)
+    caption: opt(f.caption)
   }
 }
 
@@ -1282,7 +1282,7 @@ function transformArticleBlock(block: SanityRawArticleBlock, locale: WfLocale): 
       return {
         _type: 'image',
         _key: block._key,
-        image: resolveArticleFigure(block.image, block.caption)
+        image: resolveArticleFigure(block.image)
       }
     case 'articleQuote':
       return {
@@ -1295,7 +1295,7 @@ function transformArticleBlock(block: SanityRawArticleBlock, locale: WfLocale): 
       return {
         _type: 'gallery',
         _key: block._key,
-        items: (block.items ?? []).map((figure) => resolveArticleFigure(figure))
+        images: (block.images ?? []).map((figure) => resolveArticleFigure(figure))
       }
     case 'articleCallout':
       return {
@@ -1305,13 +1305,16 @@ function transformArticleBlock(block: SanityRawArticleBlock, locale: WfLocale): 
         title: opt(block.title),
         text: block.text
       }
-    case 'articleInlineCta':
+    case 'articleInlineCta': {
+      const pair = linkPair(block.cta, locale)
       return {
         _type: 'inline-cta',
         _key: block._key,
         text: block.text,
-        cta: linkPair(block.cta, locale)
+        ctaLabel: pair.label,
+        ctaHref: pair.href
       }
+    }
     default:
       return assertNever(block)
   }
@@ -1561,7 +1564,7 @@ function transformArticle(raw: SanityArticle, locale: WfLocale): Translated<Arti
     cover: resolveArticleFigure(raw.cover),
     date: raw.date,
     author: raw.author ?? '',
-    readingMinutes: raw.readingMinutes ?? 0,
+    readingTime: raw.readingTime ?? 0,
     // category deja un objet { slug, title } dereference (jamais le slug brut).
     category: raw.category ? { title: raw.category.title, slug: cleanLogic(raw.category.slug) } : undefined,
     body: transformArticleBody(raw.body, locale),
