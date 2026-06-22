@@ -20,9 +20,10 @@
 // semantique stable par type (anchorKey) pour que les ancres #services...#contact
 // resolvent sur la nav.
 //
-// Le contactBlock ne porte que eyebrow/heading/lead: les coordonnees (NAP) sont
-// jointes depuis siteSettings.contact au transform, les libelles de formulaire
-// viennent de i18n (discipline 2). Aucun champ form/meta ici.
+// Le contactBlock porte ses libelles (metaLabels, form, success) editables au
+// Studio; les VALEURS des coordonnees (NAP) sont jointes depuis siteSettings.contact
+// au transform. La privacy.link est resolue via LINK_PROJECTION (route de la
+// politique de confidentialite).
 
 import { FIGURE_PROJECTION } from '../fragments/figure'
 import { LINK_PROJECTION } from '../fragments/link'
@@ -79,6 +80,15 @@ export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
   _type == "contactBlock" => {
     eyebrow,
     heading,
-    lead
+    lead,
+    metaLabels{ phone, email, address, hours },
+    form{
+      labels{ name, email, phone, message },
+      errors{ nameRequired, emailInvalid, privacyRequired },
+      submit{ idle, loading },
+      errorBanner{ title, body },
+      privacy{ text, "link": link ${LINK_PROJECTION} }
+    },
+    success{ title, body }
   }
 }`
