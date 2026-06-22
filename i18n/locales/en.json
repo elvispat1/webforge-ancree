@@ -33,6 +33,11 @@
       "related": "Read next",
       "page_label": "Page {n}",
       "pagination_description": "Page {n} of the blog articles."
+    },
+    "error": {
+      "not_found_title": "Page not found",
+      "generic_title": "Something went wrong",
+      "home_link": "Back to home"
     }
   },
   "nav": {
@@ -104,11 +109,6 @@
     "proof_3_value": "Guaranteed",
     "proof_3_label": "satisfaction or we come back",
     "image_alt": "A smiling Rempart Extermination technician in front of his van in a North Shore residential neighbourhood at sunset."
-  },
-  "error": {
-    "not_found": "Page not found",
-    "generic": "Something went wrong",
-    "home": "Back to home"
   },
   "consent": {
     "aria_label": "Cookie preferences",

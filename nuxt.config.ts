@@ -389,6 +389,22 @@ export default defineNuxtConfig({
     perspective: 'published'
   },
 
+  hooks: {
+    // Statique pur (cette demo): le module @nuxtjs/sanity place une config `stega`
+    // dans runtimeConfig.public.sanity (utile au visual editing en preview SSR).
+    // Hors preview, elle n'a aucune utilite et fuit dans le HTML genere: on la
+    // retire pour garder .output propre (aucun marqueur stega embarque).
+    'nitro:config'(nitroConfig) {
+      const runtimeConfig = nitroConfig.runtimeConfig as
+        | { public?: { sanity?: Record<string, unknown> } }
+        | undefined
+      const sanityPublic = runtimeConfig?.public?.sanity
+      if (sanityPublic) {
+        delete sanityPublic.stega
+      }
+    }
+  },
+
   // Pipeline image (@nuxt/image, IPX). Les images du contenu vivront sur le CDN
   // Sanity; les variantes sont prérendues au build (provider ipxStatic).
   image: {
@@ -532,7 +548,18 @@ export default defineNuxtConfig({
     sanityReadToken,
     public: {
       turnstileSiteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY,
-      contactDemo: true
+      contactDemo: true,
+      // Couture de build pour app/router.options.ts: les slugs de categories du
+      // blogue PAR LANGUE (deja fetches pour les routes de prerendu), injectes en
+      // config publique. scrollBehavior les lit via useRuntimeConfig (locale
+      // derivee du chemin), plus deterministe que lire le payload du plugin
+      // 01.content (aucune dependance a l'ordre d'execution des plugins).
+      wf: {
+        categorySlugs: {
+          fr: slugsByLocale.fr.categories.map((c) => c.slug),
+          en: slugsByLocale.en.categories.map((c) => c.slug)
+        }
+      }
     }
   }
 })

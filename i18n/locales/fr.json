@@ -33,6 +33,11 @@
       "related": "À lire aussi",
       "page_label": "Page {n}",
       "pagination_description": "Page {n} des articles du blogue."
+    },
+    "error": {
+      "not_found_title": "Page introuvable",
+      "generic_title": "Une erreur est survenue",
+      "home_link": "Retour à l’accueil"
     }
   },
   "nav": {
@@ -104,11 +109,6 @@
     "proof_3_value": "Garanti",
     "proof_3_label": "satisfaction ou on revient",
     "image_alt": "Un technicien de Rempart Extermination souriant devant son camion, dans un quartier résidentiel de la Rive-Nord au coucher du soleil."
-  },
-  "error": {
-    "not_found": "Page introuvable",
-    "generic": "Une erreur est survenue",
-    "home": "Retour à l’accueil"
   },
   "consent": {
     "aria_label": "Préférences de témoins",
