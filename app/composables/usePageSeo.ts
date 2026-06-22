@@ -8,15 +8,17 @@
 // @nuxtjs/seo (useSeoMeta, useSchemaOrg, define*).
 //
 // PORT de webforge-minimaliste (plomberie SEO éprouvée), adapté à Ancrée:
-//   - Pas de dépendance usePayload: la source des défauts SEO est la config de
-//     site (nuxt.config), pas le payload CMS. Un repli de description global
-//     pourra s'y ajouter au même point sans changer la signature.
-//   - og:image: visuel propre à la page, avec repli sur l'og-image de marque
-//     par défaut (site.defaultOgImage). Dimensions 1200x630 déclarées quand
-//     elles sont garanties (crop CDN ou carte de marque purpose-built).
+//   - Replis SEO globaux lus depuis le payload CMS (usePayload().site.seo,
+//     siteSettings.seo): defaultDescription (repli de la description de page ET
+//     description du nœud WebSite) et defaultOgImage (repli d'og:image). Une
+//     seule source, depuis Sanity (discipline 3), jamais en dur dans nuxt.config.
+//   - og:image: visuel propre à la page -> defaultOgImage du CMS -> og-image de
+//     marque en dur (site.defaultOgImage, dernier recours code). Dimensions
+//     1200x630 déclarées quand elles sont garanties (crop CDN ou carte de marque
+//     purpose-built).
 //
-// Agnostique de la famille: aucun contenu de site ici. La marque vient de la
-// config de site (nuxt.config `site`) et des arguments.
+// Agnostique de la famille: aucun contenu de site en dur ici. La marque vient de
+// la config de site (nuxt.config `site`), du payload et des arguments.
 
 import type { UseSeoMetaInput } from '@unhead/vue'
 import { hasProtocol, joinURL } from 'ufo'
@@ -112,6 +114,10 @@ export interface PageSeoInput {
 export function usePageSeo(input: PageSeoInput): void {
   const site = useSiteConfig()
   const siteUrl = String(site.url ?? '')
+  // Replis SEO globaux du CMS (siteSettings.seo, spec 12.10), servis quand la
+  // page n'apporte ni description ni visuel. Le payload est garanti chargé sur
+  // toute route rendue (plugin de contenu, échec fatal sinon).
+  const seoDefaults = usePayload().site.seo
 
   /* OpenGraph exige des URL absolues: les chemins relatifs sont résolus contre
    * l'URL de site configurée (nuxt.config `site.url`). */
@@ -144,27 +150,31 @@ export function usePageSeo(input: PageSeoInput): void {
   // (site.defaultOgImage, nuxt.config). La page d'accueil et les billets portent
   // leur propre visuel; les pages sans visuel (légales, FAQ, contact...) tombent
   // sur la carte de marque, fabriquée exactement en 1200x630.
-  const defaultOgImage = site.defaultOgImage ? String(site.defaultOgImage) : undefined
-  // `||` (pas `??`): une image de page vide ('' d'un champ Sanity optionnel) doit
-  // retomber sur le defaut de marque, pas court-circuiter l'og:image.
-  const ogSource = input.image || defaultOgImage
+  // Chaîne de repli og:image (12.10): visuel propre de la page -> defaultOgImage
+  // du CMS (siteSettings.seo, carte de marque seedée) -> og-image de marque en
+  // dur (nuxt.config, dernier recours code). `||` (pas `??`): une image vide ('' d'un
+  // champ Sanity optionnel) retombe sur le repli suivant, pas court-circuiter l'og:image.
+  const codeOgImage = site.defaultOgImage ? String(site.defaultOgImage) : undefined
+  const ogSource = input.image || seoDefaults.defaultOgImage || codeOgImage
   if (ogSource) {
-    const usingDefault = !input.image && defaultOgImage !== undefined
+    // Dimensions déclarées seulement quand elles sont GARANTIES: crop CDN (URL
+    // Sanity — visuel de page OU repli CMS — normalisée à 1200x630) OU carte de
+    // marque en dur (nuxt.config, fabriquée exactement à ces dimensions). Sur une
+    // image locale propre à la page, de format inconnu, on les omet: annoncer
+    // 1200x630 mentirait aux scrapers sociaux. Sans dimensions, ils lisent les vraies.
+    const usingCodeDefault = !input.image && !seoDefaults.defaultOgImage && codeOgImage !== undefined
     const og = resolveImage(ogSource, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT)
     meta.ogImage = og.url
-    // Dimensions déclarées seulement quand elles sont GARANTIES: crop CDN (URL
-    // Sanity, normalisée à 1200x630) OU og-image de marque par défaut (asset
-    // fabriqué exactement à ces dimensions). Sur une image locale propre à la
-    // page, de format inconnu, on les omet: annoncer 1200x630 mentirait aux
-    // scrapers sociaux si le fichier a un autre format. Sans dimensions, ils
-    // lisent les vraies du fichier.
-    if (og.cropped || usingDefault) {
+    if (og.cropped || usingCodeDefault) {
       meta.ogImageWidth = OG_IMAGE_WIDTH
       meta.ogImageHeight = OG_IMAGE_HEIGHT
     }
   }
-  if (input.description !== undefined) {
-    meta.description = input.description
+  // Description: repli sur la description par défaut du CMS quand la page n'en
+  // fournit pas (les pages fixes arrivent déjà résolues par le transform).
+  const description = input.description ?? seoDefaults.defaultDescription
+  if (description !== undefined) {
+    meta.description = description
   }
   if (input.noindex) {
     meta.robots = 'noindex, nofollow'
@@ -196,9 +206,15 @@ export function usePageSeo(input: PageSeoInput): void {
 
   /* Nœud WebSite: @id, url et inLanguage sont injectés par le résolveur
    * depuis la config de site. */
-  nodes.push(defineWebSite({
+  const webSite: Record<string, unknown> = {
     name: String(site.name ?? '')
-  }))
+  }
+  // Description du nœud #website depuis Sanity (siteSettings.seo.defaultDescription),
+  // jamais une valeur en dur dans nuxt.config (discipline 3): une seule source.
+  if (seoDefaults.defaultDescription) {
+    webSite.description = seoDefaults.defaultDescription
+  }
+  nodes.push(defineWebSite(webSite))
 
   /* Nœud WebPage: name/description/url hérités des métas. Sous-type explicite
    * (option) ou FAQPage implicite quand des questions sont fournies; sinon le
