@@ -20,7 +20,8 @@ const policyHref = computed(() => onePagerPath('privacy', locale.value as 'fr' |
       <slot />
     </main>
     <Footer mode="landing" :home="home" />
-    <CallBar />
+    <!-- Barre d'appel mobile desactivee temporairement: trop imposante et buggee
+         sur iPhone. A retravailler avant de la reactiver. <CallBar /> -->
     <Consent :policy-href="policyHref" />
   </div>
 </template>

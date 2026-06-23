@@ -17,7 +17,8 @@ const policyHref = routePath('privacy', useWfLocale())
       <slot />
     </main>
     <Footer />
-    <CallBar />
+    <!-- Barre d'appel mobile desactivee temporairement: trop imposante et buggee
+         sur iPhone. A retravailler avant de la reactiver. <CallBar /> -->
     <Consent :policy-href="policyHref" />
   </div>
 </template>
