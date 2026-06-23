@@ -22,8 +22,8 @@ export const SITE_SETTINGS_PROJECTION = /* groq */ `{
     hours{ weekdays, weekend }
   },
   nav{
-    landing{ "primary": primary[] ${LINK_PROJECTION}, "cta": cta ${LINK_PROJECTION} },
-    multipage{ "primary": primary[] ${LINK_PROJECTION}, "cta": cta ${LINK_PROJECTION} }
+    landing{ "primary": primary[] ${LINK_PROJECTION} },
+    multipage{ "primary": primary[] ${LINK_PROJECTION} }
   },
   footer{
     "primary": primary[] ${LINK_PROJECTION},

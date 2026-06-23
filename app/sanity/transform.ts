@@ -491,7 +491,7 @@ export function docPath(ref: SanityLinkRef, locale: WfLocale): string {
  * `#ancre` (ou `/route#ancre` si une page est referencee); external = URL telle
  * quelle. Un lien irresoluble interrompt le build: jamais de lien mort silencieux.
  */
-export function resolveLink(link: SanityLink, locale: WfLocale): string {
+export function resolveLink(link: SanityLink, locale: WfLocale, phoneE164: string): string {
   switch (link.type) {
     case 'external': {
       if (!link.externalUrl) {
@@ -509,14 +509,22 @@ export function resolveLink(link: SanityLink, locale: WfLocale): string {
       }
       return docPath(link.internalRef, locale)
     }
+    // Action d'appel: le href tel: est DERIVE de la source unique (phoneE164),
+    // jamais saisi. Fail-fast si le numero manque (jamais un tel: vide).
+    case 'tel': {
+      if (!phoneE164) {
+        throw new Error(`Lien d'appel sans numero (siteSettings.contact.phone vide): « ${link.label} »`)
+      }
+      return `tel:${phoneE164}`
+    }
     default:
       return assertNever(link.type)
   }
 }
 
 /** Couple { label, href } des CTA. */
-function linkPair(link: SanityLink, locale: WfLocale): { label: string; href: string } {
-  return { label: link.label, href: resolveLink(link, locale) }
+function linkPair(link: SanityLink, locale: WfLocale, phoneE164: string): { label: string; href: string } {
+  return { label: link.label, href: resolveLink(link, locale, phoneE164) }
 }
 
 // ── Figures ───────────────────────────────────────────────────────────────────
@@ -636,12 +644,12 @@ const LEGAL_DATE_TODO: Record<WfLocale, { effective: string; updated: string }> 
 
 // ── Briques partagees ──────────────────────────────────────────────────────────
 
-function transformCtaBand(raw: SanityCtaBand, locale: WfLocale): CtaBandContent {
+function transformCtaBand(raw: SanityCtaBand, locale: WfLocale, phoneE164: string): CtaBandContent {
   return {
     title: raw.title,
     subtitle: opt(raw.subtitle),
-    primaryCta: linkPair(raw.primaryCta, locale),
-    secondaryCta: raw.secondaryCta ? linkPair(raw.secondaryCta, locale) : undefined
+    primaryCta: linkPair(raw.primaryCta, locale, phoneE164),
+    secondaryCta: raw.secondaryCta ? linkPair(raw.secondaryCta, locale, phoneE164) : undefined
   }
 }
 
@@ -664,14 +672,14 @@ function transformProcess(raw: SanityProcess, locale: WfLocale): ProcessPayload 
 
 // ── Heros ───────────────────────────────────────────────────────────────────
 
-function transformHeroHomeBody(raw: SanityHeroHome, locale: WfLocale): HeroContent {
+function transformHeroHomeBody(raw: SanityHeroHome, locale: WfLocale, phoneE164: string): HeroContent {
   const visual = resolveFigure(raw.visual, RATIOS.heroVisual)
   return {
     kicker: opt(raw.kicker),
     title: raw.title,
     lead: raw.lead,
-    primaryCta: linkPair(raw.primaryCta, locale),
-    secondaryCta: linkPair(raw.secondaryCta, locale),
+    primaryCta: linkPair(raw.primaryCta, locale, phoneE164),
+    secondaryCta: linkPair(raw.secondaryCta, locale, phoneE164),
     meta: (raw.meta ?? []).map((m) => ({ value: m.value, label: m.label, icon: opt(m.icon) })),
     visual,
     // Cadrage mobile derive de la meme image (paysage 4/5); le seed n'a qu'un visuel.
@@ -679,11 +687,11 @@ function transformHeroHomeBody(raw: SanityHeroHome, locale: WfLocale): HeroConte
   }
 }
 
-function transformPageHeroBody(raw: SanityPageHero, locale: WfLocale): HeroPageContent {
+function transformPageHeroBody(raw: SanityPageHero, locale: WfLocale, phoneE164: string): HeroPageContent {
   return {
     title: raw.title,
     lead: opt(raw.lead),
-    cta: raw.cta ? linkPair(raw.cta, locale) : undefined
+    cta: raw.cta ? linkPair(raw.cta, locale, phoneE164) : undefined
     // crumbs: composes par la page (route-map), jamais au CMS.
     // image: pageHero porte une image au schema, mais HeroPageContent n'en a pas
     // (les pages simples portent leur visuel dans le corps); on l'ignore ici.
@@ -691,12 +699,12 @@ function transformPageHeroBody(raw: SanityPageHero, locale: WfLocale): HeroPageC
 }
 
 /** Bloc heros brut -> bloc heros Vue (corps transforme + _type kebab + _key). */
-function transformHeroBlock(raw: SanityRawHeroBlock, locale: WfLocale): HeroBlock {
+function transformHeroBlock(raw: SanityRawHeroBlock, locale: WfLocale, phoneE164: string): HeroBlock {
   switch (raw._type) {
     case 'heroHome':
-      return { _type: 'hero-home', _key: raw._key, ...transformHeroHomeBody(raw, locale) }
+      return { _type: 'hero-home', _key: raw._key, ...transformHeroHomeBody(raw, locale, phoneE164) }
     case 'pageHero':
-      return { _type: 'hero-page', _key: raw._key, ...transformPageHeroBody(raw, locale) }
+      return { _type: 'hero-page', _key: raw._key, ...transformPageHeroBody(raw, locale, phoneE164) }
     default:
       return assertNever(raw)
   }
@@ -707,13 +715,13 @@ function requireHero(raw: Maybe<SanityRawHeroBlock>, name: string): SanityRawHer
   return raw
 }
 
-function asHomeHero(raw: Maybe<SanityRawHeroBlock>, name: string, locale: WfLocale): HeroHomeBlock {
-  const b = transformHeroBlock(requireHero(raw, name), locale)
+function asHomeHero(raw: Maybe<SanityRawHeroBlock>, name: string, locale: WfLocale, phoneE164: string): HeroHomeBlock {
+  const b = transformHeroBlock(requireHero(raw, name), locale, phoneE164)
   if (b._type !== 'hero-home') throw new Error(`Document « ${name} »: heros attendu de type accueil.`)
   return b
 }
-function asPageHero(raw: Maybe<SanityRawHeroBlock>, name: string, locale: WfLocale): HeroPageBlock {
-  const b = transformHeroBlock(requireHero(raw, name), locale)
+function asPageHero(raw: Maybe<SanityRawHeroBlock>, name: string, locale: WfLocale, phoneE164: string): HeroPageBlock {
+  const b = transformHeroBlock(requireHero(raw, name), locale, phoneE164)
   if (b._type !== 'hero-page') throw new Error(`Document « ${name} »: heros attendu de type page.`)
   return b
 }
@@ -757,7 +765,7 @@ function transformBlock(
         heading: block.heading,
         lead: opt(block.lead),
         ctaLabel: block.cta ? block.cta.label : undefined,
-        ctaHref: block.cta ? resolveLink(block.cta, locale) : undefined,
+        ctaHref: block.cta ? resolveLink(block.cta, locale, site.contact.phoneE164) : undefined,
         selection: {
           mode: cleanLogic(block.mode) ?? 'auto',
           refs: (block.refs ?? []).map((r) => cleanLogic(r)),
@@ -817,7 +825,7 @@ function transformBlock(
         selection: { refs: (block.refs ?? []).map((r) => cleanLogic(r)) }
       }
     case 'ctaBand':
-      return { _type: 'cta-band', _key: key, ...transformCtaBand(block, locale) }
+      return { _type: 'cta-band', _key: key, ...transformCtaBand(block, locale, site.contact.phoneE164) }
     case 'contact':
       return transformContactBlock(block, site, locale, key)
     default:
@@ -877,7 +885,7 @@ function transformContactBlock(
       privacy: {
         text: block.form.privacy.text,
         linkText: block.form.privacy.link.label,
-        href: resolveLink(block.form.privacy.link, locale)
+        href: resolveLink(block.form.privacy.link, locale, site.contact.phoneE164)
       }
     },
     success: { title: block.success.title, body: block.success.body }
@@ -894,7 +902,7 @@ export function transformPageBuilder(
 
 // ── Corps d'article (7 blocs) ─────────────────────────────────────────────────
 
-function transformArticleBlock(block: SanityRawArticleBlock, locale: WfLocale): ArticleBlock {
+function transformArticleBlock(block: SanityRawArticleBlock, locale: WfLocale, phoneE164: string): ArticleBlock {
   switch (block._type) {
     case 'articleLead':
       return { _type: 'lead', _key: block._key, text: block.text }
@@ -928,7 +936,7 @@ function transformArticleBlock(block: SanityRawArticleBlock, locale: WfLocale): 
         text: block.text
       }
     case 'articleInlineCta': {
-      const pair = linkPair(block.cta, locale)
+      const pair = linkPair(block.cta, locale, phoneE164)
       return {
         _type: 'inline-cta',
         _key: block._key,
@@ -942,8 +950,8 @@ function transformArticleBlock(block: SanityRawArticleBlock, locale: WfLocale): 
   }
 }
 
-export function transformArticleBody(blocks: Maybe<SanityRawArticleBlock[]>, locale: WfLocale): ArticleBlock[] {
-  return (blocks ?? []).map((block) => transformArticleBlock(block, locale))
+export function transformArticleBody(blocks: Maybe<SanityRawArticleBlock[]>, locale: WfLocale, phoneE164: string): ArticleBlock[] {
+  return (blocks ?? []).map((block) => transformArticleBlock(block, locale, phoneE164))
 }
 
 // ── Globales (siteSettings) ───────────────────────────────────────────────────
@@ -987,15 +995,13 @@ function transformSocials(raw: Maybe<Array<{ platform: string; url: string }>>):
  *  pour le one-pager, `multipage` des ROUTES reelles: cles distinctes (anchor vs
  *  route), miroir du contrat SiteContent. Source unique de l'En-tete et du Menu
  *  mobile; aucune nav codee en dur cote composant. */
-function transformNav(raw: SanitySiteSettings['nav'], locale: WfLocale): SiteContent['nav'] {
+function transformNav(raw: SanitySiteSettings['nav'], locale: WfLocale, phoneE164: string): SiteContent['nav'] {
   return {
     landing: {
-      primary: raw.landing.primary.map((link) => ({ label: link.label, anchor: resolveLink(link, locale) })),
-      cta: { label: raw.landing.cta.label, anchor: resolveLink(raw.landing.cta, locale) }
+      primary: raw.landing.primary.map((link) => ({ label: link.label, anchor: resolveLink(link, locale, phoneE164) }))
     },
     multipage: {
-      primary: raw.multipage.primary.map((link) => ({ label: link.label, route: resolveLink(link, locale) })),
-      cta: { label: raw.multipage.cta.label, route: resolveLink(raw.multipage.cta, locale) }
+      primary: raw.multipage.primary.map((link) => ({ label: link.label, route: resolveLink(link, locale, phoneE164) }))
     }
   }
 }
@@ -1004,11 +1010,11 @@ function transformNav(raw: SanitySiteSettings['nav'], locale: WfLocale): SiteCon
  *  utilitaires et raccourcis (resolus en href), texte de droits et credit du
  *  studio (4 champs label/studio/studioUrl/product). Optionnels normalises en []
  *  (12.12: interfaces front non optionnelles). */
-function transformFooter(raw: SanitySiteSettings['footer'], locale: WfLocale): SiteContent['footer'] {
+function transformFooter(raw: SanitySiteSettings['footer'], locale: WfLocale, phoneE164: string): SiteContent['footer'] {
   return {
-    primary: raw.primary.map((link) => linkPair(link, locale)),
-    utility: (raw.utility ?? []).map((link) => ({ href: resolveLink(link, locale), label: link.label })),
-    pageLinks: (raw.pageLinks ?? []).map((link) => ({ href: resolveLink(link, locale), label: link.label })),
+    primary: raw.primary.map((link) => linkPair(link, locale, phoneE164)),
+    utility: (raw.utility ?? []).map((link) => ({ href: resolveLink(link, locale, phoneE164), label: link.label })),
+    pageLinks: (raw.pageLinks ?? []).map((link) => ({ href: resolveLink(link, locale, phoneE164), label: link.label })),
     copyright: raw.copyright,
     credit: {
       label: raw.credit.label,
@@ -1025,6 +1031,7 @@ function transformFooter(raw: SanitySiteSettings['footer'], locale: WfLocale): S
  *  point de consommation, index.vue); zone desservie en array; heures
  *  {weekdays, weekend}. seo inclus (replis description/og + suffixe de titre). */
 export function transformSiteSettings(raw: SanitySiteSettings, locale: WfLocale): SiteContent {
+  const phoneE164 = derivePhoneE164(raw.contact.phone)
   return {
     brand: {
       name: raw.brand.name,
@@ -1036,7 +1043,7 @@ export function transformSiteSettings(raw: SanitySiteSettings, locale: WfLocale)
     },
     contact: {
       phone: raw.contact.phone,
-      phoneE164: derivePhoneE164(raw.contact.phone),
+      phoneE164,
       email: raw.contact.email,
       address: {
         line1: raw.contact.address.line1,
@@ -1049,8 +1056,8 @@ export function transformSiteSettings(raw: SanitySiteSettings, locale: WfLocale)
       areaServed: raw.contact.areaServed,
       hours: { weekdays: raw.contact.hours.weekdays, weekend: raw.contact.hours.weekend }
     },
-    nav: transformNav(raw.nav, locale),
-    footer: transformFooter(raw.footer, locale),
+    nav: transformNav(raw.nav, locale, phoneE164),
+    footer: transformFooter(raw.footer, locale, phoneE164),
     socials: transformSocials(raw.socials),
     seo: {
       titleSuffix: raw.seo.titleSuffix,
@@ -1105,9 +1112,9 @@ export function transformLegal(pages: SanityLegalPage[], locale: WfLocale): Lega
 
 // ── Copies des pages de detail (portees par chaque doc de collection) ─────────
 
-function transformServiceDetail(raw: SanityServiceDetail, locale: WfLocale): ServiceDetailPayload {
+function transformServiceDetail(raw: SanityServiceDetail, locale: WfLocale, phoneE164: string): ServiceDetailPayload {
   return {
-    benefits: { heading: raw.benefits.heading, cta: linkPair(raw.benefits.cta, locale) },
+    benefits: { heading: raw.benefits.heading, cta: linkPair(raw.benefits.cta, locale, phoneE164) },
     included: { heading: raw.included.heading },
     process: transformProcess(raw.process, locale),
     serviceCities: {
@@ -1115,10 +1122,10 @@ function transformServiceDetail(raw: SanityServiceDetail, locale: WfLocale): Ser
       heading: raw.serviceCities.heading,
       lead: opt(raw.serviceCities.lead),
       ctaLabel: raw.serviceCities.cta ? raw.serviceCities.cta.label : undefined,
-      ctaHref: raw.serviceCities.cta ? resolveLink(raw.serviceCities.cta, locale) : undefined
+      ctaHref: raw.serviceCities.cta ? resolveLink(raw.serviceCities.cta, locale, phoneE164) : undefined
     },
     testimonials: { eyebrow: raw.testimonials.eyebrow, heading: raw.testimonials.heading },
-    cta: transformCtaBand(raw.cta, locale)
+    cta: transformCtaBand(raw.cta, locale, phoneE164)
   }
 }
 
@@ -1135,7 +1142,7 @@ export function transformTranslations(raw: Maybe<SanityDocTranslation[]>): DocTr
     }))
 }
 
-function transformService(raw: SanityService, locale: WfLocale): ServiceWithMeta {
+function transformService(raw: SanityService, locale: WfLocale, phoneE164: string): ServiceWithMeta {
   const figure = resolveFigure(raw.image, RATIOS.serviceImage)
   return {
     _id: raw._id,
@@ -1148,7 +1155,7 @@ function transformService(raw: SanityService, locale: WfLocale): ServiceWithMeta
     imageMeta: { alt: figure.alt, label: figure.label, caption: figure.caption },
     intro: opt(raw.intro),
     benefits: (raw.benefits ?? []).map((b) => ({ title: b.title, body: b.body })),
-    detail: raw.detail ? transformServiceDetail(raw.detail, locale) : undefined,
+    detail: raw.detail ? transformServiceDetail(raw.detail, locale, phoneE164) : undefined,
     related: (raw.related ?? []).map((r) => cleanLogic(r)),
     featured: opt(raw.featured),
     order: opt(raw.order),
@@ -1179,7 +1186,7 @@ function transformServiceCity(raw: SanityServiceCity, locale: WfLocale): Service
   }
 }
 
-function transformArticle(raw: SanityArticle, locale: WfLocale): Translated<Article> {
+function transformArticle(raw: SanityArticle, locale: WfLocale, phoneE164: string): Translated<Article> {
   return {
     slug: cleanLogic(raw.slug),
     title: raw.title,
@@ -1190,7 +1197,7 @@ function transformArticle(raw: SanityArticle, locale: WfLocale): Translated<Arti
     readingTime: raw.readingTime ?? 0,
     // category deja un objet { slug, title } dereference (jamais le slug brut).
     category: raw.category ? { title: raw.category.title, slug: cleanLogic(raw.category.slug) } : undefined,
-    body: transformArticleBody(raw.body, locale),
+    body: transformArticleBody(raw.body, locale, phoneE164),
     translations: transformTranslations(raw.translations)
   }
 }
@@ -1250,21 +1257,24 @@ export function transformGraph(raw: SanityGraph, locale: WfLocale): ContentPaylo
   // unique de l'En-tete/Menu mobile/Pied de page ET de usePageSeo (site.seo,
   // site.contact pour le LocalBusiness). Le contact joint site.contact.
   const site = transformSiteSettings(siteSettings, locale)
+  // Source unique du numero d'appel, derivee de site.contact.phone. Threadee dans
+  // toutes les resolutions de lien pour que les liens de type 'tel' fabriquent leur href.
+  const phoneE164 = site.contact.phoneE164
   const seoDefaults = site.seo
   const builder = (blocks: Maybe<SanityRawBlock[]>): PayloadPageBlock[] =>
     transformPageBuilder(blocks, site, locale)
 
   const heroes = {
-    home: asHomeHero(homePage.hero, 'homePage', locale),
-    onePager: asHomeHero(onePager.hero, 'onePager', locale)
+    home: asHomeHero(homePage.hero, 'homePage', locale, phoneE164),
+    onePager: asHomeHero(onePager.hero, 'onePager', locale, phoneE164)
   }
 
-  const servicesHero = asPageHero(servicesPage.hero, 'servicesPage', locale)
-  const villesHero = asPageHero(villesPage.hero, 'villesPage', locale)
-  const aboutHero = asPageHero(aboutPage.hero, 'aboutPage', locale)
-  const blogHero = asPageHero(blogPage.hero, 'blogPage', locale)
-  const faqHero = asPageHero(faqPage.hero, 'faqPage', locale)
-  const contactHero = asPageHero(contactPage.hero, 'contactPage', locale)
+  const servicesHero = asPageHero(servicesPage.hero, 'servicesPage', locale, phoneE164)
+  const villesHero = asPageHero(villesPage.hero, 'villesPage', locale, phoneE164)
+  const aboutHero = asPageHero(aboutPage.hero, 'aboutPage', locale, phoneE164)
+  const blogHero = asPageHero(blogPage.hero, 'blogPage', locale, phoneE164)
+  const faqHero = asPageHero(faqPage.hero, 'faqPage', locale, phoneE164)
+  const contactHero = asPageHero(contactPage.hero, 'contactPage', locale, phoneE164)
 
   return {
     site,
@@ -1292,9 +1302,9 @@ export function transformGraph(raw: SanityGraph, locale: WfLocale): ContentPaylo
       },
       blog: {
         hero: blogHero,
-        listCta: transformCtaBand(blogPage.listCta, locale),
-        categoryCta: transformCtaBand(blogPage.categoryCta, locale),
-        articleCta: transformCtaBand(blogPage.articleCta, locale),
+        listCta: transformCtaBand(blogPage.listCta, locale, phoneE164),
+        categoryCta: transformCtaBand(blogPage.categoryCta, locale, phoneE164),
+        articleCta: transformCtaBand(blogPage.articleCta, locale, phoneE164),
         related: { heading: blogPage.related.heading },
         pageBuilder: builder(blogPage.pageBuilder),
         seo: resolveSeo(blogPage.seo, blogHero.title, blogHero.lead, seoDefaults)
@@ -1324,9 +1334,9 @@ export function transformGraph(raw: SanityGraph, locale: WfLocale): ContentPaylo
       }
     },
     collections: {
-      services: raw.services.map((service) => transformService(service, locale)),
+      services: raw.services.map((service) => transformService(service, locale, phoneE164)),
       serviceCities: raw.serviceCities.map((city) => transformServiceCity(city, locale)),
-      articles: raw.articles.map((article) => transformArticle(article, locale)),
+      articles: raw.articles.map((article) => transformArticle(article, locale, phoneE164)),
       categories: raw.categories.map((category) => transformCategory(category)),
       testimonials: raw.testimonials.map(transformTestimonial),
       faqItems: raw.faqItems.map(transformFaqItem)

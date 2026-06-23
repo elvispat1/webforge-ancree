@@ -32,8 +32,10 @@ export const articlePortableText = {
             name: 'href',
             title: 'URL',
             type: 'url',
+            // Pas de scheme 'tel': aucun numero saisi a la main, meme dans le corps
+            // d'article. Un appel passe par un bloc CTA en type « Appel (téléphone) ».
             validation: (R) =>
-              R.required().uri({ scheme: ['http', 'https', 'mailto', 'tel'] }),
+              R.required().uri({ scheme: ['http', 'https', 'mailto'] }),
           }),
         ],
       },

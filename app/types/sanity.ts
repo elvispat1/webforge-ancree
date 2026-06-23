@@ -34,7 +34,9 @@ export interface SanityLinkRef {
 }
 export interface SanityLink {
   label: string
-  type: 'internal' | 'anchor' | 'external'
+  // 'tel' = action d'appel: aucune URL saisie, le href tel: est derive en code
+  // depuis siteSettings.contact.phone (source unique). Voir resolveLink.
+  type: 'internal' | 'anchor' | 'external' | 'tel'
   externalUrl?: Maybe<string>
   anchor?: Maybe<string>
   internalRef?: Maybe<SanityLinkRef>
@@ -245,8 +247,8 @@ export interface SanitySiteSettings {
     hours: { weekdays: string; weekend: string }
   }
   nav: {
-    landing: { primary: SanityLink[]; cta: SanityLink }
-    multipage: { primary: SanityLink[]; cta: SanityLink }
+    landing: { primary: SanityLink[] }
+    multipage: { primary: SanityLink[] }
   }
   footer: {
     primary: SanityLink[]

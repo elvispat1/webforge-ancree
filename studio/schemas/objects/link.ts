@@ -32,6 +32,7 @@ export const link = defineType({
           { title: 'Page interne (référence)', value: 'internal' },
           { title: 'URL externe', value: 'external' },
           { title: 'Ancre (#section)', value: 'anchor' },
+          { title: 'Appel (téléphone)', value: 'tel' },
         ],
         layout: 'radio',
       },
@@ -79,8 +80,10 @@ export const link = defineType({
       title: 'URL externe',
       type: 'url',
       hidden: ({ parent }) => parent?.type !== 'external',
+      // Pas de scheme 'tel' ici: un appel se modelise par le type « Appel (téléphone) »,
+      // qui derive le tel: de Coordonnees. Jamais d'URL tel: saisie a la main.
       validation: (R) =>
-        R.uri({ scheme: ['http', 'https', 'mailto', 'tel'] }).custom((value, ctx) => {
+        R.uri({ scheme: ['http', 'https', 'mailto'] }).custom((value, ctx) => {
           const parent = ctx.parent as { type?: string } | undefined
           if (parent?.type === 'external' && !value) return 'URL requise'
           return true
@@ -118,7 +121,9 @@ export const link = defineType({
           ? 'Vers ' + (external || '')
           : subtitle === 'anchor'
             ? 'Vers #' + (anchor || '')
-            : 'Vers page interne',
+            : subtitle === 'tel'
+              ? 'Appel (numéro des Coordonnées)'
+              : 'Vers page interne',
     }),
   },
 })

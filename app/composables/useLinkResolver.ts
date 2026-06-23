@@ -23,6 +23,9 @@ import type { SanityLink, SanityLinkRef } from '~/types/sanity'
 
 export const useLinkResolver = () => {
   const locale = useWfLocale()
+  // Numero d'appel (source unique) pour resoudre les liens de type 'tel' cote composant,
+  // comme le chrome. Le href tel: est derive, jamais saisi.
+  const site = useContent('site')
 
   /**
    * URL frontend d'une reference interne Sanity resolue (LINK_PROJECTION: _type,
@@ -52,7 +55,7 @@ export const useLinkResolver = () => {
   const linkHref = (link?: SanityLink | null): string | undefined => {
     if (!link) return undefined
     try {
-      return resolveLink(link, locale)
+      return resolveLink(link, locale, site.value.contact.phoneE164)
     } catch (error) {
       if (import.meta.dev) console.warn('[useLinkResolver] lien irresoluble:', error)
       return undefined

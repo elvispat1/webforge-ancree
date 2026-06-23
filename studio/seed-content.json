@@ -83,13 +83,7 @@
                 "type": "anchor",
                 "anchor": "contact"
               }
-            ],
-            "cta": {
-              "_type": "link",
-              "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
-            }
+            ]
           },
           "multipage": {
             "primary": [
@@ -114,16 +108,6 @@
                 }
               },
               {
-                "_key": "navm-blog",
-                "_type": "link",
-                "label": "Blogue",
-                "type": "internal",
-                "internalRef": {
-                  "_type": "reference",
-                  "_ref": "blogPage-fr"
-                }
-              },
-              {
                 "_key": "navm-about",
                 "_type": "link",
                 "label": "À propos",
@@ -134,13 +118,13 @@
                 }
               },
               {
-                "_key": "navm-faq",
+                "_key": "navm-blog",
                 "_type": "link",
-                "label": "FAQ",
+                "label": "Blogue",
                 "type": "internal",
                 "internalRef": {
                   "_type": "reference",
-                  "_ref": "faqPage-fr"
+                  "_ref": "blogPage-fr"
                 }
               },
               {
@@ -153,13 +137,7 @@
                   "_ref": "contactPage-fr"
                 }
               }
-            ],
-            "cta": {
-              "_type": "link",
-              "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
-            }
+            ]
           }
         },
         "socials": [
@@ -365,13 +343,7 @@
                 "type": "anchor",
                 "anchor": "contact"
               }
-            ],
-            "cta": {
-              "_type": "link",
-              "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
-            }
+            ]
           },
           "multipage": {
             "primary": [
@@ -396,16 +368,6 @@
                 }
               },
               {
-                "_key": "navm-blog",
-                "_type": "link",
-                "label": "Blog",
-                "type": "internal",
-                "internalRef": {
-                  "_type": "reference",
-                  "_ref": "blogPage-en"
-                }
-              },
-              {
                 "_key": "navm-about",
                 "_type": "link",
                 "label": "About",
@@ -416,13 +378,13 @@
                 }
               },
               {
-                "_key": "navm-faq",
+                "_key": "navm-blog",
                 "_type": "link",
-                "label": "FAQ",
+                "label": "Blog",
                 "type": "internal",
                 "internalRef": {
                   "_type": "reference",
-                  "_ref": "faqPage-en"
+                  "_ref": "blogPage-en"
                 }
               },
               {
@@ -435,13 +397,7 @@
                   "_ref": "contactPage-en"
                 }
               }
-            ],
-            "cta": {
-              "_type": "link",
-              "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
-            }
+            ]
           }
         },
         "socials": [
@@ -1125,8 +1081,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -1327,8 +1282,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -1409,8 +1363,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -1611,8 +1564,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -1692,8 +1644,7 @@
             "cta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "image": {
               "image": {
@@ -1738,8 +1689,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -1819,8 +1769,7 @@
             "cta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "image": {
               "image": {
@@ -1865,8 +1814,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -1978,8 +1926,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -2091,8 +2038,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -2249,8 +2195,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -2407,8 +2352,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -2506,8 +2450,7 @@
           "primaryCta": {
             "_type": "link",
             "label": "Appeler maintenant",
-            "type": "external",
-            "externalUrl": "tel:+14505550199"
+            "type": "tel"
           },
           "secondaryCta": {
             "_type": "link",
@@ -2522,8 +2465,7 @@
           "primaryCta": {
             "_type": "link",
             "label": "Appeler maintenant",
-            "type": "external",
-            "externalUrl": "tel:+14505550199"
+            "type": "tel"
           },
           "secondaryCta": {
             "_type": "link",
@@ -2538,8 +2480,7 @@
           "primaryCta": {
             "_type": "link",
             "label": "Appeler maintenant",
-            "type": "external",
-            "externalUrl": "tel:+14505550199"
+            "type": "tel"
           },
           "secondaryCta": {
             "_type": "link",
@@ -2641,8 +2582,7 @@
           "primaryCta": {
             "_type": "link",
             "label": "Call now",
-            "type": "external",
-            "externalUrl": "tel:+14505550199"
+            "type": "tel"
           },
           "secondaryCta": {
             "_type": "link",
@@ -2657,8 +2597,7 @@
           "primaryCta": {
             "_type": "link",
             "label": "Call now",
-            "type": "external",
-            "externalUrl": "tel:+14505550199"
+            "type": "tel"
           },
           "secondaryCta": {
             "_type": "link",
@@ -2673,8 +2612,7 @@
           "primaryCta": {
             "_type": "link",
             "label": "Call now",
-            "type": "external",
-            "externalUrl": "tel:+14505550199"
+            "type": "tel"
           },
           "secondaryCta": {
             "_type": "link",
@@ -2844,8 +2782,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -3011,8 +2948,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -3092,8 +3028,7 @@
             "cta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           }
         ],
@@ -3156,8 +3091,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -3187,8 +3121,7 @@
             "cta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           }
         ],
@@ -3251,8 +3184,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -3283,8 +3215,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -3485,8 +3416,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -3567,8 +3497,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -3769,8 +3698,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -3889,8 +3817,7 @@
             "cta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -3943,8 +3870,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -4028,8 +3954,7 @@
             "cta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -4082,8 +4007,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -4167,8 +4091,7 @@
             "cta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -4221,8 +4144,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -4306,8 +4228,7 @@
             "cta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -4360,8 +4281,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -4445,8 +4365,7 @@
             "cta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -4499,8 +4418,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -4584,8 +4502,7 @@
             "cta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -4638,8 +4555,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -4723,8 +4639,7 @@
             "cta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -4777,8 +4692,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -4862,8 +4776,7 @@
             "cta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -4916,8 +4829,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -5001,8 +4913,7 @@
             "cta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -5055,8 +4966,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",
@@ -5140,8 +5050,7 @@
             "cta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             }
           },
           "included": {
@@ -5194,8 +5103,7 @@
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
-              "type": "external",
-              "externalUrl": "tel:+14505550199"
+              "type": "tel"
             },
             "secondaryCta": {
               "_type": "link",

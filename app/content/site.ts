@@ -49,11 +49,9 @@ export interface SiteContent {
   nav: {
     landing: {
       primary: Array<{ label: string; anchor: string }>
-      cta: { label: string; anchor: string }
     }
     multipage: {
       primary: Array<{ label: string; route: string }>
-      cta: { label: string; route: string }
     }
   }
   footer: {

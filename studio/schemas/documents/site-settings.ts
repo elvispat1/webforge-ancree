@@ -179,12 +179,8 @@ export const siteSettings = defineType({
               of: [defineArrayMember({ type: 'link' })],
               validation: (R) => R.required().min(1),
             }),
-            defineField({
-              name: 'cta',
-              title: 'Bouton d\'appel',
-              type: 'link',
-              validation: (R) => R.required(),
-            }),
+            // Pas de bouton d'appel ici: le geste d'appel derive de Coordonnees ->
+            // Telephone (tel: genere en code). Jamais d'URL externe tel: saisie a la main.
           ],
         }),
         defineField({
@@ -199,12 +195,8 @@ export const siteSettings = defineType({
               of: [defineArrayMember({ type: 'link' })],
               validation: (R) => R.required().min(1),
             }),
-            defineField({
-              name: 'cta',
-              title: 'Bouton d\'appel',
-              type: 'link',
-              validation: (R) => R.required(),
-            }),
+            // Pas de bouton d'appel ici: le geste d'appel derive de Coordonnees ->
+            // Telephone (tel: genere en code). Jamais d'URL externe tel: saisie a la main.
           ],
         }),
       ],
