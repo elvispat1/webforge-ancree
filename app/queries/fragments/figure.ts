@@ -13,10 +13,14 @@
  * Figure (objet partage `figure`): l'asset image natif est resolu en URL CDN
  * des la query (`image.asset->url`), le front ne voit jamais d'objet asset.
  * `src` absent = placeholder soigne du fragment <Image> (jamais une 404).
+ *
+ * L'ALT est lu sur l'ASSET, BILINGUE (`altText` localisé { fr, en } du plugin
+ * media configuré avec locales). On pioche la langue courante via $language; une
+ * image porte son alt une seule fois, traduit, partout. Plus de champ alt par usage.
  */
 export const FIGURE_PROJECTION = /* groq */ `{
   "src": image.asset->url,
-  alt,
+  "alt": select($language == "en" => image.asset->altText.en, image.asset->altText.fr),
   label,
   caption,
   ratio

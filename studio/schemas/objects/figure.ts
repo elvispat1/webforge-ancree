@@ -3,13 +3,13 @@ import { ImageIcon } from '@sanity/icons'
 
 /**
  * Image réutilisée partout où le contenu a la shape
- * { ratio, image?, alt, label, caption }.
+ * { ratio, image?, label, caption }.
  *
  * Image NATIVE Sanity (champ `image` avec hotspot), qui remplace l'ancienne
  * paire { src, alt } en string du monolithe.
  *
- * L'alt vit ici, par usage, PAS sur l'asset: la même image peut servir
- * plusieurs contextes avec des descriptions différentes.
+ * Le TEXTE ALTERNATIF n'est PAS un champ ici: il vit sur l'asset, réglé une seule
+ * fois dans la médiathèque (asset->altText, plugin média). Une image = un alt.
  *
  * `image` est optionnel: absent, le front rend un placeholder soigné
  * (jamais une 404).
@@ -27,28 +27,13 @@ export const figure = defineType({
       type: 'image',
       options: { hotspot: true },
     }),
-    // Texte alternatif RECOMMANDÉ, jamais bloquant: validation .warning(). Au rendu,
-    // l'attribut alt est TOUJOURS présent, vide au pire (alt=""). Un attribut absent
-    // serait un échec WCAG, tandis qu'un alt vide marque correctement une image
-    // décorative pour les lecteurs d'écran. D'où l'absence de champ « décorative »
-    // distinct: une image décorative se déclare en laissant l'alt vide.
+    // L'alt n'est PLUS un champ ici: il est lu sur l'asset (asset->altText, plugin
+    // média), réglé dans la médiathèque. Au rendu l'attribut alt est toujours présent
+    // (vide au pire: image décorative ou alt non saisi), jamais absent (échec WCAG).
     //
     // DIVERGENCE ASSUMÉE vs Minimaliste (label + caption y sont required): dans la
-    // peau Ancrée, label et caption restent OPTIONNELS. Les héros pleine image
-    // n'affichent jamais de légende; exiger une légende partout forcerait du texte
-    // jamais rendu. Posture fail-fast honnête: on exige ce qui est rendu.
-    defineField({
-      name: 'alt',
-      title: 'Texte alternatif',
-      description: 'Décrit l\'image pour les lecteurs d\'écran. Défini ici, par usage. Laisser vide si l\'image est purement décorative.',
-      type: 'string',
-      validation: (R) =>
-        R.custom((alt, ctx) => {
-          const p = ctx.parent as { image?: { asset?: unknown } }
-          if (p?.image?.asset && !alt) return 'Texte alternatif recommandé quand une image est présente'
-          return true
-        }).warning(),
-    }),
+    // peau Ancrée, label et caption restent OPTIONNELS. Exiger une légende partout
+    // forcerait du texte jamais rendu. Posture fail-fast honnête: on exige ce qui est rendu.
     defineField({
       name: 'label',
       title: 'Étiquette',

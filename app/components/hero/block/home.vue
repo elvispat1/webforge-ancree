@@ -31,11 +31,25 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
 <template>
   <section ref="heroRef" class="hero">
     <div ref="frameRef" class="hero__media">
+      <!-- Image mobile optionnelle (art direction plein ecran): rendue seulement si
+           fournie au CMS, montree sous le seuil. Sinon, le desktop sert partout. -->
+      <NuxtImg
+        v-if="visualMobile"
+        :src="visualMobile.src"
+        :alt="visualMobile.alt || ''"
+        class="hero__img hero__img--mobile"
+        sizes="xs:100vw sm:100vw md:100vw"
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+      />
       <NuxtImg
         :ref="setImageEl"
         :src="visual.src"
         :alt="visual.alt || ''"
         class="hero__img"
+        :class="{ 'hero__img--desktop': !!visualMobile }"
         sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw xxl:100vw"
         format="webp"
         loading="eager"
@@ -117,6 +131,23 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
 @container site (min-width: 1024px) {
   .hero__img {
     object-position: center 36%;
+  }
+}
+
+/* Bascule desktop/mobile quand une image mobile est fournie. Sans image mobile,
+   l'image desktop ne porte pas --desktop et reste visible partout. */
+.hero__img--mobile {
+  display: block;
+}
+.hero__img--desktop {
+  display: none;
+}
+@container site (min-width: 1024px) {
+  .hero__img--mobile {
+    display: none;
+  }
+  .hero__img--desktop {
+    display: block;
   }
 }
 

@@ -45,10 +45,20 @@ export interface SanityLink {
 /** Figure (objet `figure`, FIGURE_PROJECTION): asset deja resolu en URL CDN. */
 export interface SanityFigure {
   src?: Maybe<string>
+  // alt projeté depuis l'asset (image.asset->altText), plus depuis un champ figure.
   alt?: Maybe<string>
   label?: Maybe<string>
   caption?: Maybe<string>
   ratio?: Maybe<string>
+}
+
+/** Visuel du héros (objet `heroImage`): desktop + mobile optionnelle, alt sur l'asset.
+ *  Projeté en { src, alt, mobileSrc?, mobileAlt? } (src absent = placeholder). */
+export interface SanityHeroImage {
+  src?: Maybe<string>
+  alt?: Maybe<string>
+  mobileSrc?: Maybe<string>
+  mobileAlt?: Maybe<string>
 }
 
 /** SEO de page fixe (SEO_PROJECTION). */
@@ -87,7 +97,7 @@ export interface SanityHeroHome {
   primaryCta: SanityLink
   secondaryCta: SanityLink
   meta?: Maybe<Array<{ icon?: Maybe<string>; value: string; label: string }>>
-  visual: SanityFigure
+  visual: SanityHeroImage
 }
 export interface SanityPageHero {
   _type: 'pageHero'

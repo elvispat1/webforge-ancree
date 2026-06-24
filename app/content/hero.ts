@@ -12,6 +12,13 @@ export interface HeroVisual {
   caption: string // legende du placeholder
 }
 
+/* Visuel du heros full bleed: minimal (src + alt seulement). Cadrage en CODE
+ * (object-fit cover), aucun ratio/label/caption. L'alt vient de l'asset. */
+export interface HeroHomeVisual {
+  src?: string // URL CDN deja resolue; absente -> placeholder
+  alt?: string // lu sur l'asset (asset->altText)
+}
+
 export interface HeroProof {
   value: string // la preuve elle-meme, ex "Licencie RBQ"
   label: string // le qualificatif, ex "et entierement assure"
@@ -25,8 +32,8 @@ export interface HeroContent {
   primaryCta: { label: string; href: string } // le bouton d'appel
   secondaryCta: { label: string; href: string }
   meta: HeroProof[] // les preuves de confiance integrees (3)
-  visual: HeroVisual // cadrage desktop (portrait, defaut 4/5)
-  visualMobile: HeroVisual // cadrage mobile (paysage, defaut 4/3)
+  visual: HeroHomeVisual // image desktop (recadree plein ecran 16:9 en code)
+  visualMobile?: HeroHomeVisual // image mobile optionnelle; absente -> desktop partout
 }
 
 /* Masthead des pages internes (hero-page): un bandeau de reperage, sobre et

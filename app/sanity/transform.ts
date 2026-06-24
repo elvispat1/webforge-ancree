@@ -673,7 +673,9 @@ function transformProcess(raw: SanityProcess, locale: WfLocale): ProcessPayload 
 // ── Heros ───────────────────────────────────────────────────────────────────
 
 function transformHeroHomeBody(raw: SanityHeroHome, locale: WfLocale, phoneE164: string): HeroContent {
-  const visual = resolveFigure(raw.visual, RATIOS.heroVisual)
+  // Visuel minimal: src + alt (alt sur l'asset). Cadrage en code (object-fit cover),
+  // pas de ratio. Image mobile optionnelle: absente -> le desktop sert partout.
+  const v = raw.visual
   return {
     kicker: opt(raw.kicker),
     title: raw.title,
@@ -681,9 +683,8 @@ function transformHeroHomeBody(raw: SanityHeroHome, locale: WfLocale, phoneE164:
     primaryCta: linkPair(raw.primaryCta, locale, phoneE164),
     secondaryCta: linkPair(raw.secondaryCta, locale, phoneE164),
     meta: (raw.meta ?? []).map((m) => ({ value: m.value, label: m.label, icon: opt(m.icon) })),
-    visual,
-    // Cadrage mobile derive de la meme image (paysage 4/5); le seed n'a qu'un visuel.
-    visualMobile: { ...visual, ratio: RATIOS.heroVisualMobile }
+    visual: { src: opt(v.src), alt: opt(v.alt) },
+    visualMobile: v.mobileSrc ? { src: v.mobileSrc, alt: opt(v.mobileAlt) ?? opt(v.alt) } : undefined
   }
 }
 

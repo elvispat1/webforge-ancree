@@ -67,13 +67,13 @@ export const heroHome = defineType({
     defineField({
       name: 'visual',
       title: 'Image',
-      description: 'Visuel full bleed du héros.',
-      type: 'figure',
+      description: 'Visuel full bleed du héros (desktop requis, mobile optionnel).',
+      type: 'heroImage',
       fieldset: 'visual',
     }),
   ],
   preview: {
-    select: { title: 'title', kicker: 'kicker', media: 'visual.image' },
+    select: { title: 'title', kicker: 'kicker', media: 'visual.desktop' },
     prepare: ({ title, kicker, media }) => ({
       title: title || '(héros sans titre)',
       subtitle: kicker ? 'Héros d\'accueil, ' + kicker : 'Héros d\'accueil',

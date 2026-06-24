@@ -6,6 +6,7 @@
 
 // Objets partagés
 import { figure } from './objects/figure'
+import { heroImage } from './objects/hero-image'
 import { link } from './objects/link'
 import { seo } from './objects/seo'
 import { heroHome } from './objects/hero-home'
@@ -62,6 +63,7 @@ import { legalPage } from './documents/legal-page'
 export const schemaTypes = [
   // Objets partagés
   figure,
+  heroImage,
   link,
   seo,
   heroHome,

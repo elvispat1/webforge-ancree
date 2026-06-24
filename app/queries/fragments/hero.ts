@@ -22,7 +22,12 @@ export const HERO_BLOCK_PROJECTION = /* groq */ `{
     "primaryCta": primaryCta ${LINK_PROJECTION},
     "secondaryCta": secondaryCta ${LINK_PROJECTION},
     meta[]{ icon, value, label },
-    "visual": visual ${FIGURE_PROJECTION}
+    "visual": visual{
+      "src": desktop.asset->url,
+      "alt": select($language == "en" => desktop.asset->altText.en, desktop.asset->altText.fr),
+      "mobileSrc": mobile.asset->url,
+      "mobileAlt": select($language == "en" => mobile.asset->altText.en, mobile.asset->altText.fr)
+    }
   },
   _type == "pageHero" => {
     title,

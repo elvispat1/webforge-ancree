@@ -303,7 +303,15 @@ export default defineConfig({
     }),
 
     // Media library: onglet « Media » en haut du Studio (browser/tagger global).
-    media(),
+    // Locales FR/EN: le texte alternatif (altText) devient BILINGUE sur l'asset
+    // ({ fr, en }), saisi une fois par image dans la médiathèque. Le front lit la
+    // bonne langue (FIGURE_PROJECTION via $language). Plus de champ alt par usage.
+    media({
+      locales: [
+        { id: 'fr', title: 'Français' },
+        { id: 'en', title: 'English' },
+      ],
+    }),
 
     visionTool(),
 

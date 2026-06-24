@@ -50,6 +50,30 @@ const IMAGES = {
   'logo-rempart': join(repoRoot, 'public', 'favicon.svg'),
 }
 
+// Texte alternatif BILINGUE par asset, posé sur le doc sanity.imageAsset (altText
+// localisé { fr, en } lu nativement par le plugin média et par les projections GROQ).
+// L'alt vit sur l'image, plus par usage. Une image réutilisée porte un seul alt par
+// langue (défaut de la migration); raffiner ensuite dans la médiathèque ET ici, sinon
+// un re-seed réécrit ces valeurs. Le logo est décoratif: pas d'altText.
+const ALT_TEXT = {
+  'hero-rempart': {
+    fr: 'Camionnette de service de Rempart Extermination dans un quartier de la Rive-Nord',
+    en: 'Rempart Extermination service van in a North Shore neighbourhood',
+  },
+  'equipe-rempart': {
+    fr: 'Les techniciens de Rempart Extermination réunis devant leur camionnette de service',
+    en: 'The Rempart Extermination technicians standing together beside their service van',
+  },
+  'hero-technicien': {
+    fr: 'Un technicien de Rempart Extermination en intervention devant une maison de la Rive-Nord',
+    en: 'A Rempart Extermination technician on a job in front of a North Shore home',
+  },
+  'inspection-rempart': {
+    fr: 'Un technicien vérifie les points d\'entrée le long d\'une fondation',
+    en: 'A technician checking entry points along a foundation',
+  },
+}
+
 // Extension de fichier d'un chemin (pour nommer l'asset uploade: jpg, svg, ...).
 const extOf = (path) => path.slice(path.lastIndexOf('.') + 1).toLowerCase()
 
@@ -88,6 +112,9 @@ async function main() {
     const refKeys = new Set()
     JSON.stringify(docs).replace(/IMG:([a-z-]+)/g, (_, k) => (refKeys.add(k), ''))
     console.log('  cles image referencees:', [...refKeys].join(', '))
+    for (const [key, alt] of Object.entries(ALT_TEXT)) {
+      console.log(`  altText ${key}: fr="${alt.fr}" | en="${alt.en}"`)
+    }
     console.log('DRY-RUN: aucune ecriture.')
     return
   }
@@ -108,6 +135,15 @@ async function main() {
       assetMap[key] = asset._id
       console.log(`  uploade ${key} -> ${asset._id}`)
     }
+  }
+
+  // 1b. Pose le texte alternatif bilingue sur les assets (altText localise { fr, en }).
+  // L'alt vit sur l'image, lu par le plugin media et les projections GROQ.
+  for (const [key, alt] of Object.entries(ALT_TEXT)) {
+    const id = assetMap[key]
+    if (!id) continue
+    await client.patch(id).set({ altText: alt }).commit()
+    console.log(`  altText ${key} -> { fr, en }`)
   }
 
   // 2. Construit les docs finaux (_type derive du wrapper, refs image resolues).
