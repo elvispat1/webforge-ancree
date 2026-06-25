@@ -37,3 +37,90 @@
     padding-inline: 8rem;
   }
 }
+
+/* ── Utilitaires de calage sur la grille de page ─────────────────────────────
+ * Pour ne plus re-declarer le pattern de grille dans chaque composant.
+ *
+ * CONTENEUR (a poser sur l'element grille):
+ *   .section-grid : grille 4 pistes des le mobile, 16 au desktop, avec gouttiere.
+ *                   Pour les CORPS de blocs qui se calent a toutes les tailles.
+ *   .wf-grid-cols : EMPILE au mobile/tablette (1 piste, espacement laisse au
+ *                   composant via marges), 16 pistes + gouttiere 2rem au desktop.
+ *                   Pour les TETES de section et le pied (empilent puis se calent).
+ *
+ * PLACEMENT (a poser sur un ENFANT direct du conteneur):
+ *   .wf-col-full  : pleine largeur (1 / -1), a toutes les tailles.
+ *   .wf-sm-span-N : largeur N pistes des la tablette (>= 640, grille 4 pistes).
+ *   .wf-span-N    : largeur N pistes au desktop (>= 1024); depart en flux auto.
+ *   .wf-from-N    : ligne de depart N au desktop (zone hors flux, ex. colonne de
+ *                   droite d'une scission). A combiner avec .wf-to-end ou .wf-span-N.
+ *   .wf-to-end    : fin au bord droit (-1) au desktop.
+ *
+ * Combinaisons typiques:
+ *   carte qui coule  : .wf-col-full .wf-sm-span-2 .wf-span-8
+ *   zone de gauche   : .wf-col-full .wf-span-6        (depart auto = piste 1)
+ *   zone de droite   : .wf-col-full .wf-from-8 .wf-to-end
+ *
+ * NB: gerer le placement par classes suppose AUCUNE regle grid-column en scoped
+ * CSS sur le meme element (le scoped, plus specifique, gagnerait). Les motifs
+ * POSITIONNELS (nth-child d'une mosaique) restent en scoped CSS, c'est legitime. */
+
+.wf-grid-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.wf-col-full {
+  grid-column: 1 / -1;
+}
+
+@container site (min-width: 640px) {
+  .wf-sm-span-2 { grid-column: span 2; }
+  .wf-sm-span-4 { grid-column: span 4; }
+}
+
+@container site (min-width: 1024px) {
+  .wf-grid-cols {
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+    column-gap: 2rem;
+  }
+
+  /* Largeur en pistes, depart en flux auto (cartes, zone de gauche). */
+  .wf-span-1 { grid-column: span 1; }
+  .wf-span-2 { grid-column: span 2; }
+  .wf-span-3 { grid-column: span 3; }
+  .wf-span-4 { grid-column: span 4; }
+  .wf-span-5 { grid-column: span 5; }
+  .wf-span-6 { grid-column: span 6; }
+  .wf-span-7 { grid-column: span 7; }
+  .wf-span-8 { grid-column: span 8; }
+  .wf-span-9 { grid-column: span 9; }
+  .wf-span-10 { grid-column: span 10; }
+  .wf-span-11 { grid-column: span 11; }
+  .wf-span-12 { grid-column: span 12; }
+  .wf-span-13 { grid-column: span 13; }
+  .wf-span-14 { grid-column: span 14; }
+  .wf-span-15 { grid-column: span 15; }
+  .wf-span-16 { grid-column: span 16; }
+
+  /* Ligne de depart explicite (zone hors flux). Longhand: n'ecrase que le depart,
+   * a poser APRES .wf-span/.wf-col-full pour que .wf-to-end ferme au bord. */
+  .wf-from-1 { grid-column-start: 1; }
+  .wf-from-2 { grid-column-start: 2; }
+  .wf-from-3 { grid-column-start: 3; }
+  .wf-from-4 { grid-column-start: 4; }
+  .wf-from-5 { grid-column-start: 5; }
+  .wf-from-6 { grid-column-start: 6; }
+  .wf-from-7 { grid-column-start: 7; }
+  .wf-from-8 { grid-column-start: 8; }
+  .wf-from-9 { grid-column-start: 9; }
+  .wf-from-10 { grid-column-start: 10; }
+  .wf-from-11 { grid-column-start: 11; }
+  .wf-from-12 { grid-column-start: 12; }
+  .wf-from-13 { grid-column-start: 13; }
+  .wf-from-14 { grid-column-start: 14; }
+  .wf-from-15 { grid-column-start: 15; }
+  .wf-from-16 { grid-column-start: 16; }
+
+  .wf-to-end { grid-column-end: -1; }
+}
