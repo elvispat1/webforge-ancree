@@ -41,11 +41,23 @@ const client = createClient({
   useCdn: false,
 })
 
+const img = (file) => join(repoRoot, 'public', 'images', file)
 const IMAGES = {
-  'hero-rempart': join(repoRoot, 'public', 'images', 'hero-rempart.jpg'),
-  'equipe-rempart': join(repoRoot, 'public', 'images', 'equipe-rempart.jpg'),
-  'hero-technicien': join(repoRoot, 'public', 'images', 'hero-technicien.jpg'),
-  'inspection-rempart': join(repoRoot, 'public', 'images', 'inspection-rempart.jpg'),
+  'hero-rempart': img('hero-rempart.jpg'),
+  'equipe-rempart': img('equipe-rempart.jpg'),
+  'hero-technicien': img('hero-technicien.jpg'),
+  'inspection-rempart': img('inspection-rempart.jpg'),
+  // Héros générés (split asymétrique): nuisibles sur fond blanc (détail service),
+  // scènes pour les pages de niveau 2, camionnette de quartier (villes, partagée).
+  'hero-ant': img('hero-ant.jpg'),
+  'hero-mouse': img('hero-mouse.jpg'),
+  'hero-wasp': img('hero-wasp.jpg'),
+  'hero-bedbug': img('hero-bedbug.jpg'),
+  'hero-roach': img('hero-roach.jpg'),
+  'hero-team': img('hero-team.jpg'),
+  'hero-techVan': img('hero-techVan.jpg'),
+  'hero-techAction': img('hero-techAction.jpg'),
+  'hero-vanHood': img('hero-vanHood.jpg'),
   // Logo de marque (brand.logo des Globales): le SVG de la favicon sert de marque.
   'logo-rempart': join(repoRoot, 'public', 'favicon.svg'),
 }
@@ -71,6 +83,42 @@ const ALT_TEXT = {
   'inspection-rempart': {
     fr: 'Un technicien vérifie les points d\'entrée le long d\'une fondation',
     en: 'A technician checking entry points along a foundation',
+  },
+  'hero-ant': {
+    fr: 'Fourmi charpentière en gros plan sur fond blanc',
+    en: 'Carpenter ant in close-up on a white background',
+  },
+  'hero-mouse': {
+    fr: 'Souris domestique sur fond blanc',
+    en: 'House mouse on a white background',
+  },
+  'hero-wasp': {
+    fr: 'Guêpe sur fond blanc',
+    en: 'Wasp on a white background',
+  },
+  'hero-bedbug': {
+    fr: 'Punaise de lit en gros plan sur fond blanc',
+    en: 'Bed bug in close-up on a white background',
+  },
+  'hero-roach': {
+    fr: 'Coquerelle sur fond blanc',
+    en: 'Cockroach on a white background',
+  },
+  'hero-team': {
+    fr: 'L\'équipe de techniciens de Rempart devant la camionnette de service',
+    en: 'The Rempart technician team in front of the service van',
+  },
+  'hero-techVan': {
+    fr: 'Technicien de Rempart à côté de la camionnette de service',
+    en: 'Rempart technician beside the service van',
+  },
+  'hero-techAction': {
+    fr: 'Technicien traitant les plinthes d\'une maison',
+    en: 'Technician treating the baseboards of a home',
+  },
+  'hero-vanHood': {
+    fr: 'Camionnette de service dans un quartier résidentiel de la Rive-Nord',
+    en: 'Service van in a North Shore residential neighbourhood',
   },
 }
 
@@ -110,7 +158,7 @@ async function main() {
       console.log(`  image ${key}: ${fs.existsSync(path) ? 'OK' : 'MANQUANTE'} (${path})`)
     }
     const refKeys = new Set()
-    JSON.stringify(docs).replace(/IMG:([a-z-]+)/g, (_, k) => (refKeys.add(k), ''))
+    JSON.stringify(docs).replace(/IMG:([a-zA-Z-]+)/g, (_, k) => (refKeys.add(k), ''))
     console.log('  cles image referencees:', [...refKeys].join(', '))
     for (const [key, alt] of Object.entries(ALT_TEXT)) {
       console.log(`  altText ${key}: fr="${alt.fr}" | en="${alt.en}"`)
