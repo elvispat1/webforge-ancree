@@ -43,6 +43,7 @@ import type { FaqContent } from '../content/faq'
 import type { CtaBandContent } from '../content/cta-band'
 import type { ContactContent } from '../content/contact'
 import type { ProcessContent } from '../content/process'
+import type { EditorialContent, EditorialMediaSide } from '../content/editorial'
 import type { Category } from '../content/categories'
 import type { Article } from '../content/articles'
 import type {
@@ -58,7 +59,10 @@ import type {
   HeroHomeBlock,
   HeroPageBlock,
   HeroBlock,
-  ArticleBlock
+  ArticleBlock,
+  EditorialBlock,
+  ProcessBlock,
+  HighlightsBlock
 } from '../types/blocks'
 import type {
   Maybe,
@@ -69,6 +73,7 @@ import type {
   SanitySeo,
   SanityHeroHome,
   SanityPageHero,
+  SanityDetailHero,
   SanityRawHeroBlock,
   SanityCtaBand,
   SanityProcess,
@@ -76,8 +81,9 @@ import type {
   SanityRawBlock,
   SanityRawArticleBlock,
   SanityRawPortableBlock,
+  SanityRawLinkedPortableBlock,
+  SanityEditorialFields,
   SanitySiteSettings,
-  SanityServiceDetail,
   SanityLegalPage,
   SanityLegalBlock,
   SanityService,
@@ -160,6 +166,9 @@ export type PayloadPageBlock =
   | PendingServiceCitiesBlock
   | PendingTestimonialsBlock
   | PendingFaqBlock
+  | EditorialBlock
+  | ProcessBlock
+  | HighlightsBlock
 
 /** Traduction d'un doc de collection, normalisee (slug de l'autre langue;
  *  catSlug seulement sur les articles). Sert le switcher de langue et
@@ -177,57 +186,39 @@ export type Translated<T> = T & { translations?: DocTranslation[] }
  *  ProcessContent (la numerotation des etapes reste derivee au rendu). */
 export type ProcessPayload = ProcessContent
 
-/** Copie de la page de detail d'un service, composee section par section. Reflete
- *  SERVICE_DETAIL_PROJECTION; portee par CHAQUE document service (12.16). */
-export interface ServiceDetailPayload {
-  benefits: { heading: string; cta: { label: string; href: string } }
-  included: { heading: string }
-  process: ProcessPayload
-  serviceCities: {
-    eyebrow?: string
-    heading: string
-    lead?: string
-    ctaLabel?: string
-    ctaHref?: string
-  }
-  testimonials: { eyebrow: string; heading: string }
-  cta: CtaBandContent
-}
-
-/** Service du payload: identite + carte + copie de SA page de detail + traductions.
- *  `detail` optionnel: en preview scope, les services NON courants sortent en carte
- *  sans leur copie de page. En prod statique, detail est toujours fourni. */
+/** Service du payload: identite de carte + masthead (hero) + pageBuilder + seo +
+ *  traductions, composé comme un singleton. `hero`/`pageBuilder`/`seo` optionnels:
+ *  en preview scope, les services NON courants sortent en carte; en prod statique,
+ *  ils sont toujours fournis (page de detail prerendue). */
 export interface ServicePayload {
   _id: string
   slug: string
   icon?: string
   title: string
   summary?: string
-  meta?: string
   /** Image en src string (contrat des blocs); figure sans image -> '' (placeholder). */
   image: string
   /** Meta de figure (alt/label/caption) pour serviceImage() cote composable. */
   imageMeta: { alt: string; label: string; caption: string }
-  intro?: string[]
-  benefits: Array<{ title: string; body: string }>
-  detail?: ServiceDetailPayload
-  related: string[]
+  hero?: HeroPageBlock
+  pageBuilder?: PayloadPageBlock[]
+  seo?: PageSeo
   featured?: boolean
   order?: number
 }
 export type ServiceWithMeta = Translated<ServicePayload>
 
-/** Ville desservie du payload: la page service-ville (remplace le projet). Le corps
- *  (`body`) et la `seo` ne sortent que pour l'item de detail courant en preview. */
+/** Ville desservie du payload: meme forme composee que le service (masthead +
+ *  pageBuilder + seo). hero/pageBuilder/seo ne sortent pleinement que pour l'item
+ *  de detail (en preview), toujours en prod statique. */
 export interface ServiceCityPayload {
   _id: string
   slug: string
   city: string
   region?: string
   note?: string
-  heading?: string
-  lead?: string
-  body?: string[]
+  hero?: HeroPageBlock
+  pageBuilder?: PayloadPageBlock[]
   seo?: PageSeo
   featured?: boolean
   order?: number
@@ -403,7 +394,10 @@ const PAGE_BLOCK_TYPE_MAP = {
   testimonials: 'testimonials',
   faq: 'faq',
   ctaBand: 'cta-band',
-  contact: 'contact'
+  contact: 'contact',
+  editorial: 'editorial',
+  process: 'process',
+  highlights: 'highlights'
 } as const
 
 const ARTICLE_BLOCK_TYPE_MAP = {
@@ -416,7 +410,11 @@ const ARTICLE_BLOCK_TYPE_MAP = {
   articleInlineCta: 'inline-cta'
 } as const
 
-const HERO_BLOCK_TYPE_MAP = { heroHome: 'hero-home', pageHero: 'hero-page' } as const
+const HERO_BLOCK_TYPE_MAP = {
+  heroHome: 'hero-home',
+  pageHero: 'hero-page',
+  detailHero: 'hero-page'
+} as const
 
 /** `_type` Sanity (camelCase) -> `_type` Vue (kebab-case). Restreint aux 8 blocs
  *  de page + 7 blocs d'article + 2 heros. Inconnu = erreur immediate (un nouveau
@@ -445,7 +443,10 @@ const ANCHOR_KEY: Record<SanityRawBlock['_type'], string> = {
   testimonials: 'testimonials',
   faq: 'faq',
   ctaBand: 'cta-band',
-  contact: 'contact'
+  contact: 'contact',
+  editorial: 'editorial',
+  process: 'process',
+  highlights: 'highlights'
 }
 
 // ── Liens, localises (prefixe /en inclus en EN via le route-map) ──────────────
@@ -632,6 +633,78 @@ export function ptToRichTextEntries(blocks: Maybe<SanityRawPortableBlock[]>): Po
   })
 }
 
+/**
+ * Portable Text du bloc editorial -> PortableTextBlock[]. Comme ptToRichTextEntries,
+ * mais l'annotation `link` des markDefs est RESOLUE en href string localise
+ * (resolveLink: interne via docPath, externe, ancre). Le serialiseur PortableText.vue
+ * rend ensuite interne -> NuxtLink, externe -> <a> sur. Un lien interne irresoluble
+ * (ref non publiee) interrompt le build (fail-fast), jamais un lien mort silencieux.
+ */
+export function ptToLinkedEntries(
+  blocks: Maybe<SanityRawLinkedPortableBlock[]>,
+  locale: WfLocale,
+  phoneE164: string
+): PortableTextBlock[] {
+  return (blocks ?? []).map((b) => {
+    const style = (b.style === 'h2' || b.style === 'h3' ? b.style : 'normal') as PortableTextBlock['style']
+    const out: PortableTextBlock = {
+      _type: 'block',
+      _key: b._key,
+      style,
+      children: (b.children ?? []).map((c) => ({
+        _type: 'span' as const,
+        _key: c._key,
+        text: c.text ?? '',
+        marks: opt(c.marks)
+      }))
+    }
+    if (b.listItem === 'bullet' || b.listItem === 'number') out.listItem = b.listItem
+    if (typeof b.level === 'number') out.level = b.level
+    if (b.markDefs && b.markDefs.length) {
+      out.markDefs = b.markDefs.map((m) => ({
+        _key: m._key,
+        _type: 'link' as const,
+        href: resolveLink(
+          {
+            label: '',
+            type: (cleanLogic(m.type) ?? 'internal') as SanityLink['type'],
+            internalRef: m.internalRef,
+            externalUrl: m.externalUrl,
+            anchor: m.anchor
+          },
+          locale,
+          phoneE164
+        )
+      }))
+    }
+    return out
+  })
+}
+
+/** Bloc editorial Sanity -> EditorialContent. Texte riche des segments resolu avec
+ *  liens inline (ptToLinkedEntries); images en figures (src/alt/caption); cote
+ *  d'image normalise (auto/left/right). Reutilise par le page-builder ET par la
+ *  page de detail d'un service (champ service.detail.editorial). */
+function transformEditorial(
+  raw: SanityEditorialFields,
+  locale: WfLocale,
+  phoneE164: string
+): EditorialContent {
+  return {
+    eyebrow: opt(raw.eyebrow),
+    heading: opt(raw.heading),
+    lead: opt(raw.lead),
+    segments: (raw.segments ?? []).map((s) => ({
+      body: ptToLinkedEntries(s.body, locale, phoneE164),
+      media: (s.media ?? []).map((f) => resolveArticleFigure(f)),
+      mediaSide: ((): EditorialMediaSide => {
+        const side = cleanLogic(s.mediaSide)
+        return side === 'left' || side === 'right' ? side : 'auto'
+      })()
+    }))
+  }
+}
+
 // ── Dates legales ──────────────────────────────────────────────────────────────
 
 /** Date ISO (YYYY-MM-DD) -> date longue localisee (« 1er janvier 2026 » en fr-CA).
@@ -707,13 +780,27 @@ function transformHeroHomeBody(raw: SanityHeroHome, locale: WfLocale, phoneE164:
 }
 
 function transformPageHeroBody(raw: SanityPageHero, locale: WfLocale, phoneE164: string): HeroPageContent {
+  const rf = resolveFigure(raw.image, RATIOS.pageHero)
   return {
     title: raw.title,
     lead: opt(raw.lead),
-    cta: raw.cta ? linkPair(raw.cta, locale, phoneE164) : undefined
+    cta: raw.cta ? linkPair(raw.cta, locale, phoneE164) : undefined,
     // crumbs: composes par la page (route-map), jamais au CMS.
-    // image: pageHero porte une image au schema, mais HeroPageContent n'en a pas
-    // (les pages simples portent leur visuel dans le corps); on l'ignore ici.
+    image: rf.src ? { src: rf.src, alt: rf.alt } : undefined
+  }
+}
+
+/** Masthead des collections (detailHero) -> meme corps que pageHero, avec surtitre.
+ *  Mappe vers le _type kebab 'hero-page': les pages de detail rendent le meme
+ *  masthead solide que les pages internes. Le fil d'Ariane est ajoute par la page. */
+function transformDetailHeroBody(raw: SanityDetailHero, locale: WfLocale, phoneE164: string): HeroPageContent {
+  const rf = resolveFigure(raw.image, RATIOS.pageHero)
+  return {
+    eyebrow: opt(raw.eyebrow),
+    title: raw.title,
+    lead: opt(raw.lead),
+    cta: raw.cta ? linkPair(raw.cta, locale, phoneE164) : undefined,
+    image: rf.src ? { src: rf.src, alt: rf.alt } : undefined
   }
 }
 
@@ -724,6 +811,8 @@ function transformHeroBlock(raw: SanityRawHeroBlock, locale: WfLocale, phoneE164
       return { _type: 'hero-home', _key: raw._key, ...transformHeroHomeBody(raw, locale, phoneE164) }
     case 'pageHero':
       return { _type: 'hero-page', _key: raw._key, ...transformPageHeroBody(raw, locale, phoneE164) }
+    case 'detailHero':
+      return { _type: 'hero-page', _key: raw._key, ...transformDetailHeroBody(raw, locale, phoneE164) }
     default:
       return assertNever(raw)
   }
@@ -849,6 +938,18 @@ function transformBlock(
       return { _type: 'cta-band', _key: key, ...transformCtaBand(block, locale, site.contact.phoneE164) }
     case 'contact':
       return transformContactBlock(block, site, locale, key)
+    case 'editorial':
+      return { _type: 'editorial', _key: key, ...transformEditorial(block, locale, site.contact.phoneE164) }
+    case 'process':
+      return { _type: 'process', _key: key, ...transformProcess(block, locale) }
+    case 'highlights':
+      return {
+        _type: 'highlights',
+        _key: key,
+        eyebrow: opt(block.eyebrow),
+        heading: opt(block.heading),
+        items: (block.items ?? []).map((i) => ({ title: i.title, body: i.body }))
+      }
     default:
       return assertNever(block)
   }
@@ -1131,25 +1232,6 @@ export function transformLegal(pages: SanityLegalPage[], locale: WfLocale): Lega
   }
 }
 
-// ── Copies des pages de detail (portees par chaque doc de collection) ─────────
-
-function transformServiceDetail(raw: SanityServiceDetail, locale: WfLocale, phoneE164: string): ServiceDetailPayload {
-  return {
-    benefits: { heading: raw.benefits.heading, cta: linkPair(raw.benefits.cta, locale, phoneE164) },
-    included: { heading: raw.included.heading },
-    process: transformProcess(raw.process, locale),
-    serviceCities: {
-      eyebrow: opt(raw.serviceCities.eyebrow),
-      heading: raw.serviceCities.heading,
-      lead: opt(raw.serviceCities.lead),
-      ctaLabel: raw.serviceCities.cta ? raw.serviceCities.cta.label : undefined,
-      ctaHref: raw.serviceCities.cta ? resolveLink(raw.serviceCities.cta, locale, phoneE164) : undefined
-    },
-    testimonials: { eyebrow: raw.testimonials.eyebrow, heading: raw.testimonials.heading },
-    cta: transformCtaBand(raw.cta, locale, phoneE164)
-  }
-}
-
 // ── Collections ────────────────────────────────────────────────────────────────
 
 /** Traductions normalisees: entrees sans slug ou de langue inconnue ecartees. */
@@ -1163,44 +1245,43 @@ export function transformTranslations(raw: Maybe<SanityDocTranslation[]>): DocTr
     }))
 }
 
-function transformService(raw: SanityService, locale: WfLocale, phoneE164: string): ServiceWithMeta {
+function transformService(raw: SanityService, site: SiteContent, locale: WfLocale): ServiceWithMeta {
+  const phoneE164 = site.contact.phoneE164
   const figure = resolveFigure(raw.image, RATIOS.serviceImage)
+  // hero/pageBuilder/seo presents pour l'item de detail (toujours en prod statique;
+  // l'item courant en preview). Absents pour une carte du preview scope.
+  const hero = raw.hero ? asPageHero(raw.hero, raw._id, locale, phoneE164) : undefined
   return {
     _id: raw._id,
     slug: cleanLogic(raw.slug),
     icon: opt(raw.icon),
     title: raw.title,
     summary: opt(raw.summary),
-    meta: opt(raw.meta),
     image: figure.src ?? '',
     imageMeta: { alt: figure.alt, label: figure.label, caption: figure.caption },
-    intro: opt(raw.intro),
-    benefits: (raw.benefits ?? []).map((b) => ({ title: b.title, body: b.body })),
-    detail: raw.detail ? transformServiceDetail(raw.detail, locale, phoneE164) : undefined,
-    related: (raw.related ?? []).map((r) => cleanLogic(r)),
+    hero,
+    pageBuilder: raw.pageBuilder ? transformPageBuilder(raw.pageBuilder, site, locale) : undefined,
+    seo: hero ? resolveSeo(raw.seo, hero.title, hero.lead, site.seo) : undefined,
     featured: opt(raw.featured),
     order: opt(raw.order),
     translations: transformTranslations(raw.translations)
   }
 }
 
-function transformServiceCity(raw: SanityServiceCity, locale: WfLocale): ServiceCityWithDetail {
+function transformServiceCity(raw: SanityServiceCity, site: SiteContent, locale: WfLocale): ServiceCityWithDetail {
+  const phoneE164 = site.contact.phoneE164
+  const hero = raw.hero ? asPageHero(raw.hero, raw._id, locale, phoneE164) : undefined
   return {
     _id: raw._id,
     slug: cleanLogic(raw.slug),
     city: raw.city,
     region: opt(raw.region),
     note: opt(raw.note),
-    heading: opt(raw.heading),
-    lead: opt(raw.lead),
-    // Corps absent pour les villes NON courantes en preview scope -> undefined.
-    body: raw.body ? toParagraphs(raw.body) : undefined,
-    // La SEO de ville vient de l'objet `seo` (title/description/ogImage), PAS de
-    // seoTitle/seoDescription comme l'ancien content.ts. Absente -> undefined (la
-    // page derive ses replis). Pas de repli hero ici: une ville n'a pas de hero.
-    seo: raw.seo
-      ? { title: raw.seo.title ?? '', description: raw.seo.description ?? '', image: opt(raw.seo.ogImage) }
-      : undefined,
+    hero,
+    pageBuilder: raw.pageBuilder ? transformPageBuilder(raw.pageBuilder, site, locale) : undefined,
+    // SEO derive de l'objet seo (title/description/ogImage), repli sur le titre/lead
+    // du masthead puis le defaut des globales. Absent pour une carte du preview scope.
+    seo: hero ? resolveSeo(raw.seo, hero.title, hero.lead, site.seo) : undefined,
     featured: opt(raw.featured),
     order: opt(raw.order),
     translations: transformTranslations(raw.translations)
@@ -1355,8 +1436,8 @@ export function transformGraph(raw: SanityGraph, locale: WfLocale): ContentPaylo
       }
     },
     collections: {
-      services: raw.services.map((service) => transformService(service, locale, phoneE164)),
-      serviceCities: raw.serviceCities.map((city) => transformServiceCity(city, locale)),
+      services: raw.services.map((service) => transformService(service, site, locale)),
+      serviceCities: raw.serviceCities.map((city) => transformServiceCity(city, site, locale)),
       articles: raw.articles.map((article) => transformArticle(article, locale, phoneE164)),
       categories: raw.categories.map((category) => transformCategory(category)),
       testimonials: raw.testimonials.map(transformTestimonial),

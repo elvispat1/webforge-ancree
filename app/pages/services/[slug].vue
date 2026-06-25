@@ -4,9 +4,9 @@ import PageBuilder from '~/components/page-builder/regular/index.vue'
  * (collection service, par slug + langue). Le slug est RICHE en mots-cles et TRADUIT
  * par langue (FR extermination-fourmis-charpentieres <-> EN carpenter-ant-extermination);
  * on pose les params i18n via service.translations pour que l'alternate de langue
- * porte SON propre slug. Sous le contenu propre au nuisible (intro + points forts),
- * un corps oriente conversion (processus, temoignages, bandeau d'appel) compose par
- * useServiceBlocks depuis service.detail. En-tete solide (masthead clair, pas de heros). */
+ * porte SON propre slug. La page se compose comme un singleton: un masthead (hero[1])
+ * suivi d'un pageBuilder de sections (points forts, processus, editorial, temoignages,
+ * bandeau d'appel), tous edites au Studio. */
 import { breadcrumbsFor } from '~/config/route-map'
 import type { WfLocale } from '~/sanity/transform'
 import type { HeroPageBlock } from '~/types/blocks'
@@ -42,121 +42,42 @@ const phoneHref = computed(() => `tel:${site.value.contact.phoneE164}`)
 
 const breadcrumbs = computed(() => breadcrumbsFor('services', { label: service.value.title }, loc.value))
 
-// Masthead (bloc hero-page, rendu par <Hero>). Compose code depuis le document
-// service: eyebrow d'ancrage (meta du service, repli i18n), titre, accroche (body),
-// appel direct, fil d'Ariane (route-map). Intro et points forts vivent dans le corps.
-const heroBlock = computed<HeroPageBlock>(() => ({
-  _type: 'hero-page',
-  _key: `masthead-${service.value.slug}`,
-  crumbs: breadcrumbs.value,
-  eyebrow: service.value.meta ?? t('hero.kicker'),
-  title: service.value.title,
-  lead: service.value.summary,
-  cta: { label: t('hero.cta_primary'), href: phoneHref.value }
-}))
+// Masthead: le hero[1] du document (surtitre, titre, accroche, appel), enrichi du
+// fil d'Ariane derive du route-map. Si aucun bouton n'est saisi, on pose l'appel
+// direct de la marque par defaut (source unique tel:, jamais en dur).
+const hero = computed<HeroPageBlock>(() => {
+  const fallbackCta = { label: t('hero.cta_primary'), href: phoneHref.value }
+  const h = service.value.hero
+  if (!h) {
+    return {
+      _type: 'hero-page',
+      _key: `masthead-${service.value.slug}`,
+      title: service.value.title,
+      crumbs: breadcrumbs.value,
+      cta: fallbackCta
+    }
+  }
+  return { ...h, crumbs: breadcrumbs.value, cta: h.cta ?? fallbackCta }
+})
 
-// Points forts: les benefices du service (collection), icone commune = icone du
-// service (les benefices ne portent pas d'icone propre au contrat). Decision de
-// composition de page, jamais un champ Studio; la peau (template/CSS) reste intacte.
-const intro = computed(() => service.value.intro ?? [])
-const highlights = computed(() =>
-  service.value.benefits.map((b) => ({ icon: service.value.icon ?? 'lucide:check', title: b.title, body: b.body }))
-)
-
-// Corps oriente conversion depuis service.detail (processus + temoignages + bandeau
-// d'appel), compose par useServiceBlocks et rendu par le page-builder.
+// Corps de la page: le pageBuilder du document, resolu (blocs intelligents inclus).
 const blocks = computed(() => useServiceBlocks(service.value))
 
-// Page nuisible (SEO local): ItemPage + fil Accueil > Services > [nuisible].
+// Page nuisible (SEO local): ItemPage + fil Accueil > Services > [nuisible]. Le SEO
+// vient de l'objet seo du document (replis titre/accroche du masthead deja resolus).
+const seo = computed(() => service.value.seo)
 usePageSeo({
-  title: service.value.title,
-  description: service.value.summary,
-  image: service.value.image || undefined,
+  title: seo.value?.title ?? service.value.title,
+  description: seo.value?.description ?? '',
+  image: seo.value?.image || undefined,
   webPageType: 'ItemPage',
   breadcrumbs: breadcrumbs.value
 })
 </script>
 
 <template>
-  <div class="pest">
-    <Hero :hero="heroBlock" />
-
-    <div class="wf-container pest__body">
-      <div v-if="intro.length" class="pest__intro">
-        <p v-for="(para, i) in intro" :key="i" class="wf-body-1 wf-text-muted pest__para">{{ para }}</p>
-      </div>
-
-      <ul v-if="highlights.length" class="pest__highlights" data-reveal-stagger>
-        <li v-for="h in highlights" :key="h.title" class="pest__highlight">
-          <span class="pest__highlight-icon" aria-hidden="true">
-            <Icon :name="h.icon" />
-          </span>
-          <h2 class="pest__highlight-title wf-h5">{{ h.title }}</h2>
-          <p class="pest__highlight-body wf-body-2">{{ h.body }}</p>
-        </li>
-      </ul>
-    </div>
-
+  <div>
+    <Hero :hero="hero" />
     <PageBuilder :blocks="blocks" reveal />
   </div>
 </template>
-
-<style scoped>
-.pest__body {
-  padding-block: var(--space-block-default);
-  display: grid;
-  gap: 4.8rem;
-}
-.pest__intro {
-  max-width: 68ch;
-}
-.pest__para + .pest__para {
-  margin-top: 1.6rem;
-}
-
-/* Points forts du nuisible (signes, traitement, garantie): colonnes posees, sans
- * boite de carte (on evite l'empilement de cartes), icone en pastille ambre douce,
- * titre slab. Materiau Ancree, base blanche. */
-.pest__highlights {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3.2rem;
-}
-.pest__highlight {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.pest__highlight-icon {
-  display: grid;
-  place-items: center;
-  width: 5.2rem;
-  height: 5.2rem;
-  border-radius: var(--radius);
-  background: var(--accent-call-soft);
-  box-shadow: var(--elev-low);
-  margin-bottom: 1.8rem;
-}
-.pest__highlight-icon svg {
-  width: 2.8rem;
-  height: 2.8rem;
-  color: var(--accent-trust);
-}
-.pest__highlight-title {
-  margin: 0;
-}
-.pest__highlight-body {
-  margin-top: 1rem;
-  color: var(--text-muted);
-}
-
-@container site (min-width: 768px) {
-  .pest__highlights {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4rem;
-  }
-}
-</style>

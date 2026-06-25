@@ -19,7 +19,6 @@ import { FIGURE_PROJECTION } from './fragments/figure'
 import { SEO_PROJECTION } from './fragments/seo'
 import { HERO_BLOCK_PROJECTION } from './fragments/hero'
 import { CTA_BAND_PROJECTION } from './fragments/cta'
-import { SERVICE_DETAIL_PROJECTION } from './fragments/detail'
 import { ARTICLE_BODY_PROJECTION } from './fragments/article-body'
 import { TRANSLATIONS_PROJECTION } from './fragments/link'
 import { SITE_SETTINGS_PROJECTION } from './fragments/site'
@@ -97,12 +96,10 @@ export const CONTENT_GRAPH_QUERY = /* groq */ `{
     icon,
     title,
     summary,
-    meta,
     "image": image ${FIGURE_PROJECTION},
-    intro,
-    benefits[]{ title, body },
-    "detail": detail ${SERVICE_DETAIL_PROJECTION},
-    "related": related[]->slug.current,
+    "hero": coalesce(hero[0], hero) ${HERO_BLOCK_PROJECTION},
+    ${PAGE_BUILDER_PROJECTION},
+    "seo": seo ${SEO_PROJECTION},
     featured,
     order,
     "translations": ${TRANSLATIONS_PROJECTION}
@@ -113,9 +110,8 @@ export const CONTENT_GRAPH_QUERY = /* groq */ `{
     city,
     region,
     note,
-    heading,
-    lead,
-    body,
+    "hero": coalesce(hero[0], hero) ${HERO_BLOCK_PROJECTION},
+    ${PAGE_BUILDER_PROJECTION},
     "seo": seo ${SEO_PROJECTION},
     featured,
     order,

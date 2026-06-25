@@ -28,6 +28,7 @@
 import { FIGURE_PROJECTION } from '../fragments/figure'
 import { LINK_PROJECTION } from '../fragments/link'
 import { CTA_BAND_PROJECTION } from '../fragments/cta'
+import { EDITORIAL_FIELDS } from './editorial'
 
 export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
   _key,
@@ -91,5 +92,17 @@ export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
       privacy{ text, "link": link ${LINK_PROJECTION} }
     },
     success{ title, body }
+  },
+  _type == "editorial" => ${EDITORIAL_FIELDS},
+  _type == "process" => {
+    eyebrow,
+    heading,
+    lead,
+    steps[]{ title, body }
+  },
+  _type == "highlights" => {
+    eyebrow,
+    heading,
+    items[]{ title, body }
   }
 }`

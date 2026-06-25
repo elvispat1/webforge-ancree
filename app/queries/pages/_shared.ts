@@ -23,7 +23,6 @@ import { SITE_SETTINGS_PROJECTION } from '../fragments/site'
 import { LEGAL_PROJECTION } from '../fragments/legal'
 import { SERVICE_CARD_FIELDS, SERVICE_CITY_CARD_FIELDS, ARTICLE_CARD_FIELDS } from '../fragments/cards'
 import { TRANSLATIONS_PROJECTION } from '../fragments/link'
-import { SERVICE_DETAIL_PROJECTION } from '../fragments/detail'
 import { ARTICLE_BODY_PROJECTION } from '../fragments/article-body'
 import { PAGE_BUILDER_PROJECTION } from '../blocks/page-builder'
 
@@ -81,12 +80,9 @@ export function singletons(full?: FullSingleton): string {
 
 /** Les 6 collections en carte; l'item courant de `detail` en FULL via $slug. */
 export function collections(detail?: DetailCollection): string {
-  const serviceFull = detail === 'service'
-    ? `,\n    (slug.current == $slug) => {\n      "detail": detail ${SERVICE_DETAIL_PROJECTION},\n      "translations": ${TRANSLATIONS_PROJECTION}\n    }`
-    : ''
-  const serviceCityFull = detail === 'serviceCity'
-    ? `,\n    (slug.current == $slug) => {\n      body,\n      "seo": seo ${SEO_PROJECTION},\n      "translations": ${TRANSLATIONS_PROJECTION}\n    }`
-    : ''
+  const detailFull = `,\n    (slug.current == $slug) => {\n      "hero": coalesce(hero[0], hero) ${HERO_BLOCK_PROJECTION},\n      ${PAGE_BUILDER_PROJECTION},\n      "seo": seo ${SEO_PROJECTION},\n      "translations": ${TRANSLATIONS_PROJECTION}\n    }`
+  const serviceFull = detail === 'service' ? detailFull : ''
+  const serviceCityFull = detail === 'serviceCity' ? detailFull : ''
   const articleFull = detail === 'article'
     ? `,\n    (slug.current == $slug) => {\n      ${ARTICLE_BODY_PROJECTION},\n      "translations": ${TRANSLATIONS_PROJECTION}\n    }`
     : ''

@@ -11,6 +11,9 @@ import { LINK_PROJECTION } from './link'
  *     preuves integrees (objet `proof`: icon/value/label) et visuel full bleed.
  *   - pageHero (objet `pageHero`, heros des pages fixes de niveau 2): titre,
  *     accroche, CTA optionnel (objet link) et image phare.
+ *   - detailHero (objet `detailHero`, masthead des collections service/serviceCity):
+ *     surtitre, titre, accroche, CTA optionnel (objet link). Pas d'image (masthead
+ *     solide). Le transform le mappe aussi vers _type kebab 'hero-page'.
  */
 export const HERO_BLOCK_PROJECTION = /* groq */ `{
   _type,
@@ -30,6 +33,13 @@ export const HERO_BLOCK_PROJECTION = /* groq */ `{
     }
   },
   _type == "pageHero" => {
+    title,
+    lead,
+    "cta": cta ${LINK_PROJECTION},
+    "image": image ${FIGURE_PROJECTION}
+  },
+  _type == "detailHero" => {
+    eyebrow,
     title,
     lead,
     "cta": cta ${LINK_PROJECTION},

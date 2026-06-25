@@ -2,15 +2,13 @@
 // scopee preview UNIQUEMENT (jamais la prod). Imports RELATIFS (fermeture
 // nuxt.config).
 //
-// Principe (cf. analyse de tolerance du transform): la carte = la projection FULL
-// MOINS les seuls gros sous-arbres lourds, qui sont aussi ceux qui font gonfler
-// le payload preview:
-//   - service: on retire `detail` (copie de page) et `translations`;
-//   - serviceCity: on retire `body` (corps de page) et `translations`;
-//   - article: on retire `body` (Portable Text) et `translations`.
-// Tout le reste (meta, intro, benefits, note, region, author, readingTime...)
-// est leger et reste present: ca evite de relacher des dizaines de types de
-// sortie, le gain de poids venant entierement des sous-arbres retires.
+// Principe: la carte = l'identite de listing seulement. Les sous-arbres lourds de
+// la page de detail (masthead, pageBuilder, seo) ne sortent QUE pour l'item de
+// detail courant, fusionnes via le `=>` GROQ (voir _shared.ts):
+//   - service: la carte porte icon/title/summary/image/order/featured; hero +
+//     pageBuilder + seo + translations arrivent sur l'item courant;
+//   - serviceCity: la carte porte city/region/note/order/featured; idem;
+//   - article: la carte porte ses champs legers; body + translations sur l'item.
 //
 // Ce sont des LISTES DE CHAMPS (pas des projections entre accolades): a deposer
 // DANS une projection `*[...]{ ${SERVICE_CARD_FIELDS}, (cond) => { ...full } }`,
@@ -22,30 +20,24 @@
 
 import { FIGURE_PROJECTION } from './figure'
 
-/** Champs carte service: FULL moins `detail` + `translations`. */
+/** Champs carte service: identite de listing (sans hero/pageBuilder/seo/translations). */
 export const SERVICE_CARD_FIELDS = /* groq */ `
   _id,
   "slug": slug.current,
   icon,
   title,
   summary,
-  meta,
   "image": image ${FIGURE_PROJECTION},
-  intro,
-  benefits[]{ title, body },
-  "related": related[]->slug.current,
   featured,
   order`
 
-/** Champs carte service-ville: FULL moins `body` + `translations`. */
+/** Champs carte service-ville: identite de listing (sans hero/pageBuilder/seo/translations). */
 export const SERVICE_CITY_CARD_FIELDS = /* groq */ `
   _id,
   "slug": slug.current,
   city,
   region,
   note,
-  heading,
-  lead,
   featured,
   order`
 

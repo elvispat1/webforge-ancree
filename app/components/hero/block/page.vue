@@ -1,19 +1,18 @@
 <script setup lang="ts">
-/* Masthead des pages internes (hero-page). PAS le héros full bleed d'accueil: un
- * bandeau de repérage, sobre, tourné vers le texte, sur fond clair. Signature
- * Ancrée: titre slab à l'axe gauche (cols 1-10), accroche + appel sur une mesure
- * étroite à droite (cols 12-16) calée en bas du titre (asymétrie posée, même
- * grammaire que SectionHead). Le masthead « repose » sur une ligne d'horizon
- * pleine largeur, avec une languette ambre à l'axe gauche, là où le contenu
- * touche le sol. Volontairement SANS classe .hero: l'en-tête devient blanc solide
- * d'emblée (les deux clairs, pas de couture), au lieu de rester translucide.
+/* Masthead des pages internes (hero-page), partagé par les pages de niveau 2
+ * (services, à propos, contact, FAQ, blog) ET les pages de détail (service, ville).
+ * PAS le héros full bleed d'accueil: un bandeau de repérage solide sur fond clair.
  *
- * Masthead SOLIDE, immédiat: aucune apparition au chargement. Le titre est du
- * contenu critique au-dessus de la ligne de flottaison; une anim qui le masque
- * (rAF gelé en arrière-plan, ou timeline d'anim throttlée) le laisserait blanc.
- * On reste « ancré, planté »: la signature « s'ancre en montant » vit dans les
- * blocs du corps (reveal au défilement) et le héros d'accueil, pas dans ce
- * bandeau de repérage. */
+ * Deux dispositions selon la présence d'une image:
+ *  - AVEC image (split asymétrique posé): titre, accroche et appel à l'axe gauche
+ *    (cols 1-7), image dans un cadre arrondi à ombre chaude à droite (cols 9-16),
+ *    ancrée au sol par une languette ambre. Langage Ancrée, distinct de l'accueil.
+ *  - SANS image: titre à gauche (cols 1-10), accroche + appel sur une mesure étroite
+ *    à droite (cols 12-16), calés en bas du titre (disposition d'origine).
+ *
+ * Le masthead « repose » sur une ligne d'horizon pleine largeur. Masthead SOLIDE,
+ * immédiat: aucune apparition au chargement (titre = contenu critique au-dessus de
+ * la ligne de flottaison). La signature « s'ancre en montant » vit dans le corps. */
 import type { HeroPageBlock } from '~/types/blocks'
 
 const props = defineProps<HeroPageBlock>()
@@ -30,7 +29,7 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
 </script>
 
 <template>
-  <section class="page-hero">
+  <section class="page-hero" :class="{ 'page-hero--media': image }">
     <div class="wf-container page-hero__inner">
       <nav v-if="crumbs?.length" class="page-hero__crumbs" :aria-label="t('a11y.breadcrumb')">
         <ol class="page-hero__trail">
@@ -48,23 +47,41 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
       </nav>
 
       <div class="page-hero__head section-grid">
-        <div class="page-hero__title-col wf-col-full wf-span-10">
+        <div class="page-hero__text">
           <p v-if="eyebrow" class="page-hero__eyebrow wf-caption">
             <span class="page-hero__tick" aria-hidden="true" />{{ eyebrow }}
           </p>
           <h1 class="page-hero__title wf-h1">{{ title }}</h1>
+
+          <!-- Split: accroche + appel sous le titre, dans la colonne texte. -->
+          <template v-if="image">
+            <p v-if="lead" class="page-hero__lead wf-body-1 wf-text-muted">{{ lead }}</p>
+            <div v-if="cta" class="page-hero__cta">
+              <Button :href="cta.href" :kind="ctaKind(cta.href)" variant="call" icon="lucide:phone" :pulse="true">
+                {{ cta.label }}
+              </Button>
+            </div>
+          </template>
         </div>
 
-        <div v-if="hasAside" class="page-hero__aside wf-col-full wf-from-12 wf-to-end">
+        <!-- Carte image: posée au sol, cadre arrondi, ombre chaude, languette ambre. -->
+        <figure v-if="image" class="page-hero__media">
+          <div class="page-hero__frame">
+            <Image
+              :src="image.src"
+              :alt="image.alt"
+              ratio="4/3"
+              sizes="xs:100vw sm:100vw md:50vw lg:45vw xl:45vw xxl:45vw"
+            />
+          </div>
+          <span class="page-hero__media-anchor" aria-hidden="true" />
+        </figure>
+
+        <!-- Sans image: accroche + appel sur une mesure étroite à droite (d'origine). -->
+        <div v-else-if="hasAside" class="page-hero__aside">
           <p v-if="lead" class="page-hero__lead wf-body-1 wf-text-muted">{{ lead }}</p>
           <div v-if="cta" class="page-hero__cta">
-            <Button
-              :href="cta.href"
-              :kind="ctaKind(cta.href)"
-              variant="call"
-              icon="lucide:phone"
-              :pulse="true"
-            >
+            <Button :href="cta.href" :kind="ctaKind(cta.href)" variant="call" icon="lucide:phone" :pulse="true">
               {{ cta.label }}
             </Button>
           </div>
@@ -137,17 +154,12 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
   color: color-mix(in oklch, var(--text-muted) 52%, transparent);
 }
 
-/* Tête: titre à l'axe gauche, accroche + appel à droite. La grille (16 pistes
- * desktop / 4 mobile) vient de .section-grid, calée sur .wf-container; ici on ne
- * pose que l'espacement vertical (gap fil d'Ariane -> tête) et le row-gap qui
- * sépare le bloc de titre de l'aside quand ils s'empilent au mobile. */
+/* Tête: la grille (16 pistes desktop / 4 mobile) vient de .section-grid, calée sur
+ * .wf-container; ici on pose l'espacement vertical et le placement des colonnes. */
 .page-hero__head {
   margin-top: var(--space-crumbs-head);
-  row-gap: 2.4rem;
+  row-gap: 3.2rem;
 }
-/* Base mobile (la section-grid a 4 pistes en dessous du seuil): titre et aside
- * prennent toute la largeur, empilés via wf-col-full. L'asymétrie 10/12-16 ne
- * s'active qu'au desktop via wf-span-10 / wf-from-12 wf-to-end. */
 .page-hero__eyebrow {
   display: inline-flex;
   align-items: center;
@@ -172,6 +184,33 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
 .page-hero__cta {
   margin-top: var(--space-lead-cta);
 }
+/* Split: l'accroche et l'appel sous le titre respirent du titre. */
+.page-hero--media .page-hero__lead {
+  margin-top: var(--space-title-lead);
+}
+
+/* Carte image: cadre arrondi à ombre chaude, posée au sol. Au mobile elle suit le
+ * texte (le titre, contenu critique, reste en tête). */
+.page-hero__media {
+  margin: 0;
+  position: relative;
+}
+.page-hero__frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--elev-mid);
+}
+/* Languette ambre sous la carte: le geste « ancré au sol », à l'aplomb gauche. */
+.page-hero__media-anchor {
+  position: absolute;
+  left: 2.4rem;
+  bottom: -0.3rem;
+  width: clamp(4rem, 8vw, 6rem);
+  height: 4px;
+  border-radius: 0 0 2px 2px;
+  background: var(--accent-call);
+  box-shadow: var(--elev-low);
+}
 
 /* Horizon: le masthead repose au sol. */
 .page-hero__horizon {
@@ -186,15 +225,31 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
   box-shadow: var(--elev-low);
 }
 
-/* Desktop: calage sur les 16 pistes de .section-grid (pas une grille de tête à la
- * main). Asymétrie posée: titre sur une large mesure (cols 1-10), accroche + appel
- * sur une mesure étroite (cols 12-16), calés en bas du titre. Col 11 en gouttière. */
+/* Desktop: calage sur les 16 pistes de .section-grid. */
 @container site (min-width: 1024px) {
   .page-hero__head {
     align-items: end;
   }
+  /* Sans image: titre large (cols 1-10), aside étroit (cols 12-16) calé en bas. */
+  .page-hero__text {
+    grid-column: 1 / span 10;
+  }
+  .page-hero__aside {
+    grid-column: 12 / -1;
+  }
   .page-hero__lead {
     max-width: 38ch;
+  }
+  /* Split: texte (cols 1-7) et image (cols 9-16), hauts alignés. */
+  .page-hero--media .page-hero__head {
+    align-items: start;
+  }
+  .page-hero--media .page-hero__text {
+    grid-column: 1 / span 7;
+    align-self: center;
+  }
+  .page-hero--media .page-hero__media {
+    grid-column: 9 / -1;
   }
 }
 </style>

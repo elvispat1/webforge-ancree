@@ -121,11 +121,12 @@ export function useBlockCatalog(): CatalogCategory[] {
     ...useFaqPageBlocks().value
   ]
 
-  // Bloc process: champ dedie du detail d'un service (jamais sur un page-builder
-  // regulier). On pioche le 1er service qui porte son detail (build statique).
-  const serviceWithDetail = useServices().find((s) => s.detail)
-  const processBlock = serviceWithDetail
-    ? useServiceBlocks(serviceWithDetail).find((b) => b._type === 'process')
+  // Bloc process: vit desormais dans le pageBuilder des pages de detail (service/
+  // ville), pas sur les singletons. On pioche le 1er service dont le pageBuilder
+  // porte un process, puis on le resout (build statique).
+  const serviceWithProcess = useServices().find((s) => s.pageBuilder?.some((b) => b._type === 'process'))
+  const processBlock = serviceWithProcess
+    ? useServiceBlocks(serviceWithProcess).find((b) => b._type === 'process')
     : undefined
 
   // Variantes de compte du bloc services, derivees de la grille de prod tranchee au

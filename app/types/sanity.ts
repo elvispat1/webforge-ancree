@@ -76,12 +76,11 @@ export interface SanityCtaBand {
   secondaryCta?: Maybe<SanityLink>
 }
 
-/** Bloc processus modelise en place (PROCESS_PROJECTION). */
+/** Bloc processus (champs, projete par le bloc page-builder `process`). */
 export interface SanityProcess {
   eyebrow?: Maybe<string>
   heading?: Maybe<string>
   lead?: Maybe<string>
-  cta?: Maybe<SanityLink>
   steps?: Maybe<Array<{ title: string; body: string }>>
 }
 
@@ -107,7 +106,18 @@ export interface SanityPageHero {
   cta?: Maybe<SanityLink>
   image?: Maybe<SanityFigure>
 }
-export type SanityRawHeroBlock = SanityHeroHome | SanityPageHero
+/** Masthead des collections (objet `detailHero`, hero[0] de service/serviceCity).
+ *  Mappe vers _type kebab 'hero-page' au transform; surtitre, pas d'image. */
+export interface SanityDetailHero {
+  _type: 'detailHero'
+  _key: string
+  eyebrow?: Maybe<string>
+  title: string
+  lead?: Maybe<string>
+  cta?: Maybe<SanityLink>
+  image?: Maybe<SanityFigure>
+}
+export type SanityRawHeroBlock = SanityHeroHome | SanityPageHero | SanityDetailHero
 
 // ── Blocs du pageBuilder (PAGE_BUILDER_PROJECTION, discrimines par `_type`) ────
 
@@ -199,7 +209,24 @@ export type SanityRawBlock = (
   | SanityFaqBlock
   | SanityCtaBandBlock
   | SanityContactBlock
+  | SanityEditorialBlock
+  | SanityProcessBlock
+  | SanityHighlightsBlock
 ) & { anchor?: Maybe<string> }
+
+/** Bloc processus du pageBuilder (PAGE_BUILDER_PROJECTION). */
+export interface SanityProcessBlock extends SanityProcess {
+  _type: 'process'
+  _key: string
+}
+/** Bloc points forts du pageBuilder (PAGE_BUILDER_PROJECTION). */
+export interface SanityHighlightsBlock {
+  _type: 'highlights'
+  _key: string
+  eyebrow?: Maybe<string>
+  heading?: Maybe<string>
+  items?: Maybe<Array<{ title: string; body: string }>>
+}
 
 // ── Blocs d'article (ARTICLE_BODY_PROJECTION, discrimines par `_type`) ─────────
 
@@ -217,6 +244,44 @@ export interface SanityRawPortableBlock {
   level?: Maybe<number>
   children?: Maybe<SanityRawPortableSpan[]>
   markDefs?: Maybe<Array<{ _key: string; _type: string; href?: Maybe<string> }>>
+}
+// Portable Text du bloc editorial: comme SanityRawPortableBlock mais les markDefs de
+// l'annotation `link` portent le TYPE + la reference interne dereferencee (resolus en
+// href string au transform via resolveLink/docPath).
+export interface SanityRawLinkedPortableBlock {
+  _key: string
+  _type: string
+  style?: Maybe<string>
+  listItem?: Maybe<string>
+  level?: Maybe<number>
+  children?: Maybe<SanityRawPortableSpan[]>
+  markDefs?: Maybe<
+    Array<{
+      _key: string
+      _type: string
+      type?: Maybe<'internal' | 'external' | 'anchor'>
+      externalUrl?: Maybe<string>
+      anchor?: Maybe<string>
+      internalRef?: Maybe<SanityLinkRef>
+    }>
+  >
+}
+export interface SanityEditorialSegment {
+  body?: Maybe<SanityRawLinkedPortableBlock[]>
+  media?: Maybe<SanityFigure[]>
+  mediaSide?: Maybe<'auto' | 'left' | 'right'>
+}
+// Champs du bloc editorial (EDITORIAL_FIELDS): partages par le bloc de page-builder
+// (avec _type/_key) ET par service.detail.editorial (sans _type/_key).
+export interface SanityEditorialFields {
+  eyebrow?: Maybe<string>
+  heading?: Maybe<string>
+  lead?: Maybe<string>
+  segments?: Maybe<SanityEditorialSegment[]>
+}
+export interface SanityEditorialBlock extends SanityEditorialFields {
+  _type: 'editorial'
+  _key: string
 }
 export type SanityRawArticleBlock =
   | { _type: 'articleLead'; _key: string; text: string }
@@ -292,49 +357,34 @@ export interface SanityLegalPage {
   sections?: Maybe<Array<{ title: string; body?: Maybe<SanityLegalBlock[]> }>>
 }
 
-/** Copie de page de detail d'un service (SERVICE_DETAIL_PROJECTION). */
-export interface SanityServiceDetail {
-  benefits: { heading: string; cta: SanityLink }
-  included: { heading: string }
-  process: SanityProcess
-  serviceCities: {
-    eyebrow?: Maybe<string>
-    heading: string
-    lead?: Maybe<string>
-    cta?: Maybe<SanityLink>
-  }
-  testimonials: { eyebrow: string; heading: string }
-  cta: SanityCtaBand
-}
-
-/** Document service (collection `services`). */
+/** Document service (collection `services`). Identite de carte + masthead (hero[0])
+ *  + pageBuilder + seo: composé comme un singleton. `hero`/`pageBuilder`/`seo`
+ *  optionnels car en preview scope, les services NON courants sortent en carte. */
 export interface SanityService {
   _id: string
   slug: string
   icon?: Maybe<string>
   title: string
   summary?: Maybe<string>
-  meta?: Maybe<string>
   image: SanityFigure
-  intro?: Maybe<string[]>
-  benefits?: Maybe<Array<{ title: string; body: string }>>
-  detail?: Maybe<SanityServiceDetail>
-  related?: Maybe<string[]>
+  hero?: Maybe<SanityRawHeroBlock>
+  pageBuilder?: Maybe<SanityRawBlock[]>
+  seo?: Maybe<SanitySeo>
   featured?: Maybe<boolean>
   order?: Maybe<number>
   translations?: Maybe<SanityDocTranslation[]>
 }
 
-/** Document serviceCity (collection `serviceCities`, remplace `projects`). */
+/** Document serviceCity (collection `serviceCities`, remplace `projects`). Meme
+ *  forme composee que service: identite de carte + masthead + pageBuilder + seo. */
 export interface SanityServiceCity {
   _id: string
   slug: string
   city: string
   region?: Maybe<string>
   note?: Maybe<string>
-  heading?: Maybe<string>
-  lead?: Maybe<string>
-  body?: Maybe<unknown[]>
+  hero?: Maybe<SanityRawHeroBlock>
+  pageBuilder?: Maybe<SanityRawBlock[]>
   seo?: Maybe<SanitySeo>
   featured?: Maybe<boolean>
   order?: Maybe<number>

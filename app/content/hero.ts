@@ -41,12 +41,20 @@ export interface HeroContent {
  * localise (du route-map), titre slab a l'axe gauche, accroche et appel optionnels
  * sur une mesure etroite a droite. Pas d'image: les pages simples (services, faq,
  * contact, a-propos) portent leur visuel dans le corps, pas dans le masthead. */
+/* Visuel du masthead: src CDN deja resolu + alt (sur l'asset). Absent -> masthead
+ * texte seul (mesure large, pas de colonne image). */
+export interface HeroPageVisual {
+  src: string
+  alt?: string
+}
+
 export interface HeroPageContent {
   crumbs?: Crumb[] // fil d'Ariane localise (du route-map); absent -> non rendu
   eyebrow?: string // marqueur d'ancrage (casse normale, tick ambre)
   title: string
   lead?: string
   cta?: { label: string; href: string } // appel unique, optionnel
+  image?: HeroPageVisual // image du masthead (split asymetrique); absente -> texte seul
 }
 
 /* Masthead d'un article (hero-article): meme grammaire posee que hero-page (fond

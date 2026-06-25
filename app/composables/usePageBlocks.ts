@@ -36,7 +36,6 @@ import type {
   ServiceWithMeta,
   ServiceCityWithDetail
 } from '~/sanity/transform'
-import type { TestimonialsContent } from '~/content/testimonials'
 import { routePath, serviceCityPath } from '~/config/route-map'
 
 // ── Items partages ──────────────────────────────────────────────────────────
@@ -155,23 +154,6 @@ export function resolveBlocks(blocks: PayloadPageBlock[]): PageBlock[] {
   })
 }
 
-// ── Helpers des compositions code (pages de detail) ──────────────────────────
-// Chacun recoit la copie de section depuis le gabarit du payload (Omit<…, items>)
-// et resout les items depuis la collection: composition pure.
-
-function testimonialsBlock(
-  key: string,
-  copy: Omit<TestimonialsContent, 'items'>,
-  query: Parameters<typeof useTestimonials>[0] = { featured: true }
-): TestimonialsBlock {
-  return {
-    _type: 'testimonials',
-    _key: key,
-    ...copy,
-    items: useTestimonials(query).map((t) => ({ quote: t.quote, name: t.name, city: t.context ?? '' }))
-  }
-}
-
 // ── Assembleurs par page ──────────────────────────────────────────────────────
 
 // Assembleurs PUBLICS rendus directement par les pages: ils retournent un computed
@@ -203,33 +185,15 @@ export function useFaqPageBlocks(): ComputedRef<PageBlock[]> {
   return computed(() => resolveBlocks(useFixedPage('faq').pageBuilder))
 }
 
-// La copie des sections vient de l'ITEM recu (service.detail): chaque service porte
-// sa propre copie de page de detail, plus de gabarit partage. detail FULL garanti:
-// ce composable ne tourne QUE sur l'item de la route de detail (jamais une carte du
-// preview scope, qui n'a pas de detail).
+// Pages de detail (service, ville): le pageBuilder vit sur le DOCUMENT de collection
+// lui-meme (service.pageBuilder / city.pageBuilder), compose comme un singleton. Les
+// memes 4 blocs intelligents y resolvent leurs items via resolveBlocks. pageBuilder
+// FULL garanti: ces assembleurs ne tournent QUE sur l'item de la route de detail
+// (jamais une carte du preview scope, qui n'a pas de pageBuilder).
 export function useServiceBlocks(service: ServiceWithMeta): PageBlock[] {
-  const detail = service.detail!
-  // Seuls les blocs de la PEAU d'Ancree (les 8) sont emis ici. La copie de detail
-  // qui n'a pas de bloc correspondant (benefits, included, copie de zone) est rendue
-  // par le GABARIT de la page de detail, pas par le page-builder. Sequence: le
-  // processus pose la methode, les temoignages rassurent, le bandeau d'appel conclut.
-  const blocks: PageBlock[] = [
-    // Processus de la page de detail (champ dedie detail.process de CE document
-    // service, ajustable document par document).
-    { _type: 'process', _key: `service-${service.slug}-process`, ...detail.process }
-  ]
+  return resolveBlocks(service.pageBuilder ?? [])
+}
 
-  const serviceTestimonials = useTestimonials({ service: service.slug })
-  if (serviceTestimonials.length) {
-    blocks.push(
-      testimonialsBlock(
-        `service-${service.slug}-testimonials`,
-        detail.testimonials,
-        { service: service.slug, limit: 3, pad: true }
-      )
-    )
-  }
-
-  blocks.push({ _type: 'cta-band', _key: `service-${service.slug}-cta`, ...detail.cta })
-  return blocks
+export function useCityBlocks(city: ServiceCityWithDetail): PageBlock[] {
+  return resolveBlocks(city.pageBuilder ?? [])
 }
