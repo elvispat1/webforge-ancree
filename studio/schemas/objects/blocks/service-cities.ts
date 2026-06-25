@@ -1,5 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { PinIcon } from '@sanity/icons'
+import { anchorField } from './_anchor-field'
 
 // Bloc intelligent: la resolution des villes de service vit en GROQ cote app.
 // Mapping verrouille Ancree: refs vers serviceCity (jamais project). Peau
@@ -91,6 +92,7 @@ export const serviceCities = defineType({
       hidden: ({ parent }) => parent?.mode === 'manual',
       validation: (R) => R.integer().positive(),
     }),
+    anchorField,
   ],
   preview: {
     select: { heading: 'heading', mode: 'mode', limit: 'limit' },

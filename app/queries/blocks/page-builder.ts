@@ -32,6 +32,7 @@ import { CTA_BAND_PROJECTION } from '../fragments/cta'
 export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
   _key,
   _type,
+  anchor,
   _type == "trustBar" => {
     items[]{ icon, value, label }
   },

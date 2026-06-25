@@ -1,5 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { HelpCircleIcon } from '@sanity/icons'
+import { anchorField } from './_anchor-field'
 
 // Selection manuelle PURE: pas de champ mode ni limit (la page FAQ porte sa
 // propre liste ordonnee). La resolution des refs vit en GROQ cote app. Peau
@@ -40,6 +41,7 @@ export const faq = defineType({
       ],
       validation: (R) => R.required().min(1).unique(),
     }),
+    anchorField,
   ],
   preview: {
     select: { heading: 'heading', items: 'items' },

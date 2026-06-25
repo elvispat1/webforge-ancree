@@ -348,6 +348,22 @@ function cleanLogic<T extends string | null | undefined>(value: T): T {
   return (typeof value === 'string' ? value.replace(STEGA_RE, '') : value) as T
 }
 
+/** Slug d'ancre: stega retiree, minuscules, accents -> ascii, tout caractere non
+ *  alphanumerique -> tiret, tirets de bord retires. Applique IDENTIQUEMENT a l'id
+ *  de section (cle de bloc) ET a l'ancre d'un lien, pour qu'ils se correspondent
+ *  meme si l'editeur y colle un titre (« Nos services » -> « nos-services »).
+ *  Chaine vide ou absente -> chaine vide (le caller decide du repli). */
+function slugifyAnchor(value: Maybe<string>): string {
+  const raw = cleanLogic(value)
+  if (!raw) return ''
+  return raw
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // diacritiques combinants
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 /** Coerce un tableau de contenu en paragraphes texte. Accepte des chaines ou des
  *  blocs Portable Text { children:[{text}] } / { text }. Repris de l'ancien
  *  content.ts (corps de about / serviceCity). */
@@ -500,7 +516,9 @@ export function resolveLink(link: SanityLink, locale: WfLocale, phoneE164: strin
       return link.externalUrl
     }
     case 'anchor': {
-      const hash = `#${cleanLogic(link.anchor) ?? ''}`
+      // Slugifie comme l'id de section (slugifyAnchor des deux cotes): l'editeur
+      // peut coller un titre, « Nos services » et « nos-services » se correspondent.
+      const hash = `#${slugifyAnchor(link.anchor)}`
       return link.internalRef ? `${docPath(link.internalRef, locale)}${hash}` : hash
     }
     case 'internal': {
@@ -750,7 +768,9 @@ function transformBlock(
   site: SiteContent,
   locale: WfLocale
 ): PayloadPageBlock {
-  const key = ANCHOR_KEY[block._type] ?? block._key
+  // Id d'ancre de la section: ancre explicite du bloc (slugifiee) si l'editeur en a
+  // pose une, sinon cle semantique par type (ANCHOR_KEY), sinon le _key opaque.
+  const key = slugifyAnchor(block.anchor) || ANCHOR_KEY[block._type] || block._key
   switch (block._type) {
     case 'trustBar':
       return {

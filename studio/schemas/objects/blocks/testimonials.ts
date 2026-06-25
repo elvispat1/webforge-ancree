@@ -1,5 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { StarIcon } from '@sanity/icons'
+import { anchorField } from './_anchor-field'
 
 // Bloc intelligent: la resolution des temoignages vit en GROQ cote app.
 // Mapping verrouille Ancree: le mode « par ville » reference serviceCity (jamais
@@ -110,6 +111,7 @@ export const testimonials = defineType({
       type: 'number',
       validation: (R) => R.integer().positive(),
     }),
+    anchorField,
   ],
   preview: {
     select: { heading: 'heading', mode: 'mode' },

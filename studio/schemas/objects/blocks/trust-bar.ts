@@ -1,5 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { CheckmarkCircleIcon } from '@sanity/icons'
+import { anchorField } from './_anchor-field'
 
 /**
  * Barre de confiance: rangée de signaux de confiance posée sous le héros.
@@ -25,6 +26,7 @@ export const trustBar = defineType({
         R.max(4).warning('Quatre signaux maximum pour la mise en page de la barre'),
       ],
     }),
+    anchorField,
   ],
   preview: {
     select: { first: 'items.0.value', count: 'items.length' },

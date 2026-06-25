@@ -1,5 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { BugIcon } from '@sanity/icons'
+import { anchorField } from './_anchor-field'
 
 // Bloc intelligent: stocke la copie et les parametres de selection, la
 // resolution des items vit en GROQ cote app. Peau d'Ancree (icone, libelles).
@@ -80,6 +81,7 @@ export const services = defineType({
       hidden: ({ parent }) => parent?.mode === 'manual',
       validation: (R) => R.integer().positive(),
     }),
+    anchorField,
   ],
   preview: {
     select: { heading: 'heading', mode: 'mode', limit: 'limit' },

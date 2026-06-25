@@ -188,7 +188,9 @@ export interface SanityContactBlock {
   }
   success: { title: string; body: string }
 }
-export type SanityRawBlock =
+// `anchor` (id d'ancre optionnel, PAGE_BUILDER_PROJECTION) est commun a tous les
+// blocs: l'intersection l'ajoute a chaque membre sans casser la discrimination par `_type`.
+export type SanityRawBlock = (
   | SanityTrustBarBlock
   | SanityServicesBlock
   | SanityServiceCitiesBlock
@@ -197,6 +199,7 @@ export type SanityRawBlock =
   | SanityFaqBlock
   | SanityCtaBandBlock
   | SanityContactBlock
+) & { anchor?: Maybe<string> }
 
 // ── Blocs d'article (ARTICLE_BODY_PROJECTION, discrimines par `_type`) ─────────
 

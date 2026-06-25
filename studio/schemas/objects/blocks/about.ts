@@ -1,5 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { UsersIcon } from '@sanity/icons'
+import { anchorField } from './_anchor-field'
 
 /**
  * Bloc À propos: surtitre, titre, paragraphes, photo d'équipe et chiffres de
@@ -42,6 +43,7 @@ export const about = defineType({
       of: [defineArrayMember({ type: 'stat' })],
       validation: (R) => R.max(4).warning('Quatre chiffres maximum pour la mise en page'),
     }),
+    anchorField,
   ],
   preview: {
     select: { heading: 'heading', media: 'photo.image' },

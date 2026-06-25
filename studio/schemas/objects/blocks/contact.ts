@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { CommentIcon } from '@sanity/icons'
+import { anchorField } from './_anchor-field'
 
 /**
  * Bloc Contact: surtitre, titre, accroche, libellés (étiquettes NAP, champs du
@@ -210,6 +211,7 @@ export const contact = defineType({
         }),
       ],
     }),
+    anchorField,
   ],
   preview: {
     select: { heading: 'heading' },

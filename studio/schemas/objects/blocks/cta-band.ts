@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { MobileDeviceIcon } from '@sanity/icons'
+import { anchorField } from './_anchor-field'
 
 /**
  * Bloc bandeau d'appel: titre, sous-titre et deux boutons (objet `link`).
@@ -35,6 +36,7 @@ export const ctaBand = defineType({
       title: 'Bouton secondaire',
       type: 'link',
     }),
+    anchorField,
   ],
   preview: {
     select: { title: 'title' },
