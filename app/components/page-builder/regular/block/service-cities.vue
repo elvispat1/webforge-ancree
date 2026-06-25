@@ -42,10 +42,10 @@ function cityKind(href: string): 'internal' | 'external' {
 <template>
   <section class="cities">
     <div class="wf-container">
-      <SectionHead :eyebrow="eyebrow" :heading="heading" :lead="lead" :ctas="areaCtas" />
+      <SectionHead :eyebrow="eyebrow" :heading="heading" :lead="lead" />
 
       <div class="cities__layout section-grid">
-        <aside class="cities__area" data-reveal>
+        <aside class="cities__area wf-col-full wf-span-6" data-reveal>
           <CoverageRings class="cities__rings" />
           <div class="cities__area-body">
             <span class="cities__pin" aria-hidden="true">
@@ -57,7 +57,7 @@ function cityKind(href: string): 'internal' | 'external' {
           </div>
         </aside>
 
-        <ul class="cities__grid" data-reveal-stagger>
+        <ul class="cities__grid wf-col-full wf-from-8 wf-to-end" data-reveal-stagger>
           <li
             v-for="city in cities"
             :key="city.href"
@@ -75,6 +75,8 @@ function cityKind(href: string): 'internal' | 'external' {
           </li>
         </ul>
       </div>
+
+      <SectionCta :ctas="areaCtas" />
     </div>
   </section>
 </template>
@@ -93,7 +95,6 @@ function cityKind(href: string): 'internal' | 'external' {
 .cities__area {
   position: relative;
   overflow: hidden;
-  grid-column: 1 / -1;
   padding: 3.2rem;
   border-radius: var(--radius-lg);
   background: var(--bg-deep);
@@ -141,7 +142,6 @@ function cityKind(href: string): 'internal' | 'external' {
 
 /* Mosaique de villes. */
 .cities__grid {
-  grid-column: 1 / -1;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -208,12 +208,10 @@ function cityKind(href: string): 'internal' | 'external' {
 }
 @container site (min-width: 1024px) {
   .cities__area {
-    grid-column: 1 / span 6;
     position: sticky;
     top: 3rem;
   }
   .cities__grid {
-    grid-column: 8 / -1;
     gap: 1.6rem;
   }
 }

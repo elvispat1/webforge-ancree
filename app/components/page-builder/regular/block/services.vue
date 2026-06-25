@@ -18,7 +18,7 @@ const ctas = computed<SectionCta[]>(() =>
 <template>
   <section class="services">
     <div class="wf-container">
-      <SectionHead :eyebrow="eyebrow" :heading="heading" :lead="lead" :ctas="ctas" />
+      <SectionHead :eyebrow="eyebrow" :heading="heading" :lead="lead" />
 
       <ul class="services__grid section-grid" data-reveal-stagger>
         <li
@@ -44,6 +44,8 @@ const ctas = computed<SectionCta[]>(() =>
           </component>
         </li>
       </ul>
+
+      <SectionCta :ctas="ctas" />
     </div>
   </section>
 </template>

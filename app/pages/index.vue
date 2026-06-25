@@ -22,18 +22,12 @@ const hero = useHeroContent('home')
 const seo = useFixedPage('home').seo
 
 const homeBlocks = useHomeBlocks()
+// Passerelle: on retient les apercus + la conversion. Les cartes services MENENT a
+// leur page de detail (href deja construit par resolveServicesBlock), au meme titre
+// que les cartes de villes; le CTA « Voir tous les services » reste le chemin vers
+// le hub. (Avant le 25 juin: href neutralises, cartes informatives; renverse.)
 const blocks = computed<PageBlock[]>(() =>
-  homeBlocks.value
-    .filter((b) => GATEWAY_BLOCKS.has(b._type))
-    .map((b) => {
-      // Services (apercu): les cartes ne sont PAS des liens individuels sur la
-      // passerelle. Le CTA « Voir tous les services » -> /services reste le
-      // chemin; on neutralise les href des items. Cartes informatives, posees.
-      if (b._type === 'services') {
-        return { ...b, items: b.items.map((it) => ({ ...it, href: undefined })) }
-      }
-      return b
-    })
+  homeBlocks.value.filter((b) => GATEWAY_BLOCKS.has(b._type))
 )
 
 // Accueil (racine): titre/description du CMS (homePage via payload, replis deja
