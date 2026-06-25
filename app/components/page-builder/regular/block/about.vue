@@ -22,7 +22,7 @@ defineProps<AboutBlock>()
     <div class="wf-container">
       <div class="about__layout section-grid">
         <!-- Media: photo ancree, carte de chiffres en chevauchement. -->
-        <div class="about__media" data-reveal>
+        <div class="about__media wf-col-full wf-span-9" data-reveal>
           <figure class="about__figure">
             <Image
               :src="photo.src"
@@ -45,7 +45,7 @@ defineProps<AboutBlock>()
         </div>
 
         <!-- Recit. -->
-        <div class="about__copy" data-reveal-stagger>
+        <div class="about__copy wf-col-full wf-from-11 wf-to-end" data-reveal-stagger>
           <p v-if="eyebrow" class="about__eyebrow wf-caption">
             <span class="about__tick" aria-hidden="true" />{{ eyebrow }}
           </p>
@@ -68,14 +68,6 @@ defineProps<AboutBlock>()
   align-items: center;
   row-gap: 4.8rem;
 }
-/* Mobile et tablette: la photo et le recit prennent toute la largeur, empiles.
- * L'asymetrie 9/6 ne s'active qu'au desktop (la section-grid a 4 colonnes en
- * dessous, donc sans cette regle les enfants se coinceraient dans une colonne). */
-.about__media,
-.about__copy {
-  grid-column: 1 / -1;
-}
-
 /* Media: la photo et la carte de chiffres forment une pile ancree. Au mobile,
  * la carte se pose juste apres la photo, en debord controle. */
 .about__media {
@@ -189,17 +181,10 @@ defineProps<AboutBlock>()
 }
 
 @container site (min-width: 1024px) {
-  .about__layout {
-    column-gap: 2rem;
-  }
   /* Media-texte asymetrique cale sur 16 pistes: photo a gauche (cols 1-9, large),
-   * recit a droite (cols 11-16, mesure plus etroite), col 10 en gouttiere. */
-  .about__media {
-    grid-column: 1 / span 9;
-  }
-  .about__copy {
-    grid-column: 11 / -1;
-  }
+   * recit a droite (cols 11-16, mesure plus etroite), col 10 en gouttiere.
+   * Le placement nomme est porte par les utilitaires dans le template
+   * (wf-col-full wf-span-9 / wf-col-full wf-from-11 wf-to-end). */
   /* La carte de chiffres deborde sous la photo et mord sur la gouttiere, vers le
    * recit (le chevauchement devient une vraie superposition de plans). */
   .about__stats {

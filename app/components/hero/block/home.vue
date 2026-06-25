@@ -61,7 +61,7 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
 
     <div class="wf-container hero__inner">
       <div class="hero__grid section-grid">
-        <div class="hero__content" data-reveal-stagger>
+        <div class="hero__content wf-col-full wf-span-10" data-reveal-stagger>
           <p v-if="kicker" class="hero__kicker wf-caption">
             <Icon name="lucide:map-pin" class="hero__kicker-icon" aria-hidden="true" />
             {{ kicker }}
@@ -90,7 +90,7 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
           </div>
         </div>
 
-        <dl class="hero__proofs" data-reveal>
+        <dl class="hero__proofs wf-col-full" data-reveal>
           <div v-for="proof in meta" :key="proof.value" class="hero__proof">
             <Icon v-if="proof.icon" :name="proof.icon" class="hero__proof-icon" aria-hidden="true" />
             <div class="hero__proof-text">
@@ -193,10 +193,6 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
 .hero__grid {
   row-gap: clamp(3rem, 5vh, 4.4rem);
 }
-.hero__content,
-.hero__proofs {
-  grid-column: 1 / -1;
-}
 
 .hero__content {
   display: flex;
@@ -286,9 +282,6 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
  * largeur (ligne de sol bord a bord). Les mesures 18ch/46ch du titre et du lead
  * bornent la longueur de ligne a l'interieur de la colonne. */
 @container site (min-width: 1024px) {
-  .hero__content {
-    grid-column: 1 / span 10;
-  }
   .hero__proofs {
     gap: 1.6rem 4rem;
   }

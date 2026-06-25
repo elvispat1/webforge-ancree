@@ -23,7 +23,7 @@ const accordionItems = computed(() =>
   <section class="faq">
     <div class="wf-container">
       <div class="faq__layout section-grid">
-        <div class="faq__head" data-reveal-stagger>
+        <div class="faq__head wf-col-full wf-span-6" data-reveal-stagger>
           <p v-if="eyebrow" class="faq__eyebrow wf-caption">
             <span class="faq__tick" aria-hidden="true" />{{ eyebrow }}
           </p>
@@ -40,7 +40,7 @@ const accordionItems = computed(() =>
           </div>
         </div>
 
-        <div class="faq__panel" data-reveal>
+        <div class="faq__panel wf-col-full wf-from-8 wf-to-end" data-reveal>
           <Accordion :items="accordionItems" mode="single" :default-open="[0]" :heading-level="3" />
         </div>
       </div>
@@ -120,21 +120,12 @@ const accordionItems = computed(() =>
   margin-top: var(--space-head-content);
 }
 
-/* Mobile et tablette: tete et accordeon pleine largeur, empiles (la section-grid
- * a 4 colonnes en dessous de 1024px; sans ceci les enfants se coinceraient). */
-.faq__head,
-.faq__panel {
-  grid-column: 1 / -1;
-}
-
 @container site (min-width: 1024px) {
   .faq__head {
-    grid-column: 1 / span 6;
     position: sticky;
     top: calc(var(--header-height) + 3rem);
   }
   .faq__panel {
-    grid-column: 8 / -1;
     margin-top: 0;
   }
 }

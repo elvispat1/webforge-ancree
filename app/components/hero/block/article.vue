@@ -37,7 +37,7 @@ const metaItems = computed(() => {
       </nav>
 
       <div class="article-hero__head section-grid">
-        <div class="article-hero__head-col">
+        <div class="article-hero__head-col wf-col-full wf-span-11">
           <NuxtLink v-if="category" :to="category.href" class="article-hero__chip wf-caption">{{ category.label }}</NuxtLink>
           <h1 class="article-hero__title wf-h1">{{ title }}</h1>
           <p v-if="excerpt" class="article-hero__excerpt wf-body-1 wf-text-muted">{{ excerpt }}</p>
@@ -134,7 +134,6 @@ const metaItems = computed(() => {
 /* Base mobile (la section-grid a 4 pistes en dessous du seuil): la tete prend
  * toute la largeur. L'asymetrie posee ne s'active qu'au desktop. */
 .article-hero__head-col {
-  grid-column: 1 / -1;
   max-width: 60rem;
 }
 .article-hero__chip {
@@ -200,11 +199,9 @@ const metaItems = computed(() => {
 
 @container site (min-width: 1024px) {
   /* Asymetrie posee: la tete tient une large mesure a l'axe gauche (cols 1-11),
-   * cols 12-16 en respiration. Les pistes viennent de .section-grid, pas d'une
-   * grille de tete a la main; la mesure de ligne reste bornee par max-width. */
-  .article-hero__head-col {
-    grid-column: 1 / span 11;
-  }
+   * cols 12-16 en respiration. Le placement vient des classes utilitaires
+   * (wf-col-full wf-span-11) dans le template; la mesure de ligne reste bornee
+   * par max-width. */
   /* Le fragment <Image> rend .wf-image (aspect inline = prop ratio, --ratio-wide).
    * On surclasse en cadrage cinematique au desktop (!important bat le style inline). */
   .article-hero__cover-frame :deep(.wf-image) {

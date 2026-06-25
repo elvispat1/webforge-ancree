@@ -48,14 +48,14 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
       </nav>
 
       <div class="page-hero__head section-grid">
-        <div class="page-hero__title-col">
+        <div class="page-hero__title-col wf-col-full wf-span-10">
           <p v-if="eyebrow" class="page-hero__eyebrow wf-caption">
             <span class="page-hero__tick" aria-hidden="true" />{{ eyebrow }}
           </p>
           <h1 class="page-hero__title wf-h1">{{ title }}</h1>
         </div>
 
-        <div v-if="hasAside" class="page-hero__aside">
+        <div v-if="hasAside" class="page-hero__aside wf-col-full wf-from-12 wf-to-end">
           <p v-if="lead" class="page-hero__lead wf-body-1 wf-text-muted">{{ lead }}</p>
           <div v-if="cta" class="page-hero__cta">
             <Button
@@ -146,12 +146,8 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
   row-gap: 2.4rem;
 }
 /* Base mobile (la section-grid a 4 pistes en dessous du seuil): titre et aside
- * prennent toute la largeur, empilés. L'asymétrie 10/12-16 ne s'active qu'au
- * desktop. Sans ces spans, les enfants se coinceraient dans une seule piste. */
-.page-hero__title-col,
-.page-hero__aside {
-  grid-column: 1 / -1;
-}
+ * prennent toute la largeur, empilés via wf-col-full. L'asymétrie 10/12-16 ne
+ * s'active qu'au desktop via wf-span-10 / wf-from-12 wf-to-end. */
 .page-hero__eyebrow {
   display: inline-flex;
   align-items: center;
@@ -196,12 +192,6 @@ function ctaKind(href: string): 'internal' | 'external' | 'anchor' {
 @container site (min-width: 1024px) {
   .page-hero__head {
     align-items: end;
-  }
-  .page-hero__title-col {
-    grid-column: 1 / span 10;
-  }
-  .page-hero__aside {
-    grid-column: 12 / -1;
   }
   .page-hero__lead {
     max-width: 38ch;

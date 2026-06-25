@@ -124,7 +124,7 @@ const NuxtLink = resolveComponent('NuxtLink')
 
       <div class="contact__layout section-grid">
         <!-- Coordonnees + zone de service: panneau bleu nuit, motif radial local. -->
-        <aside class="contact__aside" data-reveal>
+        <aside class="contact__aside wf-col-full wf-span-6" data-reveal>
           <CoverageRings class="contact__rings" />
           <div class="contact__aside-body">
             <span class="contact__pin" aria-hidden="true">
@@ -154,7 +154,7 @@ const NuxtLink = resolveComponent('NuxtLink')
         </aside>
 
         <!-- Formulaire d'appel ou confirmation au succes. -->
-        <div class="contact__form-col" data-reveal>
+        <div class="contact__form-col wf-col-full wf-from-8 wf-to-end" data-reveal>
           <FormSuccess
             v-if="status === 'success'"
             ref="successPanel"
@@ -285,7 +285,6 @@ const NuxtLink = resolveComponent('NuxtLink')
 .contact__aside {
   position: relative;
   overflow: hidden;
-  grid-column: 1 / -1;
   padding: 3.2rem;
   border-radius: var(--radius-lg);
   background: var(--bg-deep);
@@ -351,9 +350,6 @@ const NuxtLink = resolveComponent('NuxtLink')
 }
 
 /* Colonne formulaire. */
-.contact__form-col {
-  grid-column: 1 / -1;
-}
 .contact__form {
   display: grid;
   gap: 2.4rem;
@@ -423,12 +419,8 @@ const NuxtLink = resolveComponent('NuxtLink')
 
 @container site (min-width: 1024px) {
   .contact__aside {
-    grid-column: 1 / span 6;
     position: sticky;
     top: 3rem;
-  }
-  .contact__form-col {
-    grid-column: 8 / -1;
   }
   .contact__form {
     padding: 4rem;

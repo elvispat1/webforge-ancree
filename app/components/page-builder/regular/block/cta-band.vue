@@ -27,7 +27,7 @@ function linkKind(href: string): 'internal' | 'external' | 'anchor' {
         <CoverageRings class="ctaband__rings" />
 
         <div class="ctaband__layout section-grid" data-reveal-stagger>
-          <div class="ctaband__lede">
+          <div class="ctaband__lede wf-col-full wf-span-10">
             <!-- Liseré décoratif (filet ambre + bouclier): sans texte, masqué aux
                  lecteurs d'écran. Le sens porte sur le h2 ci-dessous. -->
             <p class="ctaband__eyebrow wf-caption" aria-hidden="true">
@@ -38,7 +38,7 @@ function linkKind(href: string): 'internal' | 'external' | 'anchor' {
             <p v-if="subtitle" class="ctaband__subtitle wf-body-1">{{ subtitle }}</p>
           </div>
 
-          <div class="ctaband__actions">
+          <div class="ctaband__actions wf-col-full wf-from-12 wf-to-end">
             <Button
               :href="primaryCta.href"
               :kind="linkKind(primaryCta.href)"
@@ -101,10 +101,6 @@ function linkKind(href: string): 'internal' | 'external' | 'anchor' {
   position: relative;
   row-gap: 3.2rem;
 }
-.ctaband__lede,
-.ctaband__actions {
-  grid-column: 1 / -1;
-}
 
 .ctaband__eyebrow {
   display: inline-flex;
@@ -161,13 +157,10 @@ function linkKind(href: string): 'internal' | 'external' | 'anchor' {
     align-items: end;
   }
   /* Asymétrie posée sur 16 pistes: le titre et la rassurance prennent la majeure
-   * partie (cols 1-10), le panneau d'action se cale à droite (cols 12-16), col 11
-   * en gouttière. Les pieds au sol (align-items: end). */
-  .ctaband__lede {
-    grid-column: 1 / span 10;
-  }
+   * partie (cols 1-10, via wf-span-10), le panneau d'action se cale à droite
+   * (cols 12-16, via wf-from-12 wf-to-end), col 11 en gouttière. Les pieds au sol
+   * (align-items: end). */
   .ctaband__actions {
-    grid-column: 12 / -1;
     flex-direction: column;
     align-items: flex-start;
   }
