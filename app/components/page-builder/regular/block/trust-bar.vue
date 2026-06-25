@@ -34,13 +34,16 @@ defineProps<TrustBarBlock>()
 }
 /* La rangee se cale sur les pistes de page (.section-grid): 4 colonnes au mobile,
  * 16 au desktop. Les signaux tombent sur les pistes, pas sur une grille a part. */
+/* Au mobile les signaux s'empilent: l'ecart vertical reprend le rythme
+ * d'espacement du site (4.8rem, le meme palier que l'en-tete vers contenu). */
 .trust__row {
   margin: 0;
-  row-gap: 2.4rem;
+  row-gap: var(--space-head-content);
 }
-/* Mobile: 4 pistes, deux signaux par rangee (span 2 chacun). */
+/* Mobile: une seule colonne, les signaux s'empilent l'un sous l'autre
+ * (span 4 = pleine largeur des 4 pistes mobiles). */
 .trust__item {
-  grid-column: span 2;
+  grid-column: span 4;
   display: flex;
   align-items: center;
   gap: 1.2rem;
