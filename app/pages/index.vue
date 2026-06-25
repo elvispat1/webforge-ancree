@@ -9,31 +9,15 @@ import PageBuilder from '~/components/page-builder/regular/index.vue'
  *
  * V2 (Sanity, fail-fast): heros et blocs viennent du payload unique (plugin
  * 01.content) via useHeroContent/useHomeBlocks; resolveBlocks a deja resolu les
- * items contre les collections. La page ne fait que (a) filtrer la passerelle,
- * (b) recabler les gestes qui pointaient vers une ancre du one-pager (#contact)
- * vers la vraie route /contact. */
-import type { HeroHomeBlock, PageBlock } from '~/types/blocks'
-
-const { locale } = useI18n()
-const isEn = computed(() => locale.value === 'en')
-const localePrefix = computed(() => (isEn.value ? '/en' : ''))
+ * items contre les collections. La page ne fait que filtrer la passerelle; les
+ * liens (dont les CTA « contact » qui portent une page interne = Contact, resolus
+ * en /contact#contact) viennent du CMS, aucun recablage code ici. */
+import type { PageBlock } from '~/types/blocks'
 
 // Blocs retenus pour la passerelle (apercus + conversion), dans l'ordre de rendu.
 const GATEWAY_BLOCKS = new Set(['trust-bar', 'services', 'service-cities', 'testimonials', 'cta-band'])
 
-// Recable une ancre du one-pager (#contact) vers la vraie route /contact.
-function toContactRoute(href: string | undefined): string | undefined {
-  return href === '#contact' ? `${localePrefix.value}/contact` : href
-}
-
-// CTA du heros en mode multipage: le document homePage porte deja des liens de
-// type route. On garde toutefois le recablage du geste secondaire vers /contact
-// (la passerelle envoie au formulaire dedie, pas a une ancre).
-const heroContent = useHeroContent('home')
-const hero = computed<HeroHomeBlock>(() => ({
-  ...heroContent.value,
-  secondaryCta: { ...heroContent.value.secondaryCta, href: `${localePrefix.value}/contact` }
-}))
+const hero = useHeroContent('home')
 
 // Snapshot: `site` ne sert qu'au graphe SEO (head, non reactif). Le Header/Footer
 // lisent useContent('site') comme ref et se mettent a jour in-place en preview.
@@ -45,10 +29,6 @@ const blocks = computed<PageBlock[]>(() =>
   homeBlocks.value
     .filter((b) => GATEWAY_BLOCKS.has(b._type))
     .map((b) => {
-      // Bandeau d'appel: geste secondaire vers la vraie route /contact.
-      if (b._type === 'cta-band') {
-        return { ...b, secondaryCta: b.secondaryCta ? { ...b.secondaryCta, href: toContactRoute(b.secondaryCta.href)! } : undefined }
-      }
       // Services (apercu): les cartes ne sont PAS des liens individuels sur la
       // passerelle. Le CTA « Voir tous les services » -> /services reste le
       // chemin; on neutralise les href des items. Cartes informatives, posees.

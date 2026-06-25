@@ -1087,7 +1087,11 @@
               "_type": "link",
               "label": "Demander une soumission",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             },
             "meta": [
               {
@@ -1284,7 +1288,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           },
           {
@@ -1365,7 +1373,11 @@
               "_type": "link",
               "label": "Request an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             },
             "meta": [
               {
@@ -1562,7 +1574,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           },
           {
@@ -1686,7 +1702,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           },
           {
@@ -1810,7 +1830,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           },
           {
@@ -1921,7 +1945,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           },
           {
@@ -2032,7 +2060,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           },
           {
@@ -2187,7 +2219,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           },
           {
@@ -2342,7 +2378,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           },
           {
@@ -2439,7 +2479,11 @@
             "_type": "link",
             "label": "Obtenir une estimation",
             "type": "anchor",
-            "anchor": "contact"
+            "anchor": "contact",
+            "internalRef": {
+              "_type": "reference",
+              "_ref": "contactPage-fr"
+            }
           }
         },
         "categoryCta": {
@@ -2454,7 +2498,11 @@
             "_type": "link",
             "label": "Obtenir une estimation",
             "type": "anchor",
-            "anchor": "contact"
+            "anchor": "contact",
+            "internalRef": {
+              "_type": "reference",
+              "_ref": "contactPage-fr"
+            }
           }
         },
         "articleCta": {
@@ -2469,7 +2517,11 @@
             "_type": "link",
             "label": "Obtenir une estimation",
             "type": "anchor",
-            "anchor": "contact"
+            "anchor": "contact",
+            "internalRef": {
+              "_type": "reference",
+              "_ref": "contactPage-fr"
+            }
           }
         },
         "related": {
@@ -2570,7 +2622,11 @@
             "_type": "link",
             "label": "Get an estimate",
             "type": "anchor",
-            "anchor": "contact"
+            "anchor": "contact",
+            "internalRef": {
+              "_type": "reference",
+              "_ref": "contactPage-en"
+            }
           }
         },
         "categoryCta": {
@@ -2585,7 +2641,11 @@
             "_type": "link",
             "label": "Get an estimate",
             "type": "anchor",
-            "anchor": "contact"
+            "anchor": "contact",
+            "internalRef": {
+              "_type": "reference",
+              "_ref": "contactPage-en"
+            }
           }
         },
         "articleCta": {
@@ -2600,7 +2660,11 @@
             "_type": "link",
             "label": "Get an estimate",
             "type": "anchor",
-            "anchor": "contact"
+            "anchor": "contact",
+            "internalRef": {
+              "_type": "reference",
+              "_ref": "contactPage-en"
+            }
           }
         },
         "related": {
@@ -2769,7 +2833,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           },
           {
@@ -2934,7 +3002,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           },
           {
@@ -3847,7 +3919,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           }
         },
@@ -3983,7 +4059,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           }
         },
@@ -4119,7 +4199,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           }
         },
@@ -4255,7 +4339,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           }
         },
@@ -4391,7 +4479,11 @@
               "_type": "link",
               "label": "Obtenir une estimation",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              }
             }
           }
         },
@@ -4527,7 +4619,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           }
         },
@@ -4663,7 +4759,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           }
         },
@@ -4799,7 +4899,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           }
         },
@@ -4935,7 +5039,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           }
         },
@@ -5071,7 +5179,11 @@
               "_type": "link",
               "label": "Get an estimate",
               "type": "anchor",
-              "anchor": "contact"
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              }
             }
           }
         },
