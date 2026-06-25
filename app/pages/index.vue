@@ -19,9 +19,6 @@ const GATEWAY_BLOCKS = new Set(['trust-bar', 'services', 'service-cities', 'test
 
 const hero = useHeroContent('home')
 
-// Snapshot: `site` ne sert qu'au graphe SEO (head, non reactif). Le Header/Footer
-// lisent useContent('site') comme ref et se mettent a jour in-place en preview.
-const site = useContent('site').value
 const seo = useFixedPage('home').seo
 
 const homeBlocks = useHomeBlocks()
@@ -48,24 +45,9 @@ usePageSeo({
   ...seo,
   titleTemplate: null,
   image: hero.value.visual.src,
-  localBusiness: {
-    name: site.brand.name,
-    telephone: site.contact.phoneE164,
-    email: site.contact.email,
-    // Cles Schema.org reconstruites au point de consommation depuis la NAP
-    // imbriquee (cityProv sert l'affichage; city/region/country/postal sont les
-    // champs structures du PostalAddress). Voir transformSiteSettings.
-    address: {
-      streetAddress: site.contact.address.line1,
-      addressLocality: site.contact.address.city,
-      addressRegion: site.contact.address.region,
-      postalCode: site.contact.address.postal,
-      addressCountry: site.contact.address.country
-    },
-    areaServed: site.contact.areaServed,
-    image: hero.value.visual.src,
-    foundingDate: String(site.brand.foundedYear)
-  }
+  // NAP complet (LocalBusiness + PostalAddress + sameAs) depuis la source unique
+  // (useLocalBusinessSeo lit siteSettings); visuel = heros de l'accueil.
+  localBusiness: useLocalBusinessSeo(hero.value.visual.src)
 })
 </script>
 

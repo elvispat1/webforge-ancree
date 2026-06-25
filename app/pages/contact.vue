@@ -15,11 +15,16 @@ const hero = usePageHero('contact')
 const breadcrumbs = breadcrumbsFor('contact', undefined, wfLocale)
 const seo = useFixedPage('contact').seo
 
-// ContactPage infere du chemin /contact par le module. Fil d'Ariane = route-map.
+// Type ContactPage explicite + nœud LocalBusiness (NAP + PostalAddress + sameAs)
+// depuis la source unique: la page Contact est la surface NAP que Google attend
+// le plus. Même @id #identity que l'accueil (le module fusionne). Fil d'Ariane =
+// route-map.
 usePageSeo({
   title: seo.title,
   description: seo.description,
-  breadcrumbs
+  breadcrumbs,
+  webPageType: 'ContactPage',
+  localBusiness: useLocalBusinessSeo()
 })
 
 const blocks = useContactPageBlocks()

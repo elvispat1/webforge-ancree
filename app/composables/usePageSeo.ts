@@ -76,6 +76,8 @@ export interface PageSeoLocalBusiness {
   image?: string
   /** Année (ou date ISO) de fondation. */
   foundingDate?: string
+  /** Profils sociaux (sameAs), pour la consolidation d'entité côté Google. */
+  sameAs?: string[]
 }
 
 export interface PageSeoFaqItem {
@@ -260,7 +262,8 @@ export function usePageSeo(input: PageSeoInput): void {
       ...(business.address !== undefined ? { address: business.address } : {}),
       ...(business.areaServed !== undefined ? { areaServed: business.areaServed } : {}),
       ...(business.image ? { image: resolveImage(business.image, SCHEMA_IMAGE_WIDTH, SCHEMA_IMAGE_HEIGHT).url } : {}),
-      ...(business.foundingDate !== undefined ? { foundingDate: business.foundingDate } : {})
+      ...(business.foundingDate !== undefined ? { foundingDate: business.foundingDate } : {}),
+      ...(business.sameAs && business.sameAs.length ? { sameAs: business.sameAs } : {})
     }))
   }
 

@@ -43,9 +43,12 @@ const brandWords = computed(() => {
 })
 const phoneHref = computed(() => `tel:${site.value.contact.phoneE164}`)
 const emailHref = computed(() => `mailto:${site.value.contact.email}`)
-const areaLine = computed(() => site.value.contact.areaServed.join(', '))
 // Copyright depuis Sanity: le jeton {year} est remplace par l'annee courante.
 const copyright = computed(() => site.value.footer.copyright.replace('{year}', String(year.value)))
+// Barre du bas: liens utilitaires (FAQ, Contact) + pages legales (conditions,
+// confidentialite), dans l'ordre du document. Les pageLinks etaient absents du
+// rendu (bug constate): on les joint a utility. Chaque href passe par legalHref.
+const legalLinks = computed(() => [...site.value.footer.utility, ...site.value.footer.pageLinks])
 
 const brandTo = computed(() => (props.mode === 'multipage' ? localePath('/') : props.home))
 function landingHref(href: string): string {
@@ -67,15 +70,11 @@ function legalHref(href: string): string {
 
 <template>
   <footer class="footer">
-    <svg class="footer__rings" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
-      <circle cx="100" cy="100" r="92" />
-      <circle cx="100" cy="100" r="64" />
-      <circle cx="100" cy="100" r="36" />
-    </svg>
+    <CoverageRings class="footer__rings" />
 
     <div class="wf-container footer__inner">
       <div class="footer__top">
-        <div class="footer__brand-col">
+        <div class="footer__identity">
           <NuxtLink :to="brandTo" class="footer__brand" :aria-label="site.brand.homeAriaLabel">
             <span class="footer__mark" aria-hidden="true"><Icon name="lucide:shield-check" /></span>
             <span class="footer__word"><strong>{{ brandWords.lead }}</strong><span v-if="brandWords.rest">{{ brandWords.rest }}</span></span>
@@ -90,40 +89,41 @@ function legalHref(href: string): string {
           </ul>
         </div>
 
-        <nav class="footer__col" :aria-label="t('footer.nav_heading')">
-          <p class="footer__heading wf-caption">{{ t('footer.nav_heading') }}</p>
-          <template v-if="mode === 'multipage'">
-            <NuxtLink v-for="link in footerNav" :key="link.href" :to="link.href" class="footer__link">
-              {{ link.label }}
-            </NuxtLink>
-          </template>
-          <template v-else>
-            <a v-for="link in footerNav" :key="link.href" :href="landingHref(link.href)" class="footer__link">
-              {{ link.label }}
-            </a>
-          </template>
-        </nav>
+        <div class="footer__aside">
+          <!-- Plan du site, en haut a droite (pas de titre generique au-dessus). -->
+          <nav class="footer__nav" :aria-label="t('footer.nav_heading')">
+            <template v-if="mode === 'multipage'">
+              <NuxtLink v-for="link in footerNav" :key="link.href" :to="link.href" class="footer__nav-link">
+                {{ link.label }}
+              </NuxtLink>
+            </template>
+            <template v-else>
+              <a v-for="link in footerNav" :key="link.href" :href="landingHref(link.href)" class="footer__nav-link">
+                {{ link.label }}
+              </a>
+            </template>
+          </nav>
 
-        <div class="footer__col">
-          <p class="footer__heading wf-caption">{{ t('footer.contact_heading') }}</p>
-          <a class="footer__link" :href="phoneHref">{{ site.contact.phone }}</a>
-          <a class="footer__link" :href="emailHref">{{ site.contact.email }}</a>
-          <p class="footer__area">
-            <Icon name="lucide:map-pin" class="footer__area-icon" aria-hidden="true" />
-            {{ areaLine }}
-          </p>
+          <!-- Nous joindre: NAP complet (telephone, courriel, adresse civique) pour
+               la coherence Name Address Phone cote Google. -->
+          <div class="footer__col footer__contact">
+            <p class="footer__heading wf-caption">{{ t('footer.contact_heading') }}</p>
+            <a class="footer__link" :href="phoneHref">{{ site.contact.phone }}</a>
+            <a class="footer__link" :href="emailHref">{{ site.contact.email }}</a>
+            <address class="footer__address">
+              <span>{{ site.contact.address.line1 }}</span>
+              <span>{{ site.contact.address.cityProv }}, {{ site.contact.address.postal }}</span>
+            </address>
+          </div>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <p class="footer__copy">{{ copyright }}</p>
-        <p class="footer__credit">
-          {{ site.footer.credit.label }}
-          <a :href="site.footer.credit.studioUrl" target="_blank" rel="noopener noreferrer">{{ site.footer.credit.studio }}</a>
-        </p>
-        <nav class="footer__legal" :aria-label="t('footer.nav_heading')">
+        <!-- Liens utiles et legaux (FAQ, Contact, conditions, confidentialite,
+             gerer les temoins): colonne au mobile, rangee au desktop. -->
+        <nav class="footer__legal" :aria-label="t('footer.legal_nav')">
           <NuxtLink
-            v-for="link in site.footer.utility"
+            v-for="link in legalLinks"
             :key="link.href"
             :to="legalHref(link.href)"
             class="footer__legal-link"
@@ -132,6 +132,15 @@ function legalHref(href: string): string {
             {{ t('consent.manage') }}
           </button>
         </nav>
+        <!-- Mentions: copyright de la compagnie, puis le credit studio juste
+             dessous (colle, discret, derniere chose qu'on voit). -->
+        <div class="footer__fineprint">
+          <p class="footer__copy">{{ copyright }}</p>
+          <p class="footer__credit">
+            {{ site.footer.credit.label }}
+            <a :href="site.footer.credit.studioUrl" target="_blank" rel="noopener noreferrer">{{ site.footer.credit.studio }}</a>
+          </p>
+        </div>
       </div>
     </div>
   </footer>
@@ -153,11 +162,7 @@ function legalHref(href: string): string {
   height: 32rem;
   opacity: 0.4;
   pointer-events: none;
-}
-.footer__rings circle {
-  fill: none;
-  stroke: color-mix(in oklch, var(--accent-call) 45%, transparent);
-  stroke-width: 1;
+  color: color-mix(in oklch, var(--accent-call) 45%, transparent);
 }
 .footer__inner {
   position: relative;
@@ -236,6 +241,33 @@ function legalHref(href: string): string {
   color: var(--accent-call);
 }
 
+/* Colonne droite: plan du site (en haut) puis bloc « Nous joindre » dessous. */
+.footer__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+/* Plan du site, slab (Bitter) pour un peu de presence. Colonne au mobile (cibles
+ * tactiles confortables, padding de touche sur chaque lien), rangee au desktop. */
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.footer__nav-link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: color-mix(in oklch, var(--text-ondeep) 88%, transparent);
+  text-decoration: none;
+  width: fit-content;
+  padding-block: 0.6rem;
+}
+.footer__nav-link:hover {
+  color: var(--accent-call);
+}
+
 .footer__col {
   display: flex;
   flex-direction: column;
@@ -255,38 +287,55 @@ function legalHref(href: string): string {
 .footer__link:hover {
   color: var(--accent-call);
 }
-.footer__area {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
+/* Adresse civique (NAP), deux lignes. <address> reinitialise (l'italique par
+ * defaut casse le ton pose). */
+.footer__address {
+  display: flex;
+  flex-direction: column;
+  font-style: normal;
   font-size: 1.6rem;
+  line-height: 1.5;
   color: color-mix(in oklch, var(--text-ondeep) 88%, transparent);
 }
-.footer__area-icon {
-  width: 1.8rem;
-  height: 1.8rem;
-  color: var(--accent-call);
-}
 
+/* Bas du footer, empile: liens (utiles/legaux/temoins), puis les mentions
+ * (copyright, puis le credit studio discret juste dessous). */
 .footer__bottom {
   margin-top: 4.8rem;
   padding-top: 2.8rem;
-  border-top: 1px solid color-mix(in oklch, white 14%, transparent);
+  border-top: var(--line-ondeep);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 2rem;
   font-size: 1.4rem;
   color: color-mix(in oklch, var(--text-ondeep) 70%, transparent);
+}
+/* Mentions: copyright en haut, credit studio colle dessous (petit ecart). */
+.footer__fineprint {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+/* Credit studio: derniere ligne, ton delicat (plus petit, plus attenue, pas un
+ * lien proeminent). */
+.footer__credit {
+  font-size: 1.3rem;
+  color: color-mix(in oklch, var(--text-ondeep) 52%, transparent);
 }
 .footer__credit a,
 .footer__legal-link {
   color: color-mix(in oklch, var(--text-ondeep) 88%, transparent);
   text-decoration: none;
 }
+/* Padding de touche sur chaque lien du bas (cible tactile confortable au mobile). */
+.footer__legal-link {
+  padding-block: 0.6rem;
+}
 /* Le déclencheur de consentement est un <button> (action JS), habillé comme les
- * liens légaux: reset des styles natifs du bouton. */
+ * liens légaux: reset des styles natifs; le padding-block de touche vient de
+ * .footer__legal-link, on ne neutralise que le padding horizontal. */
 .footer__consent {
-  padding: 0;
+  padding-inline: 0;
   background: none;
   border: none;
   font: inherit;
@@ -296,16 +345,20 @@ function legalHref(href: string): string {
 .footer__legal-link:hover {
   color: var(--accent-call);
 }
+/* Liens utiles et legaux: colonne au mobile (cibles tactiles empilees), rangee
+ * au desktop. */
 .footer__legal {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.6rem 2.4rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
 }
 
 @container site (min-width: 640px) {
+  /* Deux zones posees: identite a gauche, plan du site + contact a droite. */
   .footer__top {
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4rem;
   }
 }
 @container site (min-width: 1024px) {
@@ -313,14 +366,20 @@ function legalHref(href: string): string {
     padding-block: clamp(6rem, 9vh, 8rem) 4rem;
   }
   .footer__top {
-    grid-template-columns: 1.6fr 1fr 1.2fr;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: 6rem;
+    align-items: start;
   }
-  .footer__bottom {
+  /* Plan du site et liens du bas: rangee horizontale au desktop. */
+  .footer__nav {
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    flex-wrap: wrap;
+    gap: 0.4rem 2.4rem;
+  }
+  .footer__legal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem 2.4rem;
   }
 }
 </style>
