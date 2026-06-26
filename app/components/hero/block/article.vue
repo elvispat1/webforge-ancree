@@ -37,7 +37,7 @@ const metaItems = computed(() => {
       </nav>
 
       <div class="article-hero__head section-grid">
-        <div class="article-hero__head-col wf-col-full wf-span-11">
+        <div class="article-hero__head-col wf-col-full wf-span-12">
           <NuxtLink v-if="category" :to="category.href" class="article-hero__chip wf-caption">{{ category.label }}</NuxtLink>
           <h1 class="article-hero__title wf-h1">{{ title }}</h1>
           <p v-if="excerpt" class="article-hero__excerpt wf-body-1 wf-text-muted">{{ excerpt }}</p>
@@ -131,11 +131,10 @@ const metaItems = computed(() => {
 .article-hero__head {
   margin-top: var(--space-crumbs-head);
 }
-/* Base mobile (la section-grid a 4 pistes en dessous du seuil): la tete prend
- * toute la largeur. L'asymetrie posee ne s'active qu'au desktop. */
-.article-hero__head-col {
-  max-width: 60rem;
-}
+/* La tete prend toute la largeur au mobile (section-grid a 4 pistes) puis se cale a
+ * l'axe gauche au desktop via les utilitaires (wf-span-12). PAS de max-width sur la
+ * colonne: elle etranglait le grand titre slab en escalier de lignes courtes. La
+ * mesure de lecture reste bornee sur l'accroche seule (max-width ch ci-dessous). */
 .article-hero__chip {
   display: inline-block;
   margin-bottom: 1.8rem;
