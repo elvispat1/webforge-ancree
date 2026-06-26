@@ -62,6 +62,16 @@ const IMAGES = {
   'logo-rempart': join(repoRoot, 'public', 'favicon.svg'),
 }
 
+// Légende BILINGUE par asset (description { fr, en }), lue par FIGURE_PROJECTION
+// comme l'alt. La figure ne porte plus de légende par usage: elle vit sur l'image.
+// Seule l'image d'inspection de l'article fourmis en porte une au seed.
+const ASSET_DESCRIPTIONS = {
+  'inspection-rempart': {
+    fr: 'Une inspection soignée trouve le nid, pas seulement les ouvrières.',
+    en: 'A careful inspection finds the nest, not just the workers.',
+  },
+}
+
 // Texte alternatif BILINGUE par asset, posé sur le doc sanity.imageAsset (altText
 // localisé { fr, en } lu nativement par le plugin média et par les projections GROQ).
 // L'alt vit sur l'image, plus par usage. Une image réutilisée porte un seul alt par
@@ -192,6 +202,16 @@ async function main() {
     if (!id) continue
     await client.patch(id).set({ altText: alt }).commit()
     console.log(`  altText ${key} -> { fr, en }`)
+  }
+
+  // 1c. Pose la légende bilingue sur les assets qui en portent une (description
+  // { fr, en }, lue par FIGURE_PROJECTION comme l'alt). Seule l'image d'inspection de
+  // l'article fourmis en porte une au seed.
+  for (const [key, description] of Object.entries(ASSET_DESCRIPTIONS)) {
+    const id = assetMap[key]
+    if (!id) continue
+    await client.patch(id).set({ description }).commit()
+    console.log(`  description ${key} -> { fr, en }`)
   }
 
   // 2. Construit les docs finaux (_type derive du wrapper, refs image resolues).

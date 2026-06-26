@@ -1207,10 +1207,7 @@
                   "_type": "reference",
                   "_ref": "IMG:equipe-rempart"
                 }
-              },
-              "label": "",
-              "caption": "",
-              "ratio": "3/4"
+              }
             },
             "stats": [
               {
@@ -1493,10 +1490,7 @@
                   "_type": "reference",
                   "_ref": "IMG:equipe-rempart"
                 }
-              },
-              "label": "",
-              "caption": "",
-              "ratio": "3/4"
+              }
             },
             "stats": [
               {
@@ -2155,16 +2149,13 @@
             "eyebrow": "Qui on est",
             "heading": "Une équipe d'ici qui traite votre maison comme la sienne",
             "photo": {
-              "caption": "",
               "image": {
                 "_type": "image",
                 "asset": {
                   "_ref": "IMG:equipe-rempart",
                   "_type": "reference"
                 }
-              },
-              "label": "",
-              "ratio": "3/4"
+              }
             },
             "stats": [
               {
@@ -2313,16 +2304,13 @@
             "eyebrow": "Who we are",
             "heading": "A local team that treats your home like its own",
             "photo": {
-              "caption": "",
               "image": {
                 "_type": "image",
                 "asset": {
                   "_ref": "IMG:equipe-rempart",
                   "_type": "reference"
                 }
-              },
-              "label": "",
-              "ratio": "3/4"
+              }
             },
             "stats": [
               {
@@ -2454,10 +2442,7 @@
                   "_type": "reference",
                   "_ref": "IMG:hero-rempart"
                 }
-              },
-              "label": "",
-              "caption": "",
-              "ratio": "2/1"
+              }
             }
           }
         ],
@@ -2597,10 +2582,7 @@
                   "_type": "reference",
                   "_ref": "IMG:hero-rempart"
                 }
-              },
-              "label": "",
-              "caption": "",
-              "ratio": "2/1"
+              }
             }
           }
         ],
@@ -2740,10 +2722,7 @@
                   "_type": "reference",
                   "_ref": "IMG:hero-technicien"
                 }
-              },
-              "label": "",
-              "caption": "",
-              "ratio": "2/1"
+              }
             }
           }
         ],
@@ -2909,10 +2888,7 @@
                   "_type": "reference",
                   "_ref": "IMG:hero-technicien"
                 }
-              },
-              "label": "",
-              "caption": "",
-              "ratio": "2/1"
+              }
             }
           }
         ],
@@ -3405,10 +3381,7 @@
                   "_type": "reference",
                   "_ref": "IMG:equipe-rempart"
                 }
-              },
-              "label": "",
-              "caption": "",
-              "ratio": "3/4"
+              }
             },
             "stats": [
               {
@@ -3683,10 +3656,7 @@
                   "_type": "reference",
                   "_ref": "IMG:equipe-rempart"
                 }
-              },
-              "label": "",
-              "caption": "",
-              "ratio": "3/4"
+              }
             },
             "stats": [
               {
@@ -3857,16 +3827,13 @@
         ],
         "icon": "lucide:bug",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "fr",
         "order": 1,
@@ -4271,16 +4238,13 @@
         ],
         "icon": "lucide:rat",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "fr",
         "order": 2,
@@ -4448,16 +4412,13 @@
         ],
         "icon": "lucide:bed",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "fr",
         "order": 3,
@@ -4625,16 +4586,13 @@
         ],
         "icon": "lucide:hexagon",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "fr",
         "order": 4,
@@ -4802,16 +4760,13 @@
         ],
         "icon": "lucide:building-2",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "fr",
         "order": 5,
@@ -4985,16 +4940,13 @@
         ],
         "icon": "lucide:bug",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "en",
         "order": 1,
@@ -5399,16 +5351,13 @@
         ],
         "icon": "lucide:rat",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "en",
         "order": 2,
@@ -5576,16 +5525,13 @@
         ],
         "icon": "lucide:bed",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "en",
         "order": 3,
@@ -5753,16 +5699,13 @@
         ],
         "icon": "lucide:hexagon",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "en",
         "order": 4,
@@ -5930,16 +5873,13 @@
         ],
         "icon": "lucide:building-2",
         "image": {
-          "caption": "",
           "image": {
             "_type": "image",
             "asset": {
               "_ref": "IMG:hero-technicien",
               "_type": "reference"
             }
-          },
-          "label": "",
-          "ratio": "4/3"
+          }
         },
         "language": "en",
         "order": 5,
@@ -8007,10 +7947,7 @@
               "_type": "reference",
               "_ref": "IMG:hero-technicien"
             }
-          },
-          "label": "",
-          "caption": "",
-          "ratio": "16/9"
+          }
         },
         "category": {
           "_type": "reference",
@@ -8174,10 +8111,7 @@
                   "_type": "reference",
                   "_ref": "IMG:inspection-rempart"
                 }
-              },
-              "label": "",
-              "caption": "Une inspection soignée trouve le nid, pas seulement les ouvrières.",
-              "ratio": "4/3"
+              }
             }
           },
           {
@@ -8261,10 +8195,7 @@
               "_type": "reference",
               "_ref": "IMG:hero-technicien"
             }
-          },
-          "label": "",
-          "caption": "",
-          "ratio": "16/9"
+          }
         },
         "category": {
           "_type": "reference",
@@ -8428,10 +8359,7 @@
                   "_type": "reference",
                   "_ref": "IMG:inspection-rempart"
                 }
-              },
-              "label": "",
-              "caption": "A careful inspection finds the nest, not just the workers.",
-              "ratio": "4/3"
+              }
             }
           },
           {
@@ -8515,10 +8443,7 @@
               "_type": "reference",
               "_ref": "IMG:hero-rempart"
             }
-          },
-          "label": "",
-          "caption": "",
-          "ratio": "16/9"
+          }
         },
         "category": {
           "_type": "reference",
@@ -8580,10 +8505,7 @@
               "_type": "reference",
               "_ref": "IMG:hero-rempart"
             }
-          },
-          "label": "",
-          "caption": "",
-          "ratio": "16/9"
+          }
         },
         "category": {
           "_type": "reference",
@@ -8645,10 +8567,7 @@
               "_type": "reference",
               "_ref": "IMG:inspection-rempart"
             }
-          },
-          "label": "",
-          "caption": "",
-          "ratio": "16/9"
+          }
         },
         "category": {
           "_type": "reference",
@@ -8753,10 +8672,7 @@
                     "_type": "reference",
                     "_ref": "IMG:inspection-rempart"
                   }
-                },
-                "label": "",
-                "caption": "",
-                "ratio": "4/3"
+                }
               },
               {
                 "_key": "g2",
@@ -8767,10 +8683,7 @@
                     "_type": "reference",
                     "_ref": "IMG:equipe-rempart"
                   }
-                },
-                "label": "",
-                "caption": "",
-                "ratio": "4/3"
+                }
               }
             ]
           },
@@ -8803,10 +8716,7 @@
               "_type": "reference",
               "_ref": "IMG:inspection-rempart"
             }
-          },
-          "label": "",
-          "caption": "",
-          "ratio": "16/9"
+          }
         },
         "category": {
           "_type": "reference",
@@ -8911,10 +8821,7 @@
                     "_type": "reference",
                     "_ref": "IMG:inspection-rempart"
                   }
-                },
-                "label": "",
-                "caption": "",
-                "ratio": "4/3"
+                }
               },
               {
                 "_key": "g2",
@@ -8925,10 +8832,7 @@
                     "_type": "reference",
                     "_ref": "IMG:equipe-rempart"
                   }
-                },
-                "label": "",
-                "caption": "",
-                "ratio": "4/3"
+                }
               }
             ]
           },
