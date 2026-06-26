@@ -728,11 +728,9 @@ function transformTeam(raw: SanityTeamBlock, locale: WfLocale): TeamContent {
     lead: opt(raw.lead),
     members: (raw.members ?? []).map((m) => {
       const f = resolveFigure(m.photo)
-      const credentials = (m.credentials ?? []).filter((c): c is string => Boolean(c))
       return {
         name: m.name,
         role: m.role,
-        credentials: credentials.length ? credentials : undefined,
         bio: opt(m.bio),
         photo: { src: f.src ?? '', alt: f.alt }
       }

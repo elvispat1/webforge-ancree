@@ -15,8 +15,6 @@ export interface TeamPhoto {
 export interface TeamMember {
   name: string
   role: string
-  /** Certifications individuelles, étiquettes courtes (rendues en chips). */
-  credentials?: string[]
   /** Bio courte, une à deux phrases. */
   bio?: string
   photo: TeamPhoto

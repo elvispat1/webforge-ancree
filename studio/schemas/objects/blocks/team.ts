@@ -56,13 +56,6 @@ export const team = defineType({
               validation: (R) => R.required(),
             }),
             defineField({
-              name: 'credentials',
-              title: 'Certifications (étiquettes courtes)',
-              description: 'Quelques mots-clés courts, un par certification (rendus en étiquettes), ex. « Membre ASTTQ », « Gestion parasitaire ».',
-              type: 'array',
-              of: [defineArrayMember({ type: 'string' })],
-            }),
-            defineField({
               name: 'bio',
               title: 'Bio courte',
               type: 'text',
