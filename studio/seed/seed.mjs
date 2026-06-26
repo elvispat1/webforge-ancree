@@ -64,8 +64,10 @@ const IMAGES = {
   'team-julie': img('team-julie.jpg'),
   'team-samuel': img('team-samuel.jpg'),
   'team-nadia': img('team-nadia.jpg'),
-  // Logo de marque (brand.logo des Globales): le SVG de la favicon sert de marque.
-  'logo-rempart': join(repoRoot, 'public', 'favicon.svg'),
+  // Logo de marque (brand.logo des Globales): le LOGO COMPLET (glyphe + mot-symbole),
+  // ce qu'un vrai client fournit. Le glyphe seul (favicon.svg) reste la favicon à la
+  // racine. Généré par studio/seed/build-logo-svg.mjs.
+  'logo-rempart': join(repoRoot, 'public', 'logo-rempart.svg'),
 }
 
 // Légende BILINGUE par asset (description { fr, en }), lue par FIGURE_PROJECTION
