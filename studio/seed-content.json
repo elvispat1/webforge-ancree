@@ -5797,69 +5797,172 @@
         "order": 5,
         "pageBuilder": [
           {
-            "_key": "pb-intro-73tfg7ya",
+            "_key": "pb-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "icon": "lucide:award",
+                "value": "Membre ASTTQ",
+                "label": "gestion parasitaire du Québec"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "icon": "lucide:clipboard-check",
+                "value": "Conforme MAPAQ et HACCP",
+                "label": "rapports prêts pour l'inspection"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "icon": "lucide:clock",
+                "value": "Sous 24 à 48 h",
+                "label": "intervention 7 jours sur 7"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "icon": "lucide:leaf",
+                "value": "Produits homologués",
+                "label": "Santé Canada, appliqués avec discrétion"
+              }
+            ]
+          },
+          {
+            "_key": "pb-editorial",
             "_type": "editorial",
+            "eyebrow": "Le service en détail",
+            "heading": "Un programme préventif, prêt pour l'inspection",
+            "lead": "En milieu commercial, le risque n'est pas qu'un nuisible: c'est une inspection ratée, un avis sur le mur, une réputation. On met en place un programme continu, documenté, pensé pour la conformité MAPAQ et HACCP.",
             "segments": [
               {
-                "_key": "seg-so0dcffi",
+                "_key": "seg0",
                 "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
                 "body": [
                   {
-                    "_key": "b-jrumtowo",
                     "_type": "block",
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-gki4rkkz",
                         "_type": "span",
-                        "marks": [],
-                        "text": "Restaurants, commerces de détail, immeubles: chaque milieu a ses risques et ses inspections. Une infestation visible, c’est une note d’inspection ratée et des clients qui parlent."
+                        "_key": "e1s",
+                        "text": "Un restaurant, une épicerie ou un immeuble n'a pas droit à l'erreur: une seule trace de nuisible peut coûter une inspection, une fermeture ou un client. La gestion parasitaire commerciale ne se règle pas en une visite, elle se gère en continu, avec des preuves à montrer à l'inspecteur.",
+                        "marks": []
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   },
                   {
-                    "_key": "b-9qekcd9v",
                     "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-s0oo0mlh",
                         "_type": "span",
-                        "marks": [],
-                        "text": "On bâtit un programme préventif adapté à votre réalité, avec un calendrier de visites, des rapports clairs et une intervention rapide au besoin. Discret pour vos clients, solide pour vos inspections."
+                        "_key": "e2hs",
+                        "text": "Un dossier déjà prêt le jour de l'inspection",
+                        "marks": []
                       }
-                    ],
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
                     "markDefs": [],
-                    "style": "normal"
+                    "children": [
+                      {
+                        "_type": "span",
+                        "_key": "e2s",
+                        "text": "On installe un réseau de stations de surveillance, on passe à intervalle régulier, et chaque visite produit un rapport daté: ce qui a été vérifié, traité et recommandé. Le jour de l'inspection MAPAQ ou de l'audit HACCP, le dossier est déjà prêt.",
+                        "marks": []
+                      }
+                    ]
                   }
                 ],
-                "media": [],
-                "mediaSide": "auto"
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:inspection-rempart",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           },
           {
             "_key": "pb-hl-kwo1tawt",
             "_type": "highlights",
-            "heading": "Ce que vous obtenez",
+            "heading": "Ce que comprend le programme",
             "items": [
               {
                 "_key": "benefit-0",
                 "_type": "highlight",
-                "body": "Visites planifiées, stations documentées et rapports prêts pour vos inspections.",
-                "title": "Le programme"
+                "title": "Programme sur mesure, visites planifiées",
+                "body": "Une fréquence adaptée à votre commerce, sans interrompre vos opérations."
               },
               {
                 "_key": "benefit-1",
                 "_type": "highlight",
-                "body": "Réponse rapide entre les visites, traitements adaptés au milieu, dérangement minimal pour la clientèle.",
-                "title": "L’intervention"
+                "title": "Rapports datés, prêts pour l'audit",
+                "body": "Chaque visite documentée: vérifications, traitements et recommandations, classés pour l'inspection."
               },
               {
                 "_key": "benefit-2",
                 "_type": "highlight",
-                "body": "Un interlocuteur dédié, des dossiers à jour, une conformité que vous pouvez montrer.",
-                "title": "La tranquillité"
+                "title": "Intervention rapide entre les visites",
+                "body": "Un appel et un technicien d'ici se déplace, 7 jours sur 7, en cas d'urgence."
+              },
+              {
+                "_key": "benefit-3",
+                "_type": "highlight",
+                "title": "Produits homologués, discrétion assurée",
+                "body": "Des produits homologués Santé Canada appliqués hors des heures d'achalandage, sans nuire à votre image."
+              }
+            ]
+          },
+          {
+            "_key": "pb-faq",
+            "_type": "faq",
+            "eyebrow": "Avant d'appeler",
+            "heading": "Vos questions sur la gestion parasitaire commerciale",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-frequence-fr",
+                "_key": "fq0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-conformite-fr",
+                "_key": "fq1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-discretion-fr",
+                "_key": "fq2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-urgence-fr",
+                "_key": "fq3"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-zone-fr",
+                "_key": "fq4"
               }
             ]
           },
@@ -5867,26 +5970,26 @@
             "_key": "pb-proc-jy00p18t",
             "_type": "process",
             "eyebrow": "Comment on intervient",
-            "heading": "Une méthode claire, du premier appel à la garantie",
-            "lead": "Pas de mystère ni de pression. On regarde d’abord, on traite ce qu’il faut, et on reste là tant que le problème n’est pas réglé pour de bon.",
+            "heading": "Comment fonctionne un programme commercial",
+            "lead": "On prévient et on documente, plutôt que de réagir.",
             "steps": [
               {
-                "_key": "step-0",
+                "_key": "s1",
                 "_type": "processStep",
-                "body": "On identifie le nuisible, l’ampleur et les points d’entrée. Vous savez exactement à quoi vous faites face avant qu’on touche à quoi que ce soit.",
-                "title": "On inspecte"
+                "title": "Évaluation et plan de conformité",
+                "body": "On visite les lieux, on repère les points de risque et on bâtit un plan adapté à votre secteur et à vos obligations."
               },
               {
-                "_key": "step-1",
+                "_key": "s2",
                 "_type": "processStep",
-                "body": "Un traitement ciblé, sûr pour la famille et les animaux, appliqué par un technicien certifié. Rien de plus que ce que la situation demande.",
-                "title": "On traite"
+                "title": "Surveillance et visites planifiées",
+                "body": "Stations de contrôle et passages réguliers, avec traitement ciblé dès qu'un signe apparaît."
               },
               {
-                "_key": "step-2",
+                "_key": "s3",
                 "_type": "processStep",
-                "body": "On revient au besoin et le résultat est garanti par écrit. Le problème reste réglé, pas seulement repoussé.",
-                "title": "On garantit"
+                "title": "Rapports et suivi continu",
+                "body": "Un rapport daté à chaque visite et un dossier prêt pour l'inspection, ajusté au fil des saisons."
               }
             ]
           },
@@ -5920,8 +6023,8 @@
               "label": "Obtenir une estimation",
               "type": "anchor"
             },
-            "subtitle": "Un appel et un technicien licencié part vers vous. Pas de longue attente, pas de surprise sur la facture, une garantie écrite.",
-            "title": "Un nuisible à régler? On peut être chez vous aujourd’hui."
+            "subtitle": "Un appel, un technicien certifié évalue vos lieux et propose un plan conforme, souvent sous 24 à 48 h.",
+            "title": "Un commerce à protéger? On bâtit votre programme préventif."
           }
         ],
         "slug": {
@@ -7241,69 +7344,172 @@
         "order": 5,
         "pageBuilder": [
           {
-            "_key": "pb-intro-edoj3dxr",
+            "_key": "pb-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "icon": "lucide:award",
+                "value": "ASTTQ member",
+                "label": "Quebec pest management"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "icon": "lucide:clipboard-check",
+                "value": "MAPAQ and HACCP ready",
+                "label": "reports ready for inspection"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "icon": "lucide:clock",
+                "value": "Within 24 to 48 h",
+                "label": "service seven days a week"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "icon": "lucide:leaf",
+                "value": "Approved products",
+                "label": "Health Canada, applied with discretion"
+              }
+            ]
+          },
+          {
+            "_key": "pb-editorial",
             "_type": "editorial",
+            "eyebrow": "The service in detail",
+            "heading": "A preventive program, ready for inspection",
+            "lead": "In a commercial setting, the risk is not just a pest: it is a failed inspection, a notice on the wall, a reputation. We set up a continuous, documented program built for MAPAQ and HACCP compliance.",
             "segments": [
               {
-                "_key": "seg-996nyn6i",
+                "_key": "seg0",
                 "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
                 "body": [
                   {
-                    "_key": "b-o6u4u3v7",
                     "_type": "block",
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-sol0dx1r",
                         "_type": "span",
-                        "marks": [],
-                        "text": "Restaurants, retail, buildings: each setting has its own risks and inspections. A visible infestation means a failed inspection and customers who talk."
+                        "_key": "e1s",
+                        "text": "A restaurant, a grocery store or a building has no room for error: a single sign of pests can cost an inspection, a closure or a customer. Commercial pest management is not solved in one visit, it is managed continuously, with proof to show the inspector.",
+                        "marks": []
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   },
                   {
-                    "_key": "b-0jgmxcw3",
                     "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-4yikxc5m",
                         "_type": "span",
-                        "marks": [],
-                        "text": "We build a preventive program suited to your reality, with a visit schedule, clear reports and a fast response when needed. Discreet for your customers, solid for your inspections."
+                        "_key": "e2hs",
+                        "text": "A file ready the day of the inspection",
+                        "marks": []
                       }
-                    ],
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
                     "markDefs": [],
-                    "style": "normal"
+                    "children": [
+                      {
+                        "_type": "span",
+                        "_key": "e2s",
+                        "text": "We set up a network of monitoring stations, visit on a regular schedule, and every visit produces a dated report: what was checked, treated and recommended. On the day of the MAPAQ inspection or the HACCP audit, the file is already ready.",
+                        "marks": []
+                      }
+                    ]
                   }
                 ],
-                "media": [],
-                "mediaSide": "auto"
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:inspection-rempart",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           },
           {
             "_key": "pb-hl-ilsozn8s",
             "_type": "highlights",
-            "heading": "What you get",
+            "heading": "What the program includes",
             "items": [
               {
                 "_key": "benefit-0",
                 "_type": "highlight",
-                "body": "Scheduled visits, documented stations and reports ready for your inspections.",
-                "title": "The program"
+                "title": "Tailored program, scheduled visits",
+                "body": "A frequency suited to your business, without interrupting your operations."
               },
               {
                 "_key": "benefit-1",
                 "_type": "highlight",
-                "body": "Fast action between visits, treatments suited to the setting, minimal disruption to customers.",
-                "title": "The response"
+                "title": "Dated reports, audit-ready",
+                "body": "Every visit documented: checks, treatments and recommendations, filed for inspection."
               },
               {
                 "_key": "benefit-2",
                 "_type": "highlight",
-                "body": "A dedicated contact, records kept current, compliance you can show.",
-                "title": "The peace of mind"
+                "title": "Fast response between visits",
+                "body": "One call and a local technician heads out, seven days a week, in an emergency."
+              },
+              {
+                "_key": "benefit-3",
+                "_type": "highlight",
+                "title": "Approved products, guaranteed discretion",
+                "body": "Health Canada approved products applied outside busy hours, without harming your image."
+              }
+            ]
+          },
+          {
+            "_key": "pb-faq",
+            "_type": "faq",
+            "eyebrow": "Before you call",
+            "heading": "Your questions about commercial pest management",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-frequence-en",
+                "_key": "fq0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-conformite-en",
+                "_key": "fq1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-discretion-en",
+                "_key": "fq2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-urgence-en",
+                "_key": "fq3"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-commercial-zone-en",
+                "_key": "fq4"
               }
             ]
           },
@@ -7311,26 +7517,26 @@
             "_key": "pb-proc-8hfedgfo",
             "_type": "process",
             "eyebrow": "How we work",
-            "heading": "A clear method, from the first call to the guarantee",
-            "lead": "No mystery, no pressure. We look first, we treat what needs treating, and we stay on it until the problem is gone for good.",
+            "heading": "How a commercial program works",
+            "lead": "We prevent and document, rather than react.",
             "steps": [
               {
-                "_key": "step-0",
+                "_key": "s1",
                 "_type": "processStep",
-                "body": "We identify the pest, how far it has spread and where it gets in. You know exactly what you are dealing with before we touch anything.",
-                "title": "We inspect"
+                "title": "Assessment and compliance plan",
+                "body": "We visit the site, map the risk points and build a plan suited to your industry and your obligations."
               },
               {
-                "_key": "step-1",
+                "_key": "s2",
                 "_type": "processStep",
-                "body": "A targeted treatment, safe for your family and pets, applied by a certified technician. Nothing more than what the situation calls for.",
-                "title": "We treat"
+                "title": "Monitoring and scheduled visits",
+                "body": "Control stations and regular visits, with targeted treatment as soon as a sign appears."
               },
               {
-                "_key": "step-2",
+                "_key": "s3",
                 "_type": "processStep",
-                "body": "We come back if needed and the result is guaranteed in writing. The problem stays solved, not just pushed down the road.",
-                "title": "We guarantee"
+                "title": "Reports and ongoing follow-up",
+                "body": "A dated report at every visit and a file ready for inspection, adjusted as the seasons change."
               }
             ]
           },
@@ -7364,8 +7570,8 @@
               "label": "Get an estimate",
               "type": "anchor"
             },
-            "subtitle": "One call and a licensed technician is on the way. No long wait, no surprise on the bill, a guarantee in writing.",
-            "title": "A pest to deal with? We can be at your place today."
+            "subtitle": "One call and a certified technician assesses your site and proposes a compliant plan, often within 24 to 48 hours.",
+            "title": "A business to protect? We build your preventive program."
           }
         ],
         "slug": {
@@ -14559,6 +14765,644 @@
             "value": {
               "_type": "reference",
               "_ref": "faqItem-guepes-frelons-zone-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "faqTheme",
+      "content": {
+        "_id": "faqTheme-commercial-fr",
+        "_type": "faqTheme",
+        "language": "fr",
+        "title": "Gestion parasitaire commerciale",
+        "slug": {
+          "_type": "slug",
+          "current": "gestion-commerciale"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-frequence-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "À quelle fréquence faut-il des visites?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Ça dépend du secteur et du risque: souvent aux mois pour un restaurant, plus espacé pour un bureau. On propose une fréquence adaptée, ajustée selon les saisons."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-conformite-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Vos rapports suffisent-ils pour le MAPAQ et le HACCP?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Oui. Chaque visite produit un rapport daté des vérifications, des traitements et des recommandations, classé pour présenter à l'inspection ou à l'audit."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-discretion-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Allez-vous déranger ma clientèle?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Non. On planifie les passages hors des heures d'achalandage et on applique des produits homologués avec discrétion, sans nuire à votre image."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-urgence-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Et si un problème survient entre deux visites?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Un appel et un technicien d'ici se déplace, 7 jours sur 7, souvent sous 24 à 48 h. Les interventions d'urgence font partie du programme."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-zone-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Desservez-vous mon secteur sur la Rive-Nord?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-laval-fr"
+                }
+              },
+              {
+                "_key": "l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-blainville-fr"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Oui, de "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "l1"
+                ],
+                "text": "Laval"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": " à "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "l3"
+                ],
+                "text": "Blainville"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": " et toute la couronne nord. On dessert restaurants, commerces et immeubles."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-fr"
+        }
+      }
+    },
+    {
+      "type": "faqTheme",
+      "content": {
+        "_id": "faqTheme-commercial-en",
+        "_type": "faqTheme",
+        "language": "en",
+        "title": "Commercial pest management",
+        "slug": {
+          "_type": "slug",
+          "current": "commercial-pest-management"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-frequence-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "How often are visits needed?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "It depends on the industry and the risk: often monthly for a restaurant, less frequent for an office. We propose a suitable frequency, adjusted with the seasons."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-conformite-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Are your reports enough for MAPAQ and HACCP?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes. Every visit produces a dated report of the checks, treatments and recommendations, filed to present at the inspection or audit."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-discretion-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Will you disturb my customers?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "No. We schedule visits outside busy hours and apply approved products with discretion, without harming your image."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-urgence-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "What if a problem comes up between visits?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "One call and a local technician heads out, seven days a week, often within 24 to 48 hours. Emergency visits are part of the program."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-commercial-zone-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Do you serve my area on the North Shore?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-laval-en"
+                }
+              },
+              {
+                "_key": "l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-blainville-en"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes, from "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "l1"
+                ],
+                "text": "Laval"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": " to "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "l3"
+                ],
+                "text": "Blainville"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": " and the whole north crown. We serve restaurants, shops and buildings."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-commercial-en"
+        }
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqTheme-commercial",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqTheme"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqTheme-commercial-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqTheme"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqTheme-commercial-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqTheme"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-commercial-frequence",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-frequence-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-frequence-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-commercial-conformite",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-conformite-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-conformite-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-commercial-discretion",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-discretion-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-discretion-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-commercial-urgence",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-urgence-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-urgence-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-commercial-zone",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-zone-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-commercial-zone-en",
               "_weak": true,
               "_strengthenOnPublish": {
                 "type": "faqItem"
