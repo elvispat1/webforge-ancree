@@ -239,7 +239,7 @@ export interface SanityTeamBlock {
     Array<{
       name: string
       role: string
-      credentials?: Maybe<string>
+      credentials?: Maybe<string[]>
       bio?: Maybe<string>
       photo: SanityFigure
     }>

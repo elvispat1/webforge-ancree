@@ -41,7 +41,9 @@ const hasHead = computed(() => Boolean(props.heading || props.eyebrow))
           <div class="team__body">
             <h3 class="team__name wf-h4">{{ member.name }}</h3>
             <p class="team__role">{{ member.role }}</p>
-            <p v-if="member.credentials" class="team__credentials">{{ member.credentials }}</p>
+            <ul v-if="member.credentials?.length" class="team__creds">
+              <li v-for="cred in member.credentials" :key="cred" class="team__cred">{{ cred }}</li>
+            </ul>
             <p v-if="member.bio" class="team__bio wf-body-2 wf-text-muted">{{ member.bio }}</p>
           </div>
         </li>
@@ -88,32 +90,38 @@ const hasHead = computed(() => Boolean(props.heading || props.eyebrow))
 }
 
 .team__body {
-  margin-top: 2rem;
+  margin-top: 1.8rem;
 }
 .team__name {
   margin: 0;
   color: var(--text-base);
 }
-/* Rôle: réserve deux lignes pour que ce qui suit s'aligne d'une carte à l'autre,
- * que le rôle tienne sur une ou deux lignes. */
 .team__role {
-  margin: 0.6rem 0 0;
-  min-height: 2lh;
+  margin: 0.4rem 0 0;
   color: var(--accent-trust);
   font-weight: 600;
 }
-/* Certifications: mention lisible (pas un micro-libellé), sans tiret ni pastille.
- * Réserve aussi deux lignes pour aligner les bios sur toute la rangée. */
-.team__credentials {
-  margin: 1.1rem 0 0;
-  min-height: 2lh;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--text-muted);
+/* Certifications: étiquettes courtes, fond ambre doux, texte navy. Scannables,
+ * compactes, sans phrase ni tiret. */
+.team__creds {
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.team__cred {
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent-call-soft);
+  color: var(--text-oncall);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
 }
 .team__bio {
-  margin: 1.3rem 0 0;
+  margin: 1.6rem 0 0;
   max-width: 42ch;
 }
 </style>

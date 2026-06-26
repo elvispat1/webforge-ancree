@@ -57,9 +57,10 @@ export const team = defineType({
             }),
             defineField({
               name: 'credentials',
-              title: 'Certifications',
-              description: 'Certifications individuelles, ex. « Membre ASTTQ, gestion parasitaire ».',
-              type: 'string',
+              title: 'Certifications (étiquettes courtes)',
+              description: 'Quelques mots-clés courts, un par certification (rendus en étiquettes), ex. « Membre ASTTQ », « Gestion parasitaire ».',
+              type: 'array',
+              of: [defineArrayMember({ type: 'string' })],
             }),
             defineField({
               name: 'bio',
