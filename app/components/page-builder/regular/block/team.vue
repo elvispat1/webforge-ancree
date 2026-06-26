@@ -1,12 +1,11 @@
 <script setup lang="ts">
-/* Équipe: une grille de cartes portrait, le visage de l'autorité. Chaque carte
- * pose un portrait (ratio portrait, ombre chaude, coin ambre signé comme la photo
- * du bloc « à propos »), puis le nom en slab, le rôle en accent, les certifications
- * amorcées d'une languette ambre (le geste « ancré au sol »), et une bio sobre.
- * Forme volontairement distincte des grilles de tuiles (processus, points forts) et
- * de la mosaïque de cartes (services): ici des cartes hautes, portrait en tête. Base
- * blanche; la matière vient de l'ombre et des accents, jamais d'un fond crème.
- * Le fond peint tout de suite (PageBuilder enveloppe déjà le bloc dans v-reveal). */
+/* Équipe: les visages de l'autorité. Une rangée de portraits posés (coins
+ * arrondis, ombre chaude: la matière d'Ancrée), puis une hiérarchie typographique
+ * nette, sans accent décoratif: nom en slab, rôle en bleu confiance, certifications
+ * en micro-libellé sobre, bio muette. Pas de pastille ni de tiret ambre. La grille
+ * se remplit d'elle-même (auto-fit) pour rester équilibrée quel que soit le nombre
+ * de membres. Le fond peint tout de suite (PageBuilder enveloppe déjà le bloc dans
+ * v-reveal). */
 import type { BlockBase } from '~/types/blocks'
 import type { TeamContent } from '~/content/team'
 
@@ -34,18 +33,15 @@ const hasHead = computed(() => Boolean(props.heading || props.eyebrow))
               :src="member.photo.src"
               :alt="member.photo.alt"
               :ratio="'var(--ratio-portrait)'"
-              sizes="xs:100vw sm:50vw md:33vw lg:33vw xl:33vw xxl:33vw"
+              sizes="xs:100vw sm:50vw md:33vw lg:25vw xl:25vw xxl:25vw"
               tone="base"
             />
-            <span class="team__corner" aria-hidden="true" />
           </figure>
 
           <div class="team__body">
             <h3 class="team__name wf-h4">{{ member.name }}</h3>
-            <p class="team__role wf-body-3">{{ member.role }}</p>
-            <p v-if="member.credentials" class="team__credentials wf-caption">
-              <span class="team__tick" aria-hidden="true" />{{ member.credentials }}
-            </p>
+            <p class="team__role">{{ member.role }}</p>
+            <p v-if="member.credentials" class="team__credentials">{{ member.credentials }}</p>
             <p v-if="member.bio" class="team__bio wf-body-2 wf-text-muted">{{ member.bio }}</p>
           </div>
         </li>
@@ -64,14 +60,15 @@ const hasHead = computed(() => Boolean(props.heading || props.eyebrow))
   max-width: 52ch;
 }
 
-/* Grille de cartes: empilée au mobile, deux puis trois colonnes. */
+/* Rangée de portraits qui se remplit d'elle-même: pas de 3+1 bancal, les colonnes
+ * s'ajustent au nombre de membres et à la largeur. */
 .team__grid {
   margin: 0;
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(3.2rem, 5vw, 5.6rem) clamp(2.4rem, 4vw, 4rem);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: clamp(2.8rem, 4vw, 4.4rem) clamp(2rem, 3vw, 3.2rem);
 }
 .team__grid--headed {
   margin-top: var(--space-head-content);
@@ -81,66 +78,39 @@ const hasHead = computed(() => Boolean(props.heading || props.eyebrow))
   flex-direction: column;
 }
 
-/* Portrait posé: coins arrondis, ombre chaude, languette ambre au coin bas-gauche
- * (même signature « ancré au sol » que la photo du bloc à propos). */
+/* Portrait posé: coins arrondis, ombre chaude (la matière d'Ancrée). Aucun accent
+ * décoratif appliqué dessus. */
 .team__figure {
-  position: relative;
   margin: 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--elev-high);
 }
-.team__corner {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 5rem;
-  height: 0.6rem;
-  background: var(--accent-call);
-  border-top-right-radius: 2px;
-}
 
 .team__body {
-  margin-top: 2rem;
+  margin-top: 1.8rem;
 }
 .team__name {
   margin: 0;
   color: var(--text-base);
 }
 .team__role {
-  margin: 0.6rem 0 0;
+  margin: 0.4rem 0 0;
   color: var(--accent-trust);
   font-weight: 600;
 }
+/* Certifications: micro-libellé sobre (capitales espacées), lu comme une mention,
+ * sans tiret ni pastille. */
 .team__credentials {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 1.1rem;
-  margin: 1.2rem 0 0;
+  margin: 1rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--text-muted);
-}
-.team__tick {
-  flex: none;
-  align-self: center;
-  display: inline-block;
-  width: 2.2rem;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--accent-call);
 }
 .team__bio {
   margin: 1.2rem 0 0;
   max-width: 42ch;
-}
-
-@container site (min-width: 640px) {
-  .team__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@container site (min-width: 1024px) {
-  .team__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 </style>
