@@ -5243,69 +5243,172 @@
         "order": 3,
         "pageBuilder": [
           {
-            "_key": "pb-intro-qqh5n941",
+            "_key": "pb-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "icon": "lucide:award",
+                "value": "Membre ASTTQ",
+                "label": "gestion parasitaire du Québec"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "icon": "lucide:leaf",
+                "value": "Produits homologués",
+                "label": "Santé Canada, sûrs pour la famille"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "icon": "lucide:clock",
+                "value": "Sous 24 à 48 h",
+                "label": "intervention 7 jours sur 7"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "icon": "lucide:badge-check",
+                "value": "Garantie écrite",
+                "label": "retour sans frais"
+              }
+            ]
+          },
+          {
+            "_key": "pb-editorial",
             "_type": "editorial",
+            "eyebrow": "Le nuisible en détail",
+            "heading": "Comprendre une infestation de punaises de lit",
+            "lead": "Elles ne sont pas un signe de malpropreté: elles voyagent avec nous, se cachent le jour et piquent la nuit. S'en débarrasser demande de la méthode, pas un simple insecticide.",
             "segments": [
               {
-                "_key": "seg-5s3238zr",
+                "_key": "seg0",
                 "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
                 "body": [
                   {
-                    "_key": "b-glavvd0k",
                     "_type": "block",
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-vqntt4rh",
                         "_type": "span",
-                        "marks": [],
-                        "text": "Les punaises se cachent dans les coutures de matelas, les fissures et derrière les plinthes. Elles voyagent dans les bagages et les meubles, et une infestation s’installe en silence avant les premières piqûres."
+                        "_key": "e1s",
+                        "text": "Les punaises de lit se logent dans les coutures du matelas, le sommier, la tête de lit et les plinthes. Les signes ne trompent pas: des piqûres alignées au réveil, de petits points noirs sur les draps, parfois des mues le long des coutures. Elles passent d'une pièce à l'autre et résistent aux traitements faits maison.",
+                        "marks": []
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   },
                   {
-                    "_key": "b-6oqu91q3",
                     "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-yekaott8",
                         "_type": "span",
-                        "marks": [],
-                        "text": "On combine la chaleur et un traitement résiduel pour atteindre les œufs comme les adultes, là où ils se cachent. Discrétion totale: personne n’a à savoir qu’on est passés."
+                        "_key": "e2hs",
+                        "text": "La chaleur, là où les insecticides échouent",
+                        "marks": []
                       }
-                    ],
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
                     "markDefs": [],
-                    "style": "normal"
+                    "children": [
+                      {
+                        "_type": "span",
+                        "_key": "e2s",
+                        "text": "Un produit de surface ne touche ni les œufs ni les punaises cachées dans leurs refuges. On traite par la chaleur, létale à toutes les étapes de vie, complétée d'un produit homologué rémanent aux endroits stratégiques. Avec une préparation soignée et un contrôle de suivi, on referme le cycle au complet.",
+                        "marks": []
+                      }
+                    ]
                   }
                 ],
-                "media": [],
-                "mediaSide": "auto"
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:inspection-rempart",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           },
           {
             "_key": "pb-hl-nik4c3lu",
             "_type": "highlights",
-            "heading": "Ce que vous obtenez",
+            "heading": "Ce que comprend l'intervention",
             "items": [
               {
                 "_key": "benefit-0",
                 "_type": "highlight",
-                "body": "Piqûres en ligne au réveil, petites taches sombres sur les draps, points noirs dans les coutures du matelas.",
-                "title": "Les signes"
+                "title": "Garantie écrite, retour sans frais",
+                "body": "Si les punaises réapparaissent dans la période couverte, on retraite sans vous refacturer."
               },
               {
                 "_key": "benefit-1",
                 "_type": "highlight",
-                "body": "Traitement thermique et résiduel ciblé, plan de préparation simple, sûr pour la maisonnée.",
-                "title": "Le traitement"
+                "title": "Chaleur sans résidu, produits homologués",
+                "body": "La chaleur ne laisse aucun résidu; tout produit d'appoint est homologué Santé Canada, sûr pour les enfants et les animaux."
               },
               {
                 "_key": "benefit-2",
                 "_type": "highlight",
-                "body": "Suivi inclus et résultat garanti par écrit, jusqu’à élimination complète.",
-                "title": "La garantie"
+                "title": "Intervention sous 24 à 48 h",
+                "body": "Une vraie personne répond 7 jours sur 7 et un technicien d'ici part vers vous rapidement."
+              },
+              {
+                "_key": "benefit-3",
+                "_type": "highlight",
+                "title": "Préparation guidée, rapport écrit",
+                "body": "Une liste de préparation claire avant la visite et un rapport de ce qui a été traité et des points à surveiller."
+              }
+            ]
+          },
+          {
+            "_key": "pb-faq",
+            "_type": "faq",
+            "eyebrow": "Avant d'appeler",
+            "heading": "Vos questions sur les punaises de lit",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-preparation-fr",
+                "_key": "fq0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-securite-fr",
+                "_key": "fq1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-delai-fr",
+                "_key": "fq2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-voyage-fr",
+                "_key": "fq3"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-zone-fr",
+                "_key": "fq4"
               }
             ]
           },
@@ -5313,26 +5416,26 @@
             "_key": "pb-proc-d4x2aftr",
             "_type": "process",
             "eyebrow": "Comment on intervient",
-            "heading": "Une méthode claire, du premier appel à la garantie",
-            "lead": "Pas de mystère ni de pression. On regarde d’abord, on traite ce qu’il faut, et on reste là tant que le problème n’est pas réglé pour de bon.",
+            "heading": "Comment on traite une infestation de punaises de lit",
+            "lead": "On vise tout le cycle de vie, pas seulement les insectes visibles.",
             "steps": [
               {
-                "_key": "step-0",
+                "_key": "s1",
                 "_type": "processStep",
-                "body": "On identifie le nuisible, l’ampleur et les points d’entrée. Vous savez exactement à quoi vous faites face avant qu’on touche à quoi que ce soit.",
-                "title": "On inspecte"
+                "title": "Préparation et inspection ciblée",
+                "body": "On vous remet une liste de préparation, puis on inspecte les coutures, le sommier et les plinthes pour repérer tous les refuges."
               },
               {
-                "_key": "step-1",
+                "_key": "s2",
                 "_type": "processStep",
-                "body": "Un traitement ciblé, sûr pour la famille et les animaux, appliqué par un technicien certifié. Rien de plus que ce que la situation demande.",
-                "title": "On traite"
+                "title": "Traitement thermique et résiduel",
+                "body": "La chaleur atteint toutes les étapes de vie; un produit homologué rémanent ferme les refuges restants."
               },
               {
-                "_key": "step-2",
+                "_key": "s3",
                 "_type": "processStep",
-                "body": "On revient au besoin et le résultat est garanti par écrit. Le problème reste réglé, pas seulement repoussé.",
-                "title": "On garantit"
+                "title": "Contrôle de suivi et garantie écrite",
+                "body": "Une seconde visite confirme qu'aucun œuf n'a survécu; la garantie tient jusqu'à ce que ce soit réglé."
               }
             ]
           },
@@ -5366,8 +5469,8 @@
               "label": "Obtenir une estimation",
               "type": "anchor"
             },
-            "subtitle": "Un appel et un technicien licencié part vers vous. Pas de longue attente, pas de surprise sur la facture, une garantie écrite.",
-            "title": "Un nuisible à régler? On peut être chez vous aujourd’hui."
+            "subtitle": "Un appel, un technicien certifié évalue et planifie le traitement, souvent sous 24 à 48 h. Garantie écrite.",
+            "title": "Des punaises de lit? On referme le cycle pour de bon."
           }
         ],
         "slug": {
@@ -6481,69 +6584,172 @@
         "order": 3,
         "pageBuilder": [
           {
-            "_key": "pb-intro-oyc2xnhw",
+            "_key": "pb-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "icon": "lucide:award",
+                "value": "ASTTQ member",
+                "label": "Quebec pest management"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "icon": "lucide:leaf",
+                "value": "Approved products",
+                "label": "Health Canada, family-safe"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "icon": "lucide:clock",
+                "value": "Within 24 to 48 h",
+                "label": "service seven days a week"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "icon": "lucide:badge-check",
+                "value": "Written guarantee",
+                "label": "free return visit"
+              }
+            ]
+          },
+          {
+            "_key": "pb-editorial",
             "_type": "editorial",
+            "eyebrow": "The pest in detail",
+            "heading": "Understanding a bed bug infestation",
+            "lead": "They are not a sign of poor hygiene: they travel with us, hide by day and bite at night. Getting rid of them takes method, not a simple insecticide.",
             "segments": [
               {
-                "_key": "seg-fxut2c8c",
+                "_key": "seg0",
                 "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
                 "body": [
                   {
-                    "_key": "b-b3tq5c2m",
                     "_type": "block",
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-mn8f6a76",
                         "_type": "span",
-                        "marks": [],
-                        "text": "Bed bugs hide in mattress seams, cracks and behind baseboards. They travel in luggage and furniture, and an infestation settles in quietly before the first bites."
+                        "_key": "e1s",
+                        "text": "Bed bugs settle into mattress seams, the box spring, the headboard and the baseboards. The signs are clear: bites in a line when you wake, small dark specks on the sheets, sometimes shed skins along the seams. They move from room to room and resist do-it-yourself treatments.",
+                        "marks": []
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   },
                   {
-                    "_key": "b-xkabzl4p",
                     "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-gb32t1g7",
                         "_type": "span",
-                        "marks": [],
-                        "text": "We combine heat and a residual treatment to reach eggs and adults alike, right where they hide. Fully discreet: no one needs to know we came by."
+                        "_key": "e2hs",
+                        "text": "Heat, where insecticides fall short",
+                        "marks": []
                       }
-                    ],
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
                     "markDefs": [],
-                    "style": "normal"
+                    "children": [
+                      {
+                        "_type": "span",
+                        "_key": "e2s",
+                        "text": "A surface product reaches neither the eggs nor the bugs tucked into their harbourages. We treat with heat, lethal at every life stage, backed by an approved residual product in the key spots. With careful preparation and a follow-up check, we close the whole cycle.",
+                        "marks": []
+                      }
+                    ]
                   }
                 ],
-                "media": [],
-                "mediaSide": "auto"
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:inspection-rempart",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           },
           {
             "_key": "pb-hl-uwwlf524",
             "_type": "highlights",
-            "heading": "What you get",
+            "heading": "What the service includes",
             "items": [
               {
                 "_key": "benefit-0",
                 "_type": "highlight",
-                "body": "Bites in a line on waking, small dark spots on the sheets, black dots in the mattress seams.",
-                "title": "The signs"
+                "title": "Written guarantee, free return visit",
+                "body": "If the bed bugs come back within the covered period, we re-treat at no extra charge."
               },
               {
                 "_key": "benefit-1",
                 "_type": "highlight",
-                "body": "Targeted heat and residual treatment, a simple prep plan, safe for the household.",
-                "title": "The treatment"
+                "title": "Residue-free heat, approved products",
+                "body": "Heat leaves no residue; any backup product is Health Canada approved and safe for children and pets."
               },
               {
                 "_key": "benefit-2",
                 "_type": "highlight",
-                "body": "Follow-up included and the result guaranteed in writing, until full elimination.",
-                "title": "The guarantee"
+                "title": "On site within 24 to 48 h",
+                "body": "A real person answers seven days a week and a local technician heads your way quickly."
+              },
+              {
+                "_key": "benefit-3",
+                "_type": "highlight",
+                "title": "Guided preparation, written report",
+                "body": "A clear preparation checklist before the visit and a report of what was treated and what to watch."
+              }
+            ]
+          },
+          {
+            "_key": "pb-faq",
+            "_type": "faq",
+            "eyebrow": "Before you call",
+            "heading": "Your questions about bed bugs",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-preparation-en",
+                "_key": "fq0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-securite-en",
+                "_key": "fq1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-delai-en",
+                "_key": "fq2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-voyage-en",
+                "_key": "fq3"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-punaises-de-lit-zone-en",
+                "_key": "fq4"
               }
             ]
           },
@@ -6551,26 +6757,26 @@
             "_key": "pb-proc-df21397t",
             "_type": "process",
             "eyebrow": "How we work",
-            "heading": "A clear method, from the first call to the guarantee",
-            "lead": "No mystery, no pressure. We look first, we treat what needs treating, and we stay on it until the problem is gone for good.",
+            "heading": "How we treat a bed bug infestation",
+            "lead": "We target the whole life cycle, not just the bugs you can see.",
             "steps": [
               {
-                "_key": "step-0",
+                "_key": "s1",
                 "_type": "processStep",
-                "body": "We identify the pest, how far it has spread and where it gets in. You know exactly what you are dealing with before we touch anything.",
-                "title": "We inspect"
+                "title": "Preparation and targeted inspection",
+                "body": "We give you a preparation checklist, then inspect the seams, box spring and baseboards to find every harbourage."
               },
               {
-                "_key": "step-1",
+                "_key": "s2",
                 "_type": "processStep",
-                "body": "A targeted treatment, safe for your family and pets, applied by a certified technician. Nothing more than what the situation calls for.",
-                "title": "We treat"
+                "title": "Heat and residual treatment",
+                "body": "Heat reaches every life stage; an approved residual product closes off the remaining harbourages."
               },
               {
-                "_key": "step-2",
+                "_key": "s3",
                 "_type": "processStep",
-                "body": "We come back if needed and the result is guaranteed in writing. The problem stays solved, not just pushed down the road.",
-                "title": "We guarantee"
+                "title": "Follow-up check and written guarantee",
+                "body": "A second visit confirms no egg survived; the guarantee holds until it is solved."
               }
             ]
           },
@@ -6604,8 +6810,8 @@
               "label": "Get an estimate",
               "type": "anchor"
             },
-            "subtitle": "One call and a licensed technician is on the way. No long wait, no surprise on the bill, a guarantee in writing.",
-            "title": "A pest to deal with? We can be at your place today."
+            "subtitle": "One call and a certified technician assesses and plans the treatment, often within 24 to 48 hours. Written guarantee.",
+            "title": "Bed bugs? We close the cycle for good."
           }
         ],
         "slug": {
@@ -12871,6 +13077,644 @@
             "value": {
               "_type": "reference",
               "_ref": "faqItem-souris-rats-zone-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "faqTheme",
+      "content": {
+        "_id": "faqTheme-punaises-de-lit-fr",
+        "_type": "faqTheme",
+        "language": "fr",
+        "title": "Punaises de lit",
+        "slug": {
+          "_type": "slug",
+          "current": "punaises-de-lit"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-preparation-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Comment préparer mon logement avant le traitement?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "On vous remet une liste claire: laver et sécher à haute température la literie et les vêtements des chambres, désencombrer sans tout déménager, et dégager l'accès aux lits et aux plinthes. Une bonne préparation, c'est la moitié du résultat."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-securite-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Le traitement est-il sûr pour les enfants et les animaux?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Oui. On privilégie la chaleur, qui ne laisse aucun résidu, et tout produit d'appoint est homologué Santé Canada, appliqué par un technicien certifié. On vous indique le délai avant de réintégrer la pièce."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-delai-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Combien de visites avant d'en être débarrassé?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Souvent une à deux: le traitement, puis un contrôle de suivi deux à trois semaines plus tard pour confirmer qu'aucun œuf n'a survécu. La garantie écrite tient jusqu'à ce que ce soit réglé."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-voyage-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "D'où viennent les punaises de lit?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Le plus souvent d'un voyage, d'un meuble usagé ou d'une visite. Elles suivent les gens, pas la malpropreté. Au retour de voyage, inspectez les valises avant de les ranger."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-zone-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Desservez-vous mon secteur sur la Rive-Nord?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-repentigny-fr"
+                }
+              },
+              {
+                "_key": "l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-blainville-fr"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Oui, de "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "l1"
+                ],
+                "text": "Repentigny"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": " à "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "l3"
+                ],
+                "text": "Blainville"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": " et toute la couronne nord. Un technicien d'ici se déplace, souvent sous 24 à 48 h."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-fr"
+        }
+      }
+    },
+    {
+      "type": "faqTheme",
+      "content": {
+        "_id": "faqTheme-punaises-de-lit-en",
+        "_type": "faqTheme",
+        "language": "en",
+        "title": "Bed bugs",
+        "slug": {
+          "_type": "slug",
+          "current": "bed-bugs"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-preparation-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "How do I prepare my home before treatment?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "We give you a clear checklist: wash and dry bedding and bedroom clothing on high heat, declutter without moving everything out, and clear access to the beds and baseboards. Good preparation is half the result."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-securite-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Is the treatment safe for children and pets?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes. We rely on heat, which leaves no residue, and any backup product is Health Canada approved and applied by a certified technician. We tell you how long to wait before using the room again."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-delai-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "How many visits before they are gone?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Often one or two: the treatment, then a follow-up check two to three weeks later to confirm no egg survived. The written guarantee holds until it is solved."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-voyage-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Where do bed bugs come from?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Most often from travel, second-hand furniture or a visit. They follow people, not poor hygiene. After a trip, inspect your luggage before storing it."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-punaises-de-lit-zone-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Do you serve my area on the North Shore?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-repentigny-en"
+                }
+              },
+              {
+                "_key": "l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-blainville-en"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes, from "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "l1"
+                ],
+                "text": "Repentigny"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": " to "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "l3"
+                ],
+                "text": "Blainville"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": " and the whole north crown. A local technician heads out, often within 24 to 48 hours."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-punaises-de-lit-en"
+        }
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqTheme-punaises-de-lit",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqTheme"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqTheme-punaises-de-lit-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqTheme"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqTheme-punaises-de-lit-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqTheme"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-punaises-de-lit-preparation",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-preparation-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-preparation-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-punaises-de-lit-securite",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-securite-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-securite-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-punaises-de-lit-delai",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-delai-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-delai-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-punaises-de-lit-voyage",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-voyage-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-voyage-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-punaises-de-lit-zone",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-zone-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-punaises-de-lit-zone-en",
               "_weak": true,
               "_strengthenOnPublish": {
                 "type": "faqItem"
