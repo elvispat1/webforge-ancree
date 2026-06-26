@@ -1130,40 +1130,6 @@
         ],
         "pageBuilder": [
           {
-            "_key": "b1",
-            "_type": "trustBar",
-            "items": [
-              {
-                "_key": "t1",
-                "_type": "proof",
-                "icon": "lucide:clipboard-check",
-                "value": "Estimation gratuite",
-                "label": "Sans engagement, par téléphone"
-              },
-              {
-                "_key": "t2",
-                "_type": "proof",
-                "icon": "lucide:award",
-                "value": "Depuis 2008",
-                "label": "Ancrés sur la Rive-Nord"
-              },
-              {
-                "_key": "t3",
-                "_type": "proof",
-                "icon": "lucide:clock",
-                "value": "Service le jour même",
-                "label": "Souvent en moins de 24 h"
-              },
-              {
-                "_key": "t4",
-                "_type": "proof",
-                "icon": "lucide:leaf",
-                "value": "Sûr pour la famille",
-                "label": "et les animaux de compagnie"
-              }
-            ]
-          },
-          {
             "_key": "b2",
             "_type": "services",
             "eyebrow": "Ce qu'on règle",
@@ -1493,40 +1459,6 @@
           }
         ],
         "pageBuilder": [
-          {
-            "_key": "b1",
-            "_type": "trustBar",
-            "items": [
-              {
-                "_key": "t1",
-                "_type": "proof",
-                "icon": "lucide:clipboard-check",
-                "value": "Free estimate",
-                "label": "No obligation, by phone"
-              },
-              {
-                "_key": "t2",
-                "_type": "proof",
-                "icon": "lucide:award",
-                "value": "Since 2008",
-                "label": "Rooted on the North Shore"
-              },
-              {
-                "_key": "t3",
-                "_type": "proof",
-                "icon": "lucide:clock",
-                "value": "Same-day service",
-                "label": "Often within 24 hours"
-              },
-              {
-                "_key": "t4",
-                "_type": "proof",
-                "icon": "lucide:leaf",
-                "value": "Safe for your family",
-                "label": "and your pets"
-              }
-            ]
-          },
           {
             "_key": "b2",
             "_type": "services",
@@ -3704,40 +3636,6 @@
         ],
         "pageBuilder": [
           {
-            "_key": "b1",
-            "_type": "trustBar",
-            "items": [
-              {
-                "_key": "t1",
-                "_type": "proof",
-                "icon": "lucide:clipboard-check",
-                "value": "Estimation gratuite",
-                "label": "Sans engagement, par téléphone"
-              },
-              {
-                "_key": "t2",
-                "_type": "proof",
-                "icon": "lucide:award",
-                "value": "15 ans d'expérience",
-                "label": "Ancrés sur la Rive-Nord"
-              },
-              {
-                "_key": "t3",
-                "_type": "proof",
-                "icon": "lucide:clock",
-                "value": "Service le jour même",
-                "label": "Souvent en moins de 24 h"
-              },
-              {
-                "_key": "t4",
-                "_type": "proof",
-                "icon": "lucide:leaf",
-                "value": "Sûr pour la famille",
-                "label": "et les animaux de compagnie"
-              }
-            ]
-          },
-          {
             "_key": "b2",
             "_type": "services",
             "eyebrow": "Ce qu'on règle",
@@ -3978,40 +3876,6 @@
           }
         ],
         "pageBuilder": [
-          {
-            "_key": "b1",
-            "_type": "trustBar",
-            "items": [
-              {
-                "_key": "t1",
-                "_type": "proof",
-                "icon": "lucide:clipboard-check",
-                "value": "Free estimate",
-                "label": "No obligation, by phone"
-              },
-              {
-                "_key": "t2",
-                "_type": "proof",
-                "icon": "lucide:award",
-                "value": "15 years of experience",
-                "label": "Rooted on the North Shore"
-              },
-              {
-                "_key": "t3",
-                "_type": "proof",
-                "icon": "lucide:clock",
-                "value": "Same-day service",
-                "label": "Often within 24 hours"
-              },
-              {
-                "_key": "t4",
-                "_type": "proof",
-                "icon": "lucide:leaf",
-                "value": "Safe for your family",
-                "label": "and your pets"
-              }
-            ]
-          },
           {
             "_key": "b2",
             "_type": "services",
