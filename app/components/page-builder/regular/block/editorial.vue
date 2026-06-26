@@ -1,8 +1,13 @@
 <script setup lang="ts">
 /* Bloc Éditorial: du contenu long en SEGMENTS. Chaque segment pose du texte riche
- * (titres, listes, liens internes inline) et, au choix, une ou deux images. Une
- * « disposition » par segment décide de la composition du visuel; `auto` la dérive
- * du nombre d'images, les autres la forcent (avec replis sûrs si une image manque).
+ * (titres, listes, liens internes inline) et, au choix, une ou deux images.
+ * SOLO (un seul segment): aucune transition possible, on honore la disposition du
+ * CMS. SÉQUENCE (2+ segments): le composant force un zigzag posé, le côté de l'image
+ * est dérivé en code et les compos « posées » (band, duo) sont rabattues sur la
+ * famille « à côté ». Garantie démo: impossible de générer la transition cassée
+ * (texte, image à droite, puis texte à gauche avec un vide à droite).
+ * Une « disposition » par segment décide de la composition du visuel; `auto` la
+ * dérive du nombre d'images, les autres la forcent (replis sûrs si image manque).
  * Deux familles, pour donner du rythme entre segments:
  *   À CÔTÉ (texte et image côte à côte, zigzag d'Ancrée):
  *     aside    — image modeste à côté du texte
@@ -27,10 +32,14 @@ const props = defineProps<BlockBase<'editorial'> & EditorialContent>()
 
 const hasHead = computed(() => Boolean(props.heading))
 
-// Disposition effective: `auto` se résout selon le nombre d'images; une compo qui
-// exige plus d'images qu'elle n'en a retombe sur une compo plus simple. Jamais de
+// Un editorial à plusieurs segments est une SÉQUENCE (composée en zigzag posé); à un
+// seul segment, c'est un SOLO (aucune transition possible, disposition honorée).
+const isSequence = computed(() => props.segments.length > 1)
+
+// Disposition d'un segment SOLO: `auto` se résout selon le nombre d'images; une compo
+// qui exige plus d'images qu'elle n'en a retombe sur une compo plus simple. Jamais de
 // bloc cassé (même esprit fail-safe que le placeholder du fragment <Image>).
-function effectiveDisposition(seg: EditorialSegment): EditorialDisposition {
+function soloDisposition(seg: EditorialSegment): EditorialDisposition {
   const count = seg.media.length
   let d = seg.disposition
   if (d === 'auto') d = count === 0 ? 'text' : count === 1 ? 'aside' : 'nested'
@@ -39,8 +48,20 @@ function effectiveDisposition(seg: EditorialSegment): EditorialDisposition {
   return d
 }
 
-// Côté de l'image au desktop: `auto` alterne (segments impairs à gauche), `left`/
-// `right` forcent. Ne concerne que la famille « à côté » et le sens du diptyque.
+// Disposition d'un segment en SÉQUENCE: on rabat tout sur la famille « à côté » (ou un
+// interlude de texte centré si 0 image), pour qu'aucun segment ne puisse poser un vide
+// à côté de l'image d'un voisin. Les compos « posées » (band, duo) et le champ
+// mediaSide du CMS ne sont volontairement PAS honorés ici: la démo ne doit pas pouvoir
+// générer la transition cassée (texte, image à droite, puis texte à gauche, vide).
+function seqDisposition(seg: EditorialSegment): EditorialDisposition {
+  const count = seg.media.length
+  if (count === 0) return 'text'
+  if (count >= 2) return 'nested'
+  return 'aside'
+}
+
+// Côté de l'image au desktop (SOLO uniquement): `auto` alterne (segments impairs à
+// gauche), `left`/`right` forcent. En séquence, le côté est dérivé en code (zigzag).
 function mediaLeft(seg: EditorialSegment, i: number): boolean {
   if (seg.mediaSide === 'left') return true
   if (seg.mediaSide === 'right') return false
@@ -55,27 +76,45 @@ interface SegmentView {
   disp: EditorialDisposition
   left: boolean
   beside: boolean
+  seq: boolean
+  interlude: boolean
   images: EditorialImage[]
   caption?: string
 }
-const view = computed<SegmentView[]>(() =>
-  props.segments.map((seg, i) => {
-    const disp = effectiveDisposition(seg)
+const view = computed<SegmentView[]>(() => {
+  const seq = isSequence.value
+  let imgRank = 0 // rang du segment porteur d'image, pour le zigzag dérivé en séquence
+  return props.segments.map((seg, i) => {
+    const disp = seq ? seqDisposition(seg) : soloDisposition(seg)
     const pair = disp === 'nested' || disp === 'duo'
     const single = disp === 'aside' || disp === 'overhang' || disp === 'band'
+    const hasImg = disp !== 'text'
+    // Côté: en solo on honore mediaSide; en séquence on dérive un zigzag strict du
+    // rang d'image (1re image à droite, puis alternance), CMS volontairement ignoré.
+    let left: boolean
+    if (seq) {
+      left = hasImg ? imgRank % 2 === 1 : false
+      if (hasImg) imgRank++
+    } else {
+      left = mediaLeft(seg, i)
+    }
     return {
       body: seg.body,
       disp,
-      left: mediaLeft(seg, i),
+      left,
       beside: disp === 'aside' || disp === 'overhang' || disp === 'nested',
+      seq,
+      interlude: seq && disp === 'text',
       images: disp === 'text' ? [] : pair ? seg.media.slice(0, 2) : seg.media.slice(0, 1),
       caption: single ? seg.media[0]?.caption : undefined
     }
   })
-)
+})
 
 function segmentClass(vm: SegmentView): string[] {
   const c = [`editorial__segment--${vm.disp}`]
+  if (vm.seq) c.push('editorial__segment--seq')
+  if (vm.interlude) c.push('editorial__segment--interlude')
   if (vm.beside) c.push('editorial__segment--beside', vm.left ? 'editorial__segment--media-left' : 'editorial__segment--media-right')
   if (vm.disp === 'duo') c.push(vm.left ? 'editorial__segment--media-left' : 'editorial__segment--media-right')
   return c
@@ -213,12 +252,10 @@ function imgSizes(vm: SegmentView, j: number): string {
   color: var(--text-muted);
 }
 
-/* Débord solo: l'image porte une ombre plus marquée et un fin filet ambre (matière
- * et profondeur). Le décalage dans la gouttière se précise au desktop. */
+/* Débord: l'image porte une ombre chaude plus marquée (matière et profondeur, sans
+ * filet décoratif). Le décalage dans la gouttière se précise au desktop. */
 .editorial__segment--overhang .editorial__img {
-  box-shadow:
-    0 0 0 var(--line-width) color-mix(in oklch, var(--accent-call) 55%, transparent),
-    var(--elev-high);
+  box-shadow: var(--elev-high);
 }
 
 /* Paire emboîtée: l'image d'ancrage (back) tient le cadre, la seconde (front) glisse
@@ -338,6 +375,28 @@ function imgSizes(vm: SegmentView, j: number): string {
   .editorial__segment--duo.editorial__segment--media-left .editorial__img--duo:nth-child(2) {
     grid-column: 1;
     margin-top: 3.6rem;
+  }
+}
+
+/* Séquence (2+ segments): le zigzag se pose. L'image penche dans la gouttière vers le
+ * texte (matière et profondeur, sans tiret ni filet), l'ombre chaude se renforce. Le
+ * rendu solo reste inchangé (la signature ne s'applique qu'aux séquences). */
+@container site (min-width: 1024px) {
+  .editorial__segment--seq.editorial__segment--media-right .editorial__media {
+    transform: translateX(-1.6rem);
+  }
+  .editorial__segment--seq.editorial__segment--media-left .editorial__media {
+    transform: translateX(1.6rem);
+  }
+  .editorial__segment--seq .editorial__img--single {
+    box-shadow: var(--elev-high);
+  }
+
+  /* Interlude de texte en séquence (0 image): mesure centrée et posée, vides
+   * symétriques (jamais un demi-bloc à vide latéral sous l'image d'un voisin). */
+  .editorial__segment--interlude .editorial__text {
+    grid-column: 3 / span 12;
+    margin-inline: auto;
   }
 }
 </style>
