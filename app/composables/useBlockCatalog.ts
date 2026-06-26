@@ -131,13 +131,16 @@ export function useBlockCatalog(): CatalogCategory[] {
     : undefined
 
   // Bloc editorial: idem, il vit dans le pageBuilder des pages de detail. On cherche
-  // le 1er service dont un editorial porte au moins deux images (de quoi batir TOUTES
-  // les compositions de la vitrine: bandeau, diptyque, emboitee...).
+  // le 1er service dont l'editorial porte au moins deux images AU TOTAL (reparties sur
+  // ses segments), de quoi batir TOUTES les compositions de la vitrine (bandeau,
+  // diptyque, emboitee...). Les onglets de variantes sont mono-segment, donc honores
+  // tels quels par le rendu; le total suffit, un segment a deux images n'est plus requis.
   let editorialBlock: Extract<PageBlock, { _type: 'editorial' }> | undefined
   for (const s of useServices()) {
     const found = useServiceBlocks(s).find(
       (b): b is Extract<PageBlock, { _type: 'editorial' }> =>
-        b._type === 'editorial' && b.segments.some((seg) => seg.media.length >= 2)
+        b._type === 'editorial' &&
+        b.segments.reduce((n, seg) => n + seg.media.length, 0) >= 2
     )
     if (found) {
       editorialBlock = found
