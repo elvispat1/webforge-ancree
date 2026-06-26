@@ -211,6 +211,7 @@ export type SanityRawBlock = (
   | SanityEditorialBlock
   | SanityProcessBlock
   | SanityHighlightsBlock
+  | SanityTeamBlock
 ) & { anchor?: Maybe<string> }
 
 /** Bloc processus du pageBuilder (PAGE_BUILDER_PROJECTION). */
@@ -225,6 +226,24 @@ export interface SanityHighlightsBlock {
   eyebrow?: Maybe<string>
   heading?: Maybe<string>
   items?: Maybe<Array<{ title: string; body: string }>>
+}
+/** Bloc équipe du pageBuilder (PAGE_BUILDER_PROJECTION). Le portrait sort en figure
+ *  résolue (src/alt/caption depuis l'asset, comme about.photo). */
+export interface SanityTeamBlock {
+  _type: 'team'
+  _key: string
+  eyebrow?: Maybe<string>
+  heading?: Maybe<string>
+  lead?: Maybe<string>
+  members?: Maybe<
+    Array<{
+      name: string
+      role: string
+      credentials?: Maybe<string>
+      bio?: Maybe<string>
+      photo: SanityFigure
+    }>
+  >
 }
 
 // ── Blocs d'article (ARTICLE_BODY_PROJECTION, discrimines par `_type`) ─────────

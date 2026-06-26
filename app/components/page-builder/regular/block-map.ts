@@ -12,6 +12,7 @@ import Contact from './block/contact.vue'
 import Process from './block/process.vue'
 import Editorial from './block/editorial.vue'
 import Highlights from './block/highlights.vue'
+import Team from './block/team.vue'
 
 export const regularBlockMap = {
   'trust-bar': TrustBar,
@@ -24,7 +25,8 @@ export const regularBlockMap = {
   contact: Contact,
   process: Process,
   editorial: Editorial,
-  highlights: Highlights
+  highlights: Highlights,
+  team: Team
 } as const
 
 export type RegularBlockType = keyof typeof regularBlockMap

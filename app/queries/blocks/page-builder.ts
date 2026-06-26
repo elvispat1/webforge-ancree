@@ -104,5 +104,11 @@ export const PAGE_BUILDER_PROJECTION = /* groq */ `pageBuilder[]{
     eyebrow,
     heading,
     items[]{ title, body }
+  },
+  _type == "team" => {
+    eyebrow,
+    heading,
+    lead,
+    members[]{ name, role, credentials, bio, "photo": photo ${FIGURE_PROJECTION} }
   }
 }`

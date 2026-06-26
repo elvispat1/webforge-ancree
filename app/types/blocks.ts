@@ -11,6 +11,7 @@ import type { ContactContent } from '~/content/contact'
 import type { ProcessContent } from '~/content/process'
 import type { EditorialContent } from '~/content/editorial'
 import type { HighlightsContent } from '~/content/highlights'
+import type { TeamContent } from '~/content/team'
 import type {
   ArticleLeadContent,
   ArticleRichTextContent,
@@ -41,6 +42,7 @@ export type ContactBlock = BlockBase<'contact'> & ContactContent
 export type ProcessBlock = BlockBase<'process'> & ProcessContent
 export type EditorialBlock = BlockBase<'editorial'> & EditorialContent
 export type HighlightsBlock = BlockBase<'highlights'> & HighlightsContent
+export type TeamBlock = BlockBase<'team'> & TeamContent
 
 export type PageBlock =
   | TrustBarBlock
@@ -54,6 +56,7 @@ export type PageBlock =
   | ProcessBlock
   | EditorialBlock
   | HighlightsBlock
+  | TeamBlock
 
 // Blocs du corps d'article (catalogue a part, comme les heros). _type courts.
 export type ArticleLeadBlock = BlockBase<'lead'> & ArticleLeadContent

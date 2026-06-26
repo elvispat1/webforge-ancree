@@ -46,5 +46,6 @@ export const pageBuilderField = defineField({
     defineArrayMember({ type: 'editorial' }),
     defineArrayMember({ type: 'highlights' }),
     defineArrayMember({ type: 'process' }),
+    defineArrayMember({ type: 'team' }),
   ],
 })

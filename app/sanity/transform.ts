@@ -43,6 +43,7 @@ import type { FaqContent } from '../content/faq'
 import type { CtaBandContent } from '../content/cta-band'
 import type { ContactContent } from '../content/contact'
 import type { ProcessContent } from '../content/process'
+import type { TeamContent } from '../content/team'
 import type { EditorialContent, EditorialMediaSide, EditorialDisposition } from '../content/editorial'
 import type { Category } from '../content/categories'
 import type { Article } from '../content/articles'
@@ -62,7 +63,8 @@ import type {
   ArticleBlock,
   EditorialBlock,
   ProcessBlock,
-  HighlightsBlock
+  HighlightsBlock,
+  TeamBlock
 } from '../types/blocks'
 import type {
   Maybe,
@@ -77,6 +79,7 @@ import type {
   SanityRawHeroBlock,
   SanityCtaBand,
   SanityProcess,
+  SanityTeamBlock,
   SanityContactBlock,
   SanityRawBlock,
   SanityRawArticleBlock,
@@ -168,6 +171,7 @@ export type PayloadPageBlock =
   | EditorialBlock
   | ProcessBlock
   | HighlightsBlock
+  | TeamBlock
 
 /** Traduction d'un doc de collection, normalisee (slug de l'autre langue;
  *  catSlug seulement sur les articles). Sert le switcher de langue et
@@ -394,7 +398,8 @@ const PAGE_BLOCK_TYPE_MAP = {
   contact: 'contact',
   editorial: 'editorial',
   process: 'process',
-  highlights: 'highlights'
+  highlights: 'highlights',
+  team: 'team'
 } as const
 
 const ARTICLE_BLOCK_TYPE_MAP = {
@@ -443,7 +448,8 @@ const ANCHOR_KEY: Record<SanityRawBlock['_type'], string> = {
   contact: 'contact',
   editorial: 'editorial',
   process: 'process',
-  highlights: 'highlights'
+  highlights: 'highlights',
+  team: 'team'
 }
 
 // ── Liens, localises (prefixe /en inclus en EN via le route-map) ──────────────
@@ -713,6 +719,26 @@ function transformProcess(raw: SanityProcess, locale: WfLocale): ProcessPayload 
   }
 }
 
+/** Bloc equipe: chaque portrait sort en { src, alt } (figure resolue depuis l'asset,
+ *  comme about.photo); src absent -> '' (le fragment <Image> rend un placeholder). */
+function transformTeam(raw: SanityTeamBlock, locale: WfLocale): TeamContent {
+  return {
+    eyebrow: opt(raw.eyebrow),
+    heading: opt(raw.heading),
+    lead: opt(raw.lead),
+    members: (raw.members ?? []).map((m) => {
+      const f = resolveFigure(m.photo)
+      return {
+        name: m.name,
+        role: m.role,
+        credentials: opt(m.credentials),
+        bio: opt(m.bio),
+        photo: { src: f.src ?? '', alt: f.alt }
+      }
+    })
+  }
+}
+
 // ── Heros ───────────────────────────────────────────────────────────────────
 
 function transformHeroHomeBody(raw: SanityHeroHome, locale: WfLocale, phoneE164: string): HeroContent {
@@ -914,6 +940,8 @@ function transformBlock(
         heading: opt(block.heading),
         items: (block.items ?? []).map((i) => ({ title: i.title, body: i.body }))
       }
+    case 'team':
+      return { _type: 'team', _key: key, ...transformTeam(block, locale) }
     default:
       return assertNever(block)
   }

@@ -31,6 +31,7 @@ import { contact } from './objects/blocks/contact'
 import { editorial } from './objects/blocks/editorial'
 import { highlights } from './objects/blocks/highlights'
 import { process } from './objects/blocks/process'
+import { team } from './objects/blocks/team'
 
 // Blocs article (union ArticleBlock côté Vue)
 import { articleLead } from './objects/article-blocks/article-lead'
@@ -92,6 +93,7 @@ export const schemaTypes = [
   editorial,
   highlights,
   process,
+  team,
 
   // Blocs article
   articleLead,
