@@ -63,6 +63,8 @@
 // remboursement. Ces modalités relèvent du client. Ne pas l'inscrire tant que le
 // client ne traite pas réellement de paiements.
 
+import type { SeoOverride } from '~/content/site'
+
 /** Un bloc de contenu: paragraphe, liste à puces, ou zone à remplir par le client. */
 export type LegalBlock = string | { list: string[] } | { todo: string }
 
@@ -79,6 +81,8 @@ export interface LegalDoc {
   /** Date de la dernière mise à jour (identique à l'entrée en vigueur au lancement). */
   updated: string
   sections: LegalSection[]
+  /** SEO éditable (onglet SEO). Vide: titre de la page; description/image globales. */
+  seo?: SeoOverride
 }
 
 export interface LegalContent {

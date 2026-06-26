@@ -63,7 +63,7 @@ const articleHero = computed<HeroArticleBlock | null>(() => {
   const trail: Crumb[] = [{ label: routeLabel('blog', loc.value), to: routePath('blog', loc.value) }]
   if (a.category) trail.push({ label: a.category.title, to: categoryHref(a.category.slug, loc.value) })
   trail.push({ label: a.title })
-  const cover: HeroVisual = { ratio: '21/9', src: a.cover.src, alt: a.cover.alt, label: '', caption: '' }
+  const cover: HeroVisual = { src: a.cover.src, alt: a.cover.alt }
   return {
     _type: 'hero-article',
     _key: 'masthead',
@@ -130,11 +130,11 @@ if (seoMatch?.type === 'article') {
   if (a.category) trail.push({ label: a.category.title, to: categoryHref(a.category.slug, loc.value) })
   trail.push({ label: a.title })
   usePageSeo({
-    title: a.title,
-    description: a.excerpt,
+    title: a.seo?.title ?? a.title,
+    description: a.seo?.description ?? a.excerpt,
     type: 'article',
     webPageType: 'ItemPage',
-    image: a.cover.src,
+    image: a.seo?.image ?? a.cover.src,
     breadcrumbs: breadcrumbsFromTrail(loc.value, ...trail),
     article: {
       datePublished: a.date,
@@ -144,11 +144,13 @@ if (seoMatch?.type === 'article') {
     }
   })
 } else if (seoMatch?.type === 'category') {
+  const cat = seoMatch.category
   usePageSeo({
-    title: `${seoMatch.category.title}, ${routeLabel('blog', loc.value)}`,
-    description: seoMatch.category.description,
+    title: cat.seo?.title ?? `${cat.title}, ${routeLabel('blog', loc.value)}`,
+    description: cat.seo?.description ?? cat.description,
+    image: cat.seo?.image,
     webPageType: 'CollectionPage',
-    breadcrumbs: breadcrumbsFor('blog', { label: seoMatch.category.title }, loc.value)
+    breadcrumbs: breadcrumbsFor('blog', { label: cat.title }, loc.value)
   })
 }
 </script>

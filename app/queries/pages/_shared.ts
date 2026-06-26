@@ -84,7 +84,7 @@ export function collections(detail?: DetailCollection): string {
   const serviceFull = detail === 'service' ? detailFull : ''
   const serviceCityFull = detail === 'serviceCity' ? detailFull : ''
   const articleFull = detail === 'article'
-    ? `,\n    (slug.current == $slug) => {\n      ${ARTICLE_BODY_PROJECTION},\n      "translations": ${TRANSLATIONS_PROJECTION}\n    }`
+    ? `,\n    (slug.current == $slug) => {\n      ${ARTICLE_BODY_PROJECTION},\n      "seo": seo ${SEO_PROJECTION},\n      "translations": ${TRANSLATIONS_PROJECTION}\n    }`
     : ''
   return /* groq */ `
   "services": *[_type == "service" && language == $language] | order(order asc){
@@ -100,6 +100,7 @@ export function collections(detail?: DetailCollection): string {
     title,
     "slug": slug.current,
     description,
+    "seo": seo ${SEO_PROJECTION},
     "translations": ${TRANSLATIONS_PROJECTION}
   },
   "testimonials": *[_type == "testimonial" && language == $language] | order(order asc){

@@ -11,6 +11,7 @@
 // externe -> <a> sûr.
 
 import { FIGURE_PROJECTION } from '../fragments/figure'
+import { PT_LINK_MARKDEFS } from '../fragments/link'
 
 export const EDITORIAL_FIELDS = /* groq */ `{
   eyebrow,
@@ -24,19 +25,7 @@ export const EDITORIAL_FIELDS = /* groq */ `{
       listItem,
       level,
       "children": children[]{ _key, text, marks },
-      "markDefs": markDefs[]{
-        _key,
-        _type,
-        type,
-        externalUrl,
-        anchor,
-        "internalRef": internalRef->{
-          _type,
-          _id,
-          "slug": slug.current,
-          "catSlug": category->slug.current
-        }
-      }
+      "markDefs": ${PT_LINK_MARKDEFS}
     },
     "media": media[] ${FIGURE_PROJECTION},
     mediaSide

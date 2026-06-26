@@ -2,6 +2,8 @@
 // confidentialite). A partager entre la query de prod et la query scopee preview.
 // Import RELATIF (fermeture nuxt.config).
 
+import { SEO_PROJECTION } from './seo'
+
 /**
  * Page legale: id deterministe du seed (legalPage-<conditions|confidentialite>-
  * <lang>), titre, dates optionnelles (effective/updated) et sections (titre +
@@ -13,6 +15,7 @@ export const LEGAL_PROJECTION = /* groq */ `{
   title,
   effective,
   updated,
+  "seo": seo ${SEO_PROJECTION},
   sections[]{
     title,
     body[]{ _type, text, items }

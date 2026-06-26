@@ -18,7 +18,9 @@ const heroBlock = computed<HeroPageBlock>(() => ({
 }))
 
 usePageSeo({
-  title: doc.value.title,
+  title: doc.value.seo?.title ?? doc.value.title,
+  description: doc.value.seo?.description,
+  image: doc.value.seo?.image,
   breadcrumbs: breadcrumbsFor('privacy', undefined, locale.value as 'fr' | 'en')
 })
 </script>

@@ -29,7 +29,7 @@
 
 import { routePath, onePagerPath, serviceCityPath, legalRouteKeyForId } from '../config/route-map'
 import { SOCIAL_PLATFORMS, type SocialPlatform } from '../config/socials'
-import type { SiteContent } from '../content/site'
+import type { SiteContent, SeoOverride } from '../content/site'
 import type { LegalBlock, LegalDoc, LegalContent } from '../content/legal'
 import type { HeroContent, HeroPageContent } from '../content/hero'
 import type {
@@ -80,7 +80,6 @@ import type {
   SanityContactBlock,
   SanityRawBlock,
   SanityRawArticleBlock,
-  SanityRawPortableBlock,
   SanityRawLinkedPortableBlock,
   SanityEditorialFields,
   SanitySiteSettings,
@@ -198,8 +197,6 @@ export interface ServicePayload {
   summary?: string
   /** Image en src string (contrat des blocs); figure sans image -> '' (placeholder). */
   image: string
-  /** Meta de figure (alt/label/caption) pour serviceImage() cote composable. */
-  imageMeta: { alt: string; label: string; caption: string }
   hero?: HeroPageBlock
   pageBuilder?: PayloadPageBlock[]
   seo?: PageSeo
@@ -549,41 +546,21 @@ function linkPair(link: SanityLink, locale: WfLocale, phoneE164: string): { labe
 // ── Figures ───────────────────────────────────────────────────────────────────
 
 export interface ResolvedFigure {
-  ratio: string
   src?: string
   alt: string
-  label: string
-  caption: string
 }
 
-// Ratios par defaut par usage, cales sur les valeurs dominantes d'Ancree. Le seed
-// stocke toujours le ratio explicite: ces defauts servent le contenu cree ensuite
-// au Studio (les interfaces front exigent un ratio string).
-export const RATIOS = {
-  heroVisual: '16/9',
-  heroVisualMobile: '4/5',
-  pageHero: '2/1',
-  aboutPhoto: '3/4',
-  serviceImage: '4/3',
-  articleCover: '16/9',
-  articleImage: '4/3',
-  articleGalleryItem: '4/3'
-} as const
-
 /**
- * `figure` Sanity -> figure resolue. `src` absent (figure sans image) reste absent:
- * le fragment <Image> rend son placeholder soigne, jamais une 404. Le ratio devient
- * une valeur CSS: en preview le stega y colle des caracteres invisibles qui la
- * rendent invalide; on ne garde que chiffres, / et . (no-op en prod).
+ * `figure` Sanity -> { src, alt }. `src` absent (figure sans image) reste absent: le
+ * fragment <Image> rend son placeholder soigne, jamais une 404. alt vient de l'asset
+ * (FIGURE_PROJECTION). Le ratio est decide par l'emplacement au rendu, plus par le
+ * contenu; la legende (figures d'article/editorial) passe par resolveArticleFigure.
  */
-export function resolveFigure(figure: Maybe<SanityFigure>, defaultRatio: string): ResolvedFigure {
+export function resolveFigure(figure: Maybe<SanityFigure>): ResolvedFigure {
   const f = figure ?? {}
   return {
-    ratio: (f.ratio ?? defaultRatio).replace(/[^0-9/.]/g, '') || defaultRatio,
     src: opt(f.src),
-    alt: f.alt ?? '',
-    label: f.label ?? '',
-    caption: f.caption ?? ''
+    alt: f.alt ?? ''
   }
 }
 
@@ -601,44 +578,13 @@ function resolveArticleFigure(figure: Maybe<SanityFigure>): ArticleFigure {
 // ── Portable Text (texte riche d'article) ─────────────────────────────────────
 
 /**
- * Portable Text Sanity -> PortableTextBlock[] du contrat article-blocks. Ancree
- * garde la forme Portable Text RICHE (le bloc Vue rich-text serialise titres,
- * listes, gras/italique et liens), contrairement a Minimaliste qui aplatit en
- * RichTextEntry. On normalise simplement la nullabilite GROQ.
- */
-export function ptToRichTextEntries(blocks: Maybe<SanityRawPortableBlock[]>): PortableTextBlock[] {
-  return (blocks ?? []).map((b) => {
-    const style = (b.style === 'h2' || b.style === 'h3' ? b.style : 'normal') as PortableTextBlock['style']
-    const out: PortableTextBlock = {
-      _type: 'block',
-      _key: b._key,
-      style,
-      children: (b.children ?? []).map((c) => ({
-        _type: 'span' as const,
-        _key: c._key,
-        text: c.text ?? '',
-        marks: opt(c.marks)
-      }))
-    }
-    if (b.listItem === 'bullet' || b.listItem === 'number') out.listItem = b.listItem
-    if (typeof b.level === 'number') out.level = b.level
-    if (b.markDefs && b.markDefs.length) {
-      out.markDefs = b.markDefs.map((m) => ({
-        _key: m._key,
-        _type: 'link' as const,
-        href: m.href ?? ''
-      }))
-    }
-    return out
-  })
-}
-
-/**
- * Portable Text du bloc editorial -> PortableTextBlock[]. Comme ptToRichTextEntries,
- * mais l'annotation `link` des markDefs est RESOLUE en href string localise
- * (resolveLink: interne via docPath, externe, ancre). Le serialiseur PortableText.vue
- * rend ensuite interne -> NuxtLink, externe -> <a> sur. Un lien interne irresoluble
- * (ref non publiee) interrompt le build (fail-fast), jamais un lien mort silencieux.
+ * Portable Text riche (corps d'article ET segments editoriaux) -> PortableTextBlock[].
+ * L'annotation `link` des markDefs est RESOLUE en href string localise (resolveLink:
+ * interne via docPath, externe, ancre). Le serialiseur PortableText.vue rend ensuite
+ * interne -> NuxtLink, externe -> <a> sur. Un lien interne irresoluble (ref non
+ * publiee) interrompt le build (fail-fast), jamais un lien mort silencieux. Le corps
+ * d'article et l'editorial partagent la meme annotation (objets/portable-link) et la
+ * meme projection (PT_LINK_MARKDEFS).
  */
 export function ptToLinkedEntries(
   blocks: Maybe<SanityRawLinkedPortableBlock[]>,
@@ -780,7 +726,7 @@ function transformHeroHomeBody(raw: SanityHeroHome, locale: WfLocale, phoneE164:
 }
 
 function transformPageHeroBody(raw: SanityPageHero, locale: WfLocale, phoneE164: string): HeroPageContent {
-  const rf = resolveFigure(raw.image, RATIOS.pageHero)
+  const rf = resolveFigure(raw.image)
   return {
     title: raw.title,
     lead: opt(raw.lead),
@@ -794,7 +740,7 @@ function transformPageHeroBody(raw: SanityPageHero, locale: WfLocale, phoneE164:
  *  Mappe vers le _type kebab 'hero-page': les pages de detail rendent le meme
  *  masthead solide que les pages internes. Le fil d'Ariane est ajoute par la page. */
 function transformDetailHeroBody(raw: SanityDetailHero, locale: WfLocale, phoneE164: string): HeroPageContent {
-  const rf = resolveFigure(raw.image, RATIOS.pageHero)
+  const rf = resolveFigure(raw.image)
   return {
     eyebrow: opt(raw.eyebrow),
     title: raw.title,
@@ -848,6 +794,18 @@ function resolveSeo(
     description: seo?.description ?? heroLead ?? defaults.defaultDescription ?? '',
     image: opt(seo?.ogImage)
   }
+}
+
+/** Objet seo editable normalise en SeoOverride. Les champs-collections (article,
+ *  categorie, legalPage) gardent leur derivation Schema.org au niveau page; cet
+ *  override y est superpose. Un champ vide ('' ou absent) -> undefined pour que le
+ *  `??` de la page retombe sur sa derivation, puis sur les replis de usePageSeo. */
+function optSeoOverride(seo: Maybe<SanitySeo>): SeoOverride | undefined {
+  if (!seo) return undefined
+  const title = opt(seo.title) || undefined
+  const description = opt(seo.description) || undefined
+  const image = opt(seo.ogImage) || undefined
+  return title || description || image ? { title, description, image } : undefined
 }
 
 // ── Page builder (8 blocs) ────────────────────────────────────────────────────
@@ -906,7 +864,7 @@ function transformBlock(
         heading: block.heading,
         body: toParagraphs(block.body),
         photo: ((): AboutBlock['photo'] => {
-          const f = resolveFigure(block.photo, RATIOS.aboutPhoto)
+          const f = resolveFigure(block.photo)
           return { src: f.src ?? '', alt: f.alt }
         })(),
         stats: (block.stats ?? []).map((s) => ({ value: s.value, label: s.label }))
@@ -1029,7 +987,7 @@ function transformArticleBlock(block: SanityRawArticleBlock, locale: WfLocale, p
     case 'articleLead':
       return { _type: 'lead', _key: block._key, text: block.text }
     case 'articleRichText':
-      return { _type: 'rich-text', _key: block._key, value: ptToRichTextEntries(block.body) }
+      return { _type: 'rich-text', _key: block._key, value: ptToLinkedEntries(block.body, locale, phoneE164) }
     case 'articleImage':
       return {
         _type: 'image',
@@ -1215,7 +1173,8 @@ function transformLegalDoc(doc: SanityLegalPage, locale: WfLocale): LegalDoc {
     sections: (doc.sections ?? []).map((section) => ({
       title: section.title,
       body: (section.body ?? []).map(transformLegalBlock)
-    }))
+    })),
+    seo: optSeoOverride(doc.seo)
   }
 }
 
@@ -1247,7 +1206,7 @@ export function transformTranslations(raw: Maybe<SanityDocTranslation[]>): DocTr
 
 function transformService(raw: SanityService, site: SiteContent, locale: WfLocale): ServiceWithMeta {
   const phoneE164 = site.contact.phoneE164
-  const figure = resolveFigure(raw.image, RATIOS.serviceImage)
+  const figure = resolveFigure(raw.image)
   // hero/pageBuilder/seo presents pour l'item de detail (toujours en prod statique;
   // l'item courant en preview). Absents pour une carte du preview scope.
   const hero = raw.hero ? asPageHero(raw.hero, raw._id, locale, phoneE164) : undefined
@@ -1258,7 +1217,6 @@ function transformService(raw: SanityService, site: SiteContent, locale: WfLocal
     title: raw.title,
     summary: opt(raw.summary),
     image: figure.src ?? '',
-    imageMeta: { alt: figure.alt, label: figure.label, caption: figure.caption },
     hero,
     pageBuilder: raw.pageBuilder ? transformPageBuilder(raw.pageBuilder, site, locale) : undefined,
     seo: hero ? resolveSeo(raw.seo, hero.title, hero.lead, site.seo) : undefined,
@@ -1300,6 +1258,7 @@ function transformArticle(raw: SanityArticle, locale: WfLocale, phoneE164: strin
     // category deja un objet { slug, title } dereference (jamais le slug brut).
     category: raw.category ? { title: raw.category.title, slug: cleanLogic(raw.category.slug) } : undefined,
     body: transformArticleBody(raw.body, locale, phoneE164),
+    seo: optSeoOverride(raw.seo),
     translations: transformTranslations(raw.translations)
   }
 }
@@ -1309,6 +1268,7 @@ function transformCategory(raw: SanityCategory): Translated<Category> {
     title: raw.title,
     slug: cleanLogic(raw.slug),
     description: opt(raw.description),
+    seo: optSeoOverride(raw.seo),
     translations: transformTranslations(raw.translations)
   }
 }

@@ -6,6 +6,7 @@
  * design ni de contenu ici, que des champs. */
 import type { ArticleBlock } from '~/types/blocks'
 import type { ArticleFigure } from '~/content/article-blocks'
+import type { SeoOverride } from '~/content/site'
 
 export interface ArticleCategoryRef {
   title: string
@@ -22,4 +23,6 @@ export interface Article {
   readingTime: number
   category?: ArticleCategoryRef
   body: ArticleBlock[]
+  /** SEO éditable (onglet SEO). Vide: titre/accroche/couverture de l'article. */
+  seo?: SeoOverride
 }

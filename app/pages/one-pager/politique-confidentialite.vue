@@ -19,7 +19,9 @@ const heroBlock = computed<HeroPageBlock>(() => ({
 // Sous-arbre one-pager: NOINDEX (exclu du sitemap aussi). Pas de fil d'Ariane
 // (hors de l'arbre de breadcrumbs multipage).
 usePageSeo({
-  title: doc.value.title,
+  title: doc.value.seo?.title ?? doc.value.title,
+  description: doc.value.seo?.description,
+  image: doc.value.seo?.image,
   noindex: true
 })
 </script>

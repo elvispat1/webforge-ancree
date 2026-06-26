@@ -127,6 +127,7 @@ export const CONTENT_GRAPH_QUERY = /* groq */ `{
     date,
     author,
     readingTime,
+    "seo": seo ${SEO_PROJECTION},
     ${ARTICLE_BODY_PROJECTION},
     "translations": ${TRANSLATIONS_PROJECTION}
   },
@@ -134,6 +135,7 @@ export const CONTENT_GRAPH_QUERY = /* groq */ `{
     title,
     "slug": slug.current,
     description,
+    "seo": seo ${SEO_PROJECTION},
     "translations": ${TRANSLATIONS_PROJECTION}
   },
   "testimonials": *[_type == "testimonial" && language == $language] | order(order asc){

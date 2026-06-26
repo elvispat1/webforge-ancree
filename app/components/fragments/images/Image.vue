@@ -33,15 +33,15 @@
     class="wf-image"
   />
   <!-- Placeholder (figure sans image): cadre raye soigne, jamais une 404. Sans
-       label ni caption, aucun nom accessible utile: le placeholder devient
-       decoratif (aria-hidden) plutot que d'annoncer un nom vide de sens. -->
+       legende, aucun nom accessible utile: le placeholder devient decoratif
+       (aria-hidden) plutot que d'annoncer un nom vide de sens. -->
   <div
     v-else
     :class="['wf-ph', `wf-ph-${tone}`]"
     :style="{ aspectRatio: ratio }"
-    :role="label || caption ? 'img' : undefined"
-    :aria-label="label || caption || undefined"
-    :aria-hidden="label || caption ? undefined : 'true'"
+    :role="caption ? 'img' : undefined"
+    :aria-label="caption || undefined"
+    :aria-hidden="caption ? undefined : 'true'"
   >
     <svg class="wf-ph-stripes" aria-hidden="true" focusable="false" preserveAspectRatio="none">
       <defs>
@@ -57,7 +57,7 @@
       </defs>
       <rect width="100%" height="100%" :fill="`url(#${patternId})`" />
     </svg>
-    <span v-if="caption || label" class="wf-ph-label">{{ caption || label }}</span>
+    <span v-if="caption" class="wf-ph-label">{{ caption }}</span>
   </div>
 </template>
 
@@ -83,9 +83,8 @@ const props = withDefaults(
      *  alias d'ecran sm:/md:/lg:/xl:/xxl:). Nommer les hauts breakpoints (xl/xxl),
      *  sinon le srcset ramollit sur grand ecran et Retina. */
     sizes?: string
-    /** Texte ARIA en mode placeholder (sans lui ni caption -> placeholder decoratif). */
-    label?: string
-    /** Texte visible en mode placeholder (fallback sur label). */
+    /** Legende (derivee de la description de l'asset). En mode placeholder: nom
+     *  accessible + texte visible; absente -> placeholder decoratif. */
     caption?: string
     /** Teinte du fond en mode placeholder. */
     tone?: 'alt' | 'base'
@@ -104,7 +103,6 @@ const props = withDefaults(
     alt: '',
     ratio: 'var(--ratio-landscape)',
     sizes: 'sm:100vw md:100vw lg:50vw xl:50vw xxl:50vw',
-    label: undefined,
     caption: undefined,
     tone: 'alt',
     loading: 'lazy',
@@ -115,7 +113,7 @@ const props = withDefaults(
 )
 
 const patternId = computed(
-  () => `p-${(props.label || 'image').replace(/\s+/g, '-')}`
+  () => `p-${(props.caption || 'image').replace(/[^a-z0-9]+/gi, '-')}`
 )
 
 // En preview (edition visuelle), branche image SIMPLE plutot que parallaxe (sans son

@@ -12,6 +12,17 @@
 
 import type { SocialPlatform } from '../config/socials'
 
+/** SEO éditable d'un document-page (objet `seo` du Studio: titre/description/image
+ *  de partage), projeté en { title, description, image }. Tous optionnels: un champ
+ *  vide retombe sur la dérivation propre à la page (titre, accroche, couverture),
+ *  puis sur les replis globaux de usePageSeo. Partagé par les pages-collections
+ *  (article, catégorie, page légale) qui gardent leur dérivation Schema.org. */
+export interface SeoOverride {
+  title?: string
+  description?: string
+  image?: string
+}
+
 export interface SiteContent {
   brand: {
     name: string

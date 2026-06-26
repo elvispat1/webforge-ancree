@@ -4,8 +4,12 @@
  * le meme slug (la desambiguisation d'URL vient du prefixe de locale, jamais du
  * slug). AUCUNE valeur design ni de contenu ici, que des champs. */
 
+import type { SeoOverride } from '~/content/site'
+
 export interface Category {
   title: string
   slug: string // partage fr/en
   description?: string // amorce de la page d'archive
+  /** SEO éditable (onglet SEO). Vide: titre d'archive + description ci-dessus. */
+  seo?: SeoOverride
 }

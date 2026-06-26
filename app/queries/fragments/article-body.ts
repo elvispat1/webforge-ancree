@@ -3,13 +3,13 @@
 // tous au build statique). Imports RELATIFS (fermeture nuxt.config).
 //
 // Le Portable Text de articleRichText est projete RICHE (style, listItem, level,
-// children avec marks, markDefs avec href): le bloc Vue rich-text serialise les
-// titres, listes, gras/italique et liens. C'est la projection deja eprouvee dans
-// l'ancien app/sanity/content.ts, reportee ici telle quelle (le transform aplatit
-// vers PortableTextBlock du contrat article-blocks).
+// children avec marks). Les markDefs portent l'annotation `link` RICHE (interne/
+// externe/ancre, ref dereferencee), PARTAGEE avec l'editorial (PT_LINK_MARKDEFS); le
+// transform la resout en href localise via ptToLinkedEntries, vers PortableTextBlock
+// du contrat article-blocks. Le serialiseur PortableText.vue rend interne -> NuxtLink.
 
 import { FIGURE_PROJECTION } from './figure'
-import { LINK_PROJECTION } from './link'
+import { LINK_PROJECTION, PT_LINK_MARKDEFS } from './link'
 
 export const ARTICLE_BODY_PROJECTION = /* groq */ `body[]{
   _key,
@@ -23,7 +23,7 @@ export const ARTICLE_BODY_PROJECTION = /* groq */ `body[]{
       listItem,
       level,
       "children": children[]{ _key, text, marks },
-      "markDefs": markDefs[]{ _key, _type, href }
+      "markDefs": ${PT_LINK_MARKDEFS}
     }
   },
   _type == "articleImage" => {

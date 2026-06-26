@@ -23,6 +23,26 @@ export const LINK_PROJECTION = /* groq */ `{
 }`
 
 /**
+ * markDefs d'un Portable Text riche (annotation `link`): meme forme que
+ * LINK_PROJECTION, sans `label` (le texte du lien EST le span annote). Partagee par
+ * le corps d'article ET les segments editoriaux. A interpoler apres une cle, ex.
+ * `"markDefs": ${PT_LINK_MARKDEFS}`.
+ */
+export const PT_LINK_MARKDEFS = /* groq */ `markDefs[]{
+  _key,
+  _type,
+  type,
+  externalUrl,
+  anchor,
+  "internalRef": internalRef->{
+    _type,
+    _id,
+    "slug": slug.current,
+    "catSlug": category->slug.current
+  }
+}`
+
+/**
  * Traductions d'un document de collection (plugin @sanity/document-
  * internationalization): le document translation.metadata qui le reference porte
  * les versions de chaque langue. Projete en { lang, slug, catSlug } minimal: sert

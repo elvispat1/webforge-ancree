@@ -4,12 +4,12 @@
  * change, pas le contrat. */
 import type { Crumb } from '~/config/route-map'
 
+/* Visuel de couverture d'un masthead d'article (hero-article): src CDN deja resolu
+ * + alt (sur l'asset). Absente -> pas de couverture rendue. Le ratio est cale en CODE
+ * (var(--ratio-wide), recadrage cinematique 21/9 au desktop), plus par le contenu. */
 export interface HeroVisual {
-  ratio: string // chaine aspect-ratio CSS, ex "4/5"
-  src?: string // URL CDN deja resolue (jamais un objet asset Sanity); absente -> placeholder
-  alt?: string
-  label: string // libelle du placeholder quand src est absente
-  caption: string // legende du placeholder
+  src?: string // URL CDN deja resolue (jamais un objet asset Sanity); absente -> pas de couverture
+  alt?: string // lu sur l'asset (asset->altText)
 }
 
 /* Visuel du heros full bleed: minimal (src + alt seulement). Cadrage en CODE

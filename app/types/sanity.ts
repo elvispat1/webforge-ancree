@@ -42,14 +42,13 @@ export interface SanityLink {
   internalRef?: Maybe<SanityLinkRef>
 }
 
-/** Figure (objet `figure`, FIGURE_PROJECTION): asset deja resolu en URL CDN. */
+/** Figure (objet `figure`, FIGURE_PROJECTION): asset deja resolu en URL CDN. alt ET
+ *  caption projetes depuis l'asset (altText / description bilingues), plus depuis un
+ *  champ figure. Plus d'etiquette ni de ratio par usage (ratio decide a l'emplacement). */
 export interface SanityFigure {
   src?: Maybe<string>
-  // alt projeté depuis l'asset (image.asset->altText), plus depuis un champ figure.
   alt?: Maybe<string>
-  label?: Maybe<string>
   caption?: Maybe<string>
-  ratio?: Maybe<string>
 }
 
 /** Visuel du héros (objet `heroImage`): desktop + mobile optionnelle, alt sur l'asset.
@@ -236,18 +235,10 @@ export interface SanityRawPortableSpan {
   text?: Maybe<string>
   marks?: Maybe<string[]>
 }
-export interface SanityRawPortableBlock {
-  _key: string
-  _type: string
-  style?: Maybe<string>
-  listItem?: Maybe<string>
-  level?: Maybe<number>
-  children?: Maybe<SanityRawPortableSpan[]>
-  markDefs?: Maybe<Array<{ _key: string; _type: string; href?: Maybe<string> }>>
-}
-// Portable Text du bloc editorial: comme SanityRawPortableBlock mais les markDefs de
+// Portable Text riche (corps d'article ET segments editoriaux): les markDefs de
 // l'annotation `link` portent le TYPE + la reference interne dereferencee (resolus en
-// href string au transform via resolveLink/docPath).
+// href string au transform via resolveLink/docPath). Un seul type, partage par les
+// deux corps (annotation objets/portable-link, projection PT_LINK_MARKDEFS).
 export interface SanityRawLinkedPortableBlock {
   _key: string
   _type: string
@@ -285,7 +276,7 @@ export interface SanityEditorialBlock extends SanityEditorialFields {
 }
 export type SanityRawArticleBlock =
   | { _type: 'articleLead'; _key: string; text: string }
-  | { _type: 'articleRichText'; _key: string; body?: Maybe<SanityRawPortableBlock[]> }
+  | { _type: 'articleRichText'; _key: string; body?: Maybe<SanityRawLinkedPortableBlock[]> }
   | { _type: 'articleImage'; _key: string; image: SanityFigure }
   | { _type: 'articleQuote'; _key: string; quote: string; attribution?: Maybe<string> }
   | { _type: 'articleGallery'; _key: string; images?: Maybe<SanityFigure[]> }
@@ -355,6 +346,7 @@ export interface SanityLegalPage {
   effective?: Maybe<string>
   updated?: Maybe<string>
   sections?: Maybe<Array<{ title: string; body?: Maybe<SanityLegalBlock[]> }>>
+  seo?: Maybe<SanitySeo>
 }
 
 /** Document service (collection `services`). Identite de carte + masthead (hero[0])
@@ -403,6 +395,7 @@ export interface SanityArticle {
   author?: Maybe<string>
   readingTime?: Maybe<number>
   body?: Maybe<SanityRawArticleBlock[]>
+  seo?: Maybe<SanitySeo>
   translations?: Maybe<SanityDocTranslation[]>
 }
 
@@ -411,6 +404,7 @@ export interface SanityCategory {
   title: string
   slug: string
   description?: Maybe<string>
+  seo?: Maybe<SanitySeo>
   translations?: Maybe<SanityDocTranslation[]>
 }
 
