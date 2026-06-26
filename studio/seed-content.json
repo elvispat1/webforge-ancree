@@ -3915,6 +3915,7 @@
               {
                 "_key": "seg1",
                 "_type": "editorialSegment",
+                "disposition": "duo",
                 "body": [
                   {
                     "_key": "s1b1",
@@ -4009,6 +4010,7 @@
               {
                 "_key": "seg2",
                 "_type": "editorialSegment",
+                "disposition": "band",
                 "body": [
                   {
                     "_key": "s2h",
@@ -5028,6 +5030,7 @@
               {
                 "_key": "seg1",
                 "_type": "editorialSegment",
+                "disposition": "duo",
                 "body": [
                   {
                     "_key": "s1b1",
@@ -5122,6 +5125,7 @@
               {
                 "_key": "seg2",
                 "_type": "editorialSegment",
+                "disposition": "band",
                 "body": [
                   {
                     "_key": "s2h",
