@@ -2317,7 +2317,14 @@
                 "credentials": "Membre ASTTQ, certifié en gestion parasitaire",
                 "bio": "Il a démarré Rempart à Terrebonne en 2008. Il connaît les maisons de la Rive-Nord comme le fond de sa poche et forme chaque technicien à sa méthode.",
                 "photo": {
-                  "_type": "figure"
+                  "_type": "figure",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_type": "reference",
+                      "_ref": "IMG:team-martin"
+                    }
+                  }
                 }
               },
               {
@@ -2328,7 +2335,14 @@
                 "credentials": "Certifiée en traitement thermique, maître-chien de détection",
                 "bio": "Elle pilote les interventions de punaises de lit, du repérage à la détection canine, avec une discrétion totale.",
                 "photo": {
-                  "_type": "figure"
+                  "_type": "figure",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_type": "reference",
+                      "_ref": "IMG:team-julie"
+                    }
+                  }
                 }
               },
               {
@@ -2339,7 +2353,14 @@
                 "credentials": "Certifié en gestion parasitaire, spécialiste de l'exclusion mécanique",
                 "bio": "Il traque les points d'entrée des souris et des rats, puis les scelle pour de bon plutôt que de seulement piéger.",
                 "photo": {
-                  "_type": "figure"
+                  "_type": "figure",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_type": "reference",
+                      "_ref": "IMG:team-samuel"
+                    }
+                  }
                 }
               },
               {
@@ -2350,7 +2371,14 @@
                 "credentials": "Certifiée HACCP, programmes préventifs",
                 "bio": "Elle bâtit les programmes préventifs des restaurants et des commerces, avec les rapports qu'exigent les inspections.",
                 "photo": {
-                  "_type": "figure"
+                  "_type": "figure",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_type": "reference",
+                      "_ref": "IMG:team-nadia"
+                    }
+                  }
                 }
               }
             ]
@@ -2591,7 +2619,14 @@
                 "credentials": "ASTTQ member, certified in pest management",
                 "bio": "He started Rempart in Terrebonne in 2008. He knows North Shore homes inside out and trains every technician in his method.",
                 "photo": {
-                  "_type": "figure"
+                  "_type": "figure",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_type": "reference",
+                      "_ref": "IMG:team-martin"
+                    }
+                  }
                 }
               },
               {
@@ -2602,7 +2637,14 @@
                 "credentials": "Certified in heat treatment, canine detection handler",
                 "bio": "She leads bed bug work, from inspection to canine detection, with complete discretion.",
                 "photo": {
-                  "_type": "figure"
+                  "_type": "figure",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_type": "reference",
+                      "_ref": "IMG:team-julie"
+                    }
+                  }
                 }
               },
               {
@@ -2613,7 +2655,14 @@
                 "credentials": "Certified in pest management, mechanical exclusion specialist",
                 "bio": "He hunts down the entry points mice and rats use and seals them for good, instead of just trapping.",
                 "photo": {
-                  "_type": "figure"
+                  "_type": "figure",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_type": "reference",
+                      "_ref": "IMG:team-samuel"
+                    }
+                  }
                 }
               },
               {
@@ -2624,7 +2673,14 @@
                 "credentials": "HACCP certified, preventive programs",
                 "bio": "She builds preventive programs for restaurants and shops, with the reports inspections require.",
                 "photo": {
-                  "_type": "figure"
+                  "_type": "figure",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_type": "reference",
+                      "_ref": "IMG:team-nadia"
+                    }
+                  }
                 }
               }
             ]

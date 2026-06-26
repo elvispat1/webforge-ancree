@@ -58,6 +58,11 @@ const IMAGES = {
   'hero-techVan': img('hero-techVan.jpg'),
   'hero-techAction': img('hero-techAction.jpg'),
   'hero-vanHood': img('hero-vanHood.jpg'),
+  // Portraits de l'équipe (bloc team de /a-propos), personnes fictives (démo).
+  'team-martin': img('team-martin.jpg'),
+  'team-julie': img('team-julie.jpg'),
+  'team-samuel': img('team-samuel.jpg'),
+  'team-nadia': img('team-nadia.jpg'),
   // Logo de marque (brand.logo des Globales): le SVG de la favicon sert de marque.
   'logo-rempart': join(repoRoot, 'public', 'favicon.svg'),
 }
@@ -129,6 +134,22 @@ const ALT_TEXT = {
   'hero-vanHood': {
     fr: 'Camionnette de service dans un quartier résidentiel de la Rive-Nord',
     en: 'Service van in a North Shore residential neighbourhood',
+  },
+  'team-martin': {
+    fr: 'Martin Lefebvre, fondateur et technicien en chef de Rempart Extermination',
+    en: 'Martin Lefebvre, founder and lead technician at Rempart Extermination',
+  },
+  'team-julie': {
+    fr: 'Julie Caron, technicienne punaises de lit et détection chez Rempart Extermination',
+    en: 'Julie Caron, bed bug and detection technician at Rempart Extermination',
+  },
+  'team-samuel': {
+    fr: 'Samuel Ouellet, technicien rongeurs et exclusion chez Rempart Extermination',
+    en: 'Samuel Ouellet, rodent and exclusion technician at Rempart Extermination',
+  },
+  'team-nadia': {
+    fr: 'Nadia Bélanger, technicienne commerciale et conformité chez Rempart Extermination',
+    en: 'Nadia Bélanger, commercial and compliance technician at Rempart Extermination',
   },
 }
 
