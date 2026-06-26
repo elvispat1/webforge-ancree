@@ -1144,7 +1144,7 @@
                 "_key": "t2",
                 "_type": "proof",
                 "icon": "lucide:award",
-                "value": "15 ans d'expérience",
+                "value": "Depuis 2008",
                 "label": "Ancrés sur la Rive-Nord"
               },
               {
@@ -1167,8 +1167,8 @@
             "_key": "b2",
             "_type": "services",
             "eyebrow": "Ce qu'on règle",
-            "heading": "Un nuisible, une solution claire",
-            "lead": "Résidentiel et commercial, traités par des techniciens certifiés avec des produits sûrs pour la famille et les animaux.",
+            "heading": "Les nuisibles qu'on règle le plus souvent",
+            "lead": "Un aperçu de nos interventions résidentielles. Voyez tous les services pour le commercial et les cas plus rares.",
             "cta": {
               "_type": "link",
               "label": "Voir tous les services",
@@ -1178,7 +1178,56 @@
                 "_ref": "servicesPage-fr"
               }
             },
-            "mode": "auto"
+            "mode": "manual",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "service-fourmis-charpentieres-fr",
+                "_key": "sv1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-souris-rats-fr",
+                "_key": "sv2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-guepes-frelons-fr",
+                "_key": "sv3"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-punaises-de-lit-fr",
+                "_key": "sv4"
+              }
+            ]
+          },
+          {
+            "_key": "home-process",
+            "_type": "process",
+            "eyebrow": "Notre méthode",
+            "heading": "Comment on règle un nuisible, pour de bon",
+            "lead": "Pas de mystère ni de pression: trois temps clairs, du premier appel à la garantie.",
+            "steps": [
+              {
+                "_key": "p1",
+                "_type": "processStep",
+                "title": "On inspecte et on identifie",
+                "body": "On trouve d'où vient le problème et quelle espèce vous visez, du sous-sol au toit, avant d'agir."
+              },
+              {
+                "_key": "p2",
+                "_type": "processStep",
+                "title": "On traite à la source",
+                "body": "Produits homologués Santé Canada, appliqués par un technicien certifié, avec un prix clair et aucune vente sous pression."
+              },
+              {
+                "_key": "p3",
+                "_type": "processStep",
+                "title": "On suit et on prévient",
+                "body": "On scelle les points d'entrée, on revient au besoin, et la garantie écrite tient: le nuisible ne doit pas revenir."
+              }
+            ]
           },
           {
             "_key": "b3",
@@ -1225,7 +1274,7 @@
               {
                 "_key": "s3",
                 "_type": "stat",
-                "value": "10 villes",
+                "value": "7 villes",
                 "label": "desservies chaque semaine"
               },
               {
@@ -1233,6 +1282,38 @@
                 "_type": "stat",
                 "value": "9",
                 "label": "techniciens certifiés"
+              }
+            ]
+          },
+          {
+            "_key": "home-highlights",
+            "_type": "highlights",
+            "eyebrow": "Nos engagements",
+            "heading": "Ce que vous obtenez avec Rempart",
+            "items": [
+              {
+                "_key": "h1",
+                "_type": "highlight",
+                "title": "Garantie de retour sans frais",
+                "body": "Si le nuisible revient dans la période couverte, on revient le traiter sans vous refacturer."
+              },
+              {
+                "_key": "h2",
+                "_type": "highlight",
+                "title": "Rapport d'inspection écrit",
+                "body": "Remis après chaque visite: ce qu'on a trouvé, ce qu'on a traité et ce qu'on recommande."
+              },
+              {
+                "_key": "h3",
+                "_type": "highlight",
+                "title": "Produits homologués Santé Canada",
+                "body": "Choisis selon la situation, sûrs pour les enfants et les animaux de compagnie."
+              },
+              {
+                "_key": "h4",
+                "_type": "highlight",
+                "title": "Estimation gratuite, prix clair",
+                "body": "Le prix est fixé avant qu'on commence, sans vente sous pression ni surprise sur la facture."
               }
             ]
           },
@@ -1275,7 +1356,7 @@
             "_key": "b7",
             "_type": "ctaBand",
             "title": "Un nuisible à régler? On peut être chez vous aujourd'hui.",
-            "subtitle": "Un appel et un technicien licencié part vers vous. Pas de longue attente, pas de surprise sur la facture, une garantie écrite.",
+            "subtitle": "Une vraie personne au bout du fil, 7 jours sur 7. Pas de longue attente, pas de surprise sur la facture, une garantie écrite.",
             "primaryCta": {
               "_type": "link",
               "label": "Appeler maintenant",
@@ -1427,7 +1508,7 @@
                 "_key": "t2",
                 "_type": "proof",
                 "icon": "lucide:award",
-                "value": "15 years of experience",
+                "value": "Since 2008",
                 "label": "Rooted on the North Shore"
               },
               {
@@ -1450,8 +1531,8 @@
             "_key": "b2",
             "_type": "services",
             "eyebrow": "What we handle",
-            "heading": "One pest, one clear solution",
-            "lead": "Residential and commercial, handled by certified technicians with products safe for family and pets.",
+            "heading": "The pests we deal with most",
+            "lead": "A look at our residential work. See all services for commercial jobs and rarer cases.",
             "cta": {
               "_type": "link",
               "label": "See all services",
@@ -1461,7 +1542,56 @@
                 "_ref": "servicesPage-en"
               }
             },
-            "mode": "auto"
+            "mode": "manual",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "service-fourmis-charpentieres-en",
+                "_key": "sv1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-souris-rats-en",
+                "_key": "sv2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-guepes-frelons-en",
+                "_key": "sv3"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-punaises-de-lit-en",
+                "_key": "sv4"
+              }
+            ]
+          },
+          {
+            "_key": "home-process",
+            "_type": "process",
+            "eyebrow": "Our method",
+            "heading": "How we deal with a pest, for good",
+            "lead": "No mystery, no pressure: three clear steps, from the first call to the guarantee.",
+            "steps": [
+              {
+                "_key": "p1",
+                "_type": "processStep",
+                "title": "We inspect and identify",
+                "body": "We find where the problem starts and which species you are facing, from basement to roof, before doing anything."
+              },
+              {
+                "_key": "p2",
+                "_type": "processStep",
+                "title": "We treat at the source",
+                "body": "Health Canada approved products, applied by a certified technician, with a clear price and no pressure selling."
+              },
+              {
+                "_key": "p3",
+                "_type": "processStep",
+                "title": "We follow up and prevent",
+                "body": "We seal the entry points, come back if needed, and the written guarantee holds: the pest should not return."
+              }
+            ]
           },
           {
             "_key": "b3",
@@ -1508,7 +1638,7 @@
               {
                 "_key": "s3",
                 "_type": "stat",
-                "value": "10 cities",
+                "value": "7 cities",
                 "label": "covered every week"
               },
               {
@@ -1516,6 +1646,38 @@
                 "_type": "stat",
                 "value": "9",
                 "label": "certified technicians"
+              }
+            ]
+          },
+          {
+            "_key": "home-highlights",
+            "_type": "highlights",
+            "eyebrow": "Our commitments",
+            "heading": "What you get with Rempart",
+            "items": [
+              {
+                "_key": "h1",
+                "_type": "highlight",
+                "title": "Free return guarantee",
+                "body": "If the pest comes back within the covered period, we come back to treat it at no extra charge."
+              },
+              {
+                "_key": "h2",
+                "_type": "highlight",
+                "title": "Written inspection report",
+                "body": "Handed to you after every visit: what we found, what we treated and what we recommend."
+              },
+              {
+                "_key": "h3",
+                "_type": "highlight",
+                "title": "Health Canada approved products",
+                "body": "Chosen for the situation, safe for children and pets."
+              },
+              {
+                "_key": "h4",
+                "_type": "highlight",
+                "title": "Free estimate, clear price",
+                "body": "The price is set before we start, with no pressure selling and no surprise on the bill."
               }
             ]
           },
@@ -1558,7 +1720,7 @@
             "_key": "b7",
             "_type": "ctaBand",
             "title": "A pest to deal with? We can be at your place today.",
-            "subtitle": "One call and a licensed technician is on the way. No long wait, no surprise on the bill, a guarantee in writing.",
+            "subtitle": "A real person on the line, seven days a week. No long wait, no surprise on the bill, a guarantee in writing.",
             "primaryCta": {
               "_type": "link",
               "label": "Call now",
