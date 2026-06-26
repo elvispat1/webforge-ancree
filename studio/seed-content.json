@@ -4977,69 +4977,181 @@
         "order": 2,
         "pageBuilder": [
           {
-            "_key": "pb-intro-xcnm2hrr",
+            "_key": "pb-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "icon": "lucide:award",
+                "value": "Membre ASTTQ",
+                "label": "gestion parasitaire du Québec"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "icon": "lucide:leaf",
+                "value": "Produits homologués",
+                "label": "Santé Canada, sûrs pour la famille"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "icon": "lucide:clock",
+                "value": "Sous 24 à 48 h",
+                "label": "intervention 7 jours sur 7"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "icon": "lucide:badge-check",
+                "value": "Garantie écrite",
+                "label": "retour sans frais"
+              }
+            ]
+          },
+          {
+            "_key": "pb-editorial",
             "_type": "editorial",
+            "eyebrow": "Le nuisible en détail",
+            "heading": "Comprendre une infestation de souris et de rats",
+            "lead": "Ce n'est pas qu'une question de pièges. Tant que la maison reste ouverte, les rongeurs reviennent. Voici comment on ferme la porte pour de bon.",
             "segments": [
               {
-                "_key": "seg-4xxsttyr",
+                "_key": "seg1",
                 "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
                 "body": [
                   {
-                    "_key": "b-blprwqut",
                     "_type": "block",
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-dl49rsmc",
                         "_type": "span",
-                        "marks": [],
-                        "text": "Une souris passe par une ouverture grande comme un dix sous. Une fois à l’intérieur, elle se reproduit vite, contamine la nourriture et ronge le filage. Les pièges seuls ne font que gérer les symptômes."
+                        "_key": "e1s",
+                        "text": "Une souris passe par une ouverture grande comme un dix sous. Une fois à l'intérieur, elle se reproduit vite, contamine la nourriture et ronge le filage, un vrai risque d'incendie. Les pièges seuls ne font que gérer les symptômes.",
+                        "marks": []
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
-                  },
-                  {
-                    "_key": "b-6ixemfje",
-                    "_type": "block",
-                    "children": [
-                      {
-                        "_key": "s-6h5roxr7",
-                        "_type": "span",
-                        "marks": [],
-                        "text": "On inspecte la maison de la cave au grenier, on scelle les points d’entrée, puis on installe un contrôle adapté. Le but n’est pas d’en attraper quelques-unes, c’est de fermer la maison pour de bon."
-                      }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   }
                 ],
-                "media": [],
-                "mediaSide": "auto"
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:inspection-rempart",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "_key": "seg2",
+                "_type": "editorialSegment",
+                "disposition": "text",
+                "mediaSide": "auto",
+                "body": [
+                  {
+                    "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
+                    "children": [
+                      {
+                        "_type": "span",
+                        "_key": "e2hs",
+                        "text": "Fermer la maison, pas seulement piéger",
+                        "marks": []
+                      }
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
+                    "markDefs": [],
+                    "children": [
+                      {
+                        "_type": "span",
+                        "_key": "e2s",
+                        "text": "On inspecte de la cave au grenier, on scelle les points d'entrée, puis on installe un contrôle adapté. Le but n'est pas d'en attraper quelques-unes, c'est de fermer la maison pour de bon.",
+                        "marks": []
+                      }
+                    ]
+                  }
+                ],
+                "media": []
               }
             ]
           },
           {
             "_key": "pb-hl-o2e9kij4",
             "_type": "highlights",
-            "heading": "Ce que vous obtenez",
+            "heading": "Ce que comprend l'intervention",
             "items": [
               {
                 "_key": "benefit-0",
                 "_type": "highlight",
-                "body": "Crottes le long des murs, bruits de course la nuit, emballages grignotés, odeur persistante dans un coin.",
-                "title": "Les signes"
+                "title": "Garantie écrite, retour sans frais",
+                "body": "Si les rongeurs reviennent dans la période couverte, on retraite sans vous refacturer."
               },
               {
                 "_key": "benefit-1",
                 "_type": "highlight",
-                "body": "Scellement des accès, stations de contrôle sécurisées hors de portée des enfants et des animaux, suivi du résultat.",
-                "title": "Le traitement"
+                "title": "Stations de contrôle sécurisées",
+                "body": "Verrouillées et hors de portée des enfants et des animaux, posées par un technicien certifié."
               },
               {
                 "_key": "benefit-2",
                 "_type": "highlight",
-                "body": "On reste sur le dossier jusqu’à ce que ce soit réglé, et c’est garanti par écrit.",
-                "title": "La garantie"
+                "title": "Intervention sous 24 à 48 h",
+                "body": "Une vraie personne répond 7 jours sur 7 et un technicien d'ici part vers vous rapidement."
+              },
+              {
+                "_key": "benefit-3",
+                "_type": "highlight",
+                "title": "Points d'entrée scellés, rapport écrit",
+                "body": "Ce qu'on a trouvé, scellé, et les accès à surveiller pour éviter une récidive."
+              }
+            ]
+          },
+          {
+            "_key": "pb-faq",
+            "_type": "faq",
+            "eyebrow": "Avant d'appeler",
+            "heading": "Vos questions sur les souris et les rats",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-pieges-fr",
+                "_key": "fq0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-securite-fr",
+                "_key": "fq1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-delai-fr",
+                "_key": "fq2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-recidive-fr",
+                "_key": "fq3"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-zone-fr",
+                "_key": "fq4"
               }
             ]
           },
@@ -5047,26 +5159,26 @@
             "_key": "pb-proc-2lm8k881",
             "_type": "process",
             "eyebrow": "Comment on intervient",
-            "heading": "Une méthode claire, du premier appel à la garantie",
-            "lead": "Pas de mystère ni de pression. On regarde d’abord, on traite ce qu’il faut, et on reste là tant que le problème n’est pas réglé pour de bon.",
+            "heading": "Comment on règle une infestation de rongeurs",
+            "lead": "On ferme la maison, pas seulement on piège.",
             "steps": [
               {
-                "_key": "step-0",
+                "_key": "s1",
                 "_type": "processStep",
-                "body": "On identifie le nuisible, l’ampleur et les points d’entrée. Vous savez exactement à quoi vous faites face avant qu’on touche à quoi que ce soit.",
-                "title": "On inspecte"
+                "title": "Inspection de la cave au grenier",
+                "body": "On repère les points d'entrée, les sentiers et l'ampleur, du sous-sol au toit."
               },
               {
-                "_key": "step-1",
+                "_key": "s2",
                 "_type": "processStep",
-                "body": "Un traitement ciblé, sûr pour la famille et les animaux, appliqué par un technicien certifié. Rien de plus que ce que la situation demande.",
-                "title": "On traite"
+                "title": "Scellement des accès",
+                "body": "On ferme les ouvertures par où elles passent, pas juste là où on les voit."
               },
               {
-                "_key": "step-2",
+                "_key": "s3",
                 "_type": "processStep",
-                "body": "On revient au besoin et le résultat est garanti par écrit. Le problème reste réglé, pas seulement repoussé.",
-                "title": "On garantit"
+                "title": "Contrôle et garantie écrite",
+                "body": "Stations sécurisées, suivi du résultat; la garantie tient si elles reviennent."
               }
             ]
           },
@@ -5100,8 +5212,8 @@
               "label": "Obtenir une estimation",
               "type": "anchor"
             },
-            "subtitle": "Un appel et un technicien licencié part vers vous. Pas de longue attente, pas de surprise sur la facture, une garantie écrite.",
-            "title": "Un nuisible à régler? On peut être chez vous aujourd’hui."
+            "subtitle": "Un appel, un technicien licencié se déplace, souvent sous 24 à 48 h. Garantie écrite.",
+            "title": "Des souris ou des rats dans la maison? On ferme la porte."
           }
         ],
         "slug": {
@@ -6123,69 +6235,181 @@
         "order": 2,
         "pageBuilder": [
           {
-            "_key": "pb-intro-xv1x80re",
+            "_key": "pb-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "icon": "lucide:award",
+                "value": "ASTTQ member",
+                "label": "Quebec pest management"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "icon": "lucide:leaf",
+                "value": "Approved products",
+                "label": "Health Canada, family-safe"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "icon": "lucide:clock",
+                "value": "Within 24 to 48 h",
+                "label": "service seven days a week"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "icon": "lucide:badge-check",
+                "value": "Written guarantee",
+                "label": "free return visit"
+              }
+            ]
+          },
+          {
+            "_key": "pb-editorial",
             "_type": "editorial",
+            "eyebrow": "The pest in detail",
+            "heading": "Understanding a mouse and rat infestation",
+            "lead": "It is not just about traps. As long as the house stays open, rodents keep coming back. Here is how we close the door for good.",
             "segments": [
               {
-                "_key": "seg-mh01jyrw",
+                "_key": "seg1",
                 "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
                 "body": [
                   {
-                    "_key": "b-nlfym1mp",
                     "_type": "block",
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-zdfnroh0",
                         "_type": "span",
-                        "marks": [],
-                        "text": "A mouse fits through a gap the size of a dime. Once inside, it breeds fast, contaminates food and chews on wiring. Traps alone only manage the symptoms."
+                        "_key": "e1s",
+                        "text": "A mouse fits through a gap the size of a dime. Once inside, it breeds fast, contaminates food and chews on wiring, a real fire risk. Traps alone only manage the symptoms.",
+                        "marks": []
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
-                  },
-                  {
-                    "_key": "b-tdgbmaxf",
-                    "_type": "block",
-                    "children": [
-                      {
-                        "_key": "s-vr6qzkg5",
-                        "_type": "span",
-                        "marks": [],
-                        "text": "We inspect the home from basement to attic, seal the entry points, then set up the right control. The goal is not to catch a few, it is to close the house for good."
-                      }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   }
                 ],
-                "media": [],
-                "mediaSide": "auto"
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:inspection-rempart",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "_key": "seg2",
+                "_type": "editorialSegment",
+                "disposition": "text",
+                "mediaSide": "auto",
+                "body": [
+                  {
+                    "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
+                    "children": [
+                      {
+                        "_type": "span",
+                        "_key": "e2hs",
+                        "text": "Closing the house, not just trapping",
+                        "marks": []
+                      }
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
+                    "markDefs": [],
+                    "children": [
+                      {
+                        "_type": "span",
+                        "_key": "e2s",
+                        "text": "We inspect from basement to attic, seal the entry points, then set up the right control. The goal is not to catch a few, it is to close the house for good.",
+                        "marks": []
+                      }
+                    ]
+                  }
+                ],
+                "media": []
               }
             ]
           },
           {
             "_key": "pb-hl-00jn8hys",
             "_type": "highlights",
-            "heading": "What you get",
+            "heading": "What the service includes",
             "items": [
               {
                 "_key": "benefit-0",
                 "_type": "highlight",
-                "body": "Droppings along walls, scurrying at night, gnawed packaging, a lingering smell in one spot.",
-                "title": "The signs"
+                "title": "Written guarantee, free return visit",
+                "body": "If the rodents come back within the covered period, we re-treat at no extra charge."
               },
               {
                 "_key": "benefit-1",
                 "_type": "highlight",
-                "body": "Entry-point sealing, secure control stations out of reach of kids and pets, and a follow-up on the result.",
-                "title": "The treatment"
+                "title": "Secure control stations",
+                "body": "Locked and out of reach of children and pets, placed by a certified technician."
               },
               {
                 "_key": "benefit-2",
                 "_type": "highlight",
-                "body": "We stay on the file until it is solved, and it is guaranteed in writing.",
-                "title": "The guarantee"
+                "title": "On site within 24 to 48 h",
+                "body": "A real person answers seven days a week and a local technician heads your way quickly."
+              },
+              {
+                "_key": "benefit-3",
+                "_type": "highlight",
+                "title": "Entry points sealed, written report",
+                "body": "What we found, sealed, and the access points to watch to avoid a return."
+              }
+            ]
+          },
+          {
+            "_key": "pb-faq",
+            "_type": "faq",
+            "eyebrow": "Before you call",
+            "heading": "Your questions about mice and rats",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-pieges-en",
+                "_key": "fq0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-securite-en",
+                "_key": "fq1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-delai-en",
+                "_key": "fq2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-recidive-en",
+                "_key": "fq3"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-souris-rats-zone-en",
+                "_key": "fq4"
               }
             ]
           },
@@ -6193,26 +6417,26 @@
             "_key": "pb-proc-vgznkm8m",
             "_type": "process",
             "eyebrow": "How we work",
-            "heading": "A clear method, from the first call to the guarantee",
-            "lead": "No mystery, no pressure. We look first, we treat what needs treating, and we stay on it until the problem is gone for good.",
+            "heading": "How we clear a rodent infestation",
+            "lead": "We close the house, not just set traps.",
             "steps": [
               {
-                "_key": "step-0",
+                "_key": "s1",
                 "_type": "processStep",
-                "body": "We identify the pest, how far it has spread and where it gets in. You know exactly what you are dealing with before we touch anything.",
-                "title": "We inspect"
+                "title": "Basement-to-attic inspection",
+                "body": "We find the entry points, the runways and the scale, from the basement to the roof."
               },
               {
-                "_key": "step-1",
+                "_key": "s2",
                 "_type": "processStep",
-                "body": "A targeted treatment, safe for your family and pets, applied by a certified technician. Nothing more than what the situation calls for.",
-                "title": "We treat"
+                "title": "Sealing the access points",
+                "body": "We close the openings they use, not just where you can see them."
               },
               {
-                "_key": "step-2",
+                "_key": "s3",
                 "_type": "processStep",
-                "body": "We come back if needed and the result is guaranteed in writing. The problem stays solved, not just pushed down the road.",
-                "title": "We guarantee"
+                "title": "Control and written guarantee",
+                "body": "Secure stations, a follow-up on the result; the guarantee holds if they come back."
               }
             ]
           },
@@ -6246,8 +6470,8 @@
               "label": "Get an estimate",
               "type": "anchor"
             },
-            "subtitle": "One call and a licensed technician is on the way. No long wait, no surprise on the bill, a guarantee in writing.",
-            "title": "A pest to deal with? We can be at your place today."
+            "subtitle": "One call and a licensed technician heads out, often within 24 to 48 hours. Written guarantee.",
+            "title": "Mice or rats in the house? We close the door."
           }
         ],
         "slug": {
@@ -12049,6 +12273,644 @@
             "value": {
               "_type": "reference",
               "_ref": "faqItem-fourmis-zone-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "faqTheme",
+      "content": {
+        "_id": "faqTheme-souris-rats-fr",
+        "_type": "faqTheme",
+        "language": "fr",
+        "title": "Souris et rats",
+        "slug": {
+          "_type": "slug",
+          "current": "souris-rats"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-pieges-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Les pièges du commerce suffisent-ils?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Ils attrapent quelques rongeurs, mais ne règlent pas la cause. Tant que les points d'entrée restent ouverts, d'autres prennent la place. On scelle d'abord, puis on contrôle."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-securite-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Les stations sont-elles sûres pour les enfants et les animaux?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Oui. Les stations de contrôle sont verrouillées et posées hors de portée par un technicien certifié, avec des produits homologués Santé Canada."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-delai-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Combien de temps avant que ce soit réglé?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "L'activité chute vite une fois les accès scellés. On revient confirmer le résultat; la garantie écrite tient tant que ce n'est pas réglé."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-recidive-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Comment éviter qu'elles reviennent?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "En fermant les ouvertures par où elles passent, pas seulement là où on les voit: tuyaux, fondation, garage. La garantie couvre un retour si elles reviennent."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-zone-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Desservez-vous mon secteur sur la Rive-Nord?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-mascouche-fr"
+                }
+              },
+              {
+                "_key": "l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-blainville-fr"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Oui, de "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "l1"
+                ],
+                "text": "Mascouche"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": " à "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "l3"
+                ],
+                "text": "Blainville"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": " et toute la couronne nord. Un technicien d'ici se déplace, souvent sous 24 à 48 h."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-fr"
+        }
+      }
+    },
+    {
+      "type": "faqTheme",
+      "content": {
+        "_id": "faqTheme-souris-rats-en",
+        "_type": "faqTheme",
+        "language": "en",
+        "title": "Mice and rats",
+        "slug": {
+          "_type": "slug",
+          "current": "mice-and-rats"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-pieges-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Are store-bought traps enough?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "They catch a few rodents but do not fix the cause. As long as the entry points stay open, others take their place. We seal first, then control."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-securite-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Are the stations safe for children and pets?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes. The control stations are locked and placed out of reach by a certified technician, with Health Canada approved products."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-delai-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "How long before it is solved?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Activity drops quickly once the access points are sealed. We return to confirm the result; the written guarantee holds until it is solved."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-recidive-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "How do I keep them from coming back?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "By closing the openings they use, not just where you see them: pipes, foundation, garage. The guarantee covers a return visit if they come back."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-souris-rats-zone-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Do you serve my area on the North Shore?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-mascouche-en"
+                }
+              },
+              {
+                "_key": "l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-blainville-en"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes, from "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "l1"
+                ],
+                "text": "Mascouche"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": " to "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "l3"
+                ],
+                "text": "Blainville"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": " and the whole north crown. A local technician heads out, often within 24 to 48 hours."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-souris-rats-en"
+        }
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqTheme-souris-rats",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqTheme"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqTheme-souris-rats-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqTheme"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqTheme-souris-rats-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqTheme"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-souris-rats-pieges",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-pieges-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-pieges-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-souris-rats-securite",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-securite-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-securite-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-souris-rats-delai",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-delai-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-delai-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-souris-rats-recidive",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-recidive-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-recidive-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-souris-rats-zone",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-zone-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-souris-rats-zone-en",
               "_weak": true,
               "_strengthenOnPublish": {
                 "type": "faqItem"
