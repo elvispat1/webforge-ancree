@@ -8420,7 +8420,22 @@
         "_id": "faqItem-prix-fr",
         "language": "fr",
         "question": "Combien ça coûte, et l'estimation est-elle vraiment gratuite?",
-        "answer": "Oui, l'estimation est gratuite et sans engagement. On se déplace, on inspecte, et vous recevez un prix clair par écrit avant qu'on commence quoi que ce soit. Aucun frais surprise ajouté après coup: le prix que vous acceptez est celui que vous payez.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Oui, l'estimation est gratuite et sans engagement. On se déplace, on inspecte, et vous recevez un prix clair par écrit avant qu'on commence quoi que ce soit. Aucun frais surprise ajouté après coup: le prix que vous acceptez est celui que vous payez.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-tarification-fr"
@@ -8433,7 +8448,22 @@
         "_id": "faqItem-prix-en",
         "language": "en",
         "question": "How much does it cost, and is the estimate really free?",
-        "answer": "Yes, the estimate is free and with no obligation. We come, we inspect, and you get a clear written price before anything starts. No surprise charges added after the fact, and the price you accept is the price you pay.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Yes, the estimate is free and with no obligation. We come, we inspect, and you get a clear written price before anything starts. No surprise charges added after the fact, and the price you accept is the price you pay.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-tarification-en"
@@ -8446,7 +8476,22 @@
         "_id": "faqItem-delai-fr",
         "language": "fr",
         "question": "En combien de temps pouvez-vous intervenir?",
-        "answer": "Pour une infestation active, on vise une intervention dans les vingt-quatre heures, souvent la journée même sur la Rive-Nord et à Laval. Quand vous appelez, on vous dit franchement quand on peut être là plutôt que de vous laisser attendre.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Pour une infestation active, on vise une intervention dans les vingt-quatre heures, souvent la journée même sur la Rive-Nord et à Laval. Quand vous appelez, on vous dit franchement quand on peut être là plutôt que de vous laisser attendre.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-intervention-fr"
@@ -8459,7 +8504,22 @@
         "_id": "faqItem-delai-en",
         "language": "en",
         "question": "How fast can you come out?",
-        "answer": "For an active infestation we aim to be at your door within twenty-four hours, often the same day across the North Shore and Laval. When you call, we tell you honestly when we can be there rather than making you wait by the phone.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "For an active infestation we aim to be at your door within twenty-four hours, often the same day across the North Shore and Laval. When you call, we tell you honestly when we can be there rather than making you wait by the phone.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-intervention-en"
@@ -8472,7 +8532,22 @@
         "_id": "faqItem-securite-fr",
         "language": "fr",
         "question": "Le traitement est-il sécuritaire pour mes enfants et mes animaux?",
-        "answer": "Il l'est. On privilégie des produits ciblés, à faible toxicité, appliqués là où se trouve le problème et jamais répandus dans toute la maison. Votre technicien vous indique précisément les pièces à éviter et pour combien de temps, en général quelques heures, le temps que tout sèche.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Il l'est. On privilégie des produits ciblés, à faible toxicité, appliqués là où se trouve le problème et jamais répandus dans toute la maison. Votre technicien vous indique précisément les pièces à éviter et pour combien de temps, en général quelques heures, le temps que tout sèche.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-intervention-fr"
@@ -8485,7 +8560,22 @@
         "_id": "faqItem-securite-en",
         "language": "en",
         "question": "Is the treatment safe for my kids and my pets?",
-        "answer": "It is. We favour targeted, low-toxicity products applied right where the problem is, never sprayed across your whole home. Your technician tells you exactly which rooms to stay out of and for how long, usually just a few hours until everything has dried.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "It is. We favour targeted, low-toxicity products applied right where the problem is, never sprayed across your whole home. Your technician tells you exactly which rooms to stay out of and for how long, usually just a few hours until everything has dried.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-intervention-en"
@@ -8498,7 +8588,22 @@
         "_id": "faqItem-garantie-fr",
         "language": "fr",
         "question": "Offrez-vous une garantie si les bestioles reviennent?",
-        "answer": "Toujours. Chaque traitement résidentiel vient avec une garantie écrite. Si l'activité réapparaît pendant la période couverte, on revient traiter sans frais supplémentaires. Le travail n'est pas terminé tant que le problème ne l'est pas.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Toujours. Chaque traitement résidentiel vient avec une garantie écrite. Si l'activité réapparaît pendant la période couverte, on revient traiter sans frais supplémentaires. Le travail n'est pas terminé tant que le problème ne l'est pas.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-tarification-fr"
@@ -8511,7 +8616,22 @@
         "_id": "faqItem-garantie-en",
         "language": "en",
         "question": "Do you stand behind the work if the pests come back?",
-        "answer": "Always. Every residential treatment comes with a written guarantee. If the activity returns within the covered period, we come back and treat again at no extra cost. We are not done until the problem is.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Always. Every residential treatment comes with a written guarantee. If the activity returns within the covered period, we come back and treat again at no extra cost. We are not done until the problem is.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-tarification-en"
@@ -8524,7 +8644,22 @@
         "_id": "faqItem-produits-fr",
         "language": "fr",
         "question": "Quels produits utilisez-vous concrètement?",
-        "answer": "Uniquement des produits homologués par Santé Canada, choisis selon chaque situation plutôt qu'un seul produit générique pour tout. On vous explique avec plaisir ce qu'on applique et pourquoi, et on vous laisse les détails par écrit.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Uniquement des produits homologués par Santé Canada, choisis selon chaque situation plutôt qu'un seul produit générique pour tout. On vous explique avec plaisir ce qu'on applique et pourquoi, et on vous laisse les détails par écrit.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-traitement-fr"
@@ -8537,7 +8672,22 @@
         "_id": "faqItem-produits-en",
         "language": "en",
         "question": "What products do you actually use?",
-        "answer": "Only products approved by Health Canada, chosen for each situation rather than one generic spray for everything. We are happy to walk you through what we are applying and why, and we leave you the details in writing.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Only products approved by Health Canada, chosen for each situation rather than one generic spray for everything. We are happy to walk you through what we are applying and why, and we leave you the details in writing.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-traitement-en"
@@ -8550,7 +8700,22 @@
         "_id": "faqItem-preparation-fr",
         "language": "fr",
         "question": "Comment dois-je préparer les lieux avant votre arrivée?",
-        "answer": "Très peu de choses. On vous envoie une courte liste simple au moment de la prise de rendez-vous, souvent vider quelques armoires ou écarter un meuble du mur. Si un point vous semble flou, appelez-nous et on règle ça ensemble avant la visite.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Très peu de choses. On vous envoie une courte liste simple au moment de la prise de rendez-vous, souvent vider quelques armoires ou écarter un meuble du mur. Si un point vous semble flou, appelez-nous et on règle ça ensemble avant la visite.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-traitement-fr"
@@ -8563,7 +8728,22 @@
         "_id": "faqItem-preparation-en",
         "language": "en",
         "question": "How should I prepare before you arrive?",
-        "answer": "Very little. We send you a short, plain checklist when we book, usually clearing a few cupboards or moving furniture away from a wall. If you are not sure about something, call us and we will sort it out together before the visit.",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "a0s0",
+                "text": "Very little. We send you a short, plain checklist when we book, usually clearing a few cupboards or moving furniture away from a wall. If you are not sure about something, call us and we will sort it out together before the visit.",
+                "marks": []
+              }
+            ]
+          }
+        ],
         "theme": {
           "_type": "reference",
           "_ref": "faqTheme-traitement-en"

@@ -20,7 +20,7 @@ import { SEO_PROJECTION } from './fragments/seo'
 import { HERO_BLOCK_PROJECTION } from './fragments/hero'
 import { CTA_BAND_PROJECTION } from './fragments/cta'
 import { ARTICLE_BODY_PROJECTION } from './fragments/article-body'
-import { TRANSLATIONS_PROJECTION } from './fragments/link'
+import { TRANSLATIONS_PROJECTION, PT_LINK_MARKDEFS } from './fragments/link'
 import { SITE_SETTINGS_PROJECTION } from './fragments/site'
 import { LEGAL_PROJECTION } from './fragments/legal'
 import { PAGE_BUILDER_PROJECTION } from './blocks/page-builder'
@@ -150,7 +150,15 @@ export const CONTENT_GRAPH_QUERY = /* groq */ `{
   "faqItems": *[_type == "faqItem" && language == $language] | order(question asc){
     _id,
     question,
-    answer,
+    "answer": answer[]{
+      _key,
+      _type,
+      style,
+      listItem,
+      level,
+      "children": children[]{ _key, text, marks },
+      "markDefs": ${PT_LINK_MARKDEFS}
+    },
     "theme": theme->slug.current
   }
 }`

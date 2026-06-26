@@ -4,9 +4,15 @@
  * rajoute les items depuis la collection. Pas de champ de numerotation: jamais de
  * numero affiche, site-wide. AUCUNE valeur design ni de contenu ici. */
 
+import type { PortableTextBlock } from './article-blocks'
+
 export interface FaqQuestion {
   q: string
-  a: string
+  // Réponse en Portable Text (liens internes inline déjà résolus en href): rendue
+  // par le sérialiseur partagé PortableText.vue dans l'accordéon.
+  a: PortableTextBlock[]
+  // Version texte plat de la réponse: alimente le JSON-LD FAQPage (acceptedAnswer).
+  aText: string
 }
 
 export interface FaqContent {

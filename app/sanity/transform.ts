@@ -307,11 +307,14 @@ export interface TestimonialPayload {
   city?: string
   featured?: boolean
 }
-/** Question FAQ du payload: id = _id Sanity, theme = slug du faqTheme reference. */
+/** Question FAQ du payload: id = _id Sanity, theme = slug du faqTheme reference.
+ *  `a` = réponse en Portable Text (liens inline résolus), rendue par PortableText.vue;
+ *  `aText` = même réponse en texte plat, pour le JSON-LD FAQPage (acceptedAnswer). */
 export interface FaqItemPayload {
   id: string
   q: string
-  a: string
+  a: PortableTextBlock[]
+  aText: string
   theme?: string
 }
 
@@ -1320,11 +1323,22 @@ function transformTestimonial(raw: SanityTestimonial): TestimonialPayload {
   }
 }
 
-function transformFaqItem(raw: SanityFaqItem): FaqItemPayload {
+/** Portable Text -> texte plat: concatène les spans, blocs séparés par un saut.
+ *  Sert le JSON-LD FAQPage (acceptedAnswer.text); le rendu, lui, passe par
+ *  ptToLinkedEntries + PortableText.vue (jamais ce texte plat). */
+function ptToPlainText(blocks: Maybe<SanityRawLinkedPortableBlock[]>): string {
+  return (blocks ?? [])
+    .map((b) => (b.children ?? []).map((c) => c.text ?? '').join(''))
+    .join('\n\n')
+    .trim()
+}
+
+function transformFaqItem(raw: SanityFaqItem, locale: WfLocale, phoneE164: string): FaqItemPayload {
   return {
     id: raw._id,
     q: raw.question,
-    a: raw.answer,
+    a: ptToLinkedEntries(raw.answer, locale, phoneE164),
+    aText: ptToPlainText(raw.answer),
     theme: cleanLogic(opt(raw.theme))
   }
 }
@@ -1434,7 +1448,7 @@ export function transformGraph(raw: SanityGraph, locale: WfLocale): ContentPaylo
       articles: raw.articles.map((article) => transformArticle(article, locale, phoneE164)),
       categories: raw.categories.map((category) => transformCategory(category)),
       testimonials: raw.testimonials.map(transformTestimonial),
-      faqItems: raw.faqItems.map(transformFaqItem)
+      faqItems: raw.faqItems.map((f) => transformFaqItem(f, locale, phoneE164))
     }
   }
 }

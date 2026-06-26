@@ -9,7 +9,9 @@
  * numerotation, jamais (pas de compteur, pas d'option de numero). */
 interface AccordionItem {
   title: string
-  content: string
+  // Contenu texte simple (repli). Pour du texte riche (Portable Text), le
+  // consommateur fournit le slot `content` et peut omettre ce champ.
+  content?: string
 }
 
 const props = withDefaults(
@@ -87,7 +89,9 @@ function panelId(i: number): string {
         :hidden="!isOpen(i)"
       >
         <div class="acc__panel-inner">
-          <p class="acc__content wf-body-2 wf-text-muted">{{ item.content }}</p>
+          <div class="acc__content wf-body-2 wf-text-muted">
+            <slot name="content" :item="item" :index="i">{{ item.content }}</slot>
+          </div>
         </div>
       </div>
     </div>

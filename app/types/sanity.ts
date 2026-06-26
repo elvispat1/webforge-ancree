@@ -442,7 +442,11 @@ export interface SanityTestimonial {
 export interface SanityFaqItem {
   _id: string
   question: string
-  answer: string
+  // Réponse en Portable Text restreint (mêmes blocs riches que l'éditorial /
+  // le corps d'article: annotation `link` interne/externe/ancre, projection
+  // PT_LINK_MARKDEFS). Résolue au transform en PortableTextBlock[] (rendu) +
+  // texte plat (JSON-LD FAQPage).
+  answer?: Maybe<SanityRawLinkedPortableBlock[]>
   theme?: Maybe<string>
 }
 

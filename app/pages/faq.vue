@@ -26,7 +26,7 @@ usePageSeo({
   title: seo.title,
   description: seo.description,
   breadcrumbs,
-  faq: groups.value.flatMap((g) => g.items).map((f) => ({ question: f.q, answer: f.a }))
+  faq: groups.value.flatMap((g) => g.items).map((f) => ({ question: f.q, answer: f.aText }))
 })
 
 const blocks = useFaqPageBlocks()

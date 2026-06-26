@@ -7,16 +7,19 @@
  * accessible partagee; on mappe {q,a} vers {title,content}. AUCUNE numerotation. */
 import type { BlockBase } from '~/types/blocks'
 import type { FaqContent } from '~/content/faq'
+// Page-builder hors auto-import: le serialiseur partage est importe explicitement
+// (meme geste que l'editorial). Il rend la reponse Portable Text (liens internes
+// inline en NuxtLink) dans le panneau de l'accordeon.
+import PortableText from '~/components/page-builder/article/PortableText.vue'
 
 type FaqBlock = BlockBase<'faq'> & FaqContent
 
 const props = defineProps<FaqBlock>()
 const { t } = useI18n()
 
-// Mappe le contrat {q,a} vers le contrat de la primitive {title,content}.
-const accordionItems = computed(() =>
-  props.items.map((item) => ({ title: item.q, content: item.a }))
-)
+// La primitive Accordion porte le titre (question); la reponse riche (Portable
+// Text) passe par le slot `content`, indexe sur props.items.
+const accordionItems = computed(() => props.items.map((item) => ({ title: item.q })))
 </script>
 
 <template>
@@ -41,7 +44,11 @@ const accordionItems = computed(() =>
         </div>
 
         <div class="faq__panel wf-col-full wf-from-8 wf-to-end" data-reveal>
-          <Accordion :items="accordionItems" mode="single" :default-open="[0]" :heading-level="3" />
+          <Accordion :items="accordionItems" mode="single" :default-open="[0]" :heading-level="3">
+            <template #content="{ index }">
+              <PortableText :value="props.items[index]?.a ?? []" />
+            </template>
+          </Accordion>
         </div>
       </div>
     </div>

@@ -127,7 +127,7 @@ function resolveFaqBlock(block: PendingFaqBlock): FaqBlock {
   // Selection manuelle PURE: refs (_id Sanity) resolues dans l'ordre de l'array.
   return {
     ...copy,
-    items: useFaq({ ids: selection.refs }).map((f) => ({ q: f.q, a: f.a }))
+    items: useFaq({ ids: selection.refs }).map((f) => ({ q: f.q, a: f.a, aText: f.aText }))
   }
 }
 

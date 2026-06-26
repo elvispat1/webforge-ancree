@@ -22,7 +22,7 @@ import { CTA_BAND_PROJECTION } from '../fragments/cta'
 import { SITE_SETTINGS_PROJECTION } from '../fragments/site'
 import { LEGAL_PROJECTION } from '../fragments/legal'
 import { SERVICE_CARD_FIELDS, SERVICE_CITY_CARD_FIELDS, ARTICLE_CARD_FIELDS } from '../fragments/cards'
-import { TRANSLATIONS_PROJECTION } from '../fragments/link'
+import { TRANSLATIONS_PROJECTION, PT_LINK_MARKDEFS } from '../fragments/link'
 import { ARTICLE_BODY_PROJECTION } from '../fragments/article-body'
 import { PAGE_BUILDER_PROJECTION } from '../blocks/page-builder'
 
@@ -115,7 +115,15 @@ export function collections(detail?: DetailCollection): string {
   "faqItems": *[_type == "faqItem" && language == $language] | order(question asc){
     _id,
     question,
-    answer,
+    "answer": answer[]{
+      _key,
+      _type,
+      style,
+      listItem,
+      level,
+      "children": children[]{ _key, text, marks },
+      "markDefs": ${PT_LINK_MARKDEFS}
+    },
     "theme": theme->slug.current
   }`
 }

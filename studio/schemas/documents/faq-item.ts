@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { HelpCircleIcon } from '@sanity/icons'
+import { faqAnswerPortableText } from '../objects/blocks/faq-answer-portable-text'
 
 // Pas de champ order: l'ordre d'affichage appartient aux consommateurs
 // (faqPage.sections pour la page FAQ, l'ordre des refs items pour les blocs faq).
@@ -25,8 +26,9 @@ export const faqItem = defineType({
     defineField({
       name: 'answer',
       title: 'Réponse',
-      type: 'text',
-      rows: 4,
+      description: 'Texte riche restreint: paragraphes, liste à puces, gras, liens internes (maillage vers services et villes).',
+      type: 'array',
+      of: [faqAnswerPortableText],
       validation: (R) => R.required(),
     }),
     defineField({
