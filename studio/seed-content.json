@@ -1749,10 +1749,83 @@
           {
             "_key": "b1",
             "_type": "services",
-            "eyebrow": "Ce qu'on règle",
-            "heading": "Un nuisible, une solution claire",
-            "lead": "Résidentiel et commercial, traités par des techniciens certifiés avec des produits sûrs pour la famille et les animaux.",
+            "eyebrow": "Notre catalogue",
+            "heading": "Chaque nuisible, un traitement ciblé",
+            "lead": "Du résidentiel au commercial, voici tout ce qu'on traite sur la Rive-Nord, toujours avec la même méthode et la même garantie écrite.",
             "mode": "auto"
+          },
+          {
+            "_key": "sv-process",
+            "_type": "process",
+            "eyebrow": "Notre méthode",
+            "heading": "La même méthode rigoureuse, pour chaque nuisible",
+            "lead": "Pas de mystère ni de pression, du premier appel à la garantie.",
+            "steps": [
+              {
+                "_key": "p1",
+                "_type": "processStep",
+                "title": "Inspection et identification",
+                "body": "On confirme l'espèce et on trouve la source, du sous-sol au toit, avant d'agir."
+              },
+              {
+                "_key": "p2",
+                "_type": "processStep",
+                "title": "Plan et estimation claire",
+                "body": "On explique le plan et le prix avant de commencer, sans vente sous pression."
+              },
+              {
+                "_key": "p3",
+                "_type": "processStep",
+                "title": "Traitement ciblé",
+                "body": "Un technicien certifié applique des produits homologués Santé Canada, sûrs pour la famille et les animaux."
+              },
+              {
+                "_key": "p4",
+                "_type": "processStep",
+                "title": "Suivi et garantie",
+                "body": "On scelle les points d'entrée, on revient au besoin, et la garantie écrite tient."
+              }
+            ]
+          },
+          {
+            "_key": "sv-highlights",
+            "_type": "highlights",
+            "eyebrow": "Nos engagements",
+            "heading": "Pourquoi nous confier votre maison",
+            "items": [
+              {
+                "_key": "h1",
+                "_type": "highlight",
+                "title": "Garantie de retour sans frais",
+                "body": "Si le nuisible revient dans la période couverte, on revient le traiter sans vous refacturer."
+              },
+              {
+                "_key": "h2",
+                "_type": "highlight",
+                "title": "Produits homologués Santé Canada",
+                "body": "Choisis selon la situation, sûrs pour les enfants et les animaux."
+              },
+              {
+                "_key": "h3",
+                "_type": "highlight",
+                "title": "Intervention souvent sous 24 à 48 h",
+                "body": "Une vraie personne répond, 7 jours sur 7, et un technicien part vers vous rapidement."
+              },
+              {
+                "_key": "h4",
+                "_type": "highlight",
+                "title": "Rapport d'inspection écrit",
+                "body": "Remis après chaque visite: ce qu'on a trouvé, traité et recommandé."
+              }
+            ]
+          },
+          {
+            "_key": "sv-testimonials",
+            "_type": "testimonials",
+            "eyebrow": "Ce qu'on dit de nous",
+            "heading": "La Rive-Nord nous fait confiance",
+            "mode": "featured",
+            "limit": 3
           },
           {
             "_key": "b2",
@@ -1876,10 +1949,83 @@
           {
             "_key": "b1",
             "_type": "services",
-            "eyebrow": "What we handle",
-            "heading": "One pest, one clear solution",
-            "lead": "Residential and commercial, handled by certified technicians with products safe for family and pets.",
+            "eyebrow": "Our catalogue",
+            "heading": "Each pest, a targeted treatment",
+            "lead": "From homes to businesses, here is everything we treat on the North Shore, always with the same method and the same written guarantee.",
             "mode": "auto"
+          },
+          {
+            "_key": "sv-process",
+            "_type": "process",
+            "eyebrow": "Our method",
+            "heading": "The same rigorous method, for every pest",
+            "lead": "No mystery, no pressure, from the first call to the guarantee.",
+            "steps": [
+              {
+                "_key": "p1",
+                "_type": "processStep",
+                "title": "Inspection and identification",
+                "body": "We confirm the species and find the source, basement to roof, before acting."
+              },
+              {
+                "_key": "p2",
+                "_type": "processStep",
+                "title": "Plan and clear estimate",
+                "body": "We explain the plan and the price before starting, no pressure selling."
+              },
+              {
+                "_key": "p3",
+                "_type": "processStep",
+                "title": "Targeted treatment",
+                "body": "A certified technician applies Health Canada approved products, safe for family and pets."
+              },
+              {
+                "_key": "p4",
+                "_type": "processStep",
+                "title": "Follow-up and guarantee",
+                "body": "We seal the entry points, come back if needed, and the written guarantee holds."
+              }
+            ]
+          },
+          {
+            "_key": "sv-highlights",
+            "_type": "highlights",
+            "eyebrow": "Our commitments",
+            "heading": "Why trust us with your home",
+            "items": [
+              {
+                "_key": "h1",
+                "_type": "highlight",
+                "title": "Free return guarantee",
+                "body": "If the pest comes back within the covered period, we come back to treat it at no extra charge."
+              },
+              {
+                "_key": "h2",
+                "_type": "highlight",
+                "title": "Health Canada approved products",
+                "body": "Chosen for the situation, safe for children and pets."
+              },
+              {
+                "_key": "h3",
+                "_type": "highlight",
+                "title": "Often on site within 24 to 48 h",
+                "body": "A real person answers, seven days a week, and a technician heads your way quickly."
+              },
+              {
+                "_key": "h4",
+                "_type": "highlight",
+                "title": "Written inspection report",
+                "body": "Handed over after every visit: what we found, treated and recommend."
+              }
+            ]
+          },
+          {
+            "_key": "sv-testimonials",
+            "_type": "testimonials",
+            "eyebrow": "What people say",
+            "heading": "The North Shore trusts us",
+            "mode": "featured",
+            "limit": 3
           },
           {
             "_key": "b2",
