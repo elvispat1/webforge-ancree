@@ -150,7 +150,9 @@
   },
   "faq": {
     "still_wondering_title": "Une question qui n’est pas ici?",
-    "still_wondering_lead": "Appelez-nous, c’est toujours une vraie personne qui répond."
+    "still_wondering_lead": "Appelez-nous, c’est toujours une vraie personne qui répond.",
+    "browse": "Sur cette page",
+    "nav_label": "Thèmes de la FAQ"
   },
   "site": {
     "home_aria": "Rempart Extermination, retour à l’accueil"

@@ -29,12 +29,17 @@ usePageSeo({
   faq: groups.value.flatMap((g) => g.items).map((f) => ({ question: f.q, answer: f.aText }))
 })
 
+// Le listing VISIBLE des questions (repertoire groupe par theme) vit entre le
+// masthead et le pageBuilder (temoignages, bandeau d'appel, contact). Meme source
+// que le balisage ci-dessus (useFaqByTheme): le repertoire et le JSON-LD ne
+// divergent jamais.
 const blocks = useFaqPageBlocks()
 </script>
 
 <template>
   <div>
     <Hero :hero="hero" />
+    <FaqDirectory />
     <PageBuilder :blocks="blocks" reveal />
   </div>
 </template>

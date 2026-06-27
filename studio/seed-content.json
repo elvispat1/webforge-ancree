@@ -4027,6 +4027,14 @@
         ],
         "pageBuilder": [
           {
+            "_key": "pb-tm",
+            "_type": "testimonials",
+            "eyebrow": "La preuve par l'expérience",
+            "heading": "Ils avaient les mêmes questions que vous",
+            "mode": "featured",
+            "limit": 3
+          },
+          {
             "_key": "b1",
             "_type": "ctaBand",
             "title": "Une question reste sans réponse? Appelez-nous.",
@@ -4192,6 +4200,14 @@
           }
         ],
         "pageBuilder": [
+          {
+            "_key": "pb-tm",
+            "_type": "testimonials",
+            "eyebrow": "Proof from the field",
+            "heading": "They had the same questions you do",
+            "mode": "featured",
+            "limit": 3
+          },
           {
             "_key": "b1",
             "_type": "ctaBand",

@@ -150,7 +150,9 @@
   },
   "faq": {
     "still_wondering_title": "A question that isn’t here?",
-    "still_wondering_lead": "Call us, you always reach a real person."
+    "still_wondering_lead": "Call us, you always reach a real person.",
+    "browse": "On this page",
+    "nav_label": "FAQ topics"
   },
   "site": {
     "home_aria": "Rempart Extermination, back to home"
