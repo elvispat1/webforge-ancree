@@ -27,14 +27,18 @@
 /* Coquille centree. Cap dur a 1920px; gouttiere 24px puis 8rem au desktop. La
  * valeur 8rem est aussi la mesure du debord du heros (margin negatif). */
 .wf-container {
+  /* Marge interieure exposee en variable: un enfant peut s'en servir pour deborder
+   * proprement jusqu'au bord du conteneur (rail defilant pleine fuite) puis se
+   * re-caler sur la mesure du contenu. Source unique de la gouttiere de page. */
+  --wf-pad-inline: 24px;
   width: 100%;
   max-width: 1920px;
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: var(--wf-pad-inline);
 }
 @container site (min-width: 1024px) {
   .wf-container {
-    padding-inline: 8rem;
+    --wf-pad-inline: 8rem;
   }
 }
 
