@@ -4533,7 +4533,7 @@
           {
             "_key": "b1",
             "_type": "contact",
-            "eyebrow": "Nous joindre",
+            "eyebrow": "Parlons-en",
             "form": {
               "errorBanner": {
                 "body": "Réessayez dans un moment, ou écrivez-nous à {email}. On veut vraiment vous lire.",
@@ -4568,7 +4568,7 @@
               }
             },
             "heading": "Dites-nous ce qui vous tracasse",
-            "lead": "Décrivez la situation en quelques mots et on vous revient avec un plan clair et une estimation honnête, souvent le jour même.",
+            "lead": "Au bout du fil, une vraie personne, pas un répondeur. Écrivez-nous les grandes lignes ou appelez directement: on vous revient avec un plan clair et une estimation gratuite, 7 jours sur 7.",
             "metaLabels": {
               "address": "Notre adresse",
               "email": "Nous écrire",
@@ -4579,6 +4579,79 @@
               "body": "Un technicien de Rempart vous revient sous peu pour fixer une visite. Pour une urgence, appelez-nous.",
               "title": "Message reçu, merci."
             }
+          },
+          {
+            "_key": "cp-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "value": "Membre ASTTQ",
+                "label": "gestion parasitaire du Québec",
+                "icon": "lucide:award"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "value": "Assurance responsabilité",
+                "label": "couverture 2 M$",
+                "icon": "lucide:shield-check"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "value": "Produits homologués",
+                "label": "Santé Canada, sûrs pour la famille",
+                "icon": "lucide:leaf"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "value": "Technicien licencié",
+                "label": "certifié en intervention",
+                "icon": "lucide:badge-check"
+              }
+            ]
+          },
+          {
+            "_key": "cp-cities",
+            "_type": "serviceCities",
+            "mode": "featured",
+            "eyebrow": "Notre territoire",
+            "heading": "On est déjà dans votre secteur",
+            "lead": "De Laval à Repentigny, un technicien d'ici part vers vous, souvent le jour même.",
+            "areaLabel": "Zone desservie",
+            "areaName": "Rive-Nord de Montréal et Laval",
+            "areaNote": "Intervention rapide partout dans la couronne nord."
+          },
+          {
+            "_key": "cp-faq",
+            "_type": "faq",
+            "eyebrow": "Avant de nous écrire",
+            "heading": "Les questions qu'on entend le plus",
+            "items": [
+              {
+                "_key": "fq0",
+                "_type": "reference",
+                "_ref": "faqItem-prix-fr"
+              },
+              {
+                "_key": "fq1",
+                "_type": "reference",
+                "_ref": "faqItem-delai-fr"
+              },
+              {
+                "_key": "fq2",
+                "_type": "reference",
+                "_ref": "faqItem-garantie-fr"
+              },
+              {
+                "_key": "fq3",
+                "_type": "reference",
+                "_ref": "faqItem-securite-fr"
+              }
+            ]
           },
           {
             "_key": "b2",
@@ -4637,7 +4710,7 @@
           {
             "_key": "b1",
             "_type": "contact",
-            "eyebrow": "Get in touch",
+            "eyebrow": "Let's talk",
             "form": {
               "errorBanner": {
                 "body": "Please try again in a moment, or write to us at {email}. We really do want to hear from you.",
@@ -4672,7 +4745,7 @@
               }
             },
             "heading": "Tell us what you are dealing with",
-            "lead": "Describe the situation in a few words and we will get back to you with a clear plan and an honest estimate, often the same day.",
+            "lead": "A real person on the line, never a machine. Send us the basics or call directly: you get a clear plan and a free estimate, seven days a week.",
             "metaLabels": {
               "address": "Our address",
               "email": "Write to us",
@@ -4683,6 +4756,79 @@
               "body": "A Rempart technician will get back to you shortly to set up a visit. For anything urgent, call us.",
               "title": "Message received, thank you."
             }
+          },
+          {
+            "_key": "cp-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "value": "ASTTQ member",
+                "label": "Quebec pest management",
+                "icon": "lucide:award"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "value": "Liability insurance",
+                "label": "$2M coverage",
+                "icon": "lucide:shield-check"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "value": "Approved products",
+                "label": "Health Canada, family-safe",
+                "icon": "lucide:leaf"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "value": "Licensed technician",
+                "label": "certified to treat",
+                "icon": "lucide:badge-check"
+              }
+            ]
+          },
+          {
+            "_key": "cp-cities",
+            "_type": "serviceCities",
+            "mode": "featured",
+            "eyebrow": "Our territory",
+            "heading": "We are already in your area",
+            "lead": "From Laval to Repentigny, a local technician heads your way, often the same day.",
+            "areaLabel": "Service area",
+            "areaName": "Montreal North Shore and Laval",
+            "areaNote": "Fast response across the north crown."
+          },
+          {
+            "_key": "cp-faq",
+            "_type": "faq",
+            "eyebrow": "Before you write",
+            "heading": "The questions we hear most",
+            "items": [
+              {
+                "_key": "fq0",
+                "_type": "reference",
+                "_ref": "faqItem-prix-en"
+              },
+              {
+                "_key": "fq1",
+                "_type": "reference",
+                "_ref": "faqItem-delai-en"
+              },
+              {
+                "_key": "fq2",
+                "_type": "reference",
+                "_ref": "faqItem-garantie-en"
+              },
+              {
+                "_key": "fq3",
+                "_type": "reference",
+                "_ref": "faqItem-securite-en"
+              }
+            ]
           },
           {
             "_key": "b2",
