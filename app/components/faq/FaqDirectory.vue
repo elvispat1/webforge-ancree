@@ -60,9 +60,12 @@ onMounted(() => {
   <section ref="rootEl" class="faq-dir">
     <div class="wf-container">
       <div class="faq-dir__layout wf-grid-cols">
-        <!-- Rail: sommaire ancre + carte d'appel, colle au defilement au desktop. -->
-        <aside class="faq-dir__rail wf-col-full wf-span-5" v-reveal>
-          <div class="faq-dir__rail-inner" data-reveal-stagger>
+        <!-- Rail: sommaire ancre + carte d'appel, colle au defilement au desktop.
+             Le sticky vit sur l'item de grille (course = la hauteur des groupes);
+             pas de v-reveal ici (la nav est presente d'emblee, et un ScrollTrigger
+             sur l'element collant fausserait sa mesure). -->
+        <aside class="faq-dir__rail wf-col-full wf-span-5">
+          <div class="faq-dir__rail-inner">
             <nav class="faq-dir__nav" :aria-label="t('faq.nav_label')">
               <p class="faq-dir__nav-label wf-caption wf-text-muted">{{ t('faq.browse') }}</p>
               <ul class="faq-dir__nav-list">
@@ -99,7 +102,7 @@ onMounted(() => {
               <h2 class="faq-dir__group-title wf-h3">{{ g.theme }}</h2>
               <Accordion
                 :items="g.items.map((i) => ({ title: i.q }))"
-                mode="single"
+                mode="multiple"
                 :default-open="gi === 0 ? [0] : []"
                 :heading-level="3"
               >
@@ -237,7 +240,10 @@ onMounted(() => {
 }
 
 @container site (min-width: 1024px) {
-  .faq-dir__rail-inner {
+  /* Le sticky est porte par l'item de grille (start-aligne via align-items:start
+   * du layout): sa course de collage est la hauteur du conteneur de grille, donc
+   * toute la colonne des groupes. Meme geste que le bloc faq partage. */
+  .faq-dir__rail {
     position: sticky;
     top: calc(var(--header-height) + 3rem);
   }
