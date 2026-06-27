@@ -81,19 +81,9 @@ function panelId(i: number): string {
         </button>
       </component>
 
-      <div
-        :id="panelId(i)"
-        role="region"
-        :aria-labelledby="triggerId(i)"
-        class="acc__panel"
-        :hidden="!isOpen(i)"
-      >
-        <div class="acc__panel-inner">
-          <div class="acc__content wf-body-2 wf-text-muted">
-            <slot name="content" :item="item" :index="i">{{ item.content }}</slot>
-          </div>
-        </div>
-      </div>
+      <AccordionPanel :open="isOpen(i)" :panel-id="panelId(i)" :labelledby="triggerId(i)">
+        <slot name="content" :item="item" :index="i">{{ item.content }}</slot>
+      </AccordionPanel>
     </div>
   </div>
 </template>
@@ -102,12 +92,11 @@ function panelId(i: number): string {
 .acc {
   display: grid;
   gap: 1.6rem;
-  /* Mouvement du tiroir, propre a l'accordeon. Courbe in-out DELICATE: depart ET
-   * fin doux (contraire de settle/ease-out qui chargent tout d'emblee et donnent
-   * le « ouvre d'un coup »), duree posee. La douceur PERCUE est portee par le
-   * mouvement compositeur du corps (transform + opacite), pose par-dessus la
-   * hauteur. Variable locale tant que la couche famille n'expose pas de token
-   * in-out (family/tokens.css). */
+  /* Rythme du tiroir cote CSS: synchronise le pivot du chevron et le fondu de
+   * l'ambre sur l'ouverture du panneau (la HAUTEUR, elle, est animee en JS par
+   * AccordionPanel, car la transition CSS de grid-template-rows n'anime pas de
+   * facon fiable selon les navigateurs). Courbe in-out delicate (depart ET fin
+   * doux) et duree posee, miroir de MOTION.{duration,ease}.drawer. */
   --acc-drawer-dur: 460ms;
   --acc-drawer-ease: cubic-bezier(0.45, 0, 0.15, 1);
 }
@@ -203,45 +192,13 @@ function panelId(i: number): string {
   color: var(--text-oncall);
 }
 
-/* Panneau: hauteur animee via grid-template-rows (0fr -> 1fr). Ferme, il sort de
- * l'ordre de tabulation (visibility: hidden) et de la mesure (hauteur nulle). */
-.acc__panel {
-  display: grid;
-  grid-template-rows: 1fr;
-  transition: grid-template-rows var(--acc-drawer-dur) var(--acc-drawer-ease);
-}
-.acc__panel[hidden] {
-  display: grid;
-  grid-template-rows: 0fr;
-  visibility: hidden;
-}
-.acc__panel-inner {
-  min-height: 0;
-  overflow: hidden;
-}
-.acc__content {
-  padding: 0 2.4rem 2.4rem;
-  max-width: 64ch;
-  /* Le corps porte la douceur PERCUE: il se pose en montant (transform) et en
-   * fondu (opacite), deux proprietes compositeur, pendant que la rangee se
-   * deploie. Le geste « s'ancre en montant » de la famille, a l'echelle du tiroir.
-   * Couple a la meme courbe in-out, l'ouverture lit comme un seul mouvement doux. */
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity var(--acc-drawer-dur) var(--acc-drawer-ease),
-    transform var(--acc-drawer-dur) var(--acc-drawer-ease);
-}
-.acc__panel[hidden] .acc__content {
-  opacity: 0;
-  transform: translateY(0.8rem);
-}
+/* Le panneau (hauteur, repli, a11y) vit dans AccordionPanel: sa hauteur est animee
+ * en JS (GSAP), pas par une transition CSS. */
 
 /* Kill-switch local: les utilisateurs sensibles au mouvement obtiennent une
- * bascule instantanee (pas d'animation de hauteur ni de chevron). */
+ * bascule instantanee du chevron (la hauteur est deja instantanee cote JS via
+ * motionDisabled dans AccordionPanel). */
 @media (prefers-reduced-motion: reduce) {
-  .acc__panel,
-  .acc__content,
   .acc__chevron {
     transition: none;
   }

@@ -4,8 +4,10 @@
  * dans motion-gsap.ts (import dynamique). Miroir CSS dans family/tokens.css (meme
  * courbe settle). Discipline 1: les composants lisent MOTION.*, jamais de litteraux. */
 export const MOTION = {
-  duration: { reveal: 0.8 }, // secondes (unite GSAP)
-  ease: { settle: 'settle' }, // CustomEase enregistre dans motion-gsap.ts
+  duration: { reveal: 0.8, drawer: 0.46 }, // secondes (unite GSAP)
+  // settle = CustomEase enregistre dans motion-gsap.ts. drawer = ease in-out built-in
+  // (depart ET fin doux): l'ouverture d'un tiroir d'accordeon se pose sans a-coup.
+  ease: { settle: 'settle', drawer: 'power2.inOut' },
   // Apparition au defilement (directive v-reveal). Montee plus ample qu'en
   // Minimaliste (32px), deceleration plus lente: le bloc « se pose ».
   reveal: { distance: 32, start: 'top 88%', stagger: 0.1 },
