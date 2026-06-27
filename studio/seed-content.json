@@ -2388,6 +2388,172 @@
         "language": "fr",
         "pageBuilder": [
           {
+            "_key": "pb-editorial",
+            "_type": "editorial",
+            "eyebrow": "Notre territoire",
+            "heading": "On connaît la Rive-Nord, secteur par secteur",
+            "lead": "Depuis 2008, au départ de Terrebonne, on traite les nuisibles de toute la couronne nord. Bâti des années 1970, sous-sols humides, terrains boisés: chaque secteur a ses habitués.",
+            "segments": [
+              {
+                "_key": "seg0",
+                "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
+                "body": [
+                  {
+                    "_type": "block",
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [
+                      {
+                        "_key": "e1l1",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "service-fourmis-charpentieres-fr"
+                        }
+                      }
+                    ],
+                    "children": [
+                      {
+                        "_key": "e1s0",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Les "
+                      },
+                      {
+                        "_key": "e1s1",
+                        "_type": "span",
+                        "marks": [
+                          "e1l1"
+                        ],
+                        "text": "fourmis charpentières"
+                      },
+                      {
+                        "_key": "e1s2",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " arrivent par les arbres matures, les souris cherchent la chaleur des fondations dès l'automne, les guêpes nichent sous les galeries tout l'été. On connaît la saison de chaque nuisible et on intervient vite."
+                      }
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
+                    "children": [
+                      {
+                        "_key": "e2hs0",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Une équipe déjà dans votre secteur"
+                      }
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
+                    "markDefs": [
+                      {
+                        "_key": "e2l1",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "serviceCity-laval-fr"
+                        }
+                      },
+                      {
+                        "_key": "e2l3",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "serviceCity-terrebonne-fr"
+                        }
+                      },
+                      {
+                        "_key": "e2l5",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "servicesPage-fr"
+                        }
+                      }
+                    ],
+                    "children": [
+                      {
+                        "_key": "e2s0",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "On ne part pas de loin: nos techniciens couvrent "
+                      },
+                      {
+                        "_key": "e2s1",
+                        "_type": "span",
+                        "marks": [
+                          "e2l1"
+                        ],
+                        "text": "Laval"
+                      },
+                      {
+                        "_key": "e2s2",
+                        "_type": "span",
+                        "marks": [],
+                        "text": ", "
+                      },
+                      {
+                        "_key": "e2s3",
+                        "_type": "span",
+                        "marks": [
+                          "e2l3"
+                        ],
+                        "text": "Terrebonne"
+                      },
+                      {
+                        "_key": "e2s4",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " et toute la couronne nord au quotidien. Voir "
+                      },
+                      {
+                        "_key": "e2s5",
+                        "_type": "span",
+                        "marks": [
+                          "e2l5"
+                        ],
+                        "text": "tous nos services"
+                      },
+                      {
+                        "_key": "e2s6",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " ou trouvez votre ville plus bas."
+                      }
+                    ]
+                  }
+                ],
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:hero-vanHood",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "_key": "b1",
             "_type": "serviceCities",
             "areaLabel": "Notre zone de service",
@@ -2397,6 +2563,76 @@
             "heading": "On dessert toute la Rive-Nord",
             "lead": "Une équipe locale, déjà dans votre secteur, qui connaît les nuisibles de la région.",
             "mode": "featured"
+          },
+          {
+            "_key": "pb-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "icon": "lucide:award",
+                "value": "Membre ASTTQ",
+                "label": "gestion parasitaire du Québec"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "icon": "lucide:leaf",
+                "value": "Produits homologués",
+                "label": "Santé Canada, sûrs pour la famille"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "icon": "lucide:clock",
+                "value": "Sous 24 à 48 h",
+                "label": "intervention 7 jours sur 7"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "icon": "lucide:badge-check",
+                "value": "Depuis 2008",
+                "label": "au départ de Terrebonne"
+              }
+            ]
+          },
+          {
+            "_key": "pb-tm",
+            "_type": "testimonials",
+            "eyebrow": "Sur le terrain",
+            "heading": "Des clients dans toute la couronne nord",
+            "mode": "featured",
+            "limit": 3
+          },
+          {
+            "_key": "pb-faq",
+            "_type": "faq",
+            "eyebrow": "Avant d'appeler",
+            "heading": "Vos questions sur la zone desservie",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "faqItem-zone-couverture-fr",
+                "_key": "fq0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-zone-delai-fr",
+                "_key": "fq1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-zone-urgence-fr",
+                "_key": "fq2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-zone-nuisibles-fr",
+                "_key": "fq3"
+              }
+            ]
           },
           {
             "_key": "b2",
@@ -2502,6 +2738,172 @@
         "language": "en",
         "pageBuilder": [
           {
+            "_key": "pb-editorial",
+            "_type": "editorial",
+            "eyebrow": "Our territory",
+            "heading": "We know the North Shore, area by area",
+            "lead": "Since 2008, working out of Terrebonne, we treat pests across the whole north crown. 1970s housing stock, damp basements, wooded lots: every area has its regulars.",
+            "segments": [
+              {
+                "_key": "seg0",
+                "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
+                "body": [
+                  {
+                    "_type": "block",
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [
+                      {
+                        "_key": "e1l1",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "service-fourmis-charpentieres-en"
+                        }
+                      }
+                    ],
+                    "children": [
+                      {
+                        "_key": "e1s0",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "The "
+                      },
+                      {
+                        "_key": "e1s1",
+                        "_type": "span",
+                        "marks": [
+                          "e1l1"
+                        ],
+                        "text": "carpenter ants"
+                      },
+                      {
+                        "_key": "e1s2",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " come in from mature trees, mice seek the warmth of foundations in the fall, wasps nest under decks all summer. We know each pest season and we move fast."
+                      }
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
+                    "children": [
+                      {
+                        "_key": "e2hs0",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "A crew already in your area"
+                      }
+                    ]
+                  },
+                  {
+                    "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
+                    "markDefs": [
+                      {
+                        "_key": "e2l1",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "serviceCity-laval-en"
+                        }
+                      },
+                      {
+                        "_key": "e2l3",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "serviceCity-terrebonne-en"
+                        }
+                      },
+                      {
+                        "_key": "e2l5",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "servicesPage-en"
+                        }
+                      }
+                    ],
+                    "children": [
+                      {
+                        "_key": "e2s0",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "We do not come from far: our technicians cover "
+                      },
+                      {
+                        "_key": "e2s1",
+                        "_type": "span",
+                        "marks": [
+                          "e2l1"
+                        ],
+                        "text": "Laval"
+                      },
+                      {
+                        "_key": "e2s2",
+                        "_type": "span",
+                        "marks": [],
+                        "text": ", "
+                      },
+                      {
+                        "_key": "e2s3",
+                        "_type": "span",
+                        "marks": [
+                          "e2l3"
+                        ],
+                        "text": "Terrebonne"
+                      },
+                      {
+                        "_key": "e2s4",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " and the whole north crown every day. See "
+                      },
+                      {
+                        "_key": "e2s5",
+                        "_type": "span",
+                        "marks": [
+                          "e2l5"
+                        ],
+                        "text": "all our services"
+                      },
+                      {
+                        "_key": "e2s6",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " or find your city below."
+                      }
+                    ]
+                  }
+                ],
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:hero-vanHood",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "_key": "b1",
             "_type": "serviceCities",
             "areaLabel": "Our service area",
@@ -2511,6 +2913,76 @@
             "heading": "We cover the whole North Shore",
             "lead": "A local crew, already in your area, that knows the region's pests.",
             "mode": "featured"
+          },
+          {
+            "_key": "pb-trust",
+            "_type": "trustBar",
+            "items": [
+              {
+                "_key": "t1",
+                "_type": "proof",
+                "icon": "lucide:award",
+                "value": "ASTTQ member",
+                "label": "Quebec pest management"
+              },
+              {
+                "_key": "t2",
+                "_type": "proof",
+                "icon": "lucide:leaf",
+                "value": "Approved products",
+                "label": "Health Canada, family-safe"
+              },
+              {
+                "_key": "t3",
+                "_type": "proof",
+                "icon": "lucide:clock",
+                "value": "Within 24 to 48 h",
+                "label": "service seven days a week"
+              },
+              {
+                "_key": "t4",
+                "_type": "proof",
+                "icon": "lucide:badge-check",
+                "value": "Since 2008",
+                "label": "based in Terrebonne"
+              }
+            ]
+          },
+          {
+            "_key": "pb-tm",
+            "_type": "testimonials",
+            "eyebrow": "On the ground",
+            "heading": "Clients across the north suburbs",
+            "mode": "featured",
+            "limit": 3
+          },
+          {
+            "_key": "pb-faq",
+            "_type": "faq",
+            "eyebrow": "Before you call",
+            "heading": "Your questions about our service area",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "faqItem-zone-couverture-en",
+                "_key": "fq0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-zone-delai-en",
+                "_key": "fq1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-zone-urgence-en",
+                "_key": "fq2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "faqItem-zone-nuisibles-en",
+                "_key": "fq3"
+              }
+            ]
           },
           {
             "_key": "b2",
@@ -16715,6 +17187,826 @@
             "value": {
               "_type": "reference",
               "_ref": "faqItem-coquerelles-zone-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "faqTheme",
+      "content": {
+        "_id": "faqTheme-zone-fr",
+        "_type": "faqTheme",
+        "language": "fr",
+        "title": "Zone desservie",
+        "slug": {
+          "_type": "slug",
+          "current": "zone-desservie"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-zone-couverture-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Desservez-vous ma ville?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "a0l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-laval-fr"
+                }
+              },
+              {
+                "_key": "a0l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-terrebonne-fr"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Oui, toute la couronne nord, de "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "a0l1"
+                ],
+                "text": "Laval"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": " à "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "a0l3"
+                ],
+                "text": "Terrebonne"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": " et au-delà: Repentigny, Blainville, Mascouche, Boisbriand, Saint-Eustache. La mosaïque ci-dessous mène à votre ville."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-zone-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-zone-delai-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "En combien de temps pouvez-vous venir?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Souvent sous 24 à 48 h, parfois le jour même selon le secteur. Une vraie personne répond 7 jours sur 7."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-zone-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-zone-urgence-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Intervenez-vous en urgence?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Oui. Un nid de guêpes près d'une porte, une infestation qui s'aggrave: on priorise. Appelez, on évalue tout de suite."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-zone-fr"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-zone-nuisibles-fr",
+        "_type": "faqItem",
+        "language": "fr",
+        "question": "Quels nuisibles traitez-vous dans ma région?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "a0l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-fourmis-charpentieres-fr"
+                }
+              },
+              {
+                "_key": "a0l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-souris-rats-fr"
+                }
+              },
+              {
+                "_key": "a0l5",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-punaises-de-lit-fr"
+                }
+              },
+              {
+                "_key": "a0l7",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-guepes-frelons-fr"
+                }
+              },
+              {
+                "_key": "a0l9",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-coquerelles-fr"
+                }
+              },
+              {
+                "_key": "a0l11",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-commercial-fr"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Tous les courants de la Rive-Nord: "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "a0l1"
+                ],
+                "text": "fourmis charpentières"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": ", "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "a0l3"
+                ],
+                "text": "souris et rats"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": ", "
+              },
+              {
+                "_key": "a0s5",
+                "_type": "span",
+                "marks": [
+                  "a0l5"
+                ],
+                "text": "punaises de lit"
+              },
+              {
+                "_key": "a0s6",
+                "_type": "span",
+                "marks": [],
+                "text": ", "
+              },
+              {
+                "_key": "a0s7",
+                "_type": "span",
+                "marks": [
+                  "a0l7"
+                ],
+                "text": "guêpes et frelons"
+              },
+              {
+                "_key": "a0s8",
+                "_type": "span",
+                "marks": [],
+                "text": ", "
+              },
+              {
+                "_key": "a0s9",
+                "_type": "span",
+                "marks": [
+                  "a0l9"
+                ],
+                "text": "coquerelles"
+              },
+              {
+                "_key": "a0s10",
+                "_type": "span",
+                "marks": [],
+                "text": " et la "
+              },
+              {
+                "_key": "a0s11",
+                "_type": "span",
+                "marks": [
+                  "a0l11"
+                ],
+                "text": "gestion commerciale"
+              },
+              {
+                "_key": "a0s12",
+                "_type": "span",
+                "marks": [],
+                "text": "."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-zone-fr"
+        }
+      }
+    },
+    {
+      "type": "faqTheme",
+      "content": {
+        "_id": "faqTheme-zone-en",
+        "_type": "faqTheme",
+        "language": "en",
+        "title": "Service area",
+        "slug": {
+          "_type": "slug",
+          "current": "service-area"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-zone-couverture-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Do you serve my city?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "a0l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-laval-en"
+                }
+              },
+              {
+                "_key": "a0l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "serviceCity-terrebonne-en"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes, the whole north crown, from "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "a0l1"
+                ],
+                "text": "Laval"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": " to "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "a0l3"
+                ],
+                "text": "Terrebonne"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": " and beyond: Repentigny, Blainville, Mascouche, Boisbriand, Saint-Eustache. The mosaic below leads to your city."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-zone-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-zone-delai-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "How soon can you come?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Often within 24 to 48 hours, sometimes the same day depending on the area. A real person answers seven days a week."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-zone-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-zone-urgence-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Do you handle emergencies?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes. A wasp nest near a door, an infestation getting worse: we prioritize it. Call us and we assess right away."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-zone-en"
+        }
+      }
+    },
+    {
+      "type": "faqItem",
+      "content": {
+        "_id": "faqItem-zone-nuisibles-en",
+        "_type": "faqItem",
+        "language": "en",
+        "question": "Which pests do you treat in my area?",
+        "answer": [
+          {
+            "_type": "block",
+            "_key": "a0",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_key": "a0l1",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-fourmis-charpentieres-en"
+                }
+              },
+              {
+                "_key": "a0l3",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-souris-rats-en"
+                }
+              },
+              {
+                "_key": "a0l5",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-punaises-de-lit-en"
+                }
+              },
+              {
+                "_key": "a0l7",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-guepes-frelons-en"
+                }
+              },
+              {
+                "_key": "a0l9",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-coquerelles-en"
+                }
+              },
+              {
+                "_key": "a0l11",
+                "_type": "link",
+                "type": "internal",
+                "internalRef": {
+                  "_type": "reference",
+                  "_ref": "service-commercial-en"
+                }
+              }
+            ],
+            "children": [
+              {
+                "_key": "a0s0",
+                "_type": "span",
+                "marks": [],
+                "text": "All the common North Shore ones: "
+              },
+              {
+                "_key": "a0s1",
+                "_type": "span",
+                "marks": [
+                  "a0l1"
+                ],
+                "text": "carpenter ants"
+              },
+              {
+                "_key": "a0s2",
+                "_type": "span",
+                "marks": [],
+                "text": ", "
+              },
+              {
+                "_key": "a0s3",
+                "_type": "span",
+                "marks": [
+                  "a0l3"
+                ],
+                "text": "mice and rats"
+              },
+              {
+                "_key": "a0s4",
+                "_type": "span",
+                "marks": [],
+                "text": ", "
+              },
+              {
+                "_key": "a0s5",
+                "_type": "span",
+                "marks": [
+                  "a0l5"
+                ],
+                "text": "bed bugs"
+              },
+              {
+                "_key": "a0s6",
+                "_type": "span",
+                "marks": [],
+                "text": ", "
+              },
+              {
+                "_key": "a0s7",
+                "_type": "span",
+                "marks": [
+                  "a0l7"
+                ],
+                "text": "wasps and hornets"
+              },
+              {
+                "_key": "a0s8",
+                "_type": "span",
+                "marks": [],
+                "text": ", "
+              },
+              {
+                "_key": "a0s9",
+                "_type": "span",
+                "marks": [
+                  "a0l9"
+                ],
+                "text": "cockroaches"
+              },
+              {
+                "_key": "a0s10",
+                "_type": "span",
+                "marks": [],
+                "text": " and "
+              },
+              {
+                "_key": "a0s11",
+                "_type": "span",
+                "marks": [
+                  "a0l11"
+                ],
+                "text": "commercial pest management"
+              },
+              {
+                "_key": "a0s12",
+                "_type": "span",
+                "marks": [],
+                "text": "."
+              }
+            ]
+          }
+        ],
+        "theme": {
+          "_type": "reference",
+          "_ref": "faqTheme-zone-en"
+        }
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqTheme-zone",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqTheme"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqTheme-zone-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqTheme"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqTheme-zone-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqTheme"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-zone-couverture",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-zone-couverture-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-zone-couverture-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-zone-delai",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-zone-delai-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-zone-delai-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-zone-urgence",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-zone-urgence-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-zone-urgence-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-faqItem-zone-nuisibles",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "faqItem"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-zone-nuisibles-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "faqItem"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "faqItem-zone-nuisibles-en",
               "_weak": true,
               "_strengthenOnPublish": {
                 "type": "faqItem"
