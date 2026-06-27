@@ -8293,66 +8293,249 @@
         "order": 2,
         "pageBuilder": [
           {
-            "_key": "pb-body-zes7t1mk",
+            "_key": "pb-editorial",
             "_type": "editorial",
+            "eyebrow": "Notre territoire",
+            "heading": "L'extermination à Terrebonne, par une équipe d'ici",
+            "lead": "Terrebonne, c'est notre cour arrière: une partie de l'équipe y habite. On connaît ses boisés, sa rivière et les nuisibles qu'ils amènent.",
             "segments": [
               {
-                "_key": "seg-tseajot5",
+                "_key": "seg0",
                 "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
                 "body": [
                   {
-                    "_key": "c1",
                     "_type": "block",
-                    "children": [
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [
                       {
-                        "_key": "s-z5il40ap",
-                        "_type": "span",
-                        "marks": [],
-                        "text": "Terrebonne, c'est notre cour arrière: une partie de l'équipe y habite. On connaît les boisés qui longent les nouveaux développements et les fourmis charpentières qu'ils amènent jusqu'aux fondations."
+                        "_key": "e1l1",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "service-fourmis-charpentieres-fr"
+                        }
+                      },
+                      {
+                        "_key": "e1l3",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "service-coquerelles-fr"
+                        }
+                      },
+                      {
+                        "_key": "e1l5",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "service-souris-rats-fr"
+                        }
                       }
                     ],
-                    "markDefs": [],
-                    "style": "normal"
+                    "children": [
+                      {
+                        "_key": "e1s0",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Les boisés qui longent les nouveaux développements poussent les "
+                      },
+                      {
+                        "_key": "e1s1",
+                        "_type": "span",
+                        "marks": [
+                          "e1l1"
+                        ],
+                        "text": "fourmis charpentières"
+                      },
+                      {
+                        "_key": "e1s2",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " jusqu'aux fondations. Au bord de la rivière des Mille Îles, l'humidité attire les "
+                      },
+                      {
+                        "_key": "e1s3",
+                        "_type": "span",
+                        "marks": [
+                          "e1l3"
+                        ],
+                        "text": "coquerelles"
+                      },
+                      {
+                        "_key": "e1s4",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " et, dès les premiers froids, les "
+                      },
+                      {
+                        "_key": "e1s5",
+                        "_type": "span",
+                        "marks": [
+                          "e1l5"
+                        ],
+                        "text": "souris"
+                      },
+                      {
+                        "_key": "e1s6",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " cherchent la chaleur des sous-sols."
+                      }
+                    ]
                   },
                   {
-                    "_key": "c2",
                     "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-ayjddq9b",
+                        "_key": "e2hs0",
                         "_type": "span",
                         "marks": [],
-                        "text": "Au bord de la rivière des Mille Îles, l'humidité attire les coquerelles et les rongeurs cherchent la chaleur dès les premiers froids. On traite la source, on scelle les accès et on revient vérifier que tout tient."
+                        "text": "On part d'ici, souvent chez vous dans l'heure"
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   },
                   {
-                    "_key": "c3",
                     "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-wfwtgqak",
+                        "_key": "e2s0",
                         "_type": "span",
                         "marks": [],
-                        "text": "Parce qu'on part d'ici, on est souvent chez vous dans l'heure. Estimation gratuite, garantie écrite, et le même technicien d'une visite à l'autre."
+                        "text": "Parce qu'on connaît le secteur, on traite la source, on scelle les accès et on revient vérifier que tout tient. Le même technicien d'une visite à l'autre."
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   }
                 ],
-                "media": [],
-                "mediaSide": "auto"
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:inspection-rempart",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           },
           {
-            "_key": "pb-svc-826fru0l",
+            "_key": "pb-hl",
+            "_type": "highlights",
+            "heading": "Ce qu'on vous garantit",
+            "items": [
+              {
+                "_key": "benefit-0",
+                "_type": "highlight",
+                "title": "Garantie écrite, retour sans frais",
+                "body": "Si le nuisible revient dans la période couverte, on retraite sans vous refacturer."
+              },
+              {
+                "_key": "benefit-1",
+                "_type": "highlight",
+                "title": "Produits homologués, sûrs pour la famille",
+                "body": "Des produits homologués Santé Canada, appliqués par un technicien certifié."
+              },
+              {
+                "_key": "benefit-2",
+                "_type": "highlight",
+                "title": "Souvent le jour même",
+                "body": "Une vraie personne répond 7 jours sur 7 et un technicien d'ici part vite vers vous."
+              },
+              {
+                "_key": "benefit-3",
+                "_type": "highlight",
+                "title": "Estimation gratuite, rapport écrit",
+                "body": "On évalue sans frais et on remet un rapport de ce qui a été traité."
+              }
+            ]
+          },
+          {
+            "_key": "pb-svc",
             "_type": "services",
+            "eyebrow": "Nos interventions",
             "heading": "Nos services à Terrebonne",
-            "mode": "auto"
+            "lead": "Les nuisibles qu'on traite le plus souvent dans le secteur.",
+            "mode": "manual",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "service-fourmis-charpentieres-fr",
+                "_key": "sv0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-souris-rats-fr",
+                "_key": "sv1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-guepes-frelons-fr",
+                "_key": "sv2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-coquerelles-fr",
+                "_key": "sv3"
+              }
+            ],
+            "cta": {
+              "_type": "link",
+              "type": "internal",
+              "label": "Voir tous les services",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "servicesPage-fr"
+              }
+            }
+          },
+          {
+            "_key": "pb-tm",
+            "_type": "testimonials",
+            "eyebrow": "Sur le terrain",
+            "heading": "Des clients satisfaits à Terrebonne",
+            "mode": "city",
+            "city": {
+              "_type": "reference",
+              "_ref": "serviceCity-terrebonne-fr"
+            },
+            "limit": 3
+          },
+          {
+            "_key": "pb-cta",
+            "_type": "ctaBand",
+            "title": "Un nuisible à Terrebonne? On part d'ici.",
+            "subtitle": "Un appel, un technicien d'ici se déplace, souvent le jour même. Garantie écrite.",
+            "primaryCta": {
+              "_type": "link",
+              "label": "Appeler maintenant",
+              "type": "tel"
+            },
+            "secondaryCta": {
+              "_type": "link",
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-fr"
+              },
+              "label": "Obtenir une estimation",
+              "type": "anchor"
+            }
           }
         ],
         "region": "Rive-Nord",
@@ -8397,66 +8580,249 @@
         "order": 2,
         "pageBuilder": [
           {
-            "_key": "pb-body-ktditaxu",
+            "_key": "pb-editorial",
             "_type": "editorial",
+            "eyebrow": "Our territory",
+            "heading": "Pest control in Terrebonne, by a local crew",
+            "lead": "Terrebonne is our backyard: part of the crew lives here. We know its woodlots, its river and the pests they bring.",
             "segments": [
               {
-                "_key": "seg-4oq3uoky",
+                "_key": "seg0",
                 "_type": "editorialSegment",
+                "disposition": "aside",
+                "mediaSide": "right",
                 "body": [
                   {
-                    "_key": "c1",
                     "_type": "block",
-                    "children": [
+                    "_key": "e1",
+                    "style": "normal",
+                    "markDefs": [
                       {
-                        "_key": "s-y28djeex",
-                        "_type": "span",
-                        "marks": [],
-                        "text": "Terrebonne is our backyard: part of the team lives here. We know the wooded edges that border the new developments and the carpenter ants they carry right up to the foundations."
+                        "_key": "e1l1",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "service-fourmis-charpentieres-en"
+                        }
+                      },
+                      {
+                        "_key": "e1l3",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "service-coquerelles-en"
+                        }
+                      },
+                      {
+                        "_key": "e1l5",
+                        "_type": "link",
+                        "type": "internal",
+                        "internalRef": {
+                          "_type": "reference",
+                          "_ref": "service-souris-rats-en"
+                        }
                       }
                     ],
-                    "markDefs": [],
-                    "style": "normal"
+                    "children": [
+                      {
+                        "_key": "e1s0",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "The woodlots along the new developments push "
+                      },
+                      {
+                        "_key": "e1s1",
+                        "_type": "span",
+                        "marks": [
+                          "e1l1"
+                        ],
+                        "text": "carpenter ants"
+                      },
+                      {
+                        "_key": "e1s2",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " right to the foundations. Along the Mille Iles river, the damp draws "
+                      },
+                      {
+                        "_key": "e1s3",
+                        "_type": "span",
+                        "marks": [
+                          "e1l3"
+                        ],
+                        "text": "cockroaches"
+                      },
+                      {
+                        "_key": "e1s4",
+                        "_type": "span",
+                        "marks": [],
+                        "text": ", and at the first cold snap "
+                      },
+                      {
+                        "_key": "e1s5",
+                        "_type": "span",
+                        "marks": [
+                          "e1l5"
+                        ],
+                        "text": "mice"
+                      },
+                      {
+                        "_key": "e1s6",
+                        "_type": "span",
+                        "marks": [],
+                        "text": " seek the warmth of basements."
+                      }
+                    ]
                   },
                   {
-                    "_key": "c2",
                     "_type": "block",
+                    "_key": "e2h",
+                    "style": "h3",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-wzb4h85w",
+                        "_key": "e2hs0",
                         "_type": "span",
                         "marks": [],
-                        "text": "Along the Mille Îles river, humidity draws cockroaches and rodents look for warmth as soon as the cold sets in. We treat the source, seal the access points and come back to make sure everything holds."
+                        "text": "We are based here, often at your door within the hour"
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   },
                   {
-                    "_key": "c3",
                     "_type": "block",
+                    "_key": "e2",
+                    "style": "normal",
+                    "markDefs": [],
                     "children": [
                       {
-                        "_key": "s-4rtrt5qt",
+                        "_key": "e2s0",
                         "_type": "span",
                         "marks": [],
-                        "text": "Because we start from here, we are often at your door within the hour. Free estimate, written guarantee, and the same technician from one visit to the next."
+                        "text": "Because we know the area, we treat the source, seal the access points and come back to check it holds. The same technician from one visit to the next."
                       }
-                    ],
-                    "markDefs": [],
-                    "style": "normal"
+                    ]
                   }
                 ],
-                "media": [],
-                "mediaSide": "auto"
+                "media": [
+                  {
+                    "_key": "m1",
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "IMG:inspection-rempart",
+                        "_type": "reference"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           },
           {
-            "_key": "pb-svc-rgu2mgo7",
+            "_key": "pb-hl",
+            "_type": "highlights",
+            "heading": "What we guarantee",
+            "items": [
+              {
+                "_key": "benefit-0",
+                "_type": "highlight",
+                "title": "Written guarantee, free return visit",
+                "body": "If the pest comes back within the covered period, we re-treat at no extra charge."
+              },
+              {
+                "_key": "benefit-1",
+                "_type": "highlight",
+                "title": "Approved products, family-safe",
+                "body": "Health Canada approved products, applied by a certified technician."
+              },
+              {
+                "_key": "benefit-2",
+                "_type": "highlight",
+                "title": "Often the same day",
+                "body": "A real person answers seven days a week and a local technician heads your way fast."
+              },
+              {
+                "_key": "benefit-3",
+                "_type": "highlight",
+                "title": "Free estimate, written report",
+                "body": "We assess at no charge and provide a report of what was treated."
+              }
+            ]
+          },
+          {
+            "_key": "pb-svc",
             "_type": "services",
+            "eyebrow": "Our work",
             "heading": "Our services in Terrebonne",
-            "mode": "auto"
+            "lead": "The pests we treat most often in the area.",
+            "mode": "manual",
+            "items": [
+              {
+                "_type": "reference",
+                "_ref": "service-fourmis-charpentieres-en",
+                "_key": "sv0"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-souris-rats-en",
+                "_key": "sv1"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-guepes-frelons-en",
+                "_key": "sv2"
+              },
+              {
+                "_type": "reference",
+                "_ref": "service-coquerelles-en",
+                "_key": "sv3"
+              }
+            ],
+            "cta": {
+              "_type": "link",
+              "type": "internal",
+              "label": "See all services",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "servicesPage-en"
+              }
+            }
+          },
+          {
+            "_key": "pb-tm",
+            "_type": "testimonials",
+            "eyebrow": "On the ground",
+            "heading": "Happy clients in Terrebonne",
+            "mode": "city",
+            "city": {
+              "_type": "reference",
+              "_ref": "serviceCity-terrebonne-en"
+            },
+            "limit": 3
+          },
+          {
+            "_key": "pb-cta",
+            "_type": "ctaBand",
+            "title": "A pest in Terrebonne? We are based here.",
+            "subtitle": "One call and a local technician heads out, often the same day. Written guarantee.",
+            "primaryCta": {
+              "_type": "link",
+              "label": "Call now",
+              "type": "tel"
+            },
+            "secondaryCta": {
+              "_type": "link",
+              "anchor": "contact",
+              "internalRef": {
+                "_type": "reference",
+                "_ref": "contactPage-en"
+              },
+              "label": "Get an estimate",
+              "type": "anchor"
+            }
           }
         ],
         "region": "North Shore",
