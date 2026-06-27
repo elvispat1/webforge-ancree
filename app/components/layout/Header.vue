@@ -1,10 +1,12 @@
 <script setup lang="ts">
 /* En-tete collant avec numero d'urgence (langage de conversion grave de la
- * famille). Par-dessus le heros full bleed: transparent, clair et un cran plus
- * haut (deploye). Des qu'on descend (SOLID_AFTER), il dock: passe au blanc solide
- * et se compacte a sa hauteur collante, d'un seul geste. Solide d'emblee sur une
- * page sans heros. Se masque au defilement vers le bas, revient vers le haut.
- * Deux modes: 'landing' (one-pager: ancres, qualifiees par la racine `home`) et
+ * famille). Par-dessus tout masthead de tete: transparent et un cran plus haut
+ * (deploye). Le ton suit le fond: sur le heros full bleed sombre d'accueil il reste
+ * clair (texte clair + degrade de garde); sur les mastheads internes clairs il passe
+ * en texte sombre, sans degrade. Des qu'on descend (SOLID_AFTER), il dock: passe au
+ * blanc solide, NU (ni ombre ni filet), et se compacte. Solide d'emblee sur une page
+ * sans masthead. Se masque au defilement vers le bas, revient vers le haut. Deux
+ * modes: 'landing' (one-pager: ancres, qualifiees par la racine `home`) et
  * 'multipage' (liens de route via le route-map). */
 import { routePath } from '~/config/route-map'
 
@@ -61,6 +63,9 @@ const menuOpen = ref(false)
 // ne flotte jamais, illisible, par-dessus le titre clair du heros.
 const SOLID_AFTER = 24
 let heroH = 0
+// Ton du fond derriere l'en-tete transparent: 'dark' = heros full bleed (texte clair
+// + degrade de garde), 'light' = masthead interne clair (texte sombre, sans degrade).
+const heroTone = ref<'dark' | 'light'>('dark')
 
 // Auto-masquage au defilement (mecanique reprise de la famille Minimaliste):
 // l'en-tete se retire vers le haut quand on descend (au-dela de sa propre
@@ -71,31 +76,52 @@ let heroH = 0
 const headerRef = ref<HTMLElement | null>(null)
 const hidden = ref(false)
 const hideAfter = ref(0)
-const JITTER = 4
+// Escamotage: descente NETTE pour escamoter, remontee legere pour reveler. Le calcul
+// est echantillonne une fois par frame (rAF, voir onScroll) pour des deltas propres
+// malgre le defilement inertiel mobile (evenements en rafale, position qui oscille au
+// changement de direction) qui faisait clignoter l'en-tete (translate vers le haut).
+const HIDE_DELTA = 6
+const SHOW_DELTA = 4
 let lastScrollY = 0
+let rafId = 0
 let headerObserver: ResizeObserver | null = null
 
 function measureHero(): void {
-  const hero = document.querySelector('.hero') as HTMLElement | null
+  // Tout masthead de tete autorise l'en-tete transparent: heros full bleed (.hero,
+  // fond sombre) comme mastheads internes (.page-hero / .article-hero, fond clair).
+  // Le ton derive de la classe trouvee; aucun masthead = en-tete solide d'emblee.
+  const hero = document.querySelector('.hero, .page-hero, .article-hero') as HTMLElement | null
   heroH = hero ? hero.offsetHeight : 0
+  heroTone.value = hero?.classList.contains('hero') ? 'dark' : 'light'
 }
-function onScroll(): void {
+function applyScroll(): void {
+  rafId = 0
   const y = window.scrollY
   // Transparent uniquement tout en haut du heros; solide des qu'on descend.
   // Page sans heros (heroH === 0) = solide d'emblee.
   solid.value = heroH === 0 ? true : y > SOLID_AFTER
 
   const delta = y - lastScrollY
-  if (delta > JITTER && y > hideAfter.value) {
+  // Toujours montre pres du haut (dans la hauteur de l'en-tete): en arrivant en haut
+  // l'en-tete est revele, jamais escamote d'un coup. Au-dela: escamote a la descente
+  // nette, revele a la remontee.
+  if (y <= hideAfter.value) {
+    hidden.value = false
+  } else if (delta > HIDE_DELTA) {
     hidden.value = true
-  } else if (delta < -JITTER) {
+  } else if (delta < -SHOW_DELTA) {
     hidden.value = false
   }
   lastScrollY = y
 }
+// Un seul calcul par frame: deltas propres, pas de clignotement sur scroll inertiel.
+function onScroll(): void {
+  if (rafId) return
+  rafId = requestAnimationFrame(applyScroll)
+}
 function onResize(): void {
   measureHero()
-  onScroll()
+  applyScroll()
 }
 // Garde clavier (miroir du :focus-within CSS): si le focus entre dans l'en-tete
 // masque, on le revele pour qu'il ne se recache pas brutalement au tab suivant.
@@ -112,13 +138,15 @@ onMounted(() => {
     })
     headerObserver.observe(headerRef.value)
   }
-  onScroll()
+  lastScrollY = window.scrollY
+  applyScroll()
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('resize', onResize, { passive: true })
 })
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll)
   window.removeEventListener('resize', onResize)
+  if (rafId) cancelAnimationFrame(rafId)
   headerObserver?.disconnect()
 })
 
@@ -133,7 +161,7 @@ const route = useRoute()
 watch(() => route.fullPath, () => {
   nextTick(() => {
     measureHero()
-    onScroll()
+    applyScroll()
   })
 })
 </script>
@@ -142,7 +170,7 @@ watch(() => route.fullPath, () => {
   <header
     ref="headerRef"
     class="header"
-    :class="{ 'header--solid': solid, 'header--hidden': hidden }"
+    :class="{ 'header--solid': solid, 'header--light': !solid && heroTone === 'light', 'header--hidden': hidden }"
     @focusin="onHeaderFocusIn"
   >
     <div class="wf-container header__row">
@@ -186,6 +214,20 @@ watch(() => route.fullPath, () => {
         >
           {{ site.contact.phone }}
         </Button>
+        <!-- Mobile uniquement: bouton d'urgence compact (le CTA pleine forme ci-dessus
+             prend le relais au desktop). Icone d'alerte + « Urgence », lien tel: qui
+             compose le numero, pour signaler une ligne d'appel d'urgence. -->
+        <Button
+          :href="phoneHref"
+          :aria-label="t('contact.urgent_aria', { number: site.contact.phone })"
+          kind="anchor"
+          variant="call"
+          size="sm"
+          icon="lucide:circle-alert"
+          class="header__urgence"
+        >
+          {{ t('contact.urgent_label') }}
+        </Button>
         <button
           type="button"
           class="header__burger"
@@ -211,16 +253,13 @@ watch(() => route.fullPath, () => {
   color: var(--text-ondeep);
   transition:
     transform var(--motion-duration-expand) var(--motion-ease-settle),
-    background-color var(--motion-duration-line) var(--motion-ease-settle),
-    color var(--motion-duration-line) var(--motion-ease-settle),
-    box-shadow var(--motion-duration-line) var(--motion-ease-settle);
+    color var(--motion-duration-line) var(--motion-ease-settle);
 }
-/* Garde de contraste, etat transparent UNIQUEMENT: un degrade navy ancre en haut
-   garantit la lisibilite de la nav et de la marque claires par-dessus n'importe
-   quelle image de heros. Le scrim du heros renforce le BAS (contenu pose au sol),
-   pas le haut ou vit l'en-tete. Se retire au dock (solide): le fond blanc prend
-   le relais. */
-.header:not(.header--solid)::before {
+/* Garde de contraste, transparent SUR HEROS SOMBRE uniquement: un degrade navy ancre
+   en haut garantit la lisibilite de la nav et de la marque claires par-dessus n'importe
+   quelle image de heros. Pas de degrade sur masthead clair (header--light) ni au dock
+   (solide): le fond clair / blanc porte deja le texte sombre. */
+.header:not(.header--solid):not(.header--light)::before {
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
@@ -233,6 +272,11 @@ watch(() => route.fullPath, () => {
   pointer-events: none;
   z-index: -1;
 }
+/* Masthead interne clair: l'en-tete transparent passe en texte sombre (lisible sur le
+   fond clair). Le passage au dock garde la meme couleur sombre, seul le fond change. */
+.header--light:not(.header--solid) {
+  color: var(--text-base);
+}
 /* Auto-masquage: l'en-tete se retire vers le haut (il deborde hors viewport).
    Le focus clavier le rappelle: une cible focalisee ne doit jamais rester
    hors-champ (miroir du garde onHeaderFocusIn). */
@@ -242,11 +286,25 @@ watch(() => route.fullPath, () => {
 .header--hidden:focus-within {
   transform: none;
 }
+/* Dock: blanc NU (ni filet ni ombre). Le fond blanc est porte par une couche ::after
+   en OPACITE (compositee GPU), pas par background-color: le fondu reste lisse pendant
+   le defilement inertiel mobile, ou une transition de paint (background-color) saccade
+   ("le blanc s'en va sec"). Le texte sombre prend le relais via color. */
 .header--solid {
-  background: var(--bg-base);
   color: var(--text-base);
-  border-bottom: var(--line-hair);
-  box-shadow: var(--elev-low);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-base);
+  opacity: 0;
+  transition: opacity var(--motion-duration-line) var(--motion-ease-settle);
+  pointer-events: none;
+  z-index: -1;
+}
+.header--solid::after {
+  opacity: 1;
 }
 .header__row {
   display: flex;
@@ -300,7 +358,9 @@ watch(() => route.fullPath, () => {
   letter-spacing: 0.02em;
 }
 
-/* Navigation: ancres, soulignement ambre au survol (lisible clair ou solide). */
+/* Navigation: soulignement ambre qui POUSSE depuis la gauche a l'entree et SE RETIRE
+   vers la droite a la sortie (bascule de transform-origin sur scaleX). Lisible en
+   transparent clair, transparent sombre ou solide. */
 .header__nav {
   display: none;
 }
@@ -323,12 +383,15 @@ watch(() => route.fullPath, () => {
   border-radius: 2px;
   background: var(--accent-call);
   transform: scaleX(0);
-  transform-origin: left;
+  /* Repos: ancre a droite -> au depart du survol, la ligne se retire vers la droite. */
+  transform-origin: right;
   transition: transform var(--motion-duration-line) var(--motion-ease-settle);
 }
 .header__link:hover::after,
 .header__link:focus-visible::after {
   transform: scaleX(1);
+  /* Survol: ancre a gauche -> la ligne pousse depuis la gauche. */
+  transform-origin: left;
 }
 
 .header__actions {
@@ -352,6 +415,13 @@ watch(() => route.fullPath, () => {
 }
 .header__cta {
   display: none;
+}
+/* Bouton d'urgence: visible au mobile, masque au desktop (le CTA pleine forme prend
+   le relais). Compact pour tenir a cote du burger sur les petits ecrans. */
+.header__urgence {
+  display: inline-flex;
+  gap: 0.6rem;
+  padding: 1rem 1.4rem;
 }
 .header__burger {
   display: grid;
@@ -393,6 +463,9 @@ watch(() => route.fullPath, () => {
   }
   .header__cta {
     display: inline-flex;
+  }
+  .header__urgence {
+    display: none;
   }
   .header__burger {
     display: none;

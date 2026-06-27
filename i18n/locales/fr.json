@@ -162,6 +162,7 @@
   },
   "contact": {
     "urgent_aria": "Urgence, appelez le {number}",
+    "urgent_label": "Urgence",
     "required": "requis",
     "optional": "facultatif"
   },
