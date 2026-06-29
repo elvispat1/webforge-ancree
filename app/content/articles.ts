@@ -13,13 +13,21 @@ export interface ArticleCategoryRef {
   slug: string
 }
 
+export interface ArticleAuthor {
+  name: string
+  role: string
+  /** Portrait CDN déjà résolu (sert le JSON-LD Person; le byline reste textuel). */
+  portraitSrc?: string
+  portraitAlt?: string
+}
+
 export interface Article {
   slug: string // partage fr/en
   title: string
   excerpt: string
   cover: ArticleFigure
   date: string // ISO de publication
-  author: string
+  author: ArticleAuthor
   readingTime: number
   category?: ArticleCategoryRef
   body: ArticleBlock[]

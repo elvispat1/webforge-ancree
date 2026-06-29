@@ -411,7 +411,7 @@ export interface SanityArticle {
   cover: SanityFigure
   category?: Maybe<{ slug: string; title: string }>
   date: string
-  author?: Maybe<string>
+  author?: Maybe<{ name: string; role: string; portrait?: Maybe<SanityFigure> }>
   readingTime?: Maybe<number>
   body?: Maybe<SanityRawArticleBlock[]>
   seo?: Maybe<SanitySeo>

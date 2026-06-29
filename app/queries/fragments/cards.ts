@@ -50,5 +50,5 @@ export const ARTICLE_CARD_FIELDS = /* groq */ `
   "cover": cover ${FIGURE_PROJECTION},
   "category": category->{ "slug": slug.current, title },
   date,
-  author,
+  "author": author->{ name, role, "portrait": photo ${FIGURE_PROJECTION} },
   readingTime`

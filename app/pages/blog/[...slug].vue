@@ -73,7 +73,7 @@ const articleHero = computed<HeroArticleBlock | null>(() => {
     excerpt: a.excerpt,
     date: a.date,
     dateLabel: formatArticleDate(a.date, loc.value),
-    author: a.author,
+    author: authorByline(a.author),
     readingTime: a.readingTime,
     cover
   }
@@ -139,7 +139,7 @@ if (seoMatch?.type === 'article') {
     article: {
       datePublished: a.date,
       dateModified: a.date,
-      author: a.author || undefined,
+      author: { name: a.author.name, jobTitle: a.author.role, image: a.author.portraitSrc || undefined },
       image: a.cover.src
     }
   })

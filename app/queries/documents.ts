@@ -125,7 +125,7 @@ export const CONTENT_GRAPH_QUERY = /* groq */ `{
     "cover": cover ${FIGURE_PROJECTION},
     "category": category->{ "slug": slug.current, title },
     date,
-    author,
+    "author": author->{ name, role, "portrait": photo ${FIGURE_PROJECTION} },
     readingTime,
     "seo": seo ${SEO_PROJECTION},
     ${ARTICLE_BODY_PROJECTION},

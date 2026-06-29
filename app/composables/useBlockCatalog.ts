@@ -257,7 +257,7 @@ export function useBlockCatalog(): CatalogCategory[] {
       excerpt: sampleArticle.excerpt,
       date: sampleArticle.date,
       dateLabel: formatDate(sampleArticle.date),
-      author: sampleArticle.author,
+      author: authorByline(sampleArticle.author),
       readingTime: sampleArticle.readingTime,
       cover: sampleArticle.cover
     } as unknown as HeroBlock

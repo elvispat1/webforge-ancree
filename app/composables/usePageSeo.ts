@@ -52,7 +52,7 @@ export interface PageSeoArticle {
   /** Date de mise à jour ISO; défaut: datePublished. */
   dateModified?: string
   /** Nom de l'auteur (nœud Person). */
-  author?: string
+  author?: { name: string; jobTitle?: string; image?: string }
   /** Visuel du billet (chemin relatif ou URL CDN), porté par le nœud Article. */
   image?: string
 }
@@ -185,8 +185,8 @@ export function usePageSeo(input: PageSeoInput): void {
     meta.ogType = 'article'
     meta.articlePublishedTime = input.article.datePublished
     meta.articleModifiedTime = input.article.dateModified ?? input.article.datePublished
-    if (input.article.author !== undefined) {
-      meta.articleAuthor = [input.article.author]
+    if (input.article.author) {
+      meta.articleAuthor = [input.article.author.name]
     }
   }
   useSeoMeta(meta)
@@ -244,7 +244,16 @@ export function usePageSeo(input: PageSeoInput): void {
       ...(input.description !== undefined ? { description: input.description } : {}),
       datePublished: input.article.datePublished,
       dateModified: input.article.dateModified ?? input.article.datePublished,
-      ...(input.article.author !== undefined ? { author: { name: input.article.author } } : {}),
+      ...(input.article.author
+        ? {
+            author: {
+              '@type': 'Person',
+              name: input.article.author.name,
+              ...(input.article.author.jobTitle ? { jobTitle: input.article.author.jobTitle } : {}),
+              ...(input.article.author.image ? { image: input.article.author.image } : {})
+            }
+          }
+        : {}),
       // Garde TRUTHY (pas !== undefined): un src vide ('' depuis un champ Sanity
       // optionnel) ne doit pas produire un ImageObject vide. Alignée sur l'og:image.
       ...(input.article.image ? { image: resolveImage(input.article.image, SCHEMA_IMAGE_WIDTH, SCHEMA_IMAGE_HEIGHT).url } : {})

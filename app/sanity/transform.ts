@@ -46,7 +46,7 @@ import type { ProcessContent } from '../content/process'
 import type { TeamContent } from '../content/team'
 import type { EditorialContent, EditorialMediaSide, EditorialDisposition } from '../content/editorial'
 import type { Category } from '../content/categories'
-import type { Article } from '../content/articles'
+import type { Article, ArticleAuthor } from '../content/articles'
 import type {
   ArticleFigure,
   PortableTextBlock
@@ -1282,6 +1282,21 @@ function transformServiceCity(raw: SanityServiceCity, site: SiteContent, locale:
   }
 }
 
+/** Auteur d'article: la référence person déréférencée -> objet structuré. Posture
+ *  fail-fast: une référence non résolue (person non publiée) interrompt le build. */
+function transformArticleAuthor(raw: SanityArticle['author']): ArticleAuthor {
+  if (!raw?.name) {
+    throw new Error('Article sans auteur résolu: référence « person » manquante ou non publiée.')
+  }
+  const f = resolveFigure(raw.portrait)
+  return {
+    name: raw.name,
+    role: raw.role,
+    portraitSrc: opt(f.src),
+    portraitAlt: f.alt || undefined
+  }
+}
+
 function transformArticle(raw: SanityArticle, locale: WfLocale, phoneE164: string): Translated<Article> {
   return {
     slug: cleanLogic(raw.slug),
@@ -1289,7 +1304,7 @@ function transformArticle(raw: SanityArticle, locale: WfLocale, phoneE164: strin
     excerpt: raw.excerpt,
     cover: resolveArticleFigure(raw.cover),
     date: raw.date,
-    author: raw.author ?? '',
+    author: transformArticleAuthor(raw.author),
     readingTime: raw.readingTime ?? 0,
     // category deja un objet { slug, title } dereference (jamais le slug brut).
     category: raw.category ? { title: raw.category.title, slug: cleanLogic(raw.category.slug) } : undefined,

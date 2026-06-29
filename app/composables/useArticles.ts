@@ -5,7 +5,7 @@
  * pagination et de formatage de date. i18n document-level: slug partage fr/en,
  * l'URL ne differe que par le prefixe de locale. */
 import { computed } from 'vue'
-import type { Article } from '~/content/articles'
+import type { Article, ArticleAuthor } from '~/content/articles'
 import type { Category } from '~/content/categories'
 import { routePath, type Locale } from '~/config/route-map'
 import { ARTICLES_PER_PAGE } from '~/content/guards'
@@ -42,6 +42,13 @@ export function formatArticleDate(iso: string, locale: Locale): string {
     month: 'long',
     year: 'numeric'
   }).format(d)
+}
+
+/** Ligne d'auteur affichée (meta du masthead): « Nom, rôle ». Le rôle passe en
+ *  minuscule initiale pour lire naturellement après la virgule. */
+export function authorByline(author: ArticleAuthor): string {
+  const role = author.role.charAt(0).toLowerCase() + author.role.slice(1)
+  return `${author.name}, ${role}`
 }
 
 /** Met un article en forme de carte (liste, grille, relies). */
