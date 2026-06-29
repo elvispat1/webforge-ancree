@@ -28,19 +28,8 @@ const segments = computed<string[]>(() => {
   return Array.isArray(s) ? (s as string[]) : s ? [String(s)] : []
 })
 
-// Slug partage fr/en: le changement de langue garde les memes segments. Les deux
-// locales sont declarees INCONDITIONNELLEMENT -> les liens hreflang page-level
-// (useLocaleHead seo dans app.vue) pointent toujours fr ET en.
-// DIVERGENCE ASSUMEE (constat de revue, doc): le sitemap, lui, est presence-aware
-// (alternativesFor dans nuxt.config) et n'emet une alternative que si la
-// traduction existe vraiment. Sur le seed actuel (tous les docs apparies fr+en)
-// les deux signaux coincident. Pour un doc MONO-LANGUE futur, le hreflang
-// page-level pointerait une 404 dans l'autre langue: le repli presence-aware
-// page-level exige des slugs cross-langue que useBlog ne charge pas (il requete
-// la seule locale courante). Reconciliation au pipeline de payload unique
-// (etape 5), qui exposera la presence par langue. Site noindex d'ici la.
+// useSetI18nParams: appele inconditionnellement en setup (avant le 404 possible).
 const setI18nParams = useSetI18nParams()
-setI18nParams({ fr: { slug: segments.value }, en: { slug: segments.value } })
 
 // Contenu du blog depuis le payload unique (fail-fast, aucun repli fixtures).
 const { articles, categories } = useBlog()
@@ -52,6 +41,30 @@ const match = computed(() => resolveBlogRoute(segments.value, articles.value, ca
 if (!match.value) {
   throw createError({ statusCode: 404, statusMessage: 'Article introuvable', fatal: true })
 }
+
+// Alternate de langue: chaque langue porte SES segments TRADUITS, jamais les segments
+// de la langue courante partages aux deux. Les articles ont un slug traduit par langue
+// (souris-a-l-automne <-> mice-in-the-fall) et souvent une categorie traduite
+// (nuisibles <-> pests); poser les memes segments dans les deux entrees pointe le head
+// hreflang (useLocaleHead seo dans app.vue) ET le switcher de langue vers une 404 sous
+// l'autre prefixe. La traduction (slug + catSlug de l'autre langue) vient du payload:
+// article.translations / category.translations (TRANSLATIONS_PROJECTION, lue de
+// translation.metadata). Repli sur le slug courant si la traduction manque (doc
+// mono-langue): meme parite que services/[slug].vue. Le sitemap reste presence-aware de
+// son cote (alternativesFor dans nuxt.config), seul signal a n'emettre l'alternate que
+// si la traduction existe vraiment; le head, lui, declare les deux locales.
+const localizedSegments = (lang: Locale): string[] => {
+  const m = match.value
+  if (!m) return segments.value
+  if (m.type === 'article') {
+    const tr = m.article.translations?.find((t) => t.lang === lang)
+    const slug = tr?.slug ?? m.article.slug
+    return m.article.category ? [tr?.catSlug ?? m.article.category.slug, slug] : [slug]
+  }
+  const tr = m.category.translations?.find((t) => t.lang === lang)
+  return [tr?.slug ?? m.category.slug]
+}
+setI18nParams({ fr: { slug: localizedSegments('fr') }, en: { slug: localizedSegments('en') } })
 
 const article = computed(() => (match.value?.type === 'article' ? match.value.article : null))
 const archive = computed(() => (match.value?.type === 'category' ? match.value : null))
