@@ -14719,6 +14719,44 @@
                     "text": "Une odeur de musc dans un espace fermé comme le garde-manger"
                   }
                 ]
+              },
+              {
+                "_type": "block",
+                "_key": "b2r6",
+                "style": "normal",
+                "markDefs": [
+                  {
+                    "_key": "b2r6l1",
+                    "_type": "link",
+                    "type": "internal",
+                    "internalRef": {
+                      "_type": "reference",
+                      "_ref": "service-souris-rats-fr"
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2r6s0",
+                    "text": "Quand ces indices se confirment, notre ",
+                    "marks": []
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b2r6s1",
+                    "text": "service de contrôle des souris et des rats",
+                    "marks": [
+                      "b2r6l1"
+                    ]
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b2r6s2",
+                    "text": " s'attaque d'abord aux points d'entrée, plutôt que de seulement poser des pièges.",
+                    "marks": []
+                  }
+                ]
               }
             ]
           },
@@ -14869,6 +14907,44 @@
                     "_type": "span",
                     "marks": [],
                     "text": "A musky smell in a closed space like a pantry"
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b2r6",
+                "style": "normal",
+                "markDefs": [
+                  {
+                    "_key": "b2r6l1",
+                    "_type": "link",
+                    "type": "internal",
+                    "internalRef": {
+                      "_type": "reference",
+                      "_ref": "service-souris-rats-en"
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2r6s0",
+                    "text": "When these signs add up, our ",
+                    "marks": []
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b2r6s1",
+                    "text": "mouse and rat control service",
+                    "marks": [
+                      "b2r6l1"
+                    ]
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b2r6s2",
+                    "text": " goes after the entry points first, rather than just setting traps.",
+                    "marks": []
                   }
                 ]
               }
@@ -24788,6 +24864,1118 @@
               "_weak": true,
               "_strengthenOnPublish": {
                 "type": "person"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "article",
+      "content": {
+        "_id": "article-souris-automne-fr",
+        "_type": "article",
+        "language": "fr",
+        "title": "Souris à l'automne: les arrêter avant qu'elles n'entrent",
+        "slug": {
+          "_type": "slug",
+          "current": "souris-a-l-automne"
+        },
+        "excerpt": "Quand le froid arrive, les souris cherchent un abri au chaud. Voici par où elles entrent et comment les tenir dehors avant l'hiver.",
+        "cover": {
+          "_type": "figure",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_type": "reference",
+              "_ref": "IMG:hero-mouse"
+            }
+          }
+        },
+        "category": {
+          "_type": "reference",
+          "_ref": "category-prevention-fr"
+        },
+        "author": {
+          "_type": "reference",
+          "_ref": "person-samuel-fr"
+        },
+        "date": "2026-06-24",
+        "readingTime": 5,
+        "body": [
+          {
+            "_key": "b1",
+            "_type": "articleLead",
+            "text": "Dès que les nuits fraîchissent, les souris cherchent un abri au chaud, et nos maisons sont une cible idéale. La plupart des infestations d'automne commencent par une seule ouverture qu'on n'a jamais remarquée."
+          },
+          {
+            "_key": "b2",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b2a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2as0",
+                    "text": "Pourquoi l'automne les attire",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b2b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2bs0",
+                    "text": "Une souris ne supporte pas le froid longtemps. À l'automne, elle suit la chaleur et l'odeur de nourriture vers l'intérieur, où elle trouve un nid tranquille pour l'hiver. C'est la saison où une petite négligence devient une vraie colonie.",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_key": "b3",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b3a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3as0",
+                    "text": "Par où elles entrent",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b3b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3bs0",
+                    "text": "Une souris passe par une ouverture de la taille d'un dix sous. Les points d'entrée les plus fréquents sont:",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b3c",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3cs0",
+                    "text": "les fissures de fondation et le bas des portes de garage;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b3d",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3ds0",
+                    "text": "les passages de tuyaux et de fils mal scellés;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b3e",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3es0",
+                    "text": "les évents de sécheuse et les grilles d'aération abîmées.",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              }
+            ]
+          },
+          {
+            "_key": "b4",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b4a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4as0",
+                    "text": "Prévenir avant l'hiver",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b4b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4bs0",
+                    "text": "Quelques gestes simples, posés tôt, évitent une infestation:",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b4c",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4cs0",
+                    "text": "scellez les ouvertures avec un matériau que la souris ne ronge pas, comme la laine d'acier et le mortier;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b4d",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4ds0",
+                    "text": "rangez les graines, la nourriture pour animaux et les aliments secs dans des contenants hermétiques;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b4e",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4es0",
+                    "text": "dégagez le pourtour de la maison des tas de bois et de feuilles qui servent d'abri.",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b4f",
+                "style": "normal",
+                "markDefs": [
+                  {
+                    "_key": "b4fl1",
+                    "_type": "link",
+                    "type": "internal",
+                    "internalRef": {
+                      "_type": "reference",
+                      "_ref": "service-souris-rats-fr"
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4fs0",
+                    "text": "Si les indices se multiplient malgré tout, notre ",
+                    "marks": []
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b4fs1",
+                    "text": "service de contrôle des souris et des rats",
+                    "marks": [
+                      "b4fl1"
+                    ]
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b4fs2",
+                    "text": " s'attaque d'abord aux points d'entrée, plutôt que de seulement poser des pièges.",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_key": "b5",
+            "_type": "articleQuote",
+            "quote": "Un piège attrape une souris. Sceller l'entrée règle le problème. C'est l'exclusion qui empêche les suivantes de revenir.",
+            "attribution": "Samuel Ouellet, technicien rongeurs et exclusion"
+          }
+        ]
+      }
+    },
+    {
+      "type": "article",
+      "content": {
+        "_id": "article-souris-automne-en",
+        "_type": "article",
+        "language": "en",
+        "title": "Mice in the fall: stopping them before they get in",
+        "slug": {
+          "_type": "slug",
+          "current": "mice-in-the-fall"
+        },
+        "excerpt": "When the cold arrives, mice look for a warm shelter. Here is where they get in and how to keep them out before winter.",
+        "cover": {
+          "_type": "figure",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_type": "reference",
+              "_ref": "IMG:hero-mouse"
+            }
+          }
+        },
+        "category": {
+          "_type": "reference",
+          "_ref": "category-prevention-en"
+        },
+        "author": {
+          "_type": "reference",
+          "_ref": "person-samuel-en"
+        },
+        "date": "2026-06-24",
+        "readingTime": 5,
+        "body": [
+          {
+            "_key": "b1",
+            "_type": "articleLead",
+            "text": "As soon as the nights turn cold, mice look for a warm shelter, and our homes are an ideal target. Most fall infestations start with a single opening nobody ever noticed."
+          },
+          {
+            "_key": "b2",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b2a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2as0",
+                    "text": "Why fall draws them in",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b2b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2bs0",
+                    "text": "A mouse cannot take the cold for long. In the fall it follows warmth and the smell of food indoors, where it finds a quiet nest for the winter. This is the season when a small oversight becomes a real colony.",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_key": "b3",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b3a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3as0",
+                    "text": "Where they get in",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b3b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3bs0",
+                    "text": "A mouse slips through a gap the size of a dime. The most common entry points are:",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b3c",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3cs0",
+                    "text": "foundation cracks and the bottom of garage doors;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b3d",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3ds0",
+                    "text": "pipe and wire runs that are poorly sealed;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b3e",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3es0",
+                    "text": "dryer vents and damaged air grilles.",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              }
+            ]
+          },
+          {
+            "_key": "b4",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b4a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4as0",
+                    "text": "Prevent it before winter",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b4b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4bs0",
+                    "text": "A few simple steps, taken early, keep an infestation away:",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b4c",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4cs0",
+                    "text": "seal openings with a material a mouse cannot gnaw through, such as steel wool and mortar;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b4d",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4ds0",
+                    "text": "store seeds, pet food and dry goods in airtight containers;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b4e",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4es0",
+                    "text": "clear woodpiles and leaf litter away from the foundation.",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b4f",
+                "style": "normal",
+                "markDefs": [
+                  {
+                    "_key": "b4fl1",
+                    "_type": "link",
+                    "type": "internal",
+                    "internalRef": {
+                      "_type": "reference",
+                      "_ref": "service-souris-rats-en"
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4fs0",
+                    "text": "If the signs keep adding up, our ",
+                    "marks": []
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b4fs1",
+                    "text": "mouse and rat control service",
+                    "marks": [
+                      "b4fl1"
+                    ]
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b4fs2",
+                    "text": " goes after the entry points first, rather than just setting traps.",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_key": "b5",
+            "_type": "articleQuote",
+            "quote": "A trap catches one mouse. Sealing the entry solves the problem. Exclusion is what keeps the next ones from coming back.",
+            "attribution": "Samuel Ouellet, rodent and exclusion technician"
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-article-souris-automne",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "article"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "article-souris-automne-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "article"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "article-souris-automne-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "article"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "article",
+      "content": {
+        "_id": "article-guepes-fr",
+        "_type": "article",
+        "language": "fr",
+        "title": "Guêpes et frelons: comprendre le nid avant d'agir",
+        "slug": {
+          "_type": "slug",
+          "current": "guepes-et-frelons"
+        },
+        "excerpt": "Un nid de guêpes tient dans une main au printemps, puis devient agressif en fin d'été. Voici comment lire ce cycle et quand appeler.",
+        "cover": {
+          "_type": "figure",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_type": "reference",
+              "_ref": "IMG:hero-wasp"
+            }
+          }
+        },
+        "category": {
+          "_type": "reference",
+          "_ref": "category-prevention-fr"
+        },
+        "author": {
+          "_type": "reference",
+          "_ref": "person-martin-fr"
+        },
+        "date": "2026-06-12",
+        "readingTime": 5,
+        "body": [
+          {
+            "_key": "b1",
+            "_type": "articleLead",
+            "text": "Au printemps, un nid de guêpes tient dans une main et passe inaperçu. À la fin de l'été, la même colonie compte des centaines d'ouvrières et défend son nid avec vigueur. Comprendre ce cycle, c'est savoir quand agir sans risque."
+          },
+          {
+            "_key": "b2",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b2a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2as0",
+                    "text": "Le cycle d'une colonie",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b2b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2bs0",
+                    "text": "Une reine fondatrice démarre seule le nid au printemps. La colonie grossit tout l'été et devient la plus nombreuse, et la plus défensive, en août et septembre. C'est aussi le moment où les guêpes, attirées par le sucre, croisent le plus souvent notre chemin.",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_key": "b3",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b3a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3as0",
+                    "text": "Où les nids apparaissent",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b3b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3bs0",
+                    "text": "Selon l'espèce, le nid se cache dans des endroits très différents:",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b3c",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3cs0",
+                    "text": "sous les avant-toits, les balcons et les cadres de fenêtre;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b3d",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3ds0",
+                    "text": "dans le sol, un vieux terrier ou un muret de pierres;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b3e",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3es0",
+                    "text": "dans un cabanon, un grenier ou une cloison creuse.",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              }
+            ]
+          },
+          {
+            "_key": "b4",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b4a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4as0",
+                    "text": "Pourquoi ne pas s'en occuper soi-même",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b4b",
+                "style": "normal",
+                "markDefs": [
+                  {
+                    "_key": "b4bl1",
+                    "_type": "link",
+                    "type": "internal",
+                    "internalRef": {
+                      "_type": "reference",
+                      "_ref": "service-guepes-frelons-fr"
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4bs0",
+                    "text": "Déloger un nid actif provoque une réaction défensive immédiate, et les piqûres multiples sont dangereuses, surtout en cas d'allergie. Un nid dans un mur, arrosé d'aérosol, pousse souvent les guêpes à percer vers l'intérieur. Notre ",
+                    "marks": []
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b4bs1",
+                    "text": "service de gestion des guêpes et des frelons",
+                    "marks": [
+                      "b4bl1"
+                    ]
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b4bs2",
+                    "text": " traite le nid à la source, puis le retire une fois la colonie neutralisée.",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b4c",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4cs0",
+                    "text": "La règle simple: si le nid est plus gros qu'une balle de golf ou hors de portée, on appelle plutôt que d'improviser.",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_key": "b5",
+            "_type": "articleQuote",
+            "quote": "On traite toujours le nid avant de le sceller. Boucher un trou avec une colonie vivante derrière, c'est la rediriger vers la pièce d'à côté.",
+            "attribution": "Martin Lefebvre, fondateur et technicien en chef"
+          }
+        ]
+      }
+    },
+    {
+      "type": "article",
+      "content": {
+        "_id": "article-guepes-en",
+        "_type": "article",
+        "language": "en",
+        "title": "Wasps and hornets: understand the nest before you act",
+        "slug": {
+          "_type": "slug",
+          "current": "wasps-and-hornets"
+        },
+        "excerpt": "A wasp nest fits in your hand in spring, then turns aggressive by late summer. Here is how to read the cycle and when to call.",
+        "cover": {
+          "_type": "figure",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_type": "reference",
+              "_ref": "IMG:hero-wasp"
+            }
+          }
+        },
+        "category": {
+          "_type": "reference",
+          "_ref": "category-prevention-en"
+        },
+        "author": {
+          "_type": "reference",
+          "_ref": "person-martin-en"
+        },
+        "date": "2026-06-12",
+        "readingTime": 5,
+        "body": [
+          {
+            "_key": "b1",
+            "_type": "articleLead",
+            "text": "In spring, a wasp nest fits in your hand and goes unnoticed. By late summer, the same colony numbers hundreds of workers and defends its nest fiercely. Understanding that cycle is knowing when to act safely."
+          },
+          {
+            "_key": "b2",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b2a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2as0",
+                    "text": "The life of a colony",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b2b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b2bs0",
+                    "text": "A founding queen starts the nest alone in spring. The colony grows all summer and is at its largest, and most defensive, in August and September. That is also when wasps, drawn to sugar, cross our path most often.",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_key": "b3",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b3a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3as0",
+                    "text": "Where nests appear",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b3b",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3bs0",
+                    "text": "Depending on the species, the nest hides in very different spots:",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b3c",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3cs0",
+                    "text": "under eaves, balconies and window frames;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b3d",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3ds0",
+                    "text": "in the ground, an old burrow or a stone wall;",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              },
+              {
+                "_type": "block",
+                "_key": "b3e",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b3es0",
+                    "text": "in a shed, an attic or a hollow wall.",
+                    "marks": []
+                  }
+                ],
+                "listItem": "bullet",
+                "level": 1
+              }
+            ]
+          },
+          {
+            "_key": "b4",
+            "_type": "articleRichText",
+            "body": [
+              {
+                "_type": "block",
+                "_key": "b4a",
+                "style": "h2",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4as0",
+                    "text": "Why not handle it yourself",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b4b",
+                "style": "normal",
+                "markDefs": [
+                  {
+                    "_key": "b4bl1",
+                    "_type": "link",
+                    "type": "internal",
+                    "internalRef": {
+                      "_type": "reference",
+                      "_ref": "service-guepes-frelons-en"
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4bs0",
+                    "text": "Disturbing an active nest triggers an immediate defensive response, and multiple stings are dangerous, especially for anyone allergic. A nest inside a wall, sprayed with an aerosol, often pushes the wasps to break through indoors. Our ",
+                    "marks": []
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b4bs1",
+                    "text": "wasp and hornet management service",
+                    "marks": [
+                      "b4bl1"
+                    ]
+                  },
+                  {
+                    "_type": "span",
+                    "_key": "b4bs2",
+                    "text": " treats the nest at the source, then removes it once the colony is neutralised.",
+                    "marks": []
+                  }
+                ]
+              },
+              {
+                "_type": "block",
+                "_key": "b4c",
+                "style": "normal",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "_key": "b4cs0",
+                    "text": "The simple rule: if the nest is bigger than a golf ball or out of reach, call rather than improvise.",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_key": "b5",
+            "_type": "articleQuote",
+            "quote": "We always treat the nest before sealing it. Plug a hole with a live colony behind it and you just redirect them to the next room.",
+            "attribution": "Martin Lefebvre, founder and lead technician"
+          }
+        ]
+      }
+    },
+    {
+      "type": "translation.metadata",
+      "content": {
+        "_id": "translation-article-guepes",
+        "_type": "translation.metadata",
+        "schemaTypes": [
+          "article"
+        ],
+        "translations": [
+          {
+            "_key": "fr",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "fr",
+            "value": {
+              "_type": "reference",
+              "_ref": "article-guepes-fr",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "article"
+              }
+            }
+          },
+          {
+            "_key": "en",
+            "_type": "internationalizedArrayReferenceValue",
+            "language": "en",
+            "value": {
+              "_type": "reference",
+              "_ref": "article-guepes-en",
+              "_weak": true,
+              "_strengthenOnPublish": {
+                "type": "article"
               }
             }
           }
