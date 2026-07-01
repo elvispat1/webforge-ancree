@@ -1,5 +1,5 @@
 {
-  // Worker « assets-only » du site WebForge Ancrée (Atelier Cormier).
+  // Worker « assets-only » du site WebForge Ancrée (démo Rempart Extermination).
   //
   // STATIQUE PUR. Aucun `main`, aucun `binding`: Cloudflare sert directement les
   // fichiers prérendus par `nuxt generate` (.output/public), zéro worker à
