@@ -95,10 +95,11 @@ function panelId(i: number): string {
   /* Rythme du tiroir cote CSS: synchronise le pivot du chevron et le fondu de
    * l'ambre sur l'ouverture du panneau (la HAUTEUR, elle, est animee en JS par
    * AccordionPanel, car la transition CSS de grid-template-rows n'anime pas de
-   * facon fiable selon les navigateurs). Courbe in-out delicate (depart ET fin
-   * doux) et duree posee, miroir de MOTION.{duration,ease}.drawer. */
-  --acc-drawer-dur: 460ms;
-  --acc-drawer-ease: cubic-bezier(0.45, 0, 0.15, 1);
+   * facon fiable selon les navigateurs). Miroir EXACT de MOTION.duration.drawer
+   * (200ms) et MOTION.ease.drawer (power2.inOut == ease-in-out-cubic): le chevron
+   * et l'ambre se posent EN MEME TEMPS que la hauteur du panneau, sans decalage. */
+  --acc-drawer-dur: 200ms;
+  --acc-drawer-ease: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 /* Chaque entree: une carte chaude, arrondie, posee (ombre douce). */
