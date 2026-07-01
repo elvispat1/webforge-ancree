@@ -126,6 +126,11 @@
   },
   "ui": {
     "learn_more": "Learn more",
+    "preview": {
+      "label": "Preview mode",
+      "exit": "Exit preview",
+      "exiting": "Exiting…"
+    },
     "blog": {
       "reading_time": "{n} min read",
       "all": "All topics",

@@ -126,6 +126,11 @@
   },
   "ui": {
     "learn_more": "En savoir plus",
+    "preview": {
+      "label": "Mode prévisualisation",
+      "exit": "Quitter la prévisualisation",
+      "exiting": "Sortie en cours…"
+    },
     "blog": {
       "reading_time": "{n} min de lecture",
       "all": "Tous les sujets",
