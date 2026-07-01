@@ -1,23 +1,32 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Tete de section cols 1-5: eyebrow + h2 -->
-  <rect x="24" y="28" width="36" height="5" rx="2" fill="#6B675F"/>
-  <rect x="24" y="41" width="100" height="10" rx="2" fill="#6B675F"/>
-  <rect x="24" y="55" width="76" height="10" rx="2" fill="#6B675F"/>
-  <!-- Accordeon cols 6-12: item ouvert (chevron accent) + 3 items fermes -->
-  <rect x="148" y="28" width="148" height="1" fill="#D8D5CE"/>
-  <rect x="148" y="38" width="92" height="6" rx="2" fill="#6B675F"/>
-  <path d="M284 46 l5 -5 l5 5" fill="none" stroke="#2D4A3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="148" y="54" width="140" height="4" rx="2" fill="#6B675F"/>
-  <rect x="148" y="62" width="118" height="4" rx="2" fill="#6B675F"/>
-  <rect x="148" y="74" width="148" height="1" fill="#D8D5CE"/>
-  <rect x="148" y="84" width="84" height="6" rx="2" fill="#6B675F"/>
-  <path d="M284 84 l5 5 l5 -5" fill="none" stroke="#6B675F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="148" y="100" width="148" height="1" fill="#D8D5CE"/>
-  <rect x="148" y="110" width="96" height="6" rx="2" fill="#6B675F"/>
-  <path d="M284 110 l5 5 l5 -5" fill="none" stroke="#6B675F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="148" y="126" width="148" height="1" fill="#D8D5CE"/>
-  <rect x="148" y="136" width="78" height="6" rx="2" fill="#6B675F"/>
-  <path d="M284 136 l5 5 l5 -5" fill="none" stroke="#6B675F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="148" y="152" width="148" height="1" fill="#D8D5CE"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Gauche ~40% (x24 a ~120): eyebrow + titre + carte navy d'appel -->
+  <rect x="24" y="24" width="36" height="5" rx="2" fill="#5C6678"/>
+  <rect x="24" y="36" width="92" height="10" rx="2" fill="#16243F"/>
+  <rect x="24" y="54" width="72" height="10" rx="2" fill="#16243F"/>
+  <!-- Carte navy d'appel: puce telephone amber + 2 barres on-navy -->
+  <rect x="24" y="122" width="96" height="54" rx="2" fill="#16243F"/>
+  <rect x="34" y="134" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="42" cy="142" r="3" fill="#FBBF24"/>
+  <rect x="34" y="158" width="76" height="6" rx="2" fill="#E6ECF3"/>
+  <rect x="34" y="168" width="52" height="4" rx="2" fill="#5C6678"/>
+  <!-- Droite ~60% (x140 a 296): accordeon empile, une rangee ouverte -->
+  <!-- Rangee ouverte -->
+  <rect x="140" y="24" width="156" height="46" rx="2" fill="#FBFBF9" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="150" y="33" width="96" height="6" rx="2" fill="#16243F"/>
+  <path d="M280 41 l5 -5 l5 5" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="150" y="50" width="136" height="4" rx="2" fill="#5C6678"/>
+  <rect x="150" y="58" width="112" height="4" rx="2" fill="#5C6678"/>
+  <!-- Rangee fermee -->
+  <rect x="140" y="76" width="156" height="24" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="150" y="85" width="86" height="6" rx="2" fill="#5C6678"/>
+  <path d="M280 85 l5 5 l5 -5" fill="none" stroke="#5C6678" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Rangee fermee -->
+  <rect x="140" y="106" width="156" height="24" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="150" y="115" width="98" height="6" rx="2" fill="#5C6678"/>
+  <path d="M280 115 l5 5 l5 -5" fill="none" stroke="#5C6678" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Rangee fermee -->
+  <rect x="140" y="136" width="156" height="24" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="150" y="145" width="74" height="6" rx="2" fill="#5C6678"/>
+  <path d="M280 145 l5 5 l5 -5" fill="none" stroke="#5C6678" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

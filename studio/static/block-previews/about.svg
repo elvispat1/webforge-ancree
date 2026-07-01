@@ -1,20 +1,29 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Photo cols 1-5 + figcaption -->
-  <rect x="24" y="28" width="104" height="126" rx="2" fill="#D8D5CE"/>
-  <rect x="24" y="162" width="64" height="4" rx="2" fill="#6B675F"/>
-  <!-- Copy cols 6-12: eyebrow, h2, paragraphes, diffs numerotees -->
-  <rect x="148" y="28" width="36" height="5" rx="2" fill="#6B675F"/>
-  <rect x="148" y="41" width="148" height="10" rx="2" fill="#6B675F"/>
-  <rect x="148" y="55" width="112" height="10" rx="2" fill="#6B675F"/>
-  <rect x="148" y="75" width="148" height="4" rx="2" fill="#6B675F"/>
-  <rect x="148" y="83" width="148" height="4" rx="2" fill="#6B675F"/>
-  <rect x="148" y="91" width="124" height="4" rx="2" fill="#6B675F"/>
-  <!-- Liste de differenciateurs: numero accent + titre + corps -->
-  <rect x="148" y="109" width="14" height="8" rx="2" fill="#2D4A3E"/>
-  <rect x="170" y="110" width="64" height="6" rx="2" fill="#6B675F"/>
-  <rect x="170" y="122" width="110" height="4" rx="2" fill="#6B675F"/>
-  <rect x="148" y="138" width="14" height="8" rx="2" fill="#2D4A3E"/>
-  <rect x="170" y="139" width="72" height="6" rx="2" fill="#6B675F"/>
-  <rect x="170" y="151" width="100" height="4" rx="2" fill="#6B675F"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Gauche ~55%: grande image -->
+  <rect x="24" y="30" width="150" height="118" rx="2" fill="#D3D6DC"/>
+  <!-- Accent amber en coin de l'image -->
+  <rect x="30" y="36" width="14" height="4" rx="2" fill="#FBBF24"/>
+  <!-- Carte stat navy chevauchant le bord bas de l'image -->
+  <rect x="40" y="132" width="152" height="42" rx="2" fill="#16243F"/>
+  <!-- Stat 1: tick amber + valeur + label on-navy -->
+  <rect x="50" y="142" width="3" height="12" rx="1" fill="#FBBF24"/>
+  <rect x="58" y="143" width="22" height="8" rx="2" fill="#E6ECF3"/>
+  <rect x="58" y="156" width="26" height="4" rx="2" fill="#5C6678"/>
+  <!-- Stat 2 -->
+  <rect x="96" y="142" width="3" height="12" rx="1" fill="#FBBF24"/>
+  <rect x="104" y="143" width="22" height="8" rx="2" fill="#E6ECF3"/>
+  <rect x="104" y="156" width="26" height="4" rx="2" fill="#5C6678"/>
+  <!-- Stat 3 -->
+  <rect x="142" y="142" width="3" height="12" rx="1" fill="#FBBF24"/>
+  <rect x="150" y="143" width="22" height="8" rx="2" fill="#E6ECF3"/>
+  <rect x="150" y="156" width="26" height="4" rx="2" fill="#5C6678"/>
+  <!-- Droite ~45%: tete + corps -->
+  <rect x="206" y="30" width="30" height="5" rx="2" fill="#5C6678"/>
+  <rect x="206" y="42" width="82" height="10" rx="2" fill="#16243F"/>
+  <rect x="206" y="56" width="66" height="10" rx="2" fill="#16243F"/>
+  <rect x="206" y="80" width="90" height="4" rx="2" fill="#5C6678"/>
+  <rect x="206" y="90" width="90" height="4" rx="2" fill="#5C6678"/>
+  <rect x="206" y="100" width="74" height="4" rx="2" fill="#5C6678"/>
+  <rect x="206" y="110" width="82" height="4" rx="2" fill="#5C6678"/>
 </svg>

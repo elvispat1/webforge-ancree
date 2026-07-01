@@ -7,7 +7,7 @@ import { anchorField } from './_anchor-field'
 // project). Peau d'Ancree (icone, libelles).
 export const testimonials = defineType({
   name: 'testimonials',
-  title: 'Temoignages',
+  title: 'Témoignages',
   type: 'object',
   icon: StarIcon,
   fields: [
@@ -80,7 +80,7 @@ export const testimonials = defineType({
     }),
     defineField({
       name: 'items',
-      title: 'Temoignages choisis',
+      title: 'Témoignages choisis',
       type: 'array',
       hidden: ({ parent }) => parent?.mode !== 'manual',
       of: [
@@ -116,8 +116,8 @@ export const testimonials = defineType({
   preview: {
     select: { heading: 'heading', mode: 'mode' },
     prepare: ({ heading, mode }) => ({
-      title: heading || 'Temoignages',
-      subtitle: 'Temoignages (' + mode + ')',
+      title: heading || 'Témoignages',
+      subtitle: 'Témoignages (' + mode + ')',
     }),
   },
 })

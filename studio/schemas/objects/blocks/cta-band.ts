@@ -9,7 +9,7 @@ import { anchorField } from './_anchor-field'
  */
 export const ctaBand = defineType({
   name: 'ctaBand',
-  title: 'Bloc: bandeau d\'appel',
+  title: 'Bandeau d\'appel',
   type: 'object',
   icon: MobileDeviceIcon,
   fields: [
@@ -42,7 +42,7 @@ export const ctaBand = defineType({
     select: { title: 'title' },
     prepare: ({ title }) => ({
       title: title || '(sans titre)',
-      subtitle: 'Bloc: bandeau d\'appel',
+      subtitle: 'Bandeau d\'appel',
     }),
   },
 })

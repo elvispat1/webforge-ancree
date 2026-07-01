@@ -12,7 +12,7 @@ import { anchorField } from './_anchor-field'
  */
 export const contact = defineType({
   name: 'contact',
-  title: 'Bloc: contact',
+  title: 'Contact',
   type: 'object',
   icon: CommentIcon,
   fields: [
@@ -217,7 +217,7 @@ export const contact = defineType({
     select: { heading: 'heading' },
     prepare: ({ heading }) => ({
       title: heading || '(sans titre)',
-      subtitle: 'Bloc: contact',
+      subtitle: 'Contact',
     }),
   },
 })

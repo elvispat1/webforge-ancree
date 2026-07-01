@@ -10,7 +10,7 @@ import { anchorField } from './_anchor-field'
  */
 export const about = defineType({
   name: 'about',
-  title: 'Bloc: à propos',
+  title: 'À propos',
   type: 'object',
   icon: UsersIcon,
   fields: [
@@ -49,7 +49,7 @@ export const about = defineType({
     select: { heading: 'heading', media: 'photo.image' },
     prepare: ({ heading, media }) => ({
       title: heading || '(sans titre)',
-      subtitle: 'Bloc: à propos',
+      subtitle: 'À propos',
       media,
     }),
   },

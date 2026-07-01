@@ -1,44 +1,57 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- SectionHead: eyebrow, h2, lead -->
-  <rect x="24" y="20" width="36" height="5" rx="2" fill="#6B675F"/>
-  <rect x="24" y="32" width="148" height="10" rx="2" fill="#6B675F"/>
-  <rect x="24" y="50" width="180" height="4" rx="2" fill="#6B675F"/>
-  <!-- Grille de villes: 2 rangees x 3 cartes, chacune avec un pin et un libelle -->
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Tete de section: eyebrow, titre, accroche -->
+  <rect x="24" y="22" width="36" height="5" rx="2" fill="#5C6678"/>
+  <rect x="24" y="34" width="130" height="10" rx="2" fill="#16243F"/>
+  <rect x="24" y="52" width="168" height="4" rx="2" fill="#5C6678"/>
+  <!-- SPLIT asymetrique -->
+  <!-- Gauche (~40%): panneau NAVY avec anneaux de couverture + puce map-pin amber -->
+  <rect x="24" y="72" width="112" height="104" rx="4" fill="#16243F"/>
+  <!-- Anneaux de couverture (coin bas-droit) -->
+  <circle cx="110" cy="150" r="24" fill="none" stroke="#E6ECF3" stroke-width="1" opacity="0.35"/>
+  <circle cx="110" cy="150" r="16" fill="none" stroke="#FBBF24" stroke-width="1" opacity="0.6"/>
+  <circle cx="110" cy="150" r="8" fill="none" stroke="#FBBF24" stroke-width="1" opacity="0.6"/>
+  <!-- Puce d'icone amber map-pin -->
+  <rect x="38" y="86" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="46" cy="94" r="3" fill="#FBBF24"/>
+  <!-- Label + nom sur navy -->
+  <rect x="38" y="112" width="52" height="5" rx="2" fill="#E6ECF3"/>
+  <rect x="38" y="124" width="78" height="9" rx="2" fill="#E6ECF3"/>
+  <!-- Droite (~60%): grille de puces de ville (2 x 2) -->
   <g>
-    <rect x="24" y="72" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
-    <circle cx="38" cy="88" r="3.5" fill="#2D4A3E"/>
-    <rect x="48" y="85" width="48" height="5" rx="2" fill="#6B675F"/>
-    <rect x="36" y="100" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+    <rect x="148" y="72" width="72" height="30" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+    <circle cx="160" cy="87" r="3" fill="#FBBF24"/>
+    <rect x="168" y="84.5" width="34" height="5" rx="2" fill="#5C6678"/>
+    <path d="M206 84 L210 87 L206 90" fill="none" stroke="#D3D6DC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g>
-    <rect x="118" y="72" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
-    <circle cx="132" cy="88" r="3.5" fill="#6B675F"/>
-    <rect x="142" y="85" width="42" height="5" rx="2" fill="#6B675F"/>
-    <rect x="130" y="100" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+    <rect x="224" y="72" width="72" height="30" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+    <circle cx="236" cy="87" r="3" fill="#FBBF24"/>
+    <rect x="244" y="84.5" width="28" height="5" rx="2" fill="#5C6678"/>
+    <path d="M282 84 L286 87 L282 90" fill="none" stroke="#D3D6DC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g>
-    <rect x="212" y="72" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
-    <circle cx="226" cy="88" r="3.5" fill="#6B675F"/>
-    <rect x="236" y="85" width="46" height="5" rx="2" fill="#6B675F"/>
-    <rect x="224" y="100" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+    <rect x="148" y="110" width="72" height="30" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+    <circle cx="160" cy="125" r="3" fill="#FBBF24"/>
+    <rect x="168" y="122.5" width="30" height="5" rx="2" fill="#5C6678"/>
+    <path d="M206 122 L210 125 L206 128" fill="none" stroke="#D3D6DC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g>
-    <rect x="24" y="124" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
-    <circle cx="38" cy="140" r="3.5" fill="#6B675F"/>
-    <rect x="48" y="137" width="44" height="5" rx="2" fill="#6B675F"/>
-    <rect x="36" y="152" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+    <rect x="224" y="110" width="72" height="30" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+    <circle cx="236" cy="125" r="3" fill="#FBBF24"/>
+    <rect x="244" y="122.5" width="36" height="5" rx="2" fill="#5C6678"/>
+    <path d="M282 122 L286 125 L282 128" fill="none" stroke="#D3D6DC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g>
-    <rect x="118" y="124" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
-    <circle cx="132" cy="140" r="3.5" fill="#6B675F"/>
-    <rect x="142" y="137" width="48" height="5" rx="2" fill="#6B675F"/>
-    <rect x="130" y="152" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+    <rect x="148" y="148" width="72" height="30" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+    <circle cx="160" cy="163" r="3" fill="#FBBF24"/>
+    <rect x="168" y="160.5" width="32" height="5" rx="2" fill="#5C6678"/>
+    <path d="M206 160 L210 163 L206 166" fill="none" stroke="#D3D6DC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g>
-    <rect x="212" y="124" width="84" height="44" rx="4" fill="none" stroke="#D8D5CE" stroke-width="1"/>
-    <circle cx="226" cy="140" r="3.5" fill="#6B675F"/>
-    <rect x="236" y="137" width="40" height="5" rx="2" fill="#6B675F"/>
-    <rect x="224" y="152" width="56" height="3" rx="1.5" fill="#D8D5CE"/>
+    <rect x="224" y="148" width="72" height="30" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+    <circle cx="236" cy="163" r="3" fill="#FBBF24"/>
+    <rect x="244" y="160.5" width="26" height="5" rx="2" fill="#5C6678"/>
+    <path d="M282 160 L286 163 L282 166" fill="none" stroke="#D3D6DC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

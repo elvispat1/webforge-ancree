@@ -16,7 +16,7 @@ import { editorialPortableText } from './editorial-portable-text'
  */
 export const editorial = defineType({
   name: 'editorial',
-  title: 'Bloc: éditorial',
+  title: 'Éditorial',
   type: 'object',
   icon: BlockContentIcon,
   fields: [
@@ -125,7 +125,7 @@ export const editorial = defineType({
     select: { heading: 'heading', media: 'segments.0.media.0.image' },
     prepare: ({ heading, media }) => ({
       title: heading || 'Éditorial',
-      subtitle: 'Bloc: éditorial',
+      subtitle: 'Éditorial',
       media,
     }),
   },

@@ -1,33 +1,56 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- SectionHead: eyebrow + h2 -->
-  <rect x="24" y="22" width="36" height="5" rx="2" fill="#6B675F"/>
-  <rect x="24" y="34" width="120" height="10" rx="2" fill="#6B675F"/>
-  <!-- Carte 1: guillemet accent, citation, nom + contexte -->
-  <rect x="24" y="62" width="82" height="88" rx="2" fill="none" stroke="#D8D5CE"/>
-  <rect x="34" y="72" width="4" height="10" rx="2" fill="#2D4A3E" transform="rotate(14 36 77)"/>
-  <rect x="41" y="72" width="4" height="10" rx="2" fill="#2D4A3E" transform="rotate(14 43 77)"/>
-  <rect x="34" y="90" width="62" height="4" rx="2" fill="#6B675F"/>
-  <rect x="34" y="98" width="62" height="4" rx="2" fill="#6B675F"/>
-  <rect x="34" y="106" width="46" height="4" rx="2" fill="#6B675F"/>
-  <rect x="34" y="122" width="40" height="5" rx="2" fill="#6B675F"/>
-  <rect x="34" y="131" width="52" height="4" rx="2" fill="#6B675F"/>
-  <!-- Carte 2 -->
-  <rect x="119" y="62" width="82" height="88" rx="2" fill="none" stroke="#D8D5CE"/>
-  <rect x="129" y="72" width="4" height="10" rx="2" fill="#2D4A3E" transform="rotate(14 131 77)"/>
-  <rect x="136" y="72" width="4" height="10" rx="2" fill="#2D4A3E" transform="rotate(14 138 77)"/>
-  <rect x="129" y="90" width="62" height="4" rx="2" fill="#6B675F"/>
-  <rect x="129" y="98" width="58" height="4" rx="2" fill="#6B675F"/>
-  <rect x="129" y="106" width="50" height="4" rx="2" fill="#6B675F"/>
-  <rect x="129" y="122" width="36" height="5" rx="2" fill="#6B675F"/>
-  <rect x="129" y="131" width="56" height="4" rx="2" fill="#6B675F"/>
-  <!-- Carte 3 -->
-  <rect x="214" y="62" width="82" height="88" rx="2" fill="none" stroke="#D8D5CE"/>
-  <rect x="224" y="72" width="4" height="10" rx="2" fill="#2D4A3E" transform="rotate(14 226 77)"/>
-  <rect x="231" y="72" width="4" height="10" rx="2" fill="#2D4A3E" transform="rotate(14 233 77)"/>
-  <rect x="224" y="90" width="62" height="4" rx="2" fill="#6B675F"/>
-  <rect x="224" y="98" width="62" height="4" rx="2" fill="#6B675F"/>
-  <rect x="224" y="106" width="42" height="4" rx="2" fill="#6B675F"/>
-  <rect x="224" y="122" width="42" height="5" rx="2" fill="#6B675F"/>
-  <rect x="224" y="131" width="50" height="4" rx="2" fill="#6B675F"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Tête de section: eyebrow + titre + accroche -->
+  <rect x="24" y="22" width="36" height="5" rx="2" fill="#5C6678"/>
+  <rect x="24" y="34" width="130" height="10" rx="2" fill="#16243F"/>
+  <rect x="24" y="52" width="168" height="4" rx="2" fill="#5C6678"/>
+
+  <!-- Carte gauche (blanche, plus étroite) -->
+  <rect x="24" y="70" width="76" height="106" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <!-- guillemet amber -->
+  
+  <rect x="34" y="82" width="4" height="8" rx="1" fill="#FBBF24"/>
+  <rect x="40" y="82" width="4" height="8" rx="1" fill="#FBBF24"/>
+  <!-- citation (3 barres) -->
+  <rect x="34" y="100" width="56" height="4" rx="2" fill="#5C6678"/>
+  <rect x="34" y="108" width="56" height="4" rx="2" fill="#5C6678"/>
+  <rect x="34" y="116" width="40" height="4" rx="2" fill="#5C6678"/>
+  <!-- séparateur fin -->
+  <rect x="34" y="132" width="56" height="1" fill="#D3D6DC"/>
+  <!-- nom + ville (mini pin) -->
+  <rect x="34" y="142" width="42" height="6" rx="2" fill="#16243F"/>
+  <circle cx="36" cy="158" r="2" fill="#FBBF24"/>
+  <rect x="41" y="156" width="34" height="4" rx="2" fill="#5C6678"/>
+
+  <!-- Carte centrale (navy, vedette, plus large) -->
+  <rect x="108" y="62" width="104" height="122" rx="2" fill="#16243F"/>
+  <!-- guillemet amber -->
+  <rect x="120" y="76" width="5" height="10" rx="1" fill="#FBBF24"/>
+  <rect x="128" y="76" width="5" height="10" rx="1" fill="#FBBF24"/>
+  <!-- citation on-navy (3 barres) -->
+  <rect x="120" y="96" width="80" height="4" rx="2" fill="#E6ECF3"/>
+  <rect x="120" y="105" width="80" height="4" rx="2" fill="#E6ECF3"/>
+  <rect x="120" y="114" width="60" height="4" rx="2" fill="#E6ECF3"/>
+  <!-- séparateur fin -->
+  <rect x="120" y="134" width="80" height="1" fill="#5C6678"/>
+  <!-- nom + ville (mini pin amber) -->
+  <rect x="120" y="146" width="52" height="7" rx="2" fill="#E6ECF3"/>
+  <circle cx="122" cy="164" r="2" fill="#FBBF24"/>
+  <rect x="127" y="162" width="42" height="4" rx="2" fill="#5C6678"/>
+
+  <!-- Carte droite (blanche, plus étroite) -->
+  <rect x="220" y="70" width="76" height="106" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <!-- guillemet amber -->
+  <rect x="230" y="82" width="4" height="8" rx="1" fill="#FBBF24"/>
+  <rect x="236" y="82" width="4" height="8" rx="1" fill="#FBBF24"/>
+  <!-- citation (3 barres) -->
+  <rect x="230" y="100" width="56" height="4" rx="2" fill="#5C6678"/>
+  <rect x="230" y="108" width="52" height="4" rx="2" fill="#5C6678"/>
+  <rect x="230" y="116" width="44" height="4" rx="2" fill="#5C6678"/>
+  <!-- séparateur fin -->
+  <rect x="230" y="132" width="56" height="1" fill="#D3D6DC"/>
+  <!-- nom + ville (mini pin) -->
+  <rect x="230" y="142" width="38" height="6" rx="2" fill="#16243F"/>
+  <circle cx="232" cy="158" r="2" fill="#FBBF24"/>
+  <rect x="237" y="156" width="36" height="4" rx="2" fill="#5C6678"/>
 </svg>

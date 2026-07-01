@@ -11,7 +11,7 @@ import { anchorField } from './_anchor-field'
  */
 export const process = defineType({
   name: 'process',
-  title: 'Bloc: processus',
+  title: 'Processus',
   type: 'object',
   icon: TrendUpwardIcon,
   fields: [
@@ -69,7 +69,7 @@ export const process = defineType({
     select: { heading: 'heading' },
     prepare: ({ heading }) => ({
       title: heading || 'Processus',
-      subtitle: 'Bloc: processus',
+      subtitle: 'Processus',
     }),
   },
 })

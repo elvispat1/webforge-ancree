@@ -13,7 +13,7 @@ import { anchorField } from './_anchor-field'
  */
 export const team = defineType({
   name: 'team',
-  title: 'Bloc: équipe',
+  title: 'Équipe',
   type: 'object',
   icon: UsersIcon,
   fields: [
@@ -58,7 +58,7 @@ export const team = defineType({
     select: { heading: 'heading' },
     prepare: ({ heading }) => ({
       title: heading || 'Équipe',
-      subtitle: 'Bloc: équipe',
+      subtitle: 'Équipe',
     }),
   },
 })

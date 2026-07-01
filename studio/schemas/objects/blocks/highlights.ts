@@ -10,7 +10,7 @@ import { anchorField } from './_anchor-field'
  */
 export const highlights = defineType({
   name: 'highlights',
-  title: 'Bloc: points forts',
+  title: 'Points forts',
   type: 'object',
   icon: CheckmarkCircleIcon,
   fields: [
@@ -61,7 +61,7 @@ export const highlights = defineType({
     select: { heading: 'heading' },
     prepare: ({ heading }) => ({
       title: heading || 'Points forts',
-      subtitle: 'Bloc: points forts',
+      subtitle: 'Points forts',
     }),
   },
 })

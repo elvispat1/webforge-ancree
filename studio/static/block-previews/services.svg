@@ -1,28 +1,50 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- SectionHead: eyebrow, h2, lead -->
-  <rect x="24" y="22" width="36" height="5" rx="2" fill="#6B675F"/>
-  <rect x="24" y="34" width="132" height="10" rx="2" fill="#6B675F"/>
-  <rect x="24" y="52" width="170" height="4" rx="2" fill="#6B675F"/>
-  <!-- Filets verticaux entre les tuiles -->
-  <rect x="110" y="70" width="1" height="96" fill="#D8D5CE"/>
-  <rect x="205" y="70" width="1" height="96" fill="#D8D5CE"/>
-  <!-- Tuile 1: titre, corps, cue accent (En savoir plus) -->
-  <rect x="24" y="74" width="56" height="6" rx="2" fill="#6B675F"/>
-  <rect x="24" y="88" width="74" height="4" rx="2" fill="#6B675F"/>
-  <rect x="24" y="96" width="66" height="4" rx="2" fill="#6B675F"/>
-  <rect x="24" y="152" width="38" height="4" rx="2" fill="#2D4A3E"/>
-  <path d="M68 150 l4 4 l-4 4" fill="none" stroke="#2D4A3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tuile 2 -->
-  <rect x="119" y="74" width="60" height="6" rx="2" fill="#6B675F"/>
-  <rect x="119" y="88" width="74" height="4" rx="2" fill="#6B675F"/>
-  <rect x="119" y="96" width="58" height="4" rx="2" fill="#6B675F"/>
-  <rect x="119" y="152" width="38" height="4" rx="2" fill="#6B675F"/>
-  <path d="M163 150 l4 4 l-4 4" fill="none" stroke="#6B675F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tuile 3 -->
-  <rect x="214" y="74" width="52" height="6" rx="2" fill="#6B675F"/>
-  <rect x="214" y="88" width="74" height="4" rx="2" fill="#6B675F"/>
-  <rect x="214" y="96" width="62" height="4" rx="2" fill="#6B675F"/>
-  <rect x="214" y="152" width="38" height="4" rx="2" fill="#6B675F"/>
-  <path d="M258 150 l4 4 l-4 4" fill="none" stroke="#6B675F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Tête de section: eyebrow, titre, accroche -->
+  <rect x="24" y="22" width="36" height="5" rx="2" fill="#5C6678"/>
+  <rect x="24" y="34" width="130" height="10" rx="2" fill="#16243F"/>
+  <rect x="24" y="52" width="168" height="4" rx="2" fill="#5C6678"/>
+
+  <!-- Rangée 1 : grande carte VEDETTE navy (large, à gauche) -->
+  <rect x="24" y="72" width="150" height="52" rx="2" fill="#16243F"/>
+  <rect x="34" y="82" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="42" cy="90" r="3" fill="#FBBF24"/>
+  <rect x="34" y="104" width="70" height="6" rx="2" fill="#E6ECF3"/>
+  <rect x="34" y="114" width="120" height="4" rx="2" fill="#E6ECF3"/>
+  <rect x="132" y="112" width="24" height="4" rx="2" fill="#FBBF24"/>
+  <path d="M160 111 l4 3 l-4 3" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Rangée 1 : carte blanche étroite (haut) -->
+  <rect x="182" y="72" width="114" height="24" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="190" y="78" width="12" height="12" rx="3" fill="#FCE9BD"/>
+  <circle cx="196" cy="84" r="2.5" fill="#FBBF24"/>
+  <rect x="208" y="79" width="52" height="5" rx="2" fill="#16243F"/>
+  <rect x="208" y="88" width="66" height="3" rx="2" fill="#5C6678"/>
+
+  <!-- Rangée 1 : carte blanche étroite (bas) -->
+  <rect x="182" y="100" width="114" height="24" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="190" y="106" width="12" height="12" rx="3" fill="#FCE9BD"/>
+  <circle cx="196" cy="112" r="2.5" fill="#FBBF24"/>
+  <rect x="208" y="107" width="46" height="5" rx="2" fill="#16243F"/>
+  <rect x="208" y="116" width="60" height="3" rx="2" fill="#5C6678"/>
+
+  <!-- Rangée 2 : deux cartes blanches larges (largeurs inégales) -->
+  <!-- Carte gauche (plus large) -->
+  <rect x="24" y="132" width="164" height="46" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="34" y="142" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="42" cy="150" r="3" fill="#FBBF24"/>
+  <rect x="60" y="143" width="58" height="6" rx="2" fill="#16243F"/>
+  <rect x="60" y="154" width="112" height="4" rx="2" fill="#5C6678"/>
+  <rect x="60" y="162" width="88" height="4" rx="2" fill="#5C6678"/>
+  <rect x="34" y="170" width="26" height="4" rx="2" fill="#FBBF24"/>
+  <path d="M64 169 l4 3 l-4 3" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Carte droite (plus étroite) -->
+  <rect x="196" y="132" width="100" height="46" rx="2" fill="none" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="206" y="142" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="214" cy="150" r="3" fill="#FBBF24"/>
+  <rect x="232" y="143" width="48" height="6" rx="2" fill="#16243F"/>
+  <rect x="206" y="162" width="80" height="4" rx="2" fill="#5C6678"/>
+  <rect x="206" y="170" width="26" height="4" rx="2" fill="#FBBF24"/>
+  <path d="M236 169 l4 3 l-4 3" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

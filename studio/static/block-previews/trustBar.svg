@@ -1,29 +1,29 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Bande de confiance pleine largeur: rangee de 4 preuves (icone + valeur + qualificatif) -->
-  <rect x="0" y="66" width="320" height="68" fill="#2D4A3E"/>
-  <!-- Filets verticaux entre les preuves -->
-  <rect x="80" y="84" width="1" height="32" fill="#FAFAF7" opacity="0.25"/>
-  <rect x="160" y="84" width="1" height="32" fill="#FAFAF7" opacity="0.25"/>
-  <rect x="240" y="84" width="1" height="32" fill="#FAFAF7" opacity="0.25"/>
-  <!-- Preuve 1 -->
-  <circle cx="40" cy="90" r="6" fill="none" stroke="#FAFAF7" stroke-width="1.5"/>
-  <path d="M37 90 l2 2 l4 -4" fill="none" stroke="#FAFAF7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="24" y="104" width="34" height="6" rx="2" fill="#FAFAF7"/>
-  <rect x="24" y="115" width="48" height="3" rx="1.5" fill="#FAFAF7" opacity="0.55"/>
-  <!-- Preuve 2 -->
-  <circle cx="120" cy="90" r="6" fill="none" stroke="#FAFAF7" stroke-width="1.5"/>
-  <path d="M117 90 l2 2 l4 -4" fill="none" stroke="#FAFAF7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="104" y="104" width="34" height="6" rx="2" fill="#FAFAF7"/>
-  <rect x="104" y="115" width="48" height="3" rx="1.5" fill="#FAFAF7" opacity="0.55"/>
-  <!-- Preuve 3 -->
-  <circle cx="200" cy="90" r="6" fill="none" stroke="#FAFAF7" stroke-width="1.5"/>
-  <path d="M197 90 l2 2 l4 -4" fill="none" stroke="#FAFAF7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="184" y="104" width="34" height="6" rx="2" fill="#FAFAF7"/>
-  <rect x="184" y="115" width="48" height="3" rx="1.5" fill="#FAFAF7" opacity="0.55"/>
-  <!-- Preuve 4 -->
-  <circle cx="280" cy="90" r="6" fill="none" stroke="#FAFAF7" stroke-width="1.5"/>
-  <path d="M277 90 l2 2 l4 -4" fill="none" stroke="#FAFAF7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="264" y="104" width="34" height="6" rx="2" fill="#FAFAF7"/>
-  <rect x="264" y="115" width="40" height="3" rx="1.5" fill="#FAFAF7" opacity="0.55"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Barre de confiance: bande NAVY pleine largeur, 4 items en rangee egale -->
+  <rect x="0" y="62" width="320" height="76" fill="#16243F"/>
+  <!-- Filets verticaux fins entre les items -->
+  <rect x="80" y="80" width="1" height="40" fill="#FBBF24" opacity="0.5"/>
+  <rect x="160" y="80" width="1" height="40" fill="#FBBF24" opacity="0.5"/>
+  <rect x="240" y="80" width="1" height="40" fill="#FBBF24" opacity="0.5"/>
+  <!-- Item 1 -->
+  <rect x="32" y="78" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="40" cy="86" r="3" fill="#FBBF24"/>
+  <rect x="26" y="102" width="28" height="6" rx="2" fill="#E6ECF3"/>
+  <rect x="26" y="113" width="44" height="4" rx="2" fill="#E6ECF3" opacity="0.6"/>
+  <!-- Item 2 -->
+  <rect x="112" y="78" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="120" cy="86" r="3" fill="#FBBF24"/>
+  <rect x="106" y="102" width="28" height="6" rx="2" fill="#E6ECF3"/>
+  <rect x="106" y="113" width="44" height="4" rx="2" fill="#E6ECF3" opacity="0.6"/>
+  <!-- Item 3 -->
+  <rect x="192" y="78" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="200" cy="86" r="3" fill="#FBBF24"/>
+  <rect x="186" y="102" width="28" height="6" rx="2" fill="#E6ECF3"/>
+  <rect x="186" y="113" width="44" height="4" rx="2" fill="#E6ECF3" opacity="0.6"/>
+  <!-- Item 4 -->
+  <rect x="272" y="78" width="16" height="16" rx="4" fill="#FCE9BD"/>
+  <circle cx="280" cy="86" r="3" fill="#FBBF24"/>
+  <rect x="266" y="102" width="28" height="6" rx="2" fill="#E6ECF3"/>
+  <rect x="266" y="113" width="40" height="4" rx="2" fill="#E6ECF3" opacity="0.6"/>
 </svg>

@@ -1,12 +1,21 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Bande de conversion pleine largeur, contenu centre cols 3-10 -->
-  <rect x="0" y="36" width="320" height="128" fill="#D8D5CE"/>
-  <rect x="92" y="66" width="136" height="10" rx="2" fill="#6B675F"/>
-  <rect x="110" y="86" width="100" height="4" rx="2" fill="#6B675F"/>
-  <!-- CTA primaire accent + CTA ghost -->
-  <rect x="96" y="108" width="60" height="18" rx="2" fill="#2D4A3E"/>
-  <rect x="112" y="115" width="28" height="4" rx="2" fill="#FAFAF7"/>
-  <rect x="164" y="108" width="60" height="18" rx="2" fill="none" stroke="#6B675F"/>
-  <rect x="180" y="115" width="28" height="4" rx="2" fill="#6B675F"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Bande d'appel NAVY pleine largeur, marge verticale laisse voir le papier -->
+  <rect x="0" y="40" width="320" height="120" fill="#16243F"/>
+  <!-- Anneaux de couverture subtils en coin bas-droit -->
+  <circle cx="292" cy="150" r="30" fill="none" stroke="#E6ECF3" stroke-width="1" opacity="0.35"/>
+  <circle cx="292" cy="150" r="20" fill="none" stroke="#FBBF24" stroke-width="1" opacity="0.5"/>
+  <circle cx="292" cy="150" r="10" fill="none" stroke="#E6ECF3" stroke-width="1" opacity="0.35"/>
+  <!-- Eyebrow: petit bouclier + tick amber -->
+  <path d="M26 62 L34 62 L34 68 Q34 73 30 75 Q26 73 26 68 Z" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="40" y="65" width="30" height="5" rx="2" fill="#E6ECF3"/>
+  <!-- Gros titre: 2 barres on-navy -->
+  <rect x="24" y="84" width="150" height="11" rx="2" fill="#E6ECF3"/>
+  <rect x="24" y="100" width="110" height="11" rx="2" fill="#E6ECF3"/>
+  <!-- Sous-titre optionnel a gauche (~65%) -->
+  <rect x="24" y="122" width="168" height="4" rx="2" fill="#5C6678"/>
+  <rect x="24" y="132" width="140" height="4" rx="2" fill="#5C6678"/>
+  <!-- Bouton amber a droite (asymetrie posee) -->
+  <rect x="218" y="96" width="72" height="22" rx="2" fill="#FBBF24"/>
+  <rect x="234" y="105" width="40" height="5" rx="2" fill="#16243F"/>
 </svg>

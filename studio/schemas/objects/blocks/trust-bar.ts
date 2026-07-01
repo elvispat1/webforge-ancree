@@ -11,7 +11,7 @@ import { anchorField } from './_anchor-field'
  */
 export const trustBar = defineType({
   name: 'trustBar',
-  title: 'Bloc: barre de confiance',
+  title: 'Barre de confiance',
   type: 'object',
   icon: CheckmarkCircleIcon,
   fields: [
@@ -32,7 +32,7 @@ export const trustBar = defineType({
     select: { first: 'items.0.value', count: 'items.length' },
     prepare: ({ first, count }) => ({
       title: first || 'Barre de confiance',
-      subtitle: count ? 'Bloc: barre de confiance, ' + count + ' signaux' : 'Bloc: barre de confiance',
+      subtitle: count ? 'Barre de confiance, ' + count + ' signaux' : 'Barre de confiance',
     }),
   },
 })
