@@ -185,7 +185,7 @@ function onClick(event: MouseEvent, id: string) {
   color: var(--text-muted);
   cursor: pointer;
   font-size: 1.8rem;
-  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+  transition: color var(--motion-duration-hover) var(--motion-ease-out), border-color var(--motion-duration-hover) var(--motion-ease-out), background-color var(--motion-duration-hover) var(--motion-ease-out);
 }
 .wf-sg__toggle:hover {
   color: var(--accent-trust);
@@ -218,11 +218,11 @@ function onClick(event: MouseEvent, id: string) {
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 150ms ease;
+  transition: opacity var(--motion-duration-hover) var(--motion-ease-out);
 }
 .wf-sg.is-collapsed .wf-sg__rail-label {
   opacity: 1;
-  transition: opacity 150ms ease 200ms;
+  transition: opacity var(--motion-duration-hover) var(--motion-ease-out) 200ms;
 }
 
 .wf-sg__label {
@@ -235,7 +235,7 @@ function onClick(event: MouseEvent, id: string) {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
-  transition: opacity 120ms ease;
+  transition: opacity var(--motion-duration-hover) var(--motion-ease-out);
 }
 .wf-sg__list {
   list-style: none;
@@ -244,7 +244,7 @@ function onClick(event: MouseEvent, id: string) {
   display: flex;
   flex-direction: column;
   gap: calc(var(--spacing-unit) * 0.5);
-  transition: opacity 120ms ease;
+  transition: opacity var(--motion-duration-hover) var(--motion-ease-out);
 }
 .wf-sg.is-collapsed .wf-sg__list {
   opacity: 0;
@@ -263,7 +263,7 @@ function onClick(event: MouseEvent, id: string) {
   padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.5);
   border-left: 2px solid transparent;
   border-radius: 0 var(--radius) var(--radius) 0;
-  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+  transition: color var(--motion-duration-hover) var(--motion-ease-out), border-color var(--motion-duration-hover) var(--motion-ease-out), background-color var(--motion-duration-hover) var(--motion-ease-out);
 }
 .wf-sg__link:hover {
   color: var(--text-base);

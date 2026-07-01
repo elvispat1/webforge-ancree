@@ -204,7 +204,7 @@ const onepagerHref = onePagerPath('index', locale)
   border-bottom: 2px solid transparent;
   padding: calc(var(--spacing-unit) * 1) 0;
   cursor: pointer;
-  transition: color 150ms ease, border-color 150ms ease;
+  transition: color var(--motion-duration-hover) var(--motion-ease-out), border-color var(--motion-duration-hover) var(--motion-ease-out);
 }
 .wf-showcase-tabs__icon {
   font-size: 1.7rem;
@@ -242,7 +242,7 @@ const onepagerHref = onePagerPath('index', locale)
   padding: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1.2);
   border: 1px solid color-mix(in oklch, var(--text-ondeep) 30%, transparent);
   border-radius: var(--radius-sm);
-  transition: background-color 150ms ease, border-color 150ms ease;
+  transition: background-color var(--motion-duration-hover) var(--motion-ease-out), border-color var(--motion-duration-hover) var(--motion-ease-out);
 }
 .wf-showcase-bar__link-icon {
   font-size: 1.6rem;
