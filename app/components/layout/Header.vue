@@ -215,15 +215,17 @@ watch(() => route.fullPath, () => {
           {{ site.contact.phone }}
         </Button>
         <!-- Mobile uniquement: bouton d'urgence compact (le CTA pleine forme ci-dessus
-             prend le relais au desktop). Icone d'alerte + « Urgence », lien tel: qui
-             compose le numero, pour signaler une ligne d'appel d'urgence. -->
+             prend le relais au desktop). Icone de telephone + « Urgence », lien tel: qui
+             compose le numero (l'icone dit « appeler », le libelle seul ne porte pas le
+             numero comme au desktop). -->
+
         <Button
           :href="phoneHref"
           :aria-label="t('contact.urgent_aria', { number: site.contact.phone })"
           kind="anchor"
           variant="call"
           size="sm"
-          icon="lucide:circle-alert"
+          icon="lucide:phone"
           class="header__urgence"
         >
           {{ t('contact.urgent_label') }}
