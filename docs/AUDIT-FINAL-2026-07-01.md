@@ -67,6 +67,18 @@ Aucun résidu de noindex codé en dur sur une page de contenu, aucune page de co
 Conclusion: lever `site.indexable` suffira à réindexer proprement tout le site le jour venu,
 sans chasse aux noindex résiduels. `nuxt.config.ts` a été remis à `indexable: false`.
 
+**Posture noindex durcie à trois couches (1er juillet, après signalement de Charles).** Le
+gabarit de démo sert désormais trois signaux noindex concordants tant que `site.indexable`
+reste `false`: (1) `robots.txt` `Disallow: /` (nuxt-robots); (2) `<meta name="robots"
+content="noindex, nofollow">` sur chaque page; (3) un entête HTTP `X-Robots-Tag: noindex,
+nofollow` servi par le Worker Static Assets via `public/_headers` (copié dans
+`.output/public/_headers`, honoré nativement par Cloudflare Workers, confirmé par la doc). La
+couche (3) couvre le cas d'un robot qui ignorerait `robots.txt` ou fetcherait une URL
+directement, et s'applique aux réponses non-HTML. `public/_headers` porte une note « à retirer
+quand un vrai site client passe indexable ». Note: sur le Worker preview (SSR, non assets-only),
+l'entête `_headers` peut ne pas s'appliquer aux routes rendues par le code, mais la balise meta
+noindex et le `robots.txt` couvrent le preview.
+
 ## Tableau de bord
 
 23 constats. 0 bloquant, 7 majeurs, 11 mineurs, 5 voulu à confirmer.

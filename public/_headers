@@ -1,0 +1,13 @@
+# Entêtes HTTP servis par le Worker Static Assets de Cloudflare (prod + staging).
+# Copié verbatim dans .output/public/ par `nuxt generate` (dossier public/).
+#
+# NOINDEX À TOUTE ÉPREUVE. Ce gabarit de démo ne doit JAMAIS être indexé tant
+# qu'aucun vrai site client n'est en ligne. Défense en profondeur, en plus de:
+#   1. robots.txt « Disallow: / » (nuxt-robots, site.indexable:false);
+#   2. la balise <meta name="robots" content="noindex, nofollow"> de chaque page.
+# L'entête X-Robots-Tag est servi sur CHAQUE réponse (HTML comme non-HTML) et est
+# lu même par un robot qui ignorerait robots.txt ou fetcherait une URL directement.
+# À RETIRER le jour où un vrai site client passe indexable (voir site.indexable
+# dans nuxt.config.ts et la checklist de transfert de docs/AUDIT-FINAL-2026-07-01.md).
+/*
+  X-Robots-Tag: noindex, nofollow
