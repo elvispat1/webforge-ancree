@@ -164,9 +164,6 @@
     "nav_label": "FAQ topics",
     "no_theme": "Other questions"
   },
-  "site": {
-    "home_aria": "Rempart Extermination, back to home"
-  },
   "cities": {
     "see_all": "See all cities"
   },
@@ -189,23 +186,11 @@
     "legal_nav": "Useful and legal links"
   },
   "home": {
-    "title": "Rempart Extermination, residential pest control on the North Shore",
-    "lead": "Certified, guaranteed pest control on Montreal's North Shore. A technician at your door, often the same day.",
     "switch": "Français"
   },
   "hero": {
     "kicker": "North Shore of Montreal and Laval",
-    "title": "Pests at home? We handle it for good.",
-    "lead": "Residential and commercial pest control on Montreal's North Shore. A certified technician at your door, often the same day, with a written guarantee.",
-    "cta_primary": "Call now",
-    "cta_secondary": "Get an estimate",
-    "proof_1_value": "Certified",
-    "proof_1_label": "and fully insured",
-    "proof_2_value": "4.9 out of 5",
-    "proof_2_label": "from 600+ Google reviews",
-    "proof_3_value": "Guaranteed",
-    "proof_3_label": "satisfaction or we come back",
-    "image_alt": "A smiling Rempart Extermination technician in front of his van in a North Shore residential neighbourhood at sunset."
+    "cta_primary": "Call now"
   },
   "consent": {
     "aria_label": "Cookie preferences",

@@ -164,9 +164,6 @@
     "nav_label": "Thèmes de la FAQ",
     "no_theme": "Autres questions"
   },
-  "site": {
-    "home_aria": "Rempart Extermination, retour à l’accueil"
-  },
   "cities": {
     "see_all": "Voir toutes les villes"
   },
@@ -189,23 +186,11 @@
     "legal_nav": "Liens utiles et légaux"
   },
   "home": {
-    "title": "Rempart Extermination, extermination résidentielle sur la Rive-Nord",
-    "lead": "Service d’extermination certifié et garanti sur la Rive-Nord de Montréal. Un technicien à votre porte, souvent le jour même.",
     "switch": "English"
   },
   "hero": {
     "kicker": "Rive-Nord de Montréal et Laval",
-    "title": "Des nuisibles chez vous? On règle ça pour de bon.",
-    "lead": "Extermination résidentielle et commerciale sur la Rive-Nord de Montréal. Un technicien certifié à votre porte, souvent le jour même, avec une garantie écrite.",
-    "cta_primary": "Appeler maintenant",
-    "cta_secondary": "Obtenir une estimation",
-    "proof_1_value": "Certifié",
-    "proof_1_label": "et entièrement assuré",
-    "proof_2_value": "4,9 sur 5",
-    "proof_2_label": "sur plus de 600 avis Google",
-    "proof_3_value": "Garanti",
-    "proof_3_label": "satisfaction ou on revient",
-    "image_alt": "Un technicien de Rempart Extermination souriant devant son camion, dans un quartier résidentiel de la Rive-Nord au coucher du soleil."
+    "cta_primary": "Appeler maintenant"
   },
   "consent": {
     "aria_label": "Préférences de témoins",
