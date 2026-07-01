@@ -29,8 +29,8 @@ generated_imgs/
 .env.*
 !.env.example
 
-# Docs de travail jetables (prompts d'audit, jamais livrés au client)
-docs/PROMPT-AUDIT-FINAL.md
+# Docs de travail jetables (prompts d'audit et de passe, jamais livrés au client)
+docs/PROMPT-*.md
 
 # Claude Code: config locale et scripts de workflow jetables (launch.json est versionné)
 .claude/settings.local.json
