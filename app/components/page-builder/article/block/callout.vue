@@ -50,7 +50,9 @@ const icon = computed(() => (props.tone === 'warning' ? 'lucide:triangle-alert' 
   height: 2.2rem;
 }
 .article-callout--note .article-callout__icon {
-  color: var(--accent-call);
+  /* Bleu de confiance (pas l'ambre d'appel): 5.21:1 sur le chip clair, conforme au
+   * seuil 3:1 de WCAG 1.4.11. Le type du callout reste aussi porte par son titre. */
+  color: var(--accent-trust);
 }
 .article-callout--warning .article-callout__icon {
   color: var(--error);

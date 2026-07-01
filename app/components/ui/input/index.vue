@@ -122,7 +122,10 @@ defineExpose({ focus: () => control.value?.focus() })
   color: var(--text-base);
 }
 .field__req {
-  color: var(--accent-call);
+  /* Bleu de confiance (pas l'ambre d'appel): 5.21:1 sur fond clair, conforme au
+   * seuil 3:1 de WCAG 1.4.11 pour un marqueur graphique. L'info « requis » reste
+   * aussi portee par aria-label et l'attribut required (jamais la seule couleur). */
+  color: var(--accent-trust);
   font-weight: 700;
 }
 .field__opt {
