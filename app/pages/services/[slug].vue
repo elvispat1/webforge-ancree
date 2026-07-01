@@ -68,7 +68,7 @@ const blocks = computed(() => useServiceBlocks(service.value))
 const seo = computed(() => service.value.seo)
 usePageSeo({
   title: seo.value?.title ?? service.value.title,
-  description: seo.value?.description ?? '',
+  description: seo.value?.description || undefined,
   image: seo.value?.image || undefined,
   webPageType: 'ItemPage',
   breadcrumbs: breadcrumbs.value

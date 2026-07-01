@@ -63,7 +63,7 @@ const blocks = computed(() => useCityBlocks(city.value))
 const seo = computed(() => city.value.seo)
 usePageSeo({
   title: seo.value?.title ?? hero.value.title,
-  description: seo.value?.description ?? '',
+  description: seo.value?.description || undefined,
   image: seo.value?.image || undefined,
   webPageType: 'ItemPage',
   breadcrumbs: breadcrumbs.value
