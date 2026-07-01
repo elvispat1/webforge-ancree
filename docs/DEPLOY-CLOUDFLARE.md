@@ -5,14 +5,16 @@ Runbook du déploiement du démo Rempart Extermination sur Cloudflare. Plan viva
 frère, déjà en ligne), avec une seule vraie divergence: le secret de build
 `NUXT_SANITY_TOKEN` est requis sur prod ET staging (pas seulement sur le preview).
 
-**État (1 juillet 2026): PHASE 1 EN LIGNE ET VÉRIFIÉE.** Prod
+**État (1 juillet 2026): LES TROIS ENVIRONNEMENTS EN LIGNE ET VÉRIFIÉS.** Phase 1
+(statique: prod + staging) ET Phase 2 (preview SSR, édition visuelle Sanity) complètes. Prod
 (`webforge-ancree` sur `main`, `webforge-ancree.patoinestudio.ca`) et staging
 (`webforge-ancree-staging` sur `staging`, `webforge-ancree-staging.patoinestudio.ca`)
 déployés via Workers Builds; secret de build `NUXT_SANITY_TOKEN` + variable
 `NUXT_PUBLIC_SITE_URL` par environnement; builds des branches non-prod coupés;
 `workers.dev` off; vérifiés en live (200, hreflang slug-traduit correct, canonical
 par environnement, noindex, zéro fuite du token). `origin/staging` a été
-fast-forwardé sur `main`. Reste la **Phase 2 (preview SSR)**. Les trois branches
+fast-forwardé sur `main`. La **Phase 2 (preview SSR)** est faite et vérifiée (détail
+plus bas). Les trois branches
 (`main`, `staging`, `preview`) sont poussées sur `patoine-studio/webforge-ancree`. Les deux fichiers
 `wrangler.jsonc` et `wrangler.preview.jsonc` sont prêts (noms échangés depuis
 Minimaliste, workers.dev et preview_urls coupés). Le site reste `noindex`
@@ -149,47 +151,60 @@ SSR.
   webhook Sanity (project `5if00rwn` > API > Webhooks) avec le filtre
   `!(_id in path("drafts.**"))`. Deux gestes de tableau de bord.
 
-### Phase 2: preview (SSR, édition visuelle Sanity)
+### Phase 2: preview (SSR, édition visuelle Sanity) — FAITE (1 juillet 2026)
 
-Le terrain app est déjà en place (`app/middleware/00.preview-content.global.ts`,
-`app/composables/usePayload.ts`, `app/plugins/01.content.ts` branche preview,
-`app/config/preview.ts`, `server/api/exit-preview.get.ts`). Reste l'activation,
-côté `nuxt.config.ts` et dépendances, calquée sur Minimaliste.
+Worker `webforge-ancree-preview` sur `webforge-ancree-preview.patoinestudio.ca`.
+Activation portée 1:1 de Minimaliste, une seule vraie adaptation: le gate lit le
+token composite d'Ancrée (`sanityReadToken = NUXT_SANITY_TOKEN || SANITY_API_READ_TOKEN`,
+déjà déclaré) plutôt qu'un `SANITY_API_READ_TOKEN` séparé. Commit `fd37364` sur `main`.
 
-- [ ] **Assistant (code)**: activer le preview dans `nuxt.config.ts`.
-  - `previewEnabled` (garde de branche `WORKERS_CI_BRANCH === 'preview'` +
-    présence du token + `NUXT_PUBLIC_STUDIO_URL`).
-  - `vite.define.__WF_PREVIEW__` = `previewEnabled` (au lieu de `'false'` figé).
-  - `nitro.preset` = `previewEnabled ? 'cloudflare-module' : 'static'`.
-  - Bloc `sanity.visualEditing` conditionnel (mode `live-visual-editing`, token,
-    studioUrl, stega).
-  - `vite.optimizeDeps` de la stack React (preview seulement).
-  - Hook `nitro:config`: en preview, neutraliser le prérendu (drafts rendus à la
-    requête); hors preview, garder le retrait de `stega` actuel.
-  - `image.provider = 'none'` en preview (sharp ne tourne pas sur workerd; les
-    images viennent du CDN Sanity).
-- [ ] **Assistant (deps)**: ajouter `react`, `react-dom`, `styled-components`
-  (la stack visual-editing), absentes depuis le reset.
-- [ ] **Assistant (vérif locale SSR)**: `npx nuxt build` (avec token + studioUrl),
-  preset `cloudflare-module`, `.output/server/index.mjs` produit, `nodejs_compat`
-  attendu. Grep: pas de token dans `.output/public`.
-- [ ] **Charles**: déployer le Studio si requis (figer `studioHost`, proposé
-  `webforge-ancree` -> `webforge-ancree.sanity.studio`), créer le token Viewer
-  preview (peut être le même que Phase 1).
-- [ ] **Dashboard**: créer le Worker `webforge-ancree-preview`, branche `preview`,
-  build `yarn build`, deploy `wrangler deploy --config wrangler.preview.jsonc`,
-  `nodejs_compat`. Variables: `NUXT_PUBLIC_SITE_URL=https://webforge-ancree-preview.patoinestudio.ca`,
-  secret `NUXT_SANITY_TOKEN` (ou `SANITY_API_READ_TOKEN`),
-  `NUXT_PUBLIC_STUDIO_URL=https://webforge-ancree.sanity.studio`. Domaine
-  `webforge-ancree-preview.patoinestudio.ca`.
-- [ ] **Assistant (MCP Sanity)**: ajouter l'origine
-  `https://webforge-ancree-preview.patoinestudio.ca` aux origines CORS du project
-  (allowCredentials).
+- [x] **Code (`nuxt.config.ts`)**: `previewEnabled` (branche `preview` + `sanityReadToken`
+  + `NUXT_PUBLIC_STUDIO_URL`); `__WF_PREVIEW__` = `previewEnabled`; preset
+  `previewEnabled ? 'cloudflare-module' : 'static'`; bloc `sanity.visualEditing`
+  (mode `live-visual-editing`, `token: sanityReadToken`, studioUrl, stega); `vite.optimizeDeps`
+  React (preview seulement); hook `nitro:config` (neutralise le prérendu en preview,
+  garde le retrait de `stega` hors preview); `image.provider = 'none'` en preview;
+  `htmlAttrs class wf-no-motion` en preview; `public.studioUrl`.
+- [x] **Anti-flash du hero**: Ancrée coupe le mouvement en JS via `__WF_PREVIEW__`
+  (`app/family/motion.ts`), MAIS le masque anti-flash du hero d'accueil
+  (`app/components/hero/block/home.vue`, `opacity:0` sur `[data-reveal]`) est du CSS
+  media-query pur qui ne voit pas `__WF_PREVIEW__` → en preview le hero resterait
+  invisible (le JS de révélation est coupé). Fix (calque Mini): classe `wf-no-motion`
+  posée sur `<html>` en preview + masque gaté `html:not(.wf-no-motion)`. Sortie
+  statique inchangée au bit près (classe absente hors preview).
+- [x] **Deps**: `react`, `react-dom`, `styled-components`, `@sanity/image-url`
+  (+ `@types/react`, `@types/react-dom`), versions verbatim de Minimaliste.
+- [x] **Vérif locale SSR**: `WORKERS_CI_BRANCH=preview NUXT_PUBLIC_STUDIO_URL=… npx nuxt build`
+  → preset `cloudflare-module`, `.output/server/index.mjs` produit; token ABSENT de
+  `.output/public`. Build statique (`nuxt generate`, sans env preview) → `.output/public`
+  vierge (0 token/stega/react/route preview; `wf-no-motion` présent SEULEMENT comme
+  sélecteur CSS, jamais appliqué sur `<html>`).
+- [x] **Studio**: `studioHost` + `appId` déjà figés. Déployé avec
+  `SANITY_STUDIO_PREVIEW_URL=https://webforge-ancree-preview.patoinestudio.ca yarn studio:deploy`
+  (le presentationTool était déjà câblé). Token Viewer = le même qu'en Phase 1.
+- [x] **Dashboard**: Worker `webforge-ancree-preview`, branche **`preview`**, build
+  `corepack enable && yarn install --immutable && yarn build`, deploy
+  `npx wrangler deploy --config wrangler.preview.jsonc`, root `/`, builds non-prod coupés,
+  watch `*`, API token « webforge-minimaliste-demo build token » (seul token du compte).
+  3 vars de BUILD: `NUXT_PUBLIC_SITE_URL=https://webforge-ancree-preview.patoinestudio.ca`,
+  `NUXT_PUBLIC_STUDIO_URL=https://webforge-ancree.sanity.studio`, secret chiffré
+  `NUXT_SANITY_TOKEN`. Domaine custom `webforge-ancree-preview.patoinestudio.ca`,
+  `workers.dev` + `preview_urls` off. `nodejs_compat` + compat date appliqués par
+  `wrangler.preview.jsonc` au deploy.
+- [x] **CORS Sanity**: origine `https://webforge-ancree-preview.patoinestudio.ca`
+  ajoutée (allowCredentials) via MCP Sanity `add_cors_origin`.
+- [x] **Vérif du cycle**: live 200 SSR, noindex, `<html class="wf-no-motion">` (hero
+  visible), stega + client visual-editing présents, zéro fuite token, images cdn.sanity.io,
+  routes /en //services //villes en 200. Depuis `webforge-ancree.sanity.studio` >
+  Presentation: l'iframe charge le Worker en perspective `drafts`, hero + sections
+  rendent, `mainDocuments` mappe `/` → Accueil FR (éditeur synchro), overlays
+  click-to-edit actifs, zéro erreur console liée au preview. Prod + staging
+  re-vérifiés vierges.
+- [x] **PreviewBanner**: porté de Minimaliste, adapté au style Ancrée (bandeau « mode
+  preview » + bouton « Quitter » qui ramène au site publié via
+  `server/api/exit-preview.get.ts` et `prodHostFromPreviewHost`).
 - [ ] **Charles (optionnel)**: Cloudflare Access (Zero Trust) sur les domaines
-  preview et staging.
-- [ ] **Vérif**: depuis le Studio > Presentation, l'iframe charge le Worker
-  preview; un draft non publié est visible; overlays click-to-edit actifs; images
-  CDN Sanity affichées.
+  preview et staging. Le preview sert des brouillons à qui a l'URL (noindex mais public).
 
 ## Pièges rencontrés (Phase 1, tableau de bord)
 
