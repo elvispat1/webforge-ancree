@@ -1,11 +1,11 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Citation en exergue: filet d'accent a gauche, guillemet accent, h4, attribution -->
-  <rect x="84" y="50" width="2" height="84" rx="1" fill="#2D4A3E"/>
-  <rect x="98" y="52" width="5" height="13" rx="2.5" fill="#2D4A3E" transform="rotate(14 100 58)"/>
-  <rect x="107" y="52" width="5" height="13" rx="2.5" fill="#2D4A3E" transform="rotate(14 109 58)"/>
-  <rect x="98" y="76" width="134" height="8" rx="2" fill="#6B675F"/>
-  <rect x="98" y="90" width="134" height="8" rx="2" fill="#6B675F"/>
-  <rect x="98" y="104" width="96" height="8" rx="2" fill="#6B675F"/>
-  <rect x="98" y="126" width="56" height="4" rx="2" fill="#6B675F"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Citation en exergue: gros guillemet amber, filet vertical amber a gauche, citation navy, attribution slate -->
+  <rect x="84" y="50" width="3" height="84" rx="1.5" fill="#FBBF24"/>
+  <rect x="100" y="48" width="7" height="16" rx="3" fill="#FBBF24" transform="rotate(16 103 56)"/>
+  <rect x="111" y="48" width="7" height="16" rx="3" fill="#FBBF24" transform="rotate(16 114 56)"/>
+  <rect x="100" y="78" width="136" height="6" rx="2" fill="#16243F"/>
+  <rect x="100" y="90" width="136" height="6" rx="2" fill="#16243F"/>
+  <rect x="100" y="102" width="98" height="6" rx="2" fill="#16243F"/>
+  <rect x="100" y="124" width="58" height="4" rx="2" fill="#5C6678"/>
 </svg>

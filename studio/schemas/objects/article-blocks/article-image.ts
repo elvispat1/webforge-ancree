@@ -3,7 +3,7 @@ import { ImageIcon } from '@sanity/icons'
 
 export const articleImage = defineType({
   name: 'articleImage',
-  title: 'Article: image',
+  title: 'Image',
   type: 'object',
   icon: ImageIcon,
   fields: [
@@ -19,7 +19,7 @@ export const articleImage = defineType({
     prepare({ label, caption, media }) {
       return {
         title: label || caption || '(image sans etiquette)',
-        subtitle: 'Article: image',
+        subtitle: 'Image',
         media,
       }
     },

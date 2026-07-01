@@ -1,9 +1,15 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Bande CTA en ligne: fond alt, texte d'invite a gauche, bouton accent a droite -->
-  <rect x="56" y="72" width="208" height="56" rx="2" fill="#D8D5CE"/>
-  <rect x="74" y="97" width="88" height="6" rx="2" fill="#6B675F"/>
-  <rect x="182" y="91" width="62" height="18" rx="2" fill="#2D4A3E"/>
-  <rect x="194" y="98" width="24" height="4" rx="2" fill="#FAFAF7"/>
-  <path d="M226 96 l4 4 l-4 4" fill="none" stroke="#FAFAF7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Corps d'article au-dessus -->
+  <rect x="40" y="30" width="240" height="6" rx="2" fill="#5C6678"/>
+  <rect x="40" y="44" width="212" height="6" rx="2" fill="#5C6678"/>
+  <!-- Bande CTA en ligne: fond navy tres pale, titre+texte a gauche, bouton ambre a droite -->
+  <rect x="40" y="76" width="240" height="52" rx="2" fill="#E6ECF3" stroke="#D3D6DC" stroke-width="1"/>
+  <rect x="56" y="90" width="88" height="7" rx="2" fill="#16243F"/>
+  <rect x="56" y="105" width="118" height="5" rx="2" fill="#5C6678"/>
+  <rect x="200" y="92" width="64" height="20" rx="2" fill="#FBBF24"/>
+  <rect x="212" y="100" width="30" height="4" rx="2" fill="#16243F"/>
+  <!-- Corps d'article en dessous -->
+  <rect x="40" y="152" width="240" height="6" rx="2" fill="#5C6678"/>
+  <rect x="40" y="166" width="196" height="6" rx="2" fill="#5C6678"/>
 </svg>

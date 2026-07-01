@@ -3,7 +3,7 @@ import { BulbOutlineIcon } from '@sanity/icons'
 
 export const articleCallout = defineType({
   name: 'articleCallout',
-  title: 'Article: encadre',
+  title: 'Encadré',
   type: 'object',
   icon: BulbOutlineIcon,
   fields: [

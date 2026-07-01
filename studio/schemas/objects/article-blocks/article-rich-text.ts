@@ -4,7 +4,7 @@ import { articlePortableText } from './article-portable-text'
 
 export const articleRichText = defineType({
   name: 'articleRichText',
-  title: 'Article: texte riche',
+  title: 'Texte riche',
   type: 'object',
   icon: BlockContentIcon,
   fields: [
@@ -25,7 +25,7 @@ export const articleRichText = defineType({
         .join('')
       return {
         title: text ? text.slice(0, 60) : '(texte vide)',
-        subtitle: 'Article: texte riche',
+        subtitle: 'Texte riche',
       }
     },
   },

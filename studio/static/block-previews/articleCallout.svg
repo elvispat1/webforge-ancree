@@ -1,9 +1,13 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Encadre: boite teintee, bordure d'accent a gauche, titre + corps -->
-  <rect x="72" y="62" width="176" height="58" rx="2" fill="#D8D5CE"/>
-  <rect x="72" y="62" width="3" height="58" rx="1.5" fill="#2D4A3E"/>
-  <rect x="88" y="76" width="64" height="6" rx="2" fill="#6B675F"/>
-  <rect x="88" y="92" width="144" height="4" rx="2" fill="#6B675F"/>
-  <rect x="88" y="100" width="128" height="4" rx="2" fill="#6B675F"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Encadre (note): boite arrondie sur fond amber-doux, puce amber, titre navy, corps slate -->
+  <rect x="60" y="58" width="200" height="72" rx="2" fill="#FCE9BD" stroke="#D3D6DC" stroke-width="1"/>
+  <!-- Puce/glyphe amber en haut a gauche -->
+  <circle cx="80" cy="78" r="7" fill="#FBBF24"/>
+  <path d="M77 78.5 L79.5 81 L83.5 76" fill="none" stroke="#FBFBF9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Barre-titre navy -->
+  <rect x="96" y="74" width="88" height="7" rx="2" fill="#16243F"/>
+  <!-- 2 barres de texte slate -->
+  <rect x="80" y="100" width="160" height="5" rx="2" fill="#5C6678"/>
+  <rect x="80" y="112" width="132" height="5" rx="2" fill="#5C6678"/>
 </svg>

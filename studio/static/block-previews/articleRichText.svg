@@ -1,16 +1,15 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Corps riche: sous-titre, paragraphes, liste a puces accent, paragraphe -->
-  <rect x="84" y="42" width="96" height="8" rx="2" fill="#6B675F"/>
-  <rect x="84" y="60" width="152" height="4" rx="2" fill="#6B675F"/>
-  <rect x="84" y="68" width="152" height="4" rx="2" fill="#6B675F"/>
-  <rect x="84" y="76" width="124" height="4" rx="2" fill="#6B675F"/>
-  <rect x="84" y="94" width="4" height="4" rx="1" fill="#2D4A3E"/>
-  <rect x="94" y="94" width="118" height="4" rx="2" fill="#6B675F"/>
-  <rect x="84" y="104" width="4" height="4" rx="1" fill="#2D4A3E"/>
-  <rect x="94" y="104" width="106" height="4" rx="2" fill="#6B675F"/>
-  <rect x="84" y="114" width="4" height="4" rx="1" fill="#2D4A3E"/>
-  <rect x="94" y="114" width="126" height="4" rx="2" fill="#6B675F"/>
-  <rect x="84" y="132" width="152" height="4" rx="2" fill="#6B675F"/>
-  <rect x="84" y="140" width="136" height="4" rx="2" fill="#6B675F"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Corps riche: sous-titre navy, paragraphes slate, petite liste a puces amber, colonne de lecture -->
+  <rect x="40" y="44" width="112" height="8" rx="2" fill="#16243F"/>
+  <rect x="40" y="64" width="240" height="4" rx="2" fill="#5C6678"/>
+  <rect x="40" y="74" width="240" height="4" rx="2" fill="#5C6678"/>
+  <rect x="40" y="84" width="240" height="4" rx="2" fill="#5C6678"/>
+  <rect x="40" y="94" width="196" height="4" rx="2" fill="#5C6678"/>
+  <rect x="40" y="120" width="4" height="4" rx="1" fill="#FBBF24"/>
+  <rect x="52" y="120" width="180" height="4" rx="2" fill="#5C6678"/>
+  <rect x="40" y="134" width="4" height="4" rx="1" fill="#FBBF24"/>
+  <rect x="52" y="134" width="164" height="4" rx="2" fill="#5C6678"/>
+  <rect x="40" y="148" width="4" height="4" rx="1" fill="#FBBF24"/>
+  <rect x="52" y="148" width="196" height="4" rx="2" fill="#5C6678"/>
 </svg>

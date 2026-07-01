@@ -1,9 +1,8 @@
 <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="320" height="200" fill="#FAFAF7"/>
-  <!-- Chapo en colonne de lecture: filet d'accent a gauche + paragraphe appuye -->
-  <rect x="84" y="80" width="3" height="40" rx="1.5" fill="#2D4A3E"/>
-  <rect x="96" y="82" width="136" height="5" rx="2" fill="#6B675F"/>
-  <rect x="96" y="92" width="136" height="5" rx="2" fill="#6B675F"/>
-  <rect x="96" y="102" width="136" height="5" rx="2" fill="#6B675F"/>
-  <rect x="96" y="112" width="104" height="5" rx="2" fill="#6B675F"/>
+  <rect width="320" height="200" fill="#FBFBF9"/>
+  <!-- Amorce (chapo/intro) en colonne de lecture: court filet amber devant la 1re ligne + 3 barres larges appuyees en navy -->
+  <rect x="40" y="78" width="3" height="18" rx="1.5" fill="#FBBF24"/>
+  <rect x="52" y="80" width="228" height="8" rx="2" fill="#16243F"/>
+  <rect x="40" y="98" width="240" height="8" rx="2" fill="#16243F"/>
+  <rect x="40" y="116" width="176" height="8" rx="2" fill="#16243F"/>
 </svg>

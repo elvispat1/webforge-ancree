@@ -3,7 +3,7 @@ import { BlockquoteIcon } from '@sanity/icons'
 
 export const articleQuote = defineType({
   name: 'articleQuote',
-  title: 'Article: citation',
+  title: 'Citation',
   type: 'object',
   icon: BlockquoteIcon,
   fields: [
@@ -29,7 +29,7 @@ export const articleQuote = defineType({
     prepare({ quote, attribution }) {
       return {
         title: quote ? quote.slice(0, 80) : '(citation vide)',
-        subtitle: attribution ? 'Citation de ' + attribution : 'Article: citation',
+        subtitle: attribution ? 'Citation de ' + attribution : 'Citation',
       }
     },
   },

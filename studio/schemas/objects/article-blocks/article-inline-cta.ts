@@ -3,7 +3,7 @@ import { LaunchIcon } from '@sanity/icons'
 
 export const articleInlineCta = defineType({
   name: 'articleInlineCta',
-  title: 'Article: appel a l\'action',
+  title: 'Appel à l\'action',
   type: 'object',
   icon: LaunchIcon,
   fields: [
@@ -26,7 +26,7 @@ export const articleInlineCta = defineType({
     prepare({ text, label }) {
       return {
         title: text ? text.slice(0, 60) : '(texte vide)',
-        subtitle: label ? 'CTA: ' + label : 'Article: appel a l\'action',
+        subtitle: label ? 'CTA: ' + label : 'Appel à l\'action',
       }
     },
   },

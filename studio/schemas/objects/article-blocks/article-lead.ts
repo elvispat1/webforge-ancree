@@ -3,7 +3,7 @@ import { TextIcon } from '@sanity/icons'
 
 export const articleLead = defineType({
   name: 'articleLead',
-  title: 'Article: amorce',
+  title: 'Amorce',
   type: 'object',
   icon: TextIcon,
   fields: [
@@ -20,7 +20,7 @@ export const articleLead = defineType({
     prepare({ text }) {
       return {
         title: text ? text.slice(0, 80) : '(amorce vide)',
-        subtitle: 'Article: amorce',
+        subtitle: 'Amorce',
       }
     },
   },
